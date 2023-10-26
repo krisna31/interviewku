@@ -1,0 +1,36 @@
+{
+  "name": "interviewku-backend",
+  "version": "1.0.0",
+  "description": "This is the backend for interviewku.com",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --es-module-specifier-resolution=node ./src/server.js",
+    "dev": "nodemon --es-module-specifier-resolution=node ./src/server.js",
+    "lint": "eslint ./src --fix",
+    "migrate": "node-pg-migrate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2",
+    "@hapi/jwt": "^3.2.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "joi": "^17.11.0",
+    "nanoid": "^5.0.2",
+    "node-pg-migrate": "^6.2.2",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@hapi/inert": "^7.1.0",
+    "@hapi/vision": "^7.0.3",
+    "eslint": "^8.52.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "hapi-swagger": "^17.1.0",
+    "nodemon": "^3.0.1"
+  }
+}
