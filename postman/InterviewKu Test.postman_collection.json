@@ -101,6 +101,205 @@
 					"response": []
 				},
 				{
+					"name": "Add User with Bad email",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('it should response 400 status code', () => {\r",
+									"    pm.expect(pm.response).to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									"\r",
+									"pm.test('response body should an object', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.message).to.be.a('string');\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"interviewku_{{$timestamp}}\",\r\n    \"lastName\": \"lastName\",\r\n    \"email\": \"interviewKuTestPostman@test\",\r\n    \"password\": \"secret\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User with Short password",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('it should response 400 status code', () => {\r",
+									"    pm.expect(pm.response).to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									"\r",
+									"pm.test('response body should an object', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.message).to.be.a('string');\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"interviewku_{{$timestamp}}\",\r\n    \"lastName\": \"lastName\",\r\n    \"email\": \"interviewKuTestPostman@gmail.com\",\r\n    \"password\": \"12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User with Valid Payload Without Last Name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('it should response 201 status code', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									"\r",
+									"pm.test('response body should an object', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.data).to.be.an('object');\r",
+									"    pm.expect(responseJson.data.userId).to.be.a('string');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"interviewku_{{$timestamp}}\",\r\n    \"email\": \"{{$timestamp}}-WithoutLast@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Add User with Valid Payload",
 					"event": [
 						{
@@ -146,7 +345,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"dicoding_{{$timestamp}}\",\r\n    \"password\": \"secret\",\r\n    \"fullname\": \"Dicoding Indonesia\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"interviewku_{{$timestamp}}\",\r\n    \"lastName\": \"lastName\",\r\n    \"email\": \"{{$timestamp}}-interviewKuTestPostman@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -168,7 +367,7 @@
 					"response": []
 				},
 				{
-					"name": "Add User with Already Taken Username",
+					"name": "Add User with Already Taken Email",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -229,7 +428,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"dicoding\",\r\n    \"password\": \"secret\",\r\n    \"fullname\": \"Dicoding Indonesia\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"interviewku_{{$timestamp}}\",\r\n    \"lastName\": \"lastName\",\r\n    \"email\": \"interviewKuTestPostman@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -265,7 +464,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"secret\",\r\n    \"fullname\": \"John Doe\"\r\n}",
+									"raw": "{\r\n    \"firstName\": \"john\",\r\n    \"email\": \"john@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -293,7 +492,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"jane\",\r\n    \"password\": \"secret\",\r\n    \"fullname\": \"John Doe\"\r\n}",
+									"raw": "{\r\n    \"firstName\": \"jane\",\r\n    \"email\": \"jane@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -450,7 +649,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"xxx\",\r\n    \"password\": \"xxx\"\r\n}",
+							"raw": "{\r\n    \"email\": \"xxx@gmail.com\",\r\n    \"password\": \"xxx\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -516,7 +715,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"xxx\"\r\n}",
+							"raw": "{\r\n    \"email\": \"john@gmail.com\",\r\n    \"password\": \"xxx\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -587,7 +786,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"secret\"\r\n}",
+							"raw": "{\r\n    \"email\": \"john@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -658,7 +857,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"jane\",\r\n    \"password\": \"secret\"\r\n}",
+							"raw": "{\r\n    \"email\": \"jane@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

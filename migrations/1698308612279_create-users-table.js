@@ -8,18 +8,31 @@ exports.up = (pgm) => {
       type: 'VARCHAR(50)',
       primaryKey: true,
     },
-    username: {
+    first_name: {
       type: 'VARCHAR(50)',
-      unique: true,
       notNull: true,
+    },
+    last_name: {
+      type: 'VARCHAR(50)',
+    },
+    email: {
+      type: 'VARCHAR(50)',
+      notNull: true,
+      unique: true,
     },
     password: {
       type: 'TEXT',
       notNull: true,
     },
-    fullname: {
-      type: 'TEXT',
+    created_at: {
+      type: 'timestamp',
       notNull: true,
+      default: pgm.func('current_timestamp'),
+    },
+    updated_at: {
+      type: 'timestamp',
+      notNull: true,
+      default: pgm.func('current_timestamp'),
     },
   });
 };

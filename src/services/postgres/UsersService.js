@@ -10,26 +10,31 @@ class UsersService {
     this._pool = new Pool();
   }
 
-  async verifyNewUsername(username) {
+  async verifyNewEmail(email) {
     const query = {
-      text: 'SELECT username FROM users WHERE username = $1',
-      values: [username],
+      text: 'SELECT email FROM users WHERE email = $1',
+      values: [email],
     };
 
     const result = await this._pool.query(query);
 
     if (result.rows.length > 0) {
-      throw new InvariantError('Gagal menambahkan user. Username sudah digunakan.');
+      throw new InvariantError('Gagal menambahkan user. Email sudah digunakan.');
     }
   }
 
-  async addUser({ username, password, fullname }) {
-    await this.verifyNewUsername(username);
+  async addUser({
+    firstName,
+    lastName,
+    email,
+    password,
+  }) {
+    await this.verifyNewEmail(email);
     const id = `user-${nanoid(16)}`;
     const hashedPassword = await bcrypt.hash(password, 10);
     const query = {
-      text: 'INSERT INTO users VALUES($1, $2, $3, $4) RETURNING id',
-      values: [id, username, hashedPassword, fullname],
+      text: 'INSERT INTO users VALUES($1, $2, $3, $4, $5) RETURNING id',
+      values: [id, firstName, lastName, email, hashedPassword],
     };
     const result = await this._pool.query(query);
     if (!result.rows[0].id) {
@@ -40,7 +45,7 @@ class UsersService {
 
   async getUserById(userId) {
     const query = {
-      text: 'SELECT id, username, fullname FROM users WHERE id = $1',
+      text: 'SELECT id, first_name AS firstName, last_name AS lastName, email FROM users WHERE id = $1',
       values: [userId],
     };
     const result = await this._pool.query(query);
@@ -52,10 +57,10 @@ class UsersService {
     return result.rows[0];
   }
 
-  async verifyUserCredential(username, password) {
+  async verifyUserCredential(email, password) {
     const query = {
-      text: 'SELECT id, password FROM users WHERE username = $1',
-      values: [username],
+      text: 'SELECT id, password FROM users WHERE email = $1',
+      values: [email],
     };
 
     const result = await this._pool.query(query);
