@@ -42,7 +42,7 @@ This is the backend for interviewku.com
 3. Run the collection
 4. Explore Them All!
 
-## FUTURE How to run Swagger
+## How to run Swagger
 
 1. Run `npm run dev`  to start the server
 2. Open `http://localhost:5000/documentation` in your browser
