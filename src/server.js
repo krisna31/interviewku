@@ -1,6 +1,10 @@
 // Import library module
 const Hapi = require('@hapi/hapi');
 const Jwt = require('@hapi/jwt');
+const Inert = require('@hapi/inert');
+const Vision = require('@hapi/vision');
+const HapiSwagger = require('hapi-swagger');
+const Pack = require('../package.json');
 
 // import user created module
 const ClientError = require('./exceptions/ClientError');
@@ -28,9 +32,22 @@ require('dotenv').config();
     },
   });
 
+  const swaggerOptions = {
+    info: {
+      title: 'InterviewKu API Documentation',
+      version: Pack.version,
+    },
+  };
+
   await server.register([
     {
       plugin: Jwt,
+    },
+    Inert,
+    Vision,
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
     },
   ]);
 
@@ -72,7 +89,7 @@ require('dotenv').config();
   // extension function before response check and handle error
   server.ext('onPreResponse', (request, h) => {
     const { response } = request;
-    // console.log(response.message);
+    console.log(response.message);
     if (response instanceof Error) {
       if (response instanceof ClientError) {
         const newResponse = h.response({
