@@ -17,6 +17,7 @@ const UserSuccessCreateResponseSchema = Joi.object({
 
 const UserGetResponseSchema = Joi.object({
   status: Joi.string().required(),
+  message: Joi.string().required(),
   data: Joi.object({
     user: Joi.object({
       id: Joi.string(),
@@ -27,4 +28,10 @@ const UserGetResponseSchema = Joi.object({
   }),
 }).label('User Get By Id Success');
 
-module.exports = { UserPayloadSchema, UserSuccessCreateResponseSchema, UserGetResponseSchema };
+const UserGetRequestSchema = Joi.object({
+  id: Joi.string().required(),
+}).label('Get User Params');
+
+module.exports = {
+  UserPayloadSchema, UserSuccessCreateResponseSchema, UserGetResponseSchema, UserGetRequestSchema,
+};

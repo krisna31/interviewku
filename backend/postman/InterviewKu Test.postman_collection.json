@@ -267,7 +267,10 @@
 									"    pm.expect(responseJson.status).to.equal('success');\r",
 									"    pm.expect(responseJson.data).to.be.an('object');\r",
 									"    pm.expect(responseJson.data.userId).to.be.a('string');\r",
-									"});"
+									"\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"userId\", pm.response.json().data.userId);"
 								],
 								"type": "text/javascript"
 							}
@@ -505,7 +508,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/users/user-ZD7BnhaNgHW0IEcn",
+							"raw": "http://localhost:{{port}}/users/{{userId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -513,7 +516,7 @@
 							"port": "{{port}}",
 							"path": [
 								"users",
-								"user-ZD7BnhaNgHW0IEcn"
+								"{{userId}}"
 							]
 						}
 					},

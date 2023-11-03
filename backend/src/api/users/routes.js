@@ -1,5 +1,7 @@
 const InvariantError = require('../../exceptions/InvariantError');
-const { UserPayloadSchema, UserSuccessCreateResponseSchema, UserGetResponseSchema } = require('../../validator/users/schema');
+const {
+  UserPayloadSchema, UserSuccessCreateResponseSchema, UserGetResponseSchema, UserGetRequestSchema,
+} = require('../../validator/users/schema');
 
 const routes = (handler) => [
   {
@@ -22,6 +24,12 @@ const routes = (handler) => [
     path: '/users/{id}',
     options: {
       handler: (request, h) => handler.getUserByIdHandler(request, h),
+      validate: {
+        params: UserGetRequestSchema,
+        failAction: (request, h, error) => {
+          throw new InvariantError(error.message);
+        },
+      },
       tags: ['api'],
       response: { schema: UserGetResponseSchema },
     },

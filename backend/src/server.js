@@ -11,11 +11,9 @@ const ClientError = require('./exceptions/ClientError');
 const UsersService = require('./services/postgres/UsersService');
 const AuthenticationsService = require('./services/postgres/AuthenticationsService');
 const users = require('./api/users');
-const UsersValidator = require('./validator/users');
 
 const authentications = require('./api/authentication');
 const TokenManager = require('./tokenize/TokenManager');
-const AuthenticationsValidator = require('./validator/authentication');
 
 // initialize dotenv
 require('dotenv').config();
@@ -72,7 +70,6 @@ require('dotenv').config();
       plugin: users,
       options: {
         service: usersService,
-        validator: UsersValidator,
       },
     },
     {
@@ -81,7 +78,6 @@ require('dotenv').config();
         authenticationsService,
         usersService,
         tokenManager: TokenManager,
-        validator: AuthenticationsValidator,
       },
     },
   ]);

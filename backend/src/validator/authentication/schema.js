@@ -5,16 +5,40 @@ const PostAuthenticationPayloadSchema = Joi.object({
   password: Joi.string().required(),
 });
 
+const PostAuthenticationResponseSchema = Joi.object({
+  status: Joi.string().required(),
+  message: Joi.string().required(),
+  data: Joi.object({
+    accessToken: Joi.string(),
+    refreshToken: Joi.string(),
+  }),
+});
+
 const PutAuthenticationPayloadSchema = Joi.object({
   refreshToken: Joi.string().required(),
+});
+const PutAuthenticationResponseSchema = Joi.object({
+  status: Joi.string().required(),
+  message: Joi.string().required(),
+  data: Joi.object({
+    accessToken: Joi.string(),
+  }),
 });
 
 const DeleteAuthenticationPayloadSchema = Joi.object({
   refreshToken: Joi.string().required(),
 });
 
+const DeleteAuthenticationResponseSchema = Joi.object({
+  status: Joi.string().required(),
+  message: Joi.string().required(),
+});
+
 module.exports = {
   PostAuthenticationPayloadSchema,
   PutAuthenticationPayloadSchema,
   DeleteAuthenticationPayloadSchema,
+  PostAuthenticationResponseSchema,
+  PutAuthenticationResponseSchema,
+  DeleteAuthenticationResponseSchema,
 };
