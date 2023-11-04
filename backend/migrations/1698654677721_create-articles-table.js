@@ -17,7 +17,7 @@ exports.up = (pgm) => {
       type: 'VARCHAR(50)',
       notNull: true,
     },
-    cover_img: {
+    cover_img_url: {
       type: 'TEXT',
       notNull: true,
     },

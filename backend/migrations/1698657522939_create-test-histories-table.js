@@ -13,6 +13,10 @@ exports.up = (pgm) => {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     },
+    audio_url: {
+      type: 'TEXT',
+      notNull: true,
+    },
     mode: {
       type: 'VARCHAR(50)',
       notNull: true,
