@@ -13,27 +13,11 @@ exports.up = (pgm) => {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     },
-    audio_url: {
-      type: 'TEXT',
-      notNull: true,
-    },
     mode: {
       type: 'VARCHAR(50)',
       notNull: true,
     },
-    job_field: {
-      type: 'VARCHAR(50)',
-      notNull: true,
-    },
-    job_position: {
-      type: 'VARCHAR(50)',
-      notNull: true,
-    },
-    duration: {
-      type: 'bigint',
-      notNull: true,
-    },
-    status: {
+    is_complete: {
       type: 'boolean',
       notNull: true,
     },

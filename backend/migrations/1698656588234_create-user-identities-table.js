@@ -20,10 +20,6 @@ exports.up = (pgm) => {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     },
-    age: {
-      type: 'integer',
-      notNull: true,
-    },
     gender: {
       type: 'CHAR(1)',
       notNull: true,

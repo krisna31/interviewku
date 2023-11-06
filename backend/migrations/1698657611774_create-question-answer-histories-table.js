@@ -20,6 +20,10 @@ exports.up = (pgm) => {
       type: 'VARCHAR(50)',
       notNull: true,
     },
+    audio_url: {
+      type: 'TEXT',
+      notNull: true,
+    },
     score: {
       type: 'integer',
       notNull: true,
@@ -31,6 +35,7 @@ exports.up = (pgm) => {
     retry_attempt: {
       type: 'integer',
       notNull: true,
+      default: 0,
     },
     question: {
       type: 'TEXT',
