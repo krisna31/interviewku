@@ -1,2 +1,0 @@
-# interviewku-frontend
-
