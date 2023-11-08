@@ -76,6 +76,38 @@ class UsersService {
 
     return id;
   }
+
+  async verifyUserCredentialById(id, password) {
+    const query = {
+      text: 'SELECT password FROM users WHERE id = $1',
+      values: [id],
+    };
+
+    const result = await this._pool.query(query);
+    if (!result.rows.length) {
+      throw new AuthenticationError('Kredensial yang Anda berikan salah');
+    }
+
+    const { password: hashedPassword } = result.rows[0];
+    const match = await bcrypt.compare(password, hashedPassword);
+    if (!match) {
+      throw new AuthenticationError('Kredensial yang Anda berikan salah');
+    }
+
+    return id;
+  }
+
+  async editUserPassword(id, password) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const query = {
+      text: 'UPDATE users SET password = $1 WHERE id = $2',
+      values: [hashedPassword, id],
+    };
+    const result = await this._pool.query(query);
+    if (!result.rowCount) {
+      throw new NotFoundError('Gagal memperbarui password. Id tidak ditemukan');
+    }
+  }
 }
 
 module.exports = UsersService;

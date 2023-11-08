@@ -1,10 +1,25 @@
 const Joi = require('joi');
+const { joiPasswordExtendCore } = require('joi-password');
+
+const joiPassword = Joi.extend(joiPasswordExtendCore);
+
+const passwordValidation = joiPassword
+  .string()
+  // .minOfSpecialCharacters(2)
+  // .minOfLowercase(2)
+  // .minOfUppercase(2)
+  .min(6)
+  .max(30)
+  .minOfNumeric(1)
+  .noWhiteSpaces()
+  .onlyLatinCharacters()
+  .required();
 
 const UserPayloadSchema = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string(),
   email: Joi.string().email({ tlds: true }).required(),
-  password: Joi.string().required().min(6).max(30),
+  password: passwordValidation,
 }).label('Users Payload');
 
 const UserSuccessCreateResponseSchema = Joi.object({
@@ -33,5 +48,9 @@ const UserGetRequestSchema = Joi.object({
 }).label('Get User Params');
 
 module.exports = {
-  UserPayloadSchema, UserSuccessCreateResponseSchema, UserGetResponseSchema, UserGetRequestSchema,
+  UserPayloadSchema,
+  UserSuccessCreateResponseSchema,
+  UserGetResponseSchema,
+  UserGetRequestSchema,
+  passwordValidation,
 };

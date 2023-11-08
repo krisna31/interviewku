@@ -6,6 +6,8 @@ const {
   PutAuthenticationResponseSchema,
   DeleteAuthenticationPayloadSchema,
   DeleteAuthenticationResponseSchema,
+  PutChangePasswordResponseSchema,
+  PutChangePasswordPayloadSchema,
 } = require('../../validator/authentication/schema');
 
 const routes = (handler) => [
@@ -52,6 +54,22 @@ const routes = (handler) => [
         },
       },
       response: { schema: DeleteAuthenticationResponseSchema },
+    },
+  },
+  {
+    method: 'PUT',
+    path: '/change-password',
+    options: {
+      handler: (request, h) => handler.changePasswordHandler(request, h),
+      auth: 'interviewku_jwt',
+      tags: ['api'],
+      validate: {
+        payload: PutChangePasswordPayloadSchema,
+        failAction: (request, h, error) => {
+          throw new InvariantError(error.message);
+        },
+      },
+      response: { schema: PutChangePasswordResponseSchema },
     },
   },
 ];

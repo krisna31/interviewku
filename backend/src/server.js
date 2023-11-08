@@ -49,7 +49,7 @@ require('dotenv').config();
     },
   ]);
 
-  server.auth.strategy('openmusic_jwt', 'jwt', {
+  server.auth.strategy('interviewku_jwt', 'jwt', {
     keys: process.env.ACCESS_TOKEN_KEY,
     verify: {
       aud: false,

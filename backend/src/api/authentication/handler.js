@@ -57,6 +57,19 @@ class AuthenticationsHandler {
       message: 'Refresh token berhasil dihapus',
     };
   }
+
+  async changePasswordHandler(request, h) {
+    const { id } = request.auth.credentials;
+    const { oldPassword, newPassword } = request.payload;
+
+    await this._usersService.verifyUserCredentialById(id, oldPassword);
+    await this._usersService.editUserPassword(id, newPassword);
+
+    return {
+      status: 'success',
+      message: 'Password berhasil diperbarui',
+    };
+  }
 }
 
 module.exports = AuthenticationsHandler;
