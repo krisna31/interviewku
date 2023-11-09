@@ -1,8 +1,5 @@
 const Joi = require('joi');
-const { joiPasswordExtendCore } = require('joi-password');
 const { passwordValidation } = require('../users/schema');
-
-const joiPassword = Joi.extend(joiPasswordExtendCore);
 
 const PostAuthenticationPayloadSchema = Joi.object({
   email: Joi.string().email({ tlds: true }).required(),

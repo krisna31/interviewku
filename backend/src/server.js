@@ -14,12 +14,14 @@ const users = require('./api/users');
 
 const authentications = require('./api/authentication');
 const TokenManager = require('./tokenize/TokenManager');
+const JobsService = require('./services/postgres/JobsService');
 
 // initialize dotenv
 require('dotenv').config();
 
 (async () => {
   const usersService = new UsersService();
+  const jobsService = new JobsService();
   const authenticationsService = new AuthenticationsService();
 
   const server = Hapi.server({
@@ -69,7 +71,8 @@ require('dotenv').config();
     {
       plugin: users,
       options: {
-        service: usersService,
+        usersService,
+        jobsService,
       },
     },
     {

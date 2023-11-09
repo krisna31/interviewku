@@ -23,6 +23,32 @@ class UsersService {
     }
   }
 
+  async verifyUserId({ userId }) {
+    const query = {
+      text: 'SELECT id FROM users WHERE id = $1',
+      values: [userId],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError('User tidak ditemukan');
+    }
+  }
+
+  async verifyUserHaveOnlyOneIdentity({ userId }) {
+    const query = {
+      text: 'SELECT id FROM user_identities WHERE user_id = $1',
+      values: [userId],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (result.rows.length) {
+      throw new InvariantError('User hanya boleh memiliki satu identitas');
+    }
+  }
+
   async addUser({
     firstName,
     lastName,
@@ -45,7 +71,7 @@ class UsersService {
 
   async getUserById(userId) {
     const query = {
-      text: 'SELECT id, first_name AS firstName, last_name AS lastName, email FROM users WHERE id = $1',
+      text: 'SELECT * FROM users WHERE id = $1',
       values: [userId],
     };
     const result = await this._pool.query(query);
@@ -107,6 +133,106 @@ class UsersService {
     if (!result.rowCount) {
       throw new NotFoundError('Gagal memperbarui password. Id tidak ditemukan');
     }
+  }
+
+  async addUserIdentity({
+    userId,
+    jobPositionId,
+    gender,
+    dateBirth,
+    currentCity,
+  }) {
+    const query = {
+      text: 'INSERT INTO user_identities(user_id, job_position_id, gender, date_birth, current_city) VALUES($1, $2, $3, $4, $5) RETURNING *',
+      values: [userId, jobPositionId, gender, dateBirth, currentCity],
+    };
+
+    await this.verifyUserId({ userId });
+
+    await this.verifyUserHaveOnlyOneIdentity({ userId });
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new InvariantError('Identity gagal ditambahkan');
+    }
+
+    return result.rows[0];
+  }
+
+  async getUserIdentity(userId) {
+    const query = {
+      text: `
+        SELECT *, name AS job_position_name FROM user_identities AS ui
+        INNER JOIN job_positions AS jp ON ui.job_position_id = jp.id
+        WHERE ui.user_id = $1;
+      `,
+      values: [userId],
+    };
+
+    await this.verifyUserId({ userId });
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError('Identity tidak ditemukan');
+    }
+
+    return result.rows[0];
+  }
+
+  async deleteUserIdentity(userId) {
+    const query = {
+      text: 'DELETE FROM user_identities WHERE user_id = $1 RETURNING user_id',
+      values: [userId],
+    };
+
+    await this.verifyUserId({ userId });
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError('Identity gagal dihapus. Id tidak ditemukan');
+    }
+  }
+
+  async editUserIdentity({
+    userId,
+    jobPositionId,
+    gender,
+    dateBirth,
+    currentCity,
+  }) {
+    const query = {
+      text: `
+        UPDATE user_identities
+        SET 
+          ${jobPositionId !== undefined ? 'job_position_id = $2,' : ''}
+          ${gender !== undefined ? 'gender = $3,' : ''}
+          ${dateBirth !== undefined ? 'date_birth = $4,' : ''}
+          ${currentCity !== undefined ? 'current_city = $5,' : ''}
+          updated_at = NOW()
+        WHERE user_id = $1
+        RETURNING *;
+        `,
+      values: [
+        userId,
+        jobPositionId,
+        gender,
+        dateBirth,
+        currentCity,
+      ].filter((val) => val !== undefined),
+    };
+
+    await this.verifyUserId({ userId });
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError('Identity gagal diperbarui. Id tidak ditemukan');
+    }
+
+    return result.rows[0];
   }
 }
 
