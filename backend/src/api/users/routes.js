@@ -1,11 +1,11 @@
 const InvariantError = require('../../exceptions/InvariantError');
+const { WithTokenRequestSchema } = require('../../validator/general/schema');
 const {
   UserPayloadSchema,
   UserSuccessCreateResponseSchema,
   UserGetResponseSchema,
-  UserGetRequestSchema,
   PostUserIdentityPayloadSchema,
-  PostUserIdentityResponseSchema,
+  UserIdentityResponseSchema,
   DeleteUserIdentityResponseSchema,
   PutChangeUserIdentityPayloadSchema,
 } = require('../../validator/users/schema');
@@ -28,12 +28,12 @@ const routes = (handler) => [
   },
   {
     method: 'GET',
-    path: '/users/{id}',
+    path: '/users',
     options: {
       handler: (request, h) => handler.getUserByIdHandler(request, h),
       auth: 'interviewku_jwt',
       validate: {
-        params: UserGetRequestSchema,
+        headers: WithTokenRequestSchema,
         failAction: (request, h, error) => {
           throw new InvariantError(error.message);
         },
@@ -50,12 +50,13 @@ const routes = (handler) => [
       auth: 'interviewku_jwt',
       tags: ['api'],
       validate: {
+        headers: WithTokenRequestSchema,
         payload: PostUserIdentityPayloadSchema,
         failAction: (request, h, error) => {
           throw new InvariantError(error.message);
         },
       },
-      response: { schema: PostUserIdentityResponseSchema },
+      response: { schema: UserIdentityResponseSchema },
     },
   },
   {
@@ -65,7 +66,13 @@ const routes = (handler) => [
       handler: (request, h) => handler.getUserIdentityHandler(request, h),
       auth: 'interviewku_jwt',
       tags: ['api'],
-      response: { schema: PostUserIdentityResponseSchema },
+      validate: {
+        headers: WithTokenRequestSchema,
+        failAction: (request, h, error) => {
+          throw new InvariantError(error.message);
+        },
+      },
+      response: { schema: UserIdentityResponseSchema },
     },
   },
   {
@@ -76,12 +83,13 @@ const routes = (handler) => [
       auth: 'interviewku_jwt',
       tags: ['api'],
       validate: {
+        headers: WithTokenRequestSchema,
         payload: PutChangeUserIdentityPayloadSchema,
         failAction: (request, h, error) => {
           throw new InvariantError(error.message);
         },
       },
-      response: { schema: PostUserIdentityResponseSchema },
+      response: { schema: UserIdentityResponseSchema },
     },
   },
   {
@@ -91,6 +99,12 @@ const routes = (handler) => [
       handler: (request, h) => handler.deleteUserIdentityHandler(request, h),
       auth: 'interviewku_jwt',
       tags: ['api'],
+      validate: {
+        headers: WithTokenRequestSchema,
+        failAction: (request, h, error) => {
+          throw new InvariantError(error.message);
+        },
+      },
       response: { schema: DeleteUserIdentityResponseSchema },
     },
   },

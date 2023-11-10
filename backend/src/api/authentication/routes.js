@@ -9,6 +9,7 @@ const {
   PutChangePasswordResponseSchema,
   PutChangePasswordPayloadSchema,
 } = require('../../validator/authentication/schema');
+const { WithTokenRequestSchema } = require('../../validator/general/schema');
 
 const routes = (handler) => [
   {
@@ -64,6 +65,7 @@ const routes = (handler) => [
       auth: 'interviewku_jwt',
       tags: ['api'],
       validate: {
+        headers: WithTokenRequestSchema,
         payload: PutChangePasswordPayloadSchema,
         failAction: (request, h, error) => {
           throw new InvariantError(error.message);

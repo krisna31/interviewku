@@ -13,85 +13,85 @@ const passwordValidation = joiPassword
   .minOfNumeric(1)
   .noWhiteSpaces()
   .onlyLatinCharacters()
+  .default('secretpassword1')
   .required();
 
 const UserPayloadSchema = Joi.object({
-  firstName: Joi.string().required(),
+  firstName: Joi.string().required().default('first name'),
   lastName: Joi.string(),
-  email: Joi.string().email({ tlds: true }).required(),
+  email: Joi.string().email({ tlds: true }).default('interviewku@gmail.com').required(),
   password: passwordValidation,
 }).label('Users Payload');
 
 const UserSuccessCreateResponseSchema = Joi.object({
-  status: Joi.string().required(),
-  message: Joi.string().required(),
+  status: Joi.string().default('success').required(),
+  message: Joi.string().default('User berhasil ditambahkan').required(),
   data: Joi.object({
-    userId: Joi.string(),
+    userId: Joi.string().default('user-xxx'),
   }),
 }).label('User Response Success');
 
 const UserGetResponseSchema = Joi.object({
-  status: Joi.string().required(),
-  message: Joi.string().required(),
+  status: Joi.string().default('success').required(),
+  message: Joi.string().default('User Ditemukan').required(),
   data: Joi.object({
-    id: Joi.string(),
-    firstName: Joi.string(),
-    lastName: Joi.any(),
-    email: Joi.string(),
-    createdAt: Joi.date(),
-    updatedAt: Joi.any(),
+    id: Joi.string().default('user-xxx'),
+    firstName: Joi.string().default('first name'),
+    lastName: Joi.any().default(null),
+    email: Joi.string().default('interviewku@gmail.com'),
+    createdAt: Joi.date().default('2023-11-09T09:18:07.659Z'),
+    updatedAt: Joi.any().default(null),
   }),
 }).label('User Get By Id Success');
 
-const UserGetRequestSchema = Joi.object({
-  id: Joi.string().required(),
-}).label('Get User Params');
-
 const PostUserIdentityPayloadSchema = Joi.object({
-  jobPositionId: Joi.number().integer().required(),
-  gender: Joi.string().length(1).valid('p', 'l', 'P', 'L').required(),
-  dateBirth: Joi.date().required(),
-  currentCity: Joi.string().max(100).required(),
+  jobPositionId: Joi.number().integer().default(1).required(),
+  gender: Joi.string()
+    .length(1)
+    .valid('p', 'l', 'P', 'L')
+    .default('L')
+    .required(),
+  dateBirth: Joi.date().default('2023-11-09T09:18:07.659Z').required(),
+  currentCity: Joi.string().max(100).default('Riau').required(),
 }).label('User Identity Payload');
 
-const PostUserIdentityResponseSchema = Joi.object({
-  status: Joi.string().required(),
-  message: Joi.string().required(),
+const UserIdentityResponseSchema = Joi.object({
+  status: Joi.string().default('success').required(),
+  message: Joi.string().default('Identitas User berhasil ditambahkan').required(),
   data: Joi.object({
-    userId: Joi.string(),
-    jobPositionId: Joi.number().integer(),
-    jobPositionName: Joi.string(),
-    gender: Joi.string().length(1).valid('p', 'l', 'P', 'L'),
-    dateBirth: Joi.date(),
-    currentCity: Joi.string().max(100),
-    createdAt: Joi.date(),
-    updatedAt: Joi.any(),
+    userId: Joi.string().default('user-xxx'),
+    jobPositionId: Joi.number().default(1).integer(),
+    jobPositionName: Joi.string().default('Frontend'),
+    gender: Joi.string().length(1).valid('p', 'l', 'P', 'L').default('L'),
+    dateBirth: Joi.date().default('2023-11-09T09:18:07.659Z'),
+    currentCity: Joi.string().max(100).default('Lampung'),
+    createdAt: Joi.date().default('2023-11-09T09:18:07.659Z'),
+    updatedAt: Joi.any().default(null),
   }),
-}).label('User Identity Response Success');
+}).label('GET | POST | PUT for User Identity Response Success');
 
 const DeleteUserIdentityResponseSchema = Joi.object({
-  status: Joi.string().valid('success').required(),
-  message: Joi.string().required(),
+  status: Joi.string().default('success').required(),
+  message: Joi.string().default('Identitas User berhasil dihapus').required(),
   data: Joi.object({
-    userId: Joi.string(),
+    userId: Joi.string().default('user-xxx'),
   }),
 }).label('User Identity Response Success');
 
 const PutChangeUserIdentityPayloadSchema = Joi.object({
-  jobPositionId: Joi.number().integer(),
-  gender: Joi.string().length(1).valid('p', 'l', 'P', 'L'),
-  dateBirth: Joi.date(),
-  currentCity: Joi.string().max(100),
+  jobPositionId: Joi.number().integer().default(1),
+  gender: Joi.string().length(1).valid('p', 'l', 'P', 'L').default('L'),
+  dateBirth: Joi.date().default('2023-11-09T09:18:07.659Z'),
+  currentCity: Joi.string().max(100).default('Palembang'),
 }).label('PUT User Identity Payload');
 
 module.exports = {
   UserPayloadSchema,
   UserSuccessCreateResponseSchema,
   UserGetResponseSchema,
-  UserGetRequestSchema,
   passwordValidation,
   PostUserIdentityPayloadSchema,
-  PostUserIdentityResponseSchema,
+  UserIdentityResponseSchema,
   DeleteUserIdentityResponseSchema,
   PutChangeUserIdentityPayloadSchema,
 };
