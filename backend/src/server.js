@@ -11,6 +11,7 @@ const ClientError = require('./exceptions/ClientError');
 const UsersService = require('./services/postgres/UsersService');
 const AuthenticationsService = require('./services/postgres/AuthenticationsService');
 const users = require('./api/users');
+const jobs = require('./api/jobs');
 
 const authentications = require('./api/authentication');
 const TokenManager = require('./tokenize/TokenManager');
@@ -83,12 +84,28 @@ require('dotenv').config();
         tokenManager: TokenManager,
       },
     },
+    {
+      plugin: jobs,
+      options: {
+        jobsService,
+      },
+    },
   ]);
 
   // extension function before response check and handle error
   server.ext('onPreResponse', (request, h) => {
     const { response } = request;
     console.log(response.message);
+
+    if (response.message === 'Missing authentication' && response.output.statusCode === 401) {
+      const newResponse = h.response({
+        status: 'fail',
+        message: 'Missing authentication',
+      });
+      newResponse.code(401);
+      return newResponse;
+    }
+
     if (response instanceof Error) {
       if (response instanceof ClientError) {
         const newResponse = h.response({
