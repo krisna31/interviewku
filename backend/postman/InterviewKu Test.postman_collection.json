@@ -56,7 +56,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"})\r",
 									"\r",
@@ -132,7 +132,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"})"
 								],
@@ -198,7 +198,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"})"
 								],
@@ -264,7 +264,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.data).to.be.an('object');\r",
 									"    pm.expect(responseJson.data.userId).to.be.a('string');\r",
 									"\r",
@@ -334,7 +334,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.data).to.be.an('object');\r",
 									"    pm.expect(responseJson.data.userId).to.be.a('string');\r",
 									"});"
@@ -418,7 +418,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"});"
 								],
@@ -563,7 +563,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"})\r",
 									"\r",
@@ -639,7 +639,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"});"
 								],
@@ -705,7 +705,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"});"
 								],
@@ -771,7 +771,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.data).to.be.an('object');\r",
 									"    pm.expect(responseJson.data.accessToken).to.be.a('string');\r",
 									"    pm.expect(responseJson.data.refreshToken).to.be.a('string');\r",
@@ -842,7 +842,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.data).to.be.an('object');\r",
 									"    pm.expect(responseJson.data.accessToken).to.be.a('string');\r",
 									"    pm.expect(responseJson.data.refreshToken).to.be.a('string');\r",
@@ -913,7 +913,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.data).to.be.a('object');\r",
 									"});"
 								],
@@ -1046,7 +1046,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('it should response 201 status code', () => {\r",
+									"pm.test('it should response 401 status code', () => {\r",
 									"    pm.expect(pm.response).to.have.status(401);\r",
 									"});\r",
 									"\r",
@@ -1121,7 +1121,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('it should response 201 status code', () => {\r",
+									"pm.test('it should response 200 status code', () => {\r",
 									"    pm.expect(pm.response).to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -1137,7 +1137,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.message).to.be.equal('Password berhasil diperbarui');\r",
 									"});"
 								],
@@ -1213,7 +1213,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.message).to.be.equal('Password berhasil diperbarui');\r",
 									"});"
 								],
@@ -1280,7 +1280,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"})"
 								],
@@ -1337,7 +1337,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"});"
 								],
@@ -1394,7 +1394,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"});"
 								],
@@ -1451,7 +1451,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.data).to.be.an('object');\r",
 									"    pm.expect(responseJson.data.accessToken).to.be.a('string');\r",
 									"});"
@@ -1509,7 +1509,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"})"
 								],
@@ -1566,7 +1566,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"})"
 								],
@@ -1623,7 +1623,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"})"
 								],
@@ -1680,7 +1680,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"})"
 								],
@@ -1737,7 +1737,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.be.a('string');\r",
 									"})"
 								],
@@ -2001,7 +2001,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.equal('Job Position tidak valid');\r",
 									"});"
 								],
@@ -2069,7 +2069,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.equal('\\\"dateBirth\\\" must be a valid date');\r",
 									"});"
 								],
@@ -2137,7 +2137,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.equal('\\\"gender\\\" must be one of [p, l, P, L]');\r",
 									"});"
 								],
@@ -2205,7 +2205,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.message).to.equal('Identitas User berhasil ditambahkan');\r",
 									"});"
 								],
@@ -2273,7 +2273,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.message).to.equal('Identitas User Berhasil Diubah');\r",
 									"    pm.expect(responseJson.data).to.be.an('object');\r",
 									"    pm.expect(responseJson.data.jobPositionId).to.equal(2);\r",
@@ -2344,7 +2344,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('fail');\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
 									"    pm.expect(responseJson.message).to.equal('User hanya boleh memiliki satu identitas');\r",
 									"});\r",
 									""
@@ -2413,7 +2413,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.message).to.equal('Identitas User Ditemukan');\r",
 									"    pm.expect(responseJson.data).to.be.an('object');\r",
 									"});\r",
@@ -2474,7 +2474,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.message).to.equal('Identitas User berhasil dihapus');\r",
 									"});"
 								],
@@ -2699,7 +2699,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.message).to.equal('Jobs Field Ditemukan');\r",
 									"    pm.expect(responseJson.data).to.be.an('object');\r",
 									"    pm.expect(responseJson.data.jobFields).to.be.an('array');\r",
@@ -2762,7 +2762,7 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.status).to.equal('success');\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.message).to.equal('Jobs Position Ditemukan');\r",
 									"    pm.expect(responseJson.data).to.be.an('object');\r",
 									"    pm.expect(responseJson.data.jobPositions).to.be.an('array');\r",

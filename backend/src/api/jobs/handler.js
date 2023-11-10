@@ -10,7 +10,7 @@ class JobsHandler {
     const jobFields = await this._jobsService.getJobFields(id);
 
     return {
-      status: 'success',
+      success: true,
       message: 'Jobs Field Ditemukan',
       data: {
         jobFields,
@@ -22,7 +22,7 @@ class JobsHandler {
     const jobPositions = await this._jobsService.getJobPositions();
 
     return {
-      status: 'success',
+      success: true,
       message: 'Jobs Position Ditemukan',
       data: {
         jobPositions,

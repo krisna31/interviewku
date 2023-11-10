@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const GetJobsFieldResponseSchema = Joi.object({
-  status: Joi.string().default('success').required(),
+  success: Joi.boolean().default(true).required(),
   message: Joi.string().default('Jobs Field Ditemukan').required(),
   data: Joi.object().keys({
     jobFields: Joi.array().items(Joi.object().keys({
@@ -17,7 +17,7 @@ const GetJobsFieldResponseSchema = Joi.object({
 }).label('Get Jobs Field Response');
 
 const GetJobsPositionResponseSchema = Joi.object({
-  status: Joi.string().default('success').required(),
+  success: Joi.boolean().default(true).required(),
   message: Joi.string().default('Jobs Position Ditemukan').required(),
   data: Joi.object().keys({
     jobPositions: Joi.array().items(Joi.object().keys({

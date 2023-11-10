@@ -97,19 +97,23 @@ require('dotenv').config();
     const { response } = request;
     console.log(response.message);
 
-    if (response.message === 'Missing authentication' && response.output.statusCode === 401) {
-      const newResponse = h.response({
-        status: 'fail',
-        message: 'Missing authentication',
-      });
-      newResponse.code(401);
-      return newResponse;
+    if (response?.output?.statusCode === 401) {
+      if (process.env.APP_ENV === 'dev') {
+        return h.response({
+          success: false,
+          message: `Unauthorized - ${response.message}`,
+        }).code(401);
+      }
+      return h.response({
+        success: false,
+        message: 'Unauthorized',
+      }).code(401);
     }
 
     if (response instanceof Error) {
       if (response instanceof ClientError) {
         const newResponse = h.response({
-          status: 'fail',
+          success: false,
           message: response.message,
         });
         newResponse.code(response.statusCode);
@@ -119,7 +123,7 @@ require('dotenv').config();
         return h.continue;
       }
       const newResponse = h.response({
-        status: 'error',
+        success: false,
         message: 'terjadi kegagalan pada server kami',
       });
       newResponse.code(500);

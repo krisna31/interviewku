@@ -15,7 +15,7 @@ class UserHandler {
     });
 
     const response = h.response({
-      status: 'success',
+      success: true,
       message: 'User berhasil ditambahkan',
       data: {
         userId,
@@ -30,7 +30,7 @@ class UserHandler {
     const { id } = request.auth.credentials;
     const user = await this._usersService.getUserById(id);
     return {
-      status: 'success',
+      success: true,
       message: 'User Ditemukan',
       data: {
         id: user.id,
@@ -63,7 +63,7 @@ class UserHandler {
     });
 
     return {
-      status: 'success',
+      success: true,
       message: 'Identitas User berhasil ditambahkan',
       data: {
         userId: userIdentity.user_id,
@@ -98,7 +98,7 @@ class UserHandler {
     });
 
     return {
-      status: 'success',
+      success: true,
       message: 'Identitas User Berhasil Diubah',
       data: {
         userId: userIdentity.user_id,
@@ -116,7 +116,7 @@ class UserHandler {
     const { id } = request.auth.credentials;
     await this._usersService.deleteUserIdentity(id);
     return {
-      status: 'success',
+      success: true,
       message: 'Identitas User berhasil dihapus',
     };
   }
@@ -127,7 +127,7 @@ class UserHandler {
     const userIdentity = await this._usersService.getUserIdentity(id);
 
     return {
-      status: 'success',
+      success: true,
       message: 'Identitas User Ditemukan',
       data: {
         userId: userIdentity.user_id,

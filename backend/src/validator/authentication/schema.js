@@ -7,7 +7,7 @@ const PostAuthenticationPayloadSchema = Joi.object({
 }).label('PostAuthenticationPayloadSchema');
 
 const PostAuthenticationResponseSchema = Joi.object({
-  status: Joi.string().default('success').required(),
+  success: Joi.boolean().default(true).required(),
   message: Joi.string().default('Authentication berhasil ditambahkan').required(),
   data: Joi.object({
     accessToken: Joi.string().default('xxx'),
@@ -20,7 +20,7 @@ const PutAuthenticationPayloadSchema = Joi.object({
 }).label('PutAuthenticationPayloadSchema');
 
 const PutAuthenticationResponseSchema = Joi.object({
-  status: Joi.string().default('success').required(),
+  success: Joi.boolean().default(true).required(),
   message: Joi.string().default('Access Token berhasil diperbarui').required(),
   data: Joi.object({
     accessToken: Joi.string(),
@@ -32,7 +32,7 @@ const DeleteAuthenticationPayloadSchema = Joi.object({
 }).label('DeleteAuthenticationPayloadSchema');
 
 const DeleteAuthenticationResponseSchema = Joi.object({
-  status: Joi.string().default('success').required(),
+  success: Joi.boolean().default(true).required(),
   message: Joi.string().default('Refresh token berhasil dihapus').required(),
 }).label('DeleteAuthenticationResponseSchema');
 
@@ -42,7 +42,7 @@ const PutChangePasswordPayloadSchema = Joi.object({
 }).label('PutChangePasswordPayloadSchema');
 
 const PutChangePasswordResponseSchema = Joi.object({
-  status: Joi.string().default('success').required(),
+  success: Joi.boolean().default(true).required(),
   message: Joi.string().default('Password berhasil diperbarui').required(),
 }).label('PutChangePasswordResponseSchema');
 

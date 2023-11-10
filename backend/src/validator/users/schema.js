@@ -24,7 +24,7 @@ const UserPayloadSchema = Joi.object({
 }).label('Users Payload');
 
 const UserSuccessCreateResponseSchema = Joi.object({
-  status: Joi.string().default('success').required(),
+  success: Joi.boolean().default(true).required(),
   message: Joi.string().default('User berhasil ditambahkan').required(),
   data: Joi.object({
     userId: Joi.string().default('user-xxx'),
@@ -32,7 +32,7 @@ const UserSuccessCreateResponseSchema = Joi.object({
 }).label('User Response Success');
 
 const UserGetResponseSchema = Joi.object({
-  status: Joi.string().default('success').required(),
+  success: Joi.boolean().default(true).required(),
   message: Joi.string().default('User Ditemukan').required(),
   data: Joi.object({
     id: Joi.string().default('user-xxx'),
@@ -56,7 +56,7 @@ const PostUserIdentityPayloadSchema = Joi.object({
 }).label('User Identity Payload');
 
 const UserIdentityResponseSchema = Joi.object({
-  status: Joi.string().default('success').required(),
+  success: Joi.boolean().default(true).required(),
   message: Joi.string().default('Identitas User berhasil ditambahkan').required(),
   data: Joi.object({
     userId: Joi.string().default('user-xxx'),
@@ -71,7 +71,7 @@ const UserIdentityResponseSchema = Joi.object({
 }).label('GET | POST | PUT for User Identity Response Success');
 
 const DeleteUserIdentityResponseSchema = Joi.object({
-  status: Joi.string().default('success').required(),
+  success: Joi.boolean().default(true).required(),
   message: Joi.string().default('Identitas User berhasil dihapus').required(),
   data: Joi.object({
     userId: Joi.string().default('user-xxx'),
