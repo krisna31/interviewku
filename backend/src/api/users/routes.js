@@ -92,22 +92,24 @@ const routes = (handler) => [
       response: { schema: UserIdentityResponseSchema },
     },
   },
-  {
-    method: 'DELETE',
-    path: '/users/identity',
-    options: {
-      handler: (request, h) => handler.deleteUserIdentityHandler(request, h),
-      auth: 'interviewku_jwt',
-      tags: ['api'],
-      validate: {
-        headers: WithTokenRequestSchema,
-        failAction: (request, h, error) => {
-          throw new InvariantError(error.message);
+  ...(process.env.APP_ENV === 'dev' ? [
+    {
+      method: 'DELETE',
+      path: '/users/identity',
+      options: {
+        handler: (request, h) => handler.deleteUserIdentityHandler(request, h),
+        auth: 'interviewku_jwt',
+        tags: ['api'],
+        validate: {
+          headers: WithTokenRequestSchema,
+          failAction: (request, h, error) => {
+            throw new InvariantError(error.message);
+          },
         },
+        response: { schema: DeleteUserIdentityResponseSchema },
       },
-      response: { schema: DeleteUserIdentityResponseSchema },
     },
-  },
+  ] : []),
 ];
 
 module.exports = routes;
