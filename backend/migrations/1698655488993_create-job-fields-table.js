@@ -25,18 +25,19 @@ exports.up = (pgm) => {
   });
 
   pgm.sql(`
-    INSERT INTO job_fields(name) 
-      VALUES
-        ('Bidang General'),
-        ('Bidang Kuliner dan Restoran'),
-        ('Bidang Penjualan dan Pemasaran'),
-        ('Bidang Layanan Pelanggan'),
-        ('Bidang Keuangan dan Akuntansi'),
-        ('Bidang Pemasaran Digital dan Desain Grafis'),
-        ('Bidang Manajemen Proyek dan Administrasi'),
-        ('Bidang Teknis dan IT'),
-        ('Bidang Logistik dan Pengiriman')
-        ;
+    INSERT INTO job_fields(name, description) 
+    VALUES
+      ('General', 'General job field description'),
+      ('Kuliner dan Restoran', 'Job field related to culinary and restaurant management'),
+      ('Penjualan dan Pemasaran', 'Job field focusing on sales and marketing roles'),
+      ('Layanan Pelanggan', 'Job field involving customer service roles'),
+      ('Keuangan dan Akuntansi', 'Job field related to finance and accounting'),
+      ('Pemasaran Digital dan Desain Grafis', 'Job field combining digital marketing and graphic design'),
+      ('Manajemen Proyek dan Administrasi', 'Job field involving project management and administrative roles'),
+      ('Teknis dan IT', 'Job field related to technical and IT positions'),
+      ('Logistik dan Pengiriman', 'Job field involving logistics and shipping roles'),
+      ('Keamanan', 'Job field related to security roles')
+      ;  
   `);
 };
 

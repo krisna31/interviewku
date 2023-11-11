@@ -12,10 +12,12 @@ const UsersService = require('./services/postgres/UsersService');
 const AuthenticationsService = require('./services/postgres/AuthenticationsService');
 const users = require('./api/users');
 const jobs = require('./api/jobs');
+const questions = require('./api/questions');
 
 const authentications = require('./api/authentication');
 const TokenManager = require('./tokenize/TokenManager');
 const JobsService = require('./services/postgres/JobsService');
+const QuestionsService = require('./services/postgres/QuestionsService');
 
 // initialize dotenv
 require('dotenv').config();
@@ -24,6 +26,7 @@ require('dotenv').config();
   const usersService = new UsersService();
   const jobsService = new JobsService();
   const authenticationsService = new AuthenticationsService();
+  const questionsService = new QuestionsService()
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -90,6 +93,12 @@ require('dotenv').config();
         jobsService,
       },
     },
+    {
+      plugin: questions,
+      options: {
+        questionsService,
+      }
+    }
   ]);
 
   // extension function before response check and handle error
