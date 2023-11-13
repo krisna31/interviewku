@@ -1,9 +1,5 @@
 const { Pool } = require('pg');
-const { nanoid } = require('nanoid');
-const bcrypt = require('bcrypt');
 const InvariantError = require('../../exceptions/InvariantError');
-const NotFoundError = require('../../exceptions/NotFoundError');
-const AuthenticationError = require('../../exceptions/AuthenticationError');
 
 class QuestionsService {
   constructor() {
@@ -21,7 +17,7 @@ class QuestionsService {
     const result = await this._pool.query(query);
 
     if (result.rowCount < 1) {
-      throw new InvariantError('Data Masih Kosong')
+      throw new InvariantError('Data Masih Kosong');
     }
 
     return result.rows.map((question) => ({

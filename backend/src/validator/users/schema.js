@@ -51,7 +51,7 @@ const PostUserIdentityPayloadSchema = Joi.object({
     .valid('p', 'l', 'P', 'L')
     .default('L')
     .required(),
-  dateBirth: Joi.date().default('2023-11-09T09:18:07.659Z').required(),
+  dateBirth: Joi.date().default('2023-01-01').required(),
   currentCity: Joi.string().max(100).default('Riau').required(),
 }).label('User Identity Payload');
 
@@ -63,7 +63,7 @@ const UserIdentityResponseSchema = Joi.object({
     jobPositionId: Joi.number().default(1).integer(),
     jobPositionName: Joi.string().default('Frontend'),
     gender: Joi.string().length(1).valid('p', 'l', 'P', 'L').default('L'),
-    dateBirth: Joi.date().default('2023-11-09T09:18:07.659Z'),
+    dateBirth: Joi.date().default('2023-01-01'),
     currentCity: Joi.string().max(100).default('Lampung'),
     createdAt: Joi.date().default('2023-11-09T09:18:07.659Z'),
     updatedAt: Joi.any().default(null),
@@ -81,7 +81,7 @@ const DeleteUserIdentityResponseSchema = Joi.object({
 const PutChangeUserIdentityPayloadSchema = Joi.object({
   jobPositionId: Joi.number().integer().default(1),
   gender: Joi.string().length(1).valid('p', 'l', 'P', 'L').default('L'),
-  dateBirth: Joi.date().default('2023-11-09T09:18:07.659Z'),
+  dateBirth: Joi.date().default('2023-01-01'),
   currentCity: Joi.string().max(100).default('Palembang'),
 }).label('PUT User Identity Payload');
 

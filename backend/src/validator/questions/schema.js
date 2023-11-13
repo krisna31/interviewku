@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const GetQuestionsResponseSchema = Joi.object({
   success: Joi.boolean().default(true).required(),
-  message: Joi.string().default('Jobs Field Ditemukan').required(),
+  message: Joi.string().default('Answers Ditemukan').required(),
   data: Joi.object().keys({
     questions: Joi.array().items(Joi.object({
       id: Joi.number().required(),
