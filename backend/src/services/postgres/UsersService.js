@@ -1,3 +1,5 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-plusplus */
 const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const bcrypt = require('bcrypt');
@@ -139,6 +141,51 @@ class UsersService {
     }
   }
 
+  async editUser({
+    firstName,
+    lastName,
+    email = undefined,
+    password = undefined,
+    id,
+  }) {
+    const query = {
+      text: this.buildQueryForEditUserBasicData(firstName, lastName, email, password),
+      values: [
+        id,
+        firstName,
+        lastName,
+        email,
+        password,
+      ].filter((value) => value !== undefined),
+    };
+
+    console.log(query);
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError('User gagal diperbarui. Id tidak ditemukan');
+    }
+
+    result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
+    result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
+
+    return result.rows[0];
+  }
+
+  buildQueryForEditUserBasicData(firstName, lastName, email, password) {
+    let index = 2;
+    let queryText = 'UPDATE users SET';
+
+    if (firstName !== undefined) queryText += ` first_name = $${index++},`;
+    if (lastName !== undefined) queryText += ` last_name = $${index++},`;
+    if (email !== undefined) queryText += ` email = $${index++},`;
+    if (password !== undefined) queryText += ` password = $${index++},`;
+
+    queryText += ' updated_at = NOW() WHERE id = $1 RETURNING *;';
+    return queryText;
+  }
+
   async addUserIdentity({
     userId,
     jobPositionId,
@@ -211,6 +258,8 @@ class UsersService {
   }
 
   async editUserIdentity({
+    firstName,
+    lastName,
     userId,
     jobPositionId,
     gender,
@@ -218,33 +267,32 @@ class UsersService {
     currentCity,
   }) {
     const query = {
-      text: `
-        UPDATE user_identities
-        SET 
-          ${jobPositionId !== undefined ? 'job_position_id = $2,' : ''}
-          ${gender !== undefined ? 'gender = $3,' : ''}
-          ${dateBirth !== undefined ? 'date_birth = $4,' : ''}
-          ${currentCity !== undefined ? 'current_city = $5,' : ''}
-          updated_at = NOW()
-        WHERE user_id = $1
-        RETURNING *;
-        `,
+      text: this.buildQueryForEditIdentity(jobPositionId, gender, dateBirth, currentCity),
       values: [
         userId,
         jobPositionId,
         gender,
         dateBirth,
         currentCity,
-      ].filter((val) => val !== undefined),
+      ].filter((value) => value !== undefined),
     };
 
     await this.verifyUserId({ userId });
 
     const result = await this._pool.query(query);
 
+    const user = await this.editUser({
+      firstName,
+      lastName,
+      id: userId,
+    });
+
     if (!result.rows.length) {
       throw new NotFoundError('Identity gagal diperbarui. Id tidak ditemukan');
     }
+
+    result.rows[0].first_name = user.first_name;
+    result.rows[0].last_name = user.last_name;
 
     result.rows[0].date_birth = dateFromDBToRightFormatDate(result.rows[0].date_birth);
 
@@ -252,6 +300,19 @@ class UsersService {
     result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
 
     return result.rows[0];
+  }
+
+  buildQueryForEditIdentity(jobPositionId, gender, dateBirth, currentCity) {
+    let index = 2;
+    let queryText = 'UPDATE user_identities SET';
+
+    if (jobPositionId !== undefined) queryText += ` job_position_id = $${index++},`;
+    if (gender !== undefined) queryText += ` gender = $${index++},`;
+    if (dateBirth !== undefined) queryText += ` date_birth = $${index++},`;
+    if (currentCity !== undefined) queryText += ` current_city = $${index++},`;
+
+    queryText += ' updated_at = NOW() WHERE user_id = $1 RETURNING *;';
+    return queryText;
   }
 }
 

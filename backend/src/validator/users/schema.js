@@ -60,6 +60,8 @@ const UserIdentityResponseSchema = Joi.object({
   message: Joi.string().default('Identitas User berhasil ditambahkan').required(),
   data: Joi.object({
     userId: Joi.string().default('user-xxx'),
+    firstName: Joi.string().default('first name'),
+    lastName: Joi.string().default('last name').allow(null),
     jobPositionId: Joi.number().default(1).integer(),
     jobPositionName: Joi.string().default('Frontend'),
     gender: Joi.string().length(1).valid('p', 'l', 'P', 'L').default('L'),
@@ -79,10 +81,12 @@ const DeleteUserIdentityResponseSchema = Joi.object({
 }).label('User Identity Response Success');
 
 const PutChangeUserIdentityPayloadSchema = Joi.object({
-  jobPositionId: Joi.number().integer().default(1),
-  gender: Joi.string().length(1).valid('p', 'l', 'P', 'L').default('L'),
-  dateBirth: Joi.date().default('2023-01-01'),
-  currentCity: Joi.string().max(100).default('Palembang'),
+  firstName: Joi.string(),
+  lastName: Joi.string(),
+  jobPositionId: Joi.number().integer(),
+  gender: Joi.string().length(1).valid('p', 'l', 'P', 'L'),
+  dateBirth: Joi.date(),
+  currentCity: Joi.string().max(100),
 }).label('PUT User Identity Payload');
 
 module.exports = {

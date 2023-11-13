@@ -81,6 +81,8 @@ class UserHandler {
     const { id } = request.auth.credentials;
 
     const {
+      firstName,
+      lastName,
       jobPositionId,
       gender,
       dateBirth,
@@ -90,9 +92,11 @@ class UserHandler {
     if (jobPositionId) await this._jobsService.checkJobPositionId(jobPositionId);
 
     const userIdentity = await this._usersService.editUserIdentity({
+      firstName,
+      lastName,
       userId: id,
       jobPositionId,
-      gender: gender.toUpperCase(),
+      gender: gender !== undefined ? gender.toUpperCase() : undefined,
       dateBirth,
       currentCity,
     });
@@ -102,6 +106,8 @@ class UserHandler {
       message: 'Identitas User Berhasil Diubah',
       data: {
         userId: userIdentity.user_id,
+        firstName: userIdentity.first_name,
+        lastName: userIdentity.last_name,
         jobPositionId: userIdentity.job_position_id,
         gender: userIdentity.gender,
         dateBirth: userIdentity.date_birth,
