@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
 const AuthenticationError = require('../../exceptions/AuthenticationError');
+const { dateFromDBToRightFormatDate, utcToLocalTimeZone } = require('../../utils');
 
 class UsersService {
   constructor() {
@@ -79,6 +80,9 @@ class UsersService {
     if (!result.rows.length) {
       throw new NotFoundError('User tidak ditemukan');
     }
+
+    result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
+    result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
 
     return result.rows[0];
   }
@@ -157,6 +161,11 @@ class UsersService {
       throw new InvariantError('Identity gagal ditambahkan');
     }
 
+    result.rows[0].date_birth = dateFromDBToRightFormatDate(result.rows[0].date_birth);
+
+    result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
+    result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
+
     return result.rows[0];
   }
 
@@ -177,6 +186,11 @@ class UsersService {
     if (!result.rows.length) {
       throw new NotFoundError('Identity tidak ditemukan');
     }
+
+    result.rows[0].date_birth = dateFromDBToRightFormatDate(result.rows[0].date_birth);
+
+    result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
+    result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
 
     return result.rows[0];
   }
@@ -231,6 +245,11 @@ class UsersService {
     if (!result.rows.length) {
       throw new NotFoundError('Identity gagal diperbarui. Id tidak ditemukan');
     }
+
+    result.rows[0].date_birth = dateFromDBToRightFormatDate(result.rows[0].date_birth);
+
+    result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
+    result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
 
     return result.rows[0];
   }

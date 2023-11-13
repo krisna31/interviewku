@@ -17,7 +17,11 @@ exports.up = (pgm) => {
       type: 'VARCHAR(50)',
       notNull: true,
     },
-    is_complete: {
+    total_questions: {
+      type: 'integer',
+      notNull: true,
+    },
+    completed: {
       type: 'boolean',
       notNull: true,
     },

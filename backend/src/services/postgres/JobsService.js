@@ -26,6 +26,9 @@ class JobsService {
 
     const result = await this._pool.query(query);
 
+    // result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
+    // result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
+
     return result.rows.map((jobField) => ({
       id: jobField.id,
       name: jobField.name,
@@ -41,6 +44,9 @@ class JobsService {
     };
 
     const result = await this._pool.query(query);
+
+    // result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
+    // result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
 
     return result.rows.map((jobPosition) => ({
       id: jobPosition.id,
