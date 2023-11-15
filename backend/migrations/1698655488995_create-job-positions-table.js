@@ -34,6 +34,7 @@ exports.up = (pgm) => {
   pgm.sql(`
     INSERT INTO job_positions(job_field_id, name, description) 
     VALUES
+      (1, 'General', 'Peran yang mencakup berbagai tanggung jawab dalam sebuah organisasi.'),
       (6, 'Barista', 'Membuat dan menyajikan minuman kopi, teh, dan minuman lainnya; merawat mesin kopi; melayani pelanggan dengan ramah.'),
       (6, 'Crew Outlet', 'Menjalankan operasional harian di outlet seperti membersihkan, merapihkan, melayani pelanggan, dan membantu dalam tugas-tugas umum.'),
       (6, 'Waiter/Waitress', 'Melayani pelanggan di restoran, mengambil pesanan, menyajikan makanan dan minuman, menjaga kebersihan di area meja makan.'),
@@ -184,7 +185,7 @@ exports.up = (pgm) => {
       (16, 'Travel Agent', 'Memberikan informasi perjalanan, menawarkan paket perjalanan, dan mengurus reservasi untuk pelanggan.'),
       (16, 'Tour Guide', 'Mengarahkan dan memberikan informasi kepada turis selama perjalanan wisata.'),
       (16, 'Event Coordinator', 'Merencanakan dan mengkoordinasikan acara atau pertemuan di hotel, mengatur logistik, dan detail-detail lainnya.'),
-      (16, 'Spa Therapist', 'Memberikan layanan spa kepada tamu hotel, seperti pijat, perawatan kulit, dan perawatan tubuh lainnya.'),
+      (16, 'Spa Therapist', 'Memberikan layanan spa kepada tamu hotel, seperti pijat, perawatan kulit, dan perawatan tubuh lainnya.')
       ;
   `);
 };

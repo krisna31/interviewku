@@ -20,6 +20,7 @@ const TokenManager = require('./tokenize/TokenManager');
 const JobsService = require('./services/postgres/JobsService');
 const QuestionsService = require('./services/postgres/QuestionsService');
 const AnswersService = require('./services/postgres/AnswersService');
+const InterviewsService = require('./services/postgres/InterviewsService');
 
 // initialize dotenv
 require('dotenv').config();
@@ -30,6 +31,7 @@ require('dotenv').config();
   const authenticationsService = new AuthenticationsService();
   const questionsService = new QuestionsService();
   const answersService = new AnswersService();
+  const interviewsService = new InterviewsService();
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -100,6 +102,7 @@ require('dotenv').config();
       plugin: questions,
       options: {
         questionsService,
+        interviewsService,
       },
     },
     {

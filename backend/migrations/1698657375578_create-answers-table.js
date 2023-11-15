@@ -2679,7 +2679,7 @@ exports.up = (pgm) => {
       (16, 'Sebagai Staff Manager, saya akan menciptakan lingkungan kerja yang mendukung pertumbuhan staf. Saya akan memberikan pelatihan yang relevan dan memastikan bahwa setiap anggota staf memiliki rencana pengembangan yang terstruktur.'),
       (16, 'Saya akan memandang peran Staff Manager sebagai mentor dan pembimbing bagi staf hotel. Saya akan memberikan umpan balik yang konstruktif dan membantu mereka merencanakan karier mereka dengan bijaksana.'),
       (16, 'Dalam peran Staff Manager, saya akan mengawasi dan mengelola staf dengan pendekatan berbasis tim. Saya akan mengadakan pertemuan tim reguler untuk berbagi pengetahuan dan pengalaman serta mendorong pelatihan lintas departemen.'),
-      (16, 'Saya akan menjadi Staff Manager yang mendukung pengembangan staf dengan mengidentifikasi potensi dan memberikan pelatihan yang sesuai. Saya juga akan memberikan umpan balik terbuka dan jujur ​​untuk membantu staf memperbaiki kinerja mereka.'),
+      (16, 'Saya akan menjadi Staff Manager yang mendukung pengembangan staf dengan mengidentifikasi potensi dan memberikan pelatihan yang sesuai. Saya juga akan memberikan umpan balik terbuka dan jujur untuk membantu staf memperbaiki kinerja mereka.'),
       (16, 'Sebagai Staff Manager, saya akan berperan aktif dalam mengelola staf dengan fokus pada pengembangan individu. Saya akan merencanakan pelatihan berdasarkan kebutuhan staf dan memberikan kesempatan untuk memperoleh pengalaman yang berharga.'),
       (16, 'Tugas utama saya sebagai Staff Manager adalah memastikan bahwa staf hotel terus berkembang. Saya akan mengadakan program pelatihan rutin, menyediakan dukungan berkelanjutan, dan memberikan peluang untuk tanggung jawab tambahan.'),
       (16, 'Saya akan menjadi Staff Manager yang mendorong pertumbuhan staf dengan memberikan pelatihan yang relevan dan mengadakan sesi pembinaan. Saya juga akan mengidentifikasi bakat internal dan memberikan kesempatan untuk memajukan karier mereka.'),
@@ -2748,9 +2748,9 @@ exports.up = (pgm) => {
       (16, 'Saya selalu berusaha untuk tetap terhubung dengan perkembangan terbaru dalam industri perhotelan melalui pelatihan, konferensi, dan jaringan profesional. Ini memastikan bahwa saya selalu siap untuk tantangan baru.'),
       (16, 'Pengalaman saya dalam berkolaborasi dengan berbagai vendor dan mitra bisnis dalam perhotelan memungkinkan saya untuk membawa sumber daya dan kesempatan baru ke hotel tempat saya bekerja.'),
       (16, 'Saya memiliki komitmen untuk meningkatkan kualitas layanan dan pengalaman tamu secara berkelanjutan. Saya percaya bahwa dengan dedikasi dan kerja keras, kita dapat mencapai prestasi luar biasa dalam industri ini.'),
-      (16, 'Saya memiliki hasrat yang besar untuk industri perhotelan dan kepuasan tamu. Saya percaya bahwa dengan dedikasi, inovasi, dan kualitas layanan yang tinggi, saya dapat membuat perbedaan positif dalam setiap hotel tempat saya bekerja.'),
+      (16, 'Saya memiliki hasrat yang besar untuk industri perhotelan dan kepuasan tamu. Saya percaya bahwa dengan dedikasi, inovasi, dan kualitas layanan yang tinggi, saya dapat membuat perbedaan positif dalam setiap hotel tempat saya bekerja.')
       ;
-  `)
+  `);
 };
 
 exports.down = (pgm) => {

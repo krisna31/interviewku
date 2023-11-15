@@ -4,9 +4,12 @@ exports.shorthands = undefined;
 
 exports.up = (pgm) => {
   pgm.createTable('question_answer_histories', {
-    id: 'id',
+    id: {
+      type: 'VARCHAR(50)',
+      primaryKey: true,
+    },
     test_history_id: {
-      type: 'integer',
+      type: 'VARCHAR(50)',
       notNull: true,
       references: '"test_histories"',
       onDelete: 'cascade',

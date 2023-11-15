@@ -1,6 +1,6 @@
 const InvariantError = require('../../exceptions/InvariantError');
 const { WithTokenRequestSchema } = require('../../validator/general/schema');
-const { GetQuestionsResponseSchema } = require('../../validator/questions/schema');
+const { GetQuestionsResponseSchema, GetQuestionsQuerySchema } = require('../../validator/questions/schema');
 
 const routes = (handler) => [
   {
@@ -11,6 +11,7 @@ const routes = (handler) => [
       auth: 'interviewku_jwt',
       validate: {
         headers: WithTokenRequestSchema,
+        query: GetQuestionsQuerySchema,
         failAction: (request, h, error) => {
           throw new InvariantError(error.message);
         },

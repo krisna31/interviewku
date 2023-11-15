@@ -180,9 +180,9 @@ exports.up = (pgm) => {
       (16, 'Bila anda menjadi Staff Manager, bagaimana cara Anda mengawasi dan mengelola staf hotel, termasuk pelatihan dan pengembangan mereka?'),
       (16, 'Apakah Anda memiliki pengalaman dalam merencanakan dan mengelola acara atau konferensi di hotel?'),
       (16, 'Bagaimana Anda melihat perkembangan terbaru dalam industri perhotelan, termasuk tren digital dan teknologi?'),
-      (16, 'Apa yang membuat Anda percaya bahwa Anda adalah kandidat yang tepat untuk berkontribusi dalam industri perhotelan?'),
+      (16, 'Apa yang membuat Anda percaya bahwa Anda adalah kandidat yang tepat untuk berkontribusi dalam industri perhotelan?')
       ;  
-  `)
+  `);
 };
 
 exports.down = (pgm) => {

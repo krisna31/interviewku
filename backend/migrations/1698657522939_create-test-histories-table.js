@@ -4,10 +4,12 @@ exports.shorthands = undefined;
 
 exports.up = (pgm) => {
   pgm.createTable('test_histories', {
-    id: 'id',
+    id: {
+      type: 'VARCHAR(50)',
+      primaryKey: true,
+    },
     user_id: {
       type: 'VARCHAR(50)',
-      unique: true,
       notNull: true,
       references: '"users"',
       onDelete: 'cascade',
@@ -24,10 +26,7 @@ exports.up = (pgm) => {
     completed: {
       type: 'boolean',
       notNull: true,
-    },
-    feedback: {
-      type: 'TEXT',
-      notNull: true,
+      default: false,
     },
     created_at: {
       type: 'timestamp',

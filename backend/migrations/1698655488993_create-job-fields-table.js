@@ -38,10 +38,10 @@ exports.up = (pgm) => {
       ('Administrasi dan Akuntansi', 'Bidang pekerjaan terkait dengan keuangan dan akuntansi'),
       ('Desain Grafis', 'Bidang pekerjaan yang berfokus pada desain grafis'),
       ('IT', 'Bidang pekerjaan terkait dengan posisi IT dan komputer'),
-      ('Keamanan', 'Bidang pekerjaan terkait dengan peran keamanan')
-      ('Kesehatan', 'Industri yang berfokus pada perawatan medis dan kesehatan, melibatkan dokter, perawat, dan tenaga kesehatan lainnya.')
-      ('Pendidikan', 'Industri yang berkaitan dengan proses pendidikan dan pengajaran, melibatkan guru, profesor, konselor, dan staf pendidikan.')
-      ('Hiburan', 'Industri yang menawarkan hiburan melalui seni pertunjukan, film, dan musik, melibatkan aktor, musisi, produser, dan teknisi hiburan.')
+      ('Keamanan', 'Bidang pekerjaan terkait dengan peran keamanan'),
+      ('Kesehatan', 'Industri yang berfokus pada perawatan medis dan kesehatan, melibatkan dokter, perawat, dan tenaga kesehatan lainnya.'),
+      ('Pendidikan', 'Industri yang berkaitan dengan proses pendidikan dan pengajaran, melibatkan guru, profesor, konselor, dan staf pendidikan.'),
+      ('Hiburan', 'Industri yang menawarkan hiburan melalui seni pertunjukan, film, dan musik, melibatkan aktor, musisi, produser, dan teknisi hiburan.'),
       ('Perhotelan', 'Industri layanan akomodasi dan kebutuhan tamu, termasuk manajer hotel, staf penerima tamu, koki, pelayan, dan personel layanan lainnya.')
       ;  
   `);
