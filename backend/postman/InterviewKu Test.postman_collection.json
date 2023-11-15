@@ -3172,6 +3172,98 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Start Interview Correct Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('it should response 200 status code', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									"\r",
+									"pm.test('response body should an object', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
+									"    pm.expect(responseJson.message).to.equal(`Jawaban berhasil disimpan`);\r",
+									"    pm.expect(responseJson.data.testHistoryId).to.be.an(`string`);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenJohn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "audio",
+									"type": "file",
+									"src": "/C:/Users/krisna/Downloads/WhatsApp Ptt 2023-11-15 at 20.18.50.ogg"
+								},
+								{
+									"key": "jobFieldName",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "jobPositionName",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "retryAttempt",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "question",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}/answers",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"interview",
+								"{{interviewId}}",
+								"answers"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

@@ -15,11 +15,11 @@ exports.up = (pgm) => {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     },
-    job_field: {
+    job_field_name: {
       type: 'VARCHAR(50)',
       notNull: true,
     },
-    job_position: {
+    job_position_name: {
       type: 'VARCHAR(50)',
       notNull: true,
     },
@@ -28,7 +28,7 @@ exports.up = (pgm) => {
       notNull: true,
     },
     score: {
-      type: 'integer',
+      type: 'float',
       notNull: true,
     },
     duration: {
@@ -45,7 +45,7 @@ exports.up = (pgm) => {
       notNull: true,
     },
     feedback: {
-      type: 'TEXT',
+      type: 'float',
       notNull: true,
     },
     user_answer: {
