@@ -35,12 +35,14 @@ exports.up = (pgm) => {
       ('Kuliner dan Restoran', 'Bidang pekerjaan terkait dengan manajemen restoran dan kuliner'),
       ('Penjualan dan Pemasaran', 'Bidang pekerjaan yang fokus pada peran penjualan dan pemasaran'),
       ('Layanan Pelanggan', 'Bidang pekerjaan yang melibatkan peran layanan pelanggan'),
-      ('Keuangan dan Akuntansi', 'Bidang pekerjaan terkait dengan keuangan dan akuntansi'),
-      ('Pemasaran Digital dan Desain Grafis', 'Bidang pekerjaan yang menggabungkan pemasaran digital dan desain grafis'),
-      ('Manajemen Proyek dan Administrasi', 'Bidang pekerjaan yang melibatkan manajemen proyek dan peran administratif'),
-      ('Teknis dan IT', 'Bidang pekerjaan terkait dengan posisi teknis dan IT'),
-      ('Logistik dan Pengiriman', 'Bidang pekerjaan yang melibatkan logistik dan peran pengiriman'),
+      ('Administrasi dan Akuntansi', 'Bidang pekerjaan terkait dengan keuangan dan akuntansi'),
+      ('Desain Grafis', 'Bidang pekerjaan yang berfokus pada desain grafis'),
+      ('IT', 'Bidang pekerjaan terkait dengan posisi IT dan komputer'),
       ('Keamanan', 'Bidang pekerjaan terkait dengan peran keamanan')
+      ('Kesehatan', 'Industri yang berfokus pada perawatan medis dan kesehatan, melibatkan dokter, perawat, dan tenaga kesehatan lainnya.')
+      ('Pendidikan', 'Industri yang berkaitan dengan proses pendidikan dan pengajaran, melibatkan guru, profesor, konselor, dan staf pendidikan.')
+      ('Hiburan', 'Industri yang menawarkan hiburan melalui seni pertunjukan, film, dan musik, melibatkan aktor, musisi, produser, dan teknisi hiburan.')
+      ('Perhotelan', 'Industri layanan akomodasi dan kebutuhan tamu, termasuk manajer hotel, staf penerima tamu, koki, pelayan, dan personel layanan lainnya.')
       ;  
   `);
 };
