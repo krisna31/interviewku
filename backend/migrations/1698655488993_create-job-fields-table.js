@@ -27,16 +27,20 @@ exports.up = (pgm) => {
   pgm.sql(`
     INSERT INTO job_fields(name, description) 
     VALUES
-      ('General', 'General job field description'),
-      ('Kuliner dan Restoran', 'Job field related to culinary and restaurant management'),
-      ('Penjualan dan Pemasaran', 'Job field focusing on sales and marketing roles'),
-      ('Layanan Pelanggan', 'Job field involving customer service roles'),
-      ('Keuangan dan Akuntansi', 'Job field related to finance and accounting'),
-      ('Pemasaran Digital dan Desain Grafis', 'Job field combining digital marketing and graphic design'),
-      ('Manajemen Proyek dan Administrasi', 'Job field involving project management and administrative roles'),
-      ('Teknis dan IT', 'Job field related to technical and IT positions'),
-      ('Logistik dan Pengiriman', 'Job field involving logistics and shipping roles'),
-      ('Keamanan', 'Job field related to security roles')
+      ('General - Tentang Perusahaan', 'Gambaran umum tentang identitas, tujuan, dan operasi perusahaan'),
+      ('General - Latar Belakang User', 'Riwayat dan informasi terkait pengguna yang relevan'),
+      ('General - Terkait Posisi', 'Hubungan serta relevansi dengan posisi atau jabatan yang dituju'),
+      ('General - Softskill Situasional', 'Kemampuan dan keahlian yang relevan dalam situasi tertentu'),
+      ('Penutup', 'Pernyataan penutup yang menggambarkan kesimpulan atau harapan akhir'),
+      ('Kuliner dan Restoran', 'Bidang pekerjaan terkait dengan manajemen restoran dan kuliner'),
+      ('Penjualan dan Pemasaran', 'Bidang pekerjaan yang fokus pada peran penjualan dan pemasaran'),
+      ('Layanan Pelanggan', 'Bidang pekerjaan yang melibatkan peran layanan pelanggan'),
+      ('Keuangan dan Akuntansi', 'Bidang pekerjaan terkait dengan keuangan dan akuntansi'),
+      ('Pemasaran Digital dan Desain Grafis', 'Bidang pekerjaan yang menggabungkan pemasaran digital dan desain grafis'),
+      ('Manajemen Proyek dan Administrasi', 'Bidang pekerjaan yang melibatkan manajemen proyek dan peran administratif'),
+      ('Teknis dan IT', 'Bidang pekerjaan terkait dengan posisi teknis dan IT'),
+      ('Logistik dan Pengiriman', 'Bidang pekerjaan yang melibatkan logistik dan peran pengiriman'),
+      ('Keamanan', 'Bidang pekerjaan terkait dengan peran keamanan')
       ;  
   `);
 };
