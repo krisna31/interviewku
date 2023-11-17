@@ -3,10 +3,38 @@
 const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
+const { getFeedback } = require('../../utils');
 
 class InterviewsService {
   constructor() {
     this._pool = new Pool();
+  }
+
+  async getQuestionsByInterviewId({ interviewId }) {
+    const query = {
+      text: `
+        SELECT
+          *
+        FROM test_histories th
+        INNER JOIN question_answer_histories qah ON th.id = qah.test_history_id
+        WHERE th.id = $1
+      `,
+      values: [interviewId],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (result.rowCount < 1) {
+      throw new InvariantError('Sesi Interview Tidak Ditemukan');
+    }
+
+    return result.rows.map((ans) => ({
+      // interviewId: ans.id,
+      questionOrder: ans.question_order,
+      jobFieldName: ans.job_field_name,
+      // jobDescription: ans.job_description,
+      question: ans.question,
+    }));
   }
 
   async addInterview({ userId, mode, totalQuestions }) {
@@ -28,7 +56,7 @@ class InterviewsService {
 
   async updateAnswerByInterviewId({
     interviewId,
-    jobFieldName,
+    // jobFieldName,
     jobPositionName,
     audioUrl,
     score,
@@ -36,33 +64,32 @@ class InterviewsService {
     retryAttempt,
     // eslint-disable-next-line no-unused-vars
     question,
-    feedback,
+    strukturScore,
     userAnswer,
     questionOrder,
   }) {
     const query = {
       text: `
           UPDATE question_answer_histories SET
-            job_field_name = $3,
-            job_position_name = $4,
-            audio_url = $5,
-            score = $6,
-            duration = $7,
-            retry_attempt = $8,
-            feedback = $9,
-            user_answer = $10
+            job_position_name = $3,
+            audio_url = $4,
+            score = $5,
+            duration = $6,
+            retry_attempt = $7,
+            struktur_score = $8,
+            user_answer = $9,
+            updated_at = now()
           WHERE test_history_id = $1 AND question_order = $2 RETURNING id
       `,
       values: [
         interviewId,
         questionOrder,
-        jobFieldName,
         jobPositionName,
         audioUrl,
         score,
         duration,
         retryAttempt,
-        feedback,
+        strukturScore,
         userAnswer,
       ],
     };
@@ -109,7 +136,7 @@ class InterviewsService {
   }
 
   buildQueryInsertQuestionsToQaHistory(questions, interviewId) {
-    let text = 'INSERT INTO question_answer_histories (id, test_history_id, question, question_order) VALUES ';
+    let text = 'INSERT INTO question_answer_histories (id, test_history_id, question, question_order, job_field_name) VALUES ';
     let queryIndex = 1;
     const values = [];
 
@@ -120,13 +147,146 @@ class InterviewsService {
         ($${queryIndex++}, 
           $${queryIndex++}, 
           $${queryIndex++}, 
+          $${queryIndex++}, 
           $${queryIndex++}
           ${i === questions.length - 1 ? ')' : '),'}`;
 
-      values.push(questionAnswerHistoryId, interviewId, question.question, question.questionOrder);
+      values.push(
+        questionAnswerHistoryId,
+        interviewId,
+        question.question,
+        question.questionOrder,
+        question.jobFieldName,
+      );
     });
 
     return { text, values };
+  }
+
+  async validateIsInterviewCompleted({ interviewId }) {
+    const query = {
+      text: `
+        SELECT (
+          select total_questions from test_histories
+          WHERE id = $1
+        ) = (
+          SELECT COUNT(*) FROM question_answer_histories
+          WHERE test_history_id = $1
+          AND user_answer IS NOT NULL
+        ) AS completed
+          FROM test_histories
+          WHERE id = $1
+      `,
+      values: [interviewId],
+    };
+
+    const result = await this._pool.query(query);
+
+    const { completed } = result.rows[0];
+
+    if (!completed) {
+      throw new InvariantError('Sesi Interview Belum Selesai, Silahkan Jawab Semua Pertanyaan');
+    }
+
+    return completed;
+  }
+
+  async editInterviewByInterviewId({ interviewId, completed }) {
+    const query = {
+      text: 'UPDATE test_histories SET completed = $2, updated_at = now() WHERE id = $1 RETURNING id',
+      values: [interviewId, completed],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (result.rowCount < 1) {
+      throw new InvariantError('Sesi Interview Gagal Ditutup, Silahkan Coba Lagi Nanti');
+    }
+
+    return result.rows[0].id;
+  }
+
+  async getInterviewDataByInterviewId({ interviewId }) {
+    const answers = await this.getAnswerDataByInterviewId(interviewId);
+
+    const query = {
+      text: `
+          SELECT
+          th.id,
+          th.mode,
+          th.total_questions,
+          th.completed,
+          AVG(qah.score) AS avg_score,
+          AVG(qah.struktur_score) AS avg_struktur_score,
+          AVG(qah.retry_attempt) AS avg_retry_attempt,
+          SUM(qah.duration) AS total_duration,
+          th.created_at,
+          th.updated_at
+        FROM test_histories th
+        INNER JOIN question_answer_histories qah
+          ON th.id = qah.test_history_id
+        WHERE th.id = $1
+        GROUP BY th.id
+      `,
+      values: [interviewId],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (result.rowCount < 1) {
+      throw new InvariantError('Sesi Interview Tidak Ditemukan');
+    }
+
+    const interviewSession = result.rows[0];
+
+    return {
+      interviewId: interviewSession.id,
+      mode: interviewSession.mode,
+      totalQuestions: interviewSession.total_questions,
+      completed: interviewSession.completed,
+      score: interviewSession.avg_score,
+      // strukturScore: interviewSession.avg_struktur_score,
+      // retryAttempt: interviewSession.avg_retry_attempt,
+      totalDuration: interviewSession.total_duration,
+      feedback: getFeedback(
+        interviewSession.avg_score,
+        interviewSession.avg_struktur_score,
+        interviewSession.avg_retry_attempt,
+      ),
+      answers,
+    };
+  }
+
+  async getAnswerDataByInterviewId(interviewId) {
+    const query = {
+      text: `
+        SELECT
+          *
+        FROM question_answer_histories
+        WHERE test_history_id = $1
+      `,
+      values: [interviewId],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (result.rowCount < 1) {
+      throw new InvariantError('Sesi Interview Tidak Ditemukan');
+    }
+
+    return result.rows.map((ans) => ({
+      question: ans.question,
+      jobPositionName: ans.job_position_name,
+      questionOrder: ans.question_order,
+      userAnswer: ans.user_answer,
+      audioUrl: ans.audio_url,
+      score: ans.score,
+      duration: ans.duration,
+      retryAttempt: ans.retry_attempt,
+      strukturScore: ans.struktur_score,
+      jobFieldName: ans.job_field_name,
+      feedback: getFeedback(ans.score, ans.struktur_score, ans.retry_attempt),
+    }));
   }
 }
 

@@ -10,8 +10,8 @@ class MachineLearningService {
     return 0.5;
   }
 
-  async getFeedback({ score, question }) {
-    // TODO get feedback from machine learning
+  async getStrukturScore({ score, question }) {
+    // TODO get strukturScore from machine learning
     return 1;
   }
 }

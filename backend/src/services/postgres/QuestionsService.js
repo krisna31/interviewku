@@ -45,7 +45,7 @@ class QuestionsService {
     return result.rows.map((question, index) => ({
       questionOrder: index + 1,
       jobFieldName: question.job_field_name,
-      jobDescription: question.job_field_description,
+      // jobDescription: question.job_field_description,
       question: question.question,
       // createdAt: question.created_at,
       // updatedAt: question.updated_at,

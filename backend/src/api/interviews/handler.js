@@ -52,7 +52,7 @@ class InterviewsHandler {
     const { interviewId } = request.params;
     const {
       audio,
-      jobFieldName,
+      // jobFieldName,
       jobPositionName,
       retryAttempt,
       question,
@@ -82,21 +82,21 @@ class InterviewsHandler {
         userAnswer,
       });
 
-      const feedback = await this._machineLearningService.getFeedback({
+      const strukturScore = await this._machineLearningService.getStrukturScore({
         score,
         question,
       });
 
       testHistoryId = await this._interviewsService.updateAnswerByInterviewId({
         interviewId,
-        jobFieldName,
+        // jobFieldName,
         jobPositionName,
         audioUrl,
         score,
         duration,
         retryAttempt,
         question,
-        feedback,
+        strukturScore,
         userAnswer,
         questionOrder,
       });
@@ -104,9 +104,68 @@ class InterviewsHandler {
 
     return {
       success: true,
-      message: `Jawaban berhasil disimpan ${userAlreadyAnswered ? '(D)' : ''}`,
+      message: `Jawaban berhasil disimpan${userAlreadyAnswered ? ' (D)' : ''}`,
       data: {
         testHistoryId: userAlreadyAnswered ? testHistoryIdInDb : testHistoryId,
+      },
+    };
+  }
+
+  async closeInterviewSession(request, h) {
+    const { interviewId } = request.params;
+    const { completed } = request.payload;
+
+    await this._interviewsService.validateIsInterviewCompleted({ interviewId });
+
+    await this._interviewsService.editInterviewByInterviewId({
+      interviewId,
+      completed,
+    });
+
+    const interviewData = await this._interviewsService.getInterviewDataByInterviewId(
+      {
+        interviewId,
+      },
+    );
+
+    return {
+      success: true,
+      message: `Sesi Interview ${interviewId} telah ditutup`,
+      data: interviewData,
+    };
+  }
+
+  async getInterview(request, h) {
+    const { interviewId } = request.params;
+
+    await this._interviewsService.validateIsInterviewCompleted({ interviewId });
+
+    const interviewData = await this._interviewsService.getInterviewDataByInterviewId(
+      {
+        interviewId,
+      },
+    );
+
+    return {
+      success: true,
+      message: `Sesi Interview ${interviewId} ditemukan`,
+      data: interviewData,
+    };
+  }
+
+  async getQuestionsByInterviewId(request, h) {
+    const { interviewId } = request.params;
+
+    const questions = await this._interviewsService.getQuestionsByInterviewId({
+      interviewId,
+    });
+
+    return {
+      success: true,
+      message: `Sesi Interview ${interviewId} ditemukan`,
+      data: {
+        interviewId,
+        questions,
       },
     };
   }

@@ -48,7 +48,7 @@ exports.up = (pgm) => {
       type: 'TEXT',
       notNull: true,
     },
-    feedback: {
+    struktur_score: {
       type: 'float',
       notNull: false,
     },
