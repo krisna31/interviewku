@@ -3086,13 +3086,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/questions?mode=xxx",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interview/questions?mode=xxx",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
+								"interview",
 								"questions"
 							],
 							"query": [
@@ -3133,6 +3134,12 @@
 									"    pm.expect(responseJson.data.questions).to.be.an(`array`);\r",
 									"\r",
 									"    pm.environment.set('interviewId', responseJson.data.interviewId)\r",
+									"    pm.environment.set('o1', responseJson.data.questions[0].questionOrder)\r",
+									"    pm.environment.set('q1', responseJson.data.questions[0].question)\r",
+									"    pm.environment.set('o2', responseJson.data.questions[1].questionOrder)\r",
+									"    pm.environment.set('q2', responseJson.data.questions[1].question)\r",
+									"    pm.environment.set('o3', responseJson.data.questions[2].questionOrder)\r",
+									"    pm.environment.set('q3', responseJson.data.questions[2].question)\r",
 									"});\r",
 									""
 								],
@@ -3154,13 +3161,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/questions?mode=latihan",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interview/questions?mode=latihan",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
+								"interview",
 								"questions"
 							],
 							"query": [
@@ -3174,7 +3182,103 @@
 					"response": []
 				},
 				{
-					"name": "Start Interview Correct Copy",
+					"name": "Post Answer Fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('it should response 400 status code', () => {\r",
+									"    pm.expect(pm.response).to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									"\r",
+									"pm.test('response body should an object', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
+									"    pm.expect(responseJson.message).to.equal(`Sesi Interview Tidak Valid, Silahkan cek kembali (!)`);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenJohn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "audio",
+									"type": "file",
+									"src": "/C:/Users/krisna/Downloads/WhatsApp Ptt 2023-11-15 at 20.18.50.ogg"
+								},
+								{
+									"key": "jobFieldName",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "jobPositionName",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "retryAttempt",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "question",
+									"value": "tidak valid",
+									"type": "text"
+								},
+								{
+									"key": "questionOrder",
+									"value": "9999",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}/answers",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"interview",
+								"{{interviewId}}",
+								"answers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Answer Valid 1",
 					"event": [
 						{
 							"listen": "test",
@@ -3244,7 +3348,303 @@
 								},
 								{
 									"key": "question",
+									"value": "{{q1}}",
+									"type": "text"
+								},
+								{
+									"key": "questionOrder",
+									"value": "{{o1}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}/answers",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"interview",
+								"{{interviewId}}",
+								"answers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Answer Valid 1 Double",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('it should response 200 status code', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									"\r",
+									"pm.test('response body should an object', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
+									"    pm.expect(responseJson.message).to.equal(`Jawaban berhasil disimpan (D)`);\r",
+									"    pm.expect(responseJson.data.testHistoryId).to.be.an(`string`);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenJohn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "audio",
+									"type": "file",
+									"src": "/C:/Users/krisna/Downloads/WhatsApp Ptt 2023-11-15 at 20.18.50.ogg"
+								},
+								{
+									"key": "jobFieldName",
 									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "jobPositionName",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "retryAttempt",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "question",
+									"value": "{{q1}}",
+									"type": "text"
+								},
+								{
+									"key": "questionOrder",
+									"value": "{{o1}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}/answers",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"interview",
+								"{{interviewId}}",
+								"answers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Answer Valid 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('it should response 200 status code', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									"\r",
+									"pm.test('response body should an object', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
+									"    pm.expect(responseJson.message).to.equal(`Jawaban berhasil disimpan`);\r",
+									"    pm.expect(responseJson.data.testHistoryId).to.be.an(`string`);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenJohn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "audio",
+									"type": "file",
+									"src": "/C:/Users/krisna/Downloads/WhatsApp Ptt 2023-11-15 at 20.18.50.ogg"
+								},
+								{
+									"key": "jobFieldName",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "jobPositionName",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "retryAttempt",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "question",
+									"value": "{{q2}}",
+									"type": "text"
+								},
+								{
+									"key": "questionOrder",
+									"value": "{{o2}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}/answers",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"interview",
+								"{{interviewId}}",
+								"answers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Answer Valid 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('it should response 200 status code', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									"\r",
+									"pm.test('response body should an object', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
+									"    pm.expect(responseJson.message).to.equal(`Jawaban berhasil disimpan`);\r",
+									"    pm.expect(responseJson.data.testHistoryId).to.be.an(`string`);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenJohn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "audio",
+									"type": "file",
+									"src": "/C:/Users/krisna/Downloads/WhatsApp Ptt 2023-11-15 at 20.18.50.ogg"
+								},
+								{
+									"key": "jobFieldName",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "jobPositionName",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "retryAttempt",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "question",
+									"value": "{{q3}}",
+									"type": "text"
+								},
+								{
+									"key": "questionOrder",
+									"value": "{{o3}}",
 									"type": "text"
 								}
 							]

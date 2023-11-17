@@ -5,7 +5,7 @@ const GetJobsFieldResponseSchema = Joi.object({
   message: Joi.string().default('Jobs Field Ditemukan').required(),
   data: Joi.object().keys({
     jobFields: Joi.array().items(Joi.object().keys({
-      id: Joi.number().default(1).required(),
+      id: Joi.number().max(2147483647).default(1).required(),
       name: Joi.string().default('Bidang General').required(),
       description: Joi.string().allow(null),
       // createdAt: Joi.date().required(),
@@ -21,7 +21,7 @@ const GetJobsPositionResponseSchema = Joi.object({
   message: Joi.string().default('Jobs Position Ditemukan').required(),
   data: Joi.object().keys({
     jobPositions: Joi.array().items(Joi.object().keys({
-      id: Joi.number().default(1).required(),
+      id: Joi.number().max(2147483647).default(1).required(),
       name: Joi.string().default('Frontend').required(),
       description: Joi.string().allow(null),
       // createdAt: Joi.date().required(),

@@ -15,25 +15,29 @@ exports.up = (pgm) => {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     },
+    question_order: {
+      type: 'integer',
+      notNull: true,
+    },
     job_field_name: {
       type: 'VARCHAR(50)',
-      notNull: true,
+      notNull: false,
     },
     job_position_name: {
       type: 'VARCHAR(50)',
-      notNull: true,
+      notNull: false,
     },
     audio_url: {
       type: 'TEXT',
-      notNull: true,
+      notNull: false,
     },
     score: {
       type: 'float',
-      notNull: true,
+      notNull: false,
     },
     duration: {
       type: 'bigint',
-      notNull: true,
+      notNull: false,
     },
     retry_attempt: {
       type: 'integer',
@@ -46,11 +50,11 @@ exports.up = (pgm) => {
     },
     feedback: {
       type: 'float',
-      notNull: true,
+      notNull: false,
     },
     user_answer: {
       type: 'TEXT',
-      notNull: true,
+      notNull: false,
     },
     created_at: {
       type: 'timestamp',

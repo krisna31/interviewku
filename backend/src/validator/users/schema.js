@@ -45,7 +45,8 @@ const UserGetResponseSchema = Joi.object({
 }).label('User Get By Id Success');
 
 const PostUserIdentityPayloadSchema = Joi.object({
-  jobPositionId: Joi.number().integer().default(1).required(),
+  jobPositionId: Joi.number().max(2147483647).integer().default(1)
+    .required(),
   gender: Joi.string()
     .length(1)
     .valid('p', 'l', 'P', 'L')
@@ -62,7 +63,7 @@ const UserIdentityResponseSchema = Joi.object({
     userId: Joi.string().default('user-xxx'),
     firstName: Joi.string().default('first name'),
     lastName: Joi.string().default('last name').allow(null),
-    jobPositionId: Joi.number().default(1).integer(),
+    jobPositionId: Joi.number().max(2147483647).default(1).integer(),
     jobPositionName: Joi.string().default('Frontend'),
     gender: Joi.string().length(1).valid('p', 'l', 'P', 'L').default('L'),
     dateBirth: Joi.date().default('2023-01-01'),
@@ -83,7 +84,7 @@ const DeleteUserIdentityResponseSchema = Joi.object({
 const PutChangeUserIdentityPayloadSchema = Joi.object({
   firstName: Joi.string(),
   lastName: Joi.string(),
-  jobPositionId: Joi.number().integer(),
+  jobPositionId: Joi.number().max(2147483647).integer(),
   gender: Joi.string().length(1).valid('p', 'l', 'P', 'L'),
   dateBirth: Joi.date(),
   currentCity: Joi.string().max(100),

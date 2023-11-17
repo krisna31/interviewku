@@ -42,7 +42,8 @@ class QuestionsService {
       throw new InvariantError('Data Masih Kosong');
     }
 
-    return result.rows.map((question) => ({
+    return result.rows.map((question, index) => ({
+      questionOrder: index + 1,
       jobFieldName: question.job_field_name,
       jobDescription: question.job_field_description,
       question: question.question,

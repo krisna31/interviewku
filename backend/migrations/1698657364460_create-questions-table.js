@@ -14,6 +14,7 @@ exports.up = (pgm) => {
     },
     question: {
       type: 'TEXT',
+      unique: true,
       notNull: true,
     },
     created_at: {

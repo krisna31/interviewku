@@ -7,7 +7,7 @@ function utcToLocalTimeZone(utcTime) {
 }
 
 function randomInRange(start, end) {
-  return Math.floor(Math.random() * (end - start + 1) + start);
+  return process.env.APP_ENV === 'dev' ? 3 : Math.floor(Math.random() * (end - start + 1) + start);
 }
 
 module.exports = {

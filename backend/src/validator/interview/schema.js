@@ -31,8 +31,9 @@ const PostAnswersPayloadByInterviewIdSchema = Joi.object({
   },
   jobFieldName: Joi.string().default('IT').required(),
   jobPositionName: Joi.string().default('Backend Developer').required(),
-  retryAttempt: Joi.number().default(0).required(),
+  retryAttempt: Joi.number().max(2147483647).default(0).required(),
   question: Joi.string().required(),
+  questionOrder: Joi.number().max(2147483647).required(),
 }).unknown().label('PostAnswersPayloadByInterviewIdSchema');
 
 module.exports = {

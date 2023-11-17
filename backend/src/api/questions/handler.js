@@ -25,6 +25,11 @@ class QuestionsHandler {
       totalQuestions,
     });
 
+    await this._interviewsService.addQuestionsToHistory({
+      interviewId,
+      questions,
+    });
+
     return {
       success: true,
       message: `Sesi Interview ${interviewId} telah dimulai`,

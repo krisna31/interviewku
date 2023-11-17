@@ -6,6 +6,7 @@ const GetQuestionsResponseSchema = Joi.object({
   data: Joi.object().keys({
     interviewId: Joi.string().default('sesi-interview-xxx').required(),
     questions: Joi.array().items(Joi.object({
+      questionOrder: Joi.number().max(2147483647).default(1).required(),
       jobFieldName: Joi.string().default('Kuliner dan Restoran').required(),
       jobDescription: Joi.string().default('Job field related to culinary and restaurant management').required(),
       question: Joi.string().default('Apa pengalaman Anda dalam merancang dan mengelola menu restoran?').required(),

@@ -22,8 +22,8 @@ const JobsService = require('./services/postgres/JobsService');
 const QuestionsService = require('./services/postgres/QuestionsService');
 const AnswersService = require('./services/postgres/AnswersService');
 const InterviewsService = require('./services/postgres/InterviewsService');
-const StorageService = require('./services/storage/storageService');
-const MachineLearningService = require('./services/tensorflow/machineLearningService');
+const StorageService = require('./services/storage/StorageService');
+const MachineLearningService = require('./services/tensorflow/MachineLearningService');
 
 // initialize dotenv
 require('dotenv').config();
@@ -103,13 +103,13 @@ require('dotenv').config();
         jobsService,
       },
     },
-    {
-      plugin: questions,
-      options: {
-        questionsService,
-        interviewsService,
-      },
-    },
+    // {
+    //   plugin: questions,
+    //   options: {
+    //     questionsService,
+    //     interviewsService,
+    //   },
+    // },
     {
       plugin: answers,
       options: {
@@ -119,6 +119,7 @@ require('dotenv').config();
     {
       plugin: interviews,
       options: {
+        questionsService,
         interviewsService,
         storageService,
         machineLearningService,
@@ -158,7 +159,7 @@ require('dotenv').config();
       }
       const newResponse = h.response({
         success: false,
-        message: 'terjadi kegagalan pada server kami',
+        message: process.env.APP_ENV === 'dev' ? `terjadi kegagalan pada server kami - ${response.message}` : 'terjadi kegagalan pada server kami',
       });
       newResponse.code(500);
       return newResponse;

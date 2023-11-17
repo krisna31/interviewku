@@ -13,7 +13,7 @@ const GetAnwersResponseSchema = Joi.object({
 }).label('Get Jobs Field Response');
 
 const GetAnwersRequestParamsSchema = Joi.object({
-  questionId: Joi.number().required(),
+  questionId: Joi.number().max(2147483647).required(),
 }).label('Get Jobs Field Request Params');
 
 module.exports = {
