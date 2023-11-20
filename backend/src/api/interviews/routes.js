@@ -80,8 +80,8 @@ const routes = (handler) => [
       payload: {
         allow: 'multipart/form-data',
         multipart: true,
-        output: 'stream',
-        maxBytes: 2097152, // 2MB https://www.gigacalculator.com/converters/convert-mb-to-bytes.php
+        output: 'file',
+        maxBytes: 1572864, // 1.5MB https://www.gigacalculator.com/converters/convert-mb-to-bytes.php
       },
     },
   },

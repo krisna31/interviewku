@@ -15,18 +15,11 @@ const PostAnswerResponseSchema = Joi.object({
 const PostAnswersPayloadByInterviewIdSchema = Joi.object({
   // audio: Joi.any().meta({ swaggerType: 'file' }).required(),
   audio: {
-    _readableState: Joi.object(),
-    _events: Joi.object(),
-    _eventsCount: Joi.number(),
-    _maxListeners: Joi.any(),
-    _data: Joi.any(),
-    _position: Joi.number(),
-    _encoding: Joi.string(),
-    hapi: Joi.object({
-      filename: Joi.string().required(),
-      headers: Joi.object({
-        'content-type': Joi.string().valid('audio/aac', 'audio/mpeg', 'audio/ogg', 'audio/opus', 'audio/wav', 'audio/webm', 'audio/amr').required(),
-      }).unknown().required(),
+    bytes: Joi.number().required(),
+    filename: Joi.string().required(),
+    path: Joi.string().required(),
+    headers: Joi.object({
+      'content-type': Joi.string().valid('audio/aac', 'audio/mpeg', 'audio/ogg', 'audio/opus', 'audio/wav', 'audio/webm', 'audio/amr').required(),
     }).unknown().required(),
   },
   jobPositionName: Joi.string().default('Backend Developer').required(),

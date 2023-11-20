@@ -7,11 +7,13 @@ class InterviewsHandler {
     interviewsService,
     storageService,
     machineLearningService,
+    audioService,
   }) {
     this._questionsService = questionsService;
     this._interviewsService = interviewsService;
     this._storageService = storageService;
     this._machineLearningService = machineLearningService;
+    this._audioService = audioService;
   }
 
   async getQuestions(request, h) {
@@ -48,7 +50,7 @@ class InterviewsHandler {
   }
 
   async postAnswerByInterviewId(request, h) {
-    // const { id: userId } = request.auth.credentials;
+    const { id: userId } = request.auth.credentials;
     const { interviewId } = request.params;
     const {
       audio,
@@ -72,11 +74,11 @@ class InterviewsHandler {
     const userAlreadyAnswered = userAnswerInDb !== null;
 
     if (!userAlreadyAnswered) {
-      const {
-        audioUrl,
-        userAnswer,
-        duration,
-      } = await this._storageService.saveToCloudStorage(audio);
+      const duration = await this._audioService.validateAudio(audio);
+
+      const userAnswer = await this._audioService.convertAudioToText(audio);
+
+      const audioUrl = await this._storageService.saveToCloudStorage(audio, userId);
 
       const score = await this._machineLearningService.getScore({
         userAnswer,

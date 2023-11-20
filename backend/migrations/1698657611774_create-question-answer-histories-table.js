@@ -36,7 +36,7 @@ exports.up = (pgm) => {
       notNull: false,
     },
     duration: {
-      type: 'bigint',
+      type: 'float',
       notNull: false,
     },
     retry_attempt: {

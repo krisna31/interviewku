@@ -9,12 +9,14 @@ module.exports = {
     interviewsService,
     storageService,
     machineLearningService,
+    audioService,
   }) => {
     const interviewsHandler = new InterviewsHandler({
       questionsService,
       interviewsService,
       storageService,
       machineLearningService,
+      audioService,
     });
     server.route(routes(interviewsHandler));
   },

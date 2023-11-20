@@ -12,7 +12,7 @@ const UsersService = require('./services/postgres/UsersService');
 const AuthenticationsService = require('./services/postgres/AuthenticationsService');
 const users = require('./api/users');
 const jobs = require('./api/jobs');
-const questions = require('./api/questions');
+// const questions = require('./api/questions');
 const answers = require('./api/answers');
 const interviews = require('./api/interviews');
 
@@ -24,6 +24,7 @@ const AnswersService = require('./services/postgres/AnswersService');
 const InterviewsService = require('./services/postgres/InterviewsService');
 const StorageService = require('./services/storage/StorageService');
 const MachineLearningService = require('./services/tensorflow/MachineLearningService');
+const AudioService = require('./services/audio/AudioService');
 
 // initialize dotenv
 require('dotenv').config();
@@ -37,6 +38,7 @@ require('dotenv').config();
   const interviewsService = new InterviewsService();
   const storageService = new StorageService();
   const machineLearningService = new MachineLearningService();
+  const audioService = new AudioService();
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -123,6 +125,7 @@ require('dotenv').config();
         interviewsService,
         storageService,
         machineLearningService,
+        audioService,
       },
     },
   ]);
@@ -143,6 +146,19 @@ require('dotenv').config();
         success: false,
         message: 'Unauthorized',
       }).code(401);
+    }
+
+    if (response?.output?.statusCode === 413) {
+      if (process.env.APP_ENV === 'dev') {
+        return h.response({
+          success: false,
+          message: `Payload Too Large - ${response.message} (1.5MB)`,
+        }).code(413);
+      }
+      return h.response({
+        success: false,
+        message: 'Payload Too Large Than 1.5MB',
+      }).code(413);
     }
 
     if (response instanceof Error) {
