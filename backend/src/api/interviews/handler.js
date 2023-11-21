@@ -76,9 +76,9 @@ class InterviewsHandler {
     if (!userAlreadyAnswered) {
       const duration = await this._audioService.validateAudio(audio);
 
-      const userAnswer = await this._audioService.convertAudioToText(audio);
-
       const audioUrl = await this._storageService.saveToCloudStorage(audio, userId);
+
+      const userAnswer = await this._audioService.convertAudioToText(audio);
 
       const score = await this._machineLearningService.getScore({
         userAnswer,

@@ -1,9 +1,15 @@
 const { getAudioDurationInSeconds } = require('get-audio-duration');
+const speech = require('@google-cloud/speech');
+const fs = require('fs').promises;
+
 const InvariantError = require('../../exceptions/InvariantError');
 
 class AudioService {
   constructor() {
     this._getDurationService = getAudioDurationInSeconds;
+    this._googleSpeech = new speech.SpeechClient({
+      keyFilename: process.env.GOOGLE_SERVICE_ACCOUNT_KEY,
+    });
   }
 
   async validateAudio(audio) {
@@ -21,8 +27,34 @@ class AudioService {
   }
 
   async convertAudioToText(audio) {
-    // TODO speech to text
-    return 'TODO speech to text';
+    return 'dummy text';
+    // return this._googleSpeechToText(audio);
+  }
+
+  async _googleSpeechToText(audio) {
+    const audioBytes = await fs.readFile(audio.path, { encoding: 'base64' });
+
+    const audioConfig = {
+      encoding: 'AMR_WB',
+      // encoding: 'OGG_OPUS',
+      sampleRateHertz: 16000,
+      languageCode: 'id-ID',
+      model: 'default',
+    };
+
+    const request = {
+      audio: {
+        content: audioBytes,
+      },
+      config: audioConfig,
+    };
+
+    const [response] = await this._googleSpeech.recognize(request);
+    const transcription = response.results
+      .map((result) => result.alternatives[0].transcript)
+      .join('\n');
+
+    return transcription;
   }
 }
 
