@@ -52,7 +52,21 @@ require('dotenv').config();
     info: {
       title: 'InterviewKu API Documentation',
       version: Pack.version,
+      description: 'Documentation for InterviewKu API',
+      contact: {
+        name: 'InterviewKu',
+        email: 'krisnaaaputraaa@gmail.com',
+      },
+      license: {
+        name: 'GNU Affero General Public License v3.0',
+        url: 'https://github.com/krisna31/interviewku/blob/master/LICENSE',
+      },
     },
+    schemes: ['https', 'http'],
+    // documentationPath: '/interviewku-api-docs',
+    // swaggerUIPath: '/interviewku-swaggerui/',
+    // sortTags: 'unsorted',
+    // documentationPage: false,
   };
 
   await server.register([
