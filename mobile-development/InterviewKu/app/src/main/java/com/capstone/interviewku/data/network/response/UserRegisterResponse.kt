@@ -19,5 +19,5 @@ data class UserRegisterResponse(
 @Parcelize
 data class UserRegisterData(
     @SerializedName("userId")
-    val userId: String?,
+    val userId: String,
 ) : Parcelable

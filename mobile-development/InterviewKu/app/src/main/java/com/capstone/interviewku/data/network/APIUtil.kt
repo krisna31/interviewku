@@ -2,7 +2,9 @@ package com.capstone.interviewku.data.network
 
 import com.capstone.interviewku.BuildConfig
 import com.capstone.interviewku.data.network.service.InterviewKuAPIService
+import com.capstone.interviewku.data.network.token.TokenPayload
 import com.capstone.interviewku.data.preferences.AppPreferences
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.first
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -11,8 +13,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object APIUtil {
-    private const val BASE_URL = "http://localhost:5000"
-
     fun getInterviewKuAPIService(): InterviewKuAPIService {
         val loggingInterceptor = HttpLoggingInterceptor().setLevel(
             if (BuildConfig.DEBUG) {
@@ -28,31 +28,41 @@ object APIUtil {
 
         val retrofitClient = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .build()
 
         return retrofitClient.create(InterviewKuAPIService::class.java)
     }
 
+    fun tokenPayloadDecoder(token: String): TokenPayload? {
+        return try {
+            Gson().fromJson(token, TokenPayload::class.java)
+        } catch (_: Exception) {
+            null
+        }
+    }
+
     suspend fun <T> unauthorizedErrorHandler(
         apiService: InterviewKuAPIService,
         appPreferences: AppPreferences,
-        apiFunction: () -> T
+        apiFunction: suspend () -> T
     ): T {
         try {
             return apiFunction()
         } catch (e: HttpException) {
             if (e.code() == 401) {
-                val refreshToken = appPreferences.getRefreshToken()
-                val accessToken =
-                    apiService.refreshAccessToken(refreshToken.first() ?: "").data?.accessToken
+                appPreferences.getRefreshToken().first()?.let { refreshToken ->
+                    apiService
+                        .refreshAccessToken(refreshToken)
+                        .data
+                        ?.accessToken
+                        ?.let { accessToken ->
+                            appPreferences.setAccessToken(accessToken)
+                        }
 
-                accessToken?.let {
-                    appPreferences.setAccessToken(it)
+                    return apiFunction()
                 }
-
-                return apiFunction()
             }
 
             throw e

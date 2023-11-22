@@ -13,7 +13,7 @@ data class UserDetailResponse(
     val message: String,
 
     @SerializedName("data")
-    val data: UserDetailData? = null,
+    val data: UserDetailData?,
 ) : Parcelable
 
 @Parcelize
@@ -34,6 +34,6 @@ data class User(
     val firstname: String,
 
     @SerializedName("lastname")
-    val lastname: String? = null,
+    val lastname: String?,
 ) : Parcelable
 

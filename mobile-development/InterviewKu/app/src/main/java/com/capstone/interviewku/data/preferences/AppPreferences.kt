@@ -1,21 +1,25 @@
 package com.capstone.interviewku.data.preferences
 
-import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.map
-
-val Context.dataStore by preferencesDataStore(AppPreferences.DATASTORE_NAME)
 
 class AppPreferences private constructor(private val dataStore: DataStore<Preferences>) {
     private val accessTokenPreferencesKey = stringPreferencesKey("access_token_key")
     private val refreshTokenPreferencesKey = stringPreferencesKey("refresh_token_key")
 
+    suspend fun clearToken() = dataStore.edit {
+        it.clear()
+    }
+
     fun getAccessToken() = dataStore.data.map {
         it[accessTokenPreferencesKey]
+    }
+
+    fun getBearerToken() = dataStore.data.map {
+        "Bearer ${it[accessTokenPreferencesKey] ?: ""}"
     }
 
     fun getRefreshToken() = dataStore.data.map {

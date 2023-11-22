@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,6 +8,9 @@ plugins {
 }
 
 android {
+    val localProperties = Properties()
+    localProperties.load(rootProject.file("local.properties").reader())
+
     namespace = "com.capstone.interviewku"
     compileSdk = 34
 
@@ -22,6 +27,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+        buildConfigField("String", "BASE_URL", "${localProperties["BASE_URL"]}")
     }
 
     buildTypes {

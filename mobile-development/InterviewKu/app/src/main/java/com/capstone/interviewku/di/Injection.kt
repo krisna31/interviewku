@@ -7,8 +7,8 @@ import com.capstone.interviewku.data.TipsRepository
 import com.capstone.interviewku.data.UserRepository
 import com.capstone.interviewku.data.network.APIUtil
 import com.capstone.interviewku.data.preferences.AppPreferences
-import com.capstone.interviewku.data.preferences.dataStore
 import com.capstone.interviewku.data.room.InterviewKuDatabase
+import com.capstone.interviewku.util.Extensions.dataStore
 
 object Injection {
     private fun provideAppPreferences(context: Context) =

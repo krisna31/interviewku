@@ -22,6 +22,12 @@
         android:theme="@style/Theme.InterviewKu"
         tools:targetApi="34">
         <activity
+            android:name=".ui.activities.register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.login.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.main.MainActivity"
             android:exported="true">
             <intent-filter>

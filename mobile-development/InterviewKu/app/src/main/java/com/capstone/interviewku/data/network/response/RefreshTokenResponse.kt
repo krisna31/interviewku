@@ -19,5 +19,5 @@ data class RefreshTokenResponse(
 @Parcelize
 data class RefreshTokenData(
     @SerializedName("accessToken")
-    val accessToken: String?,
+    val accessToken: String,
 ) : Parcelable

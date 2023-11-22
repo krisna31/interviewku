@@ -19,8 +19,8 @@ data class LoginResponse(
 @Parcelize
 data class LoginData(
     @SerializedName("accessToken")
-    val accessToken: String?,
+    val accessToken: String,
 
     @SerializedName("refreshToken")
-    val refreshToken: String?,
+    val refreshToken: String,
 ) : Parcelable
