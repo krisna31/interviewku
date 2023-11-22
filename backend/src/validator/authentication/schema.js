@@ -46,6 +46,35 @@ const PutChangePasswordResponseSchema = Joi.object({
   message: Joi.string().default('Password berhasil diperbarui').required(),
 }).label('PutChangePasswordResponseSchema');
 
+const ResetPasswordPayloadSchema = Joi.object({
+  email: Joi.string().email({ tlds: true }).default('interviewku@gmai.com').required(),
+}).label('ResetPasswordPayloadSchema');
+
+const ResetPasswordResponseSchema = Joi.object({
+  success: Joi.boolean().default(true).required(),
+  message: Joi.string().default('Email Sudah Dikirimkan').required(),
+}).label('ResetPasswordResponseSchema');
+
+const VerifyOtpPayloadSchema = Joi.object({
+  otp: Joi.string().default('123456').required(),
+  email: Joi.string().email({ tlds: true }).default('interviewku@gmail.com').required(),
+}).label('VerifyOtpPayloadSchema');
+
+const VerifyOtpResponseSchema = Joi.object({
+  success: Joi.boolean().default(true).required(),
+  message: Joi.string().default('Otp Berhasil Diverifikasi').required(),
+}).label('VerifyOtpResponseSchema');
+
+const ChangePasswordPayloadSchema = Joi.object({
+  email: Joi.string().email({ tlds: true }).default('interviewku@gmail.com').required(),
+  newPassword: passwordValidation,
+}).label('ChangePasswordPayloadSchema');
+
+const ChangePasswordResponseSchema = Joi.object({
+  success: Joi.boolean().default(true).required(),
+  message: Joi.string().default('Password berhasil diperbarui').required(),
+}).label('ChangePasswordResponseSchema');
+
 module.exports = {
   PostAuthenticationPayloadSchema,
   PutAuthenticationPayloadSchema,
@@ -55,4 +84,10 @@ module.exports = {
   DeleteAuthenticationResponseSchema,
   PutChangePasswordPayloadSchema,
   PutChangePasswordResponseSchema,
+  ResetPasswordPayloadSchema,
+  ResetPasswordResponseSchema,
+  VerifyOtpPayloadSchema,
+  VerifyOtpResponseSchema,
+  ChangePasswordPayloadSchema,
+  ChangePasswordResponseSchema,
 };

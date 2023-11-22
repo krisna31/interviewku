@@ -4,11 +4,12 @@ class AuthenticationsHandler {
     authenticationsService,
     usersService,
     tokenManager,
-    validator,
+    mailService,
   }) {
     this._authenticationsService = authenticationsService;
     this._usersService = usersService;
     this._tokenManager = tokenManager;
+    this._mailService = mailService;
   }
 
   async postAuthenticationHandler(request, h) {
@@ -64,6 +65,56 @@ class AuthenticationsHandler {
 
     await this._usersService.verifyUserCredentialById(id, oldPassword);
     await this._usersService.editUserPassword(id, newPassword);
+
+    return {
+      success: true,
+      message: 'Password berhasil diperbarui',
+    };
+  }
+
+  async sendOtpToEmail(request, h) {
+    const { email } = request.payload;
+    await this._usersService.verifyAvaliableEmail(email);
+    await this._usersService.deleteOtpFromUser(email);
+
+    const otp = this._authenticationsService.generateSixDigitCode();
+
+    const content = `
+      <b> OTP: ${otp} </b>
+      <h1> JANGAN MEMBERITAHUKAN OTP INI KEPADA SIAPAPUN </h1>
+    `;
+
+    await this._usersService.addOtpToUser(email, otp);
+
+    await this._mailService.sendEmail(email, content);
+
+    return {
+      success: true,
+      message: 'Email Sudah Dikirimkan',
+    };
+  }
+
+  async verifyOtp(request, h) {
+    const { email, otp } = request.payload;
+
+    await this._usersService.verifyOtp(email, otp);
+
+    await this._usersService.updateOtpToUser(email, '888888');
+
+    return {
+      success: true,
+      message: 'Otp Valid Silahkan Ubah Password',
+    };
+  }
+
+  async changePassword(request, h) {
+    const { email, newPassword } = request.payload;
+
+    await this._usersService.verifyOtp(email, '888888');
+
+    await this._usersService.editUserPasswordByEmail(email, newPassword);
+
+    await this._usersService.deleteOtpFromUser(email);
 
     return {
       success: true,

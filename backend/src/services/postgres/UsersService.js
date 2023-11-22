@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
 const AuthenticationError = require('../../exceptions/AuthenticationError');
-const { dateFromDBToRightFormatDate, utcToLocalTimeZone } = require('../../utils');
+const { dateFromDBToRightFormatDate, utcToLocalTimeZone, getDateAfterXMinutes } = require('../../utils');
 
 class UsersService {
   constructor() {
@@ -23,6 +23,19 @@ class UsersService {
 
     if (result.rows.length > 0) {
       throw new InvariantError('Gagal menambahkan user. Email sudah digunakan.');
+    }
+  }
+
+  async verifyAvaliableEmail(email) {
+    const query = {
+      text: 'SELECT email FROM users WHERE email = $1',
+      values: [email],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError('Email tidak ditemukan');
     }
   }
 
@@ -144,22 +157,16 @@ class UsersService {
   async editUser({
     firstName,
     lastName,
-    email = undefined,
-    password = undefined,
     id,
   }) {
     const query = {
-      text: this.buildQueryForEditUserBasicData(firstName, lastName, email, password),
+      text: this.buildQueryForEditUserBasicData(firstName, lastName),
       values: [
         id,
         firstName,
         lastName,
-        email,
-        password,
       ].filter((value) => value !== undefined),
     };
-
-    console.log(query);
 
     const result = await this._pool.query(query);
 
@@ -173,14 +180,12 @@ class UsersService {
     return result.rows[0];
   }
 
-  buildQueryForEditUserBasicData(firstName, lastName, email, password) {
+  buildQueryForEditUserBasicData(firstName, lastName) {
     let index = 2;
     let queryText = 'UPDATE users SET';
 
     if (firstName !== undefined) queryText += ` first_name = $${index++},`;
     if (lastName !== undefined) queryText += ` last_name = $${index++},`;
-    if (email !== undefined) queryText += ` email = $${index++},`;
-    if (password !== undefined) queryText += ` password = $${index++},`;
 
     queryText += ' updated_at = NOW() WHERE id = $1 RETURNING *;';
     return queryText;
@@ -313,6 +318,70 @@ class UsersService {
 
     queryText += ' updated_at = NOW() WHERE user_id = $1 RETURNING *;';
     return queryText;
+  }
+
+  async editUserPasswordByEmail(email, password) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const query = {
+      text: 'UPDATE users SET password = $1 WHERE email = $2',
+      values: [hashedPassword, email],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (!result.rowCount) {
+      throw new NotFoundError('Gagal memperbarui password. Email tidak ditemukan');
+    }
+
+    return result.rows[0];
+  }
+
+  async addOtpToUser(email, otp) {
+    const query = {
+      text: 'INSERT INTO otps(email, otp, expired_at) VALUES($1, $2, $3)',
+      values: [email, otp, getDateAfterXMinutes(new Date(), 10)],
+    };
+
+    await this.verifyAvaliableEmail(email);
+
+    await this._pool.query(query);
+  }
+
+  async deleteOtpFromUser(email) {
+    const query = {
+      text: 'DELETE FROM otps WHERE email = $1',
+      values: [email],
+    };
+
+    await this._pool.query(query);
+  }
+
+  async verifyOtp(email, otp) {
+    const query = {
+      text: 'SELECT * FROM otps WHERE email = $1 AND otp = $2',
+      values: [email, otp],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError('Otp tidak valid');
+    }
+
+    const { expired_at: expiredAt } = result.rows[0];
+
+    if (new Date() > expiredAt) {
+      throw new InvariantError('Otp sudah kadaluarsa, silahkan generate ulang otp');
+    }
+  }
+
+  async updateOtpToUser(email, otp) {
+    const query = {
+      text: 'UPDATE otps SET otp = $1 WHERE email = $2',
+      values: [otp, email],
+    };
+
+    await this._pool.query(query);
   }
 }
 

@@ -8,6 +8,12 @@ const {
   DeleteAuthenticationResponseSchema,
   PutChangePasswordResponseSchema,
   PutChangePasswordPayloadSchema,
+  ResetPasswordPayloadSchema,
+  ResetPasswordResponseSchema,
+  VerifyOtpPayloadSchema,
+  VerifyOtpResponseSchema,
+  ChangePasswordPayloadSchema,
+  ChangePasswordResponseSchema,
 } = require('../../validator/authentication/schema');
 const { WithTokenRequestSchema } = require('../../validator/general/schema');
 
@@ -72,6 +78,51 @@ const routes = (handler) => [
         },
       },
       response: { schema: PutChangePasswordResponseSchema },
+    },
+  },
+  {
+    method: 'POST',
+    path: '/reset-password',
+    options: {
+      handler: (request, h) => handler.sendOtpToEmail(request, h),
+      tags: ['api'],
+      validate: {
+        payload: ResetPasswordPayloadSchema,
+        failAction: (request, h, error) => {
+          throw new InvariantError(error.message);
+        },
+      },
+      response: { schema: ResetPasswordResponseSchema },
+    },
+  },
+  {
+    method: 'POST',
+    path: '/reset-password/verify',
+    options: {
+      handler: (request, h) => handler.verifyOtp(request, h),
+      tags: ['api'],
+      validate: {
+        payload: VerifyOtpPayloadSchema,
+        failAction: (request, h, error) => {
+          throw new InvariantError(error.message);
+        },
+      },
+      response: { schema: VerifyOtpResponseSchema },
+    },
+  },
+  {
+    method: 'PUT',
+    path: '/reset-password',
+    options: {
+      handler: (request, h) => handler.changePassword(request, h),
+      tags: ['api'],
+      validate: {
+        payload: ChangePasswordPayloadSchema,
+        failAction: (request, h, error) => {
+          throw new InvariantError(error.message);
+        },
+      },
+      response: { schema: ChangePasswordResponseSchema },
     },
   },
 ];

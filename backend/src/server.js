@@ -27,6 +27,7 @@ const StorageService = require('./services/storage/StorageService');
 const MachineLearningService = require('./services/tensorflow/MachineLearningService');
 const AudioService = require('./services/audio/AudioService');
 const { sendCustomResponseByStatusCode } = require('./utils');
+const MailService = require('./services/email/MailService');
 
 // initialize dotenv
 require('dotenv').config();
@@ -41,6 +42,7 @@ require('dotenv').config();
   const storageService = new StorageService();
   const machineLearningService = new MachineLearningService();
   const audioService = new AudioService();
+  const mailService = new MailService();
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -130,6 +132,7 @@ require('dotenv').config();
         authenticationsService,
         usersService,
         tokenManager: TokenManager,
+        mailService,
       },
     },
     {
