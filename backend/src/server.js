@@ -4,6 +4,7 @@ const Jwt = require('@hapi/jwt');
 const Inert = require('@hapi/inert');
 const Vision = require('@hapi/vision');
 const HapiSwagger = require('hapi-swagger');
+const HapiRateLimit = require('hapi-rate-limit');
 const Pack = require('../package.json');
 
 // import user created module
@@ -25,6 +26,7 @@ const InterviewsService = require('./services/postgres/InterviewsService');
 const StorageService = require('./services/storage/StorageService');
 const MachineLearningService = require('./services/tensorflow/MachineLearningService');
 const AudioService = require('./services/audio/AudioService');
+const { sendCustomResponseByStatusCode } = require('./utils');
 
 // initialize dotenv
 require('dotenv').config();
@@ -69,15 +71,22 @@ require('dotenv').config();
     // documentationPage: false,
   };
 
+  const hapiRateLimitOptions = {
+    userLimit: 200,
+    userCache: {
+      expiresIn: 60000,
+    },
+    // pathLimit: 50,
+    // pathCache: {
+    //   expiresIn: 60000,
+    // },
+    // userWhitelist: ['interviewku'],
+    // authToken: 'jwt',
+  };
+
   await server.register([
     {
       plugin: Jwt,
-    },
-    Inert,
-    Vision,
-    {
-      plugin: HapiSwagger,
-      options: swaggerOptions,
     },
   ]);
 
@@ -98,6 +107,16 @@ require('dotenv').config();
   });
 
   await server.register([
+    Inert,
+    Vision,
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
+    },
+    {
+      plugin: HapiRateLimit,
+      options: hapiRateLimitOptions,
+    },
     {
       plugin: users,
       options: {
@@ -149,30 +168,18 @@ require('dotenv').config();
     const { response } = request;
     console.log(response.message);
 
-    if (response?.output?.statusCode === 401) {
-      if (process.env.APP_ENV === 'dev') {
-        return h.response({
-          success: false,
-          message: `Unauthorized - ${response.message}`,
-        }).code(401);
-      }
-      return h.response({
-        success: false,
-        message: 'Unauthorized',
-      }).code(401);
+    const statusCode = response?.output?.statusCode;
+
+    if (statusCode === 401) {
+      return sendCustomResponseByStatusCode(response, h, 401, 'Unauthorized');
     }
 
-    if (response?.output?.statusCode === 413) {
-      if (process.env.APP_ENV === 'dev') {
-        return h.response({
-          success: false,
-          message: `Payload Too Large - ${response.message} (1.5MB)`,
-        }).code(413);
-      }
-      return h.response({
-        success: false,
-        message: 'Payload Too Large Than 1.5MB',
-      }).code(413);
+    if (statusCode === 413) {
+      return sendCustomResponseByStatusCode(response, h, 413, 'Payload Too Large Than 1.5MB');
+    }
+
+    if (statusCode === 429) {
+      return sendCustomResponseByStatusCode(response, h, 429, 'Rate limit exceeded Try again after 1 minute');
     }
 
     if (response instanceof Error) {

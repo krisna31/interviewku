@@ -62,9 +62,25 @@ function getFeedback(scoreParam, strukturs, repeat) {
   return `${feedback.join(', ')}.`;
 }
 
+// eslint-disable-next-line consistent-return
+function sendCustomResponseByStatusCode(response, h, code, message) {
+  if (process.env.APP_ENV === 'dev') {
+    return h.response({
+      success: false,
+      message: `${message} - ${response.message}`,
+    }).code(code);
+  }
+
+  return h.response({
+    success: false,
+    message,
+  }).code(code);
+}
+
 module.exports = {
   dateFromDBToRightFormatDate,
   utcToLocalTimeZone,
   randomInRange,
   getFeedback,
+  sendCustomResponseByStatusCode,
 };
