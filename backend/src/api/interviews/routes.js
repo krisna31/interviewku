@@ -4,8 +4,8 @@ const {
   PostAnswerParamsSchema,
   PostAnswerResponseSchema,
   PostAnswersPayloadByInterviewIdSchema,
-  PutInterviewResponseSchema: interviewDataResponseSchema,
   PutInterviewPayloadSchema,
+  InterviewDataResponseSchema,
 } = require('../../validator/interview/schema');
 const { GetQuestionsResponseSchema, GetQuestionsQuerySchema } = require('../../validator/questions/schema');
 
@@ -41,7 +41,7 @@ const routes = (handler) => [
         },
       },
       tags: ['api'],
-      // response: { schema: GetQuestionsResponseSchema },
+      response: { schema: GetQuestionsResponseSchema },
     },
   },
   {
@@ -58,7 +58,7 @@ const routes = (handler) => [
         },
       },
       tags: ['api'],
-      response: { schema: interviewDataResponseSchema },
+      response: { schema: InterviewDataResponseSchema },
     },
   },
   {
@@ -100,7 +100,7 @@ const routes = (handler) => [
         },
       },
       tags: ['api'],
-      response: { schema: interviewDataResponseSchema },
+      response: { schema: InterviewDataResponseSchema },
     },
   },
 ];

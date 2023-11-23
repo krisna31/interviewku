@@ -3,7 +3,7 @@
 const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
-const { getFeedback } = require('../../utils');
+const { getFeedback, getDateAfterXMinutes } = require('../../utils');
 
 class InterviewsService {
   constructor() {
@@ -287,6 +287,60 @@ class InterviewsService {
       jobFieldName: ans.job_field_name,
       feedback: getFeedback(ans.score, ans.struktur_score, ans.retry_attempt),
     }));
+  }
+
+  async generateInterviewToken({ interviewId }) {
+    const token = nanoid(32);
+
+    const query = {
+      text: 'INSERT INTO interview_tokens (test_histories_id, token, expired_at) VALUES ($1, $2, $3) RETURNING token',
+      values: [interviewId, token, getDateAfterXMinutes(new Date(), 60)],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (result.rowCount < 1) {
+      throw new InvariantError('Gagal membuat token interview');
+    }
+
+    return result.rows[0].token;
+  }
+
+  async validateInterviewToken({ interviewId, token }) {
+    const query = {
+      text: 'SELECT * FROM interview_tokens WHERE test_histories_id = $1 AND token = $2 AND expired_at > now()',
+      values: [interviewId, token],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (result.rowCount < 1) {
+      throw new InvariantError('Token tidak valid');
+    }
+  }
+
+  async deleteInterviewToken({ interviewId }) {
+    const query = {
+      text: 'DELETE FROM interview_tokens WHERE test_histories_id = $1 OR expired_at < now()',
+      values: [interviewId],
+    };
+
+    await this._pool.query(query);
+  }
+
+  async validateIsInterviewClosed({ interviewId }) {
+    const query = {
+      text: 'SELECT * FROM interview_tokens WHERE test_histories_id = $1',
+      values: [interviewId],
+    };
+
+    const result = await this._pool.query(query);
+
+    console.log(result.rows[0]);
+
+    if (result.rowCount > 0) {
+      throw new InvariantError('Sesi Interview Masih Berlangsung');
+    }
   }
 }
 

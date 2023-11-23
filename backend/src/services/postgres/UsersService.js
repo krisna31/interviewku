@@ -338,8 +338,8 @@ class UsersService {
 
   async addOtpToUser(email, otp) {
     const query = {
-      text: 'INSERT INTO otps(email, otp, expired_at) VALUES($1, $2, $3)',
-      values: [email, otp, getDateAfterXMinutes(new Date(), 10)],
+      text: 'INSERT INTO otps(users_email, otp, expired_at) VALUES($1, $2, $3)',
+      values: [email, otp, getDateAfterXMinutes(new Date(), 5)],
     };
 
     await this.verifyAvaliableEmail(email);
@@ -349,7 +349,7 @@ class UsersService {
 
   async deleteOtpFromUser(email) {
     const query = {
-      text: 'DELETE FROM otps WHERE email = $1',
+      text: 'DELETE FROM otps WHERE users_email = $1',
       values: [email],
     };
 
@@ -358,7 +358,7 @@ class UsersService {
 
   async verifyOtp(email, otp) {
     const query = {
-      text: 'SELECT * FROM otps WHERE email = $1 AND otp = $2',
+      text: 'SELECT * FROM otps WHERE users_email = $1 AND otp = $2',
       values: [email, otp],
     };
 
@@ -377,7 +377,7 @@ class UsersService {
 
   async updateOtpToUser(email, otp) {
     const query = {
-      text: 'UPDATE otps SET otp = $1 WHERE email = $2',
+      text: 'UPDATE otps SET otp = $1 WHERE users_email = $2',
       values: [otp, email],
     };
 

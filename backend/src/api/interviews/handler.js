@@ -34,6 +34,8 @@ class InterviewsHandler {
       totalQuestions,
     });
 
+    const token = await this._interviewsService.generateInterviewToken({ interviewId });
+
     await this._interviewsService.addQuestionsToHistory({
       interviewId,
       questions,
@@ -44,6 +46,7 @@ class InterviewsHandler {
       message: `Sesi Interview ${interviewId} telah dimulai`,
       data: {
         interviewId,
+        token,
         questions,
       },
     };
@@ -59,8 +62,11 @@ class InterviewsHandler {
       retryAttempt,
       question,
       questionOrder,
+      token,
     } = request.payload;
     let testHistoryId;
+
+    await this._interviewsService.validateInterviewToken({ interviewId, token });
 
     const {
       user_answer: userAnswerInDb,
@@ -115,20 +121,24 @@ class InterviewsHandler {
 
   async closeInterviewSession(request, h) {
     const { interviewId } = request.params;
-    const { completed } = request.payload;
+    const { completed, token } = request.payload;
 
-    await this._interviewsService.validateIsInterviewCompleted({ interviewId });
+    await this._interviewsService.validateInterviewToken({ interviewId, token });
+
+    if (completed) {
+      await this._interviewsService.validateIsInterviewCompleted({ interviewId });
+    }
 
     await this._interviewsService.editInterviewByInterviewId({
       interviewId,
       completed,
     });
 
-    const interviewData = await this._interviewsService.getInterviewDataByInterviewId(
-      {
-        interviewId,
-      },
-    );
+    await this._interviewsService.deleteInterviewToken({ interviewId });
+
+    const interviewData = await this._interviewsService.getInterviewDataByInterviewId({
+      interviewId,
+    });
 
     return {
       success: true,
@@ -140,13 +150,11 @@ class InterviewsHandler {
   async getInterview(request, h) {
     const { interviewId } = request.params;
 
-    await this._interviewsService.validateIsInterviewCompleted({ interviewId });
+    await this._interviewsService.validateIsInterviewClosed({ interviewId });
 
-    const interviewData = await this._interviewsService.getInterviewDataByInterviewId(
-      {
-        interviewId,
-      },
-    );
+    const interviewData = await this._interviewsService.getInterviewDataByInterviewId({
+      interviewId,
+    });
 
     return {
       success: true,

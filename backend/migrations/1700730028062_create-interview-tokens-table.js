@@ -3,27 +3,27 @@
 exports.shorthands = undefined;
 
 exports.up = (pgm) => {
-  pgm.createTable('otps', {
-    users_email: {
+  pgm.createTable('interview_tokens', {
+    test_histories_id: {
       type: 'VARCHAR(50)',
       notNull: true,
-      references: '"users"("email")',
+      references: '"test_histories"',
       onDelete: 'cascade',
       onUpdate: 'cascade',
       unique: true,
     },
-    otp: {
-      type: 'char(6)',
+    token: {
+      type: 'char(32)',
       notNull: true,
     },
     expired_at: {
       type: 'timestamp',
       notNull: true,
-      default: pgm.func('current_timestamp + interval \'5 minute\''),
+      default: pgm.func('current_timestamp + interval \'1 day\''),
     },
   });
 };
 
 exports.down = (pgm) => {
-  pgm.dropTable('otps');
+  pgm.dropTable('interview_tokens');
 };

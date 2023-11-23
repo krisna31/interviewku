@@ -41,8 +41,7 @@ exports.up = (pgm) => {
     },
     retry_attempt: {
       type: 'integer',
-      notNull: true,
-      default: 0,
+      notNull: false,
     },
     question: {
       type: 'TEXT',

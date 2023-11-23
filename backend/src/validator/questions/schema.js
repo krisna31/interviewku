@@ -5,6 +5,7 @@ const GetQuestionsResponseSchema = Joi.object({
   message: Joi.string().default('Answers Ditemukan').required(),
   data: Joi.object().keys({
     interviewId: Joi.string().default('sesi-interview-xxx').required(),
+    token: Joi.string().default('x*32').length(32),
     questions: Joi.array().items(Joi.object({
       questionOrder: Joi.number().max(2147483647).default(1).required(),
       jobFieldName: Joi.string().default('Kuliner dan Restoran').required(),
