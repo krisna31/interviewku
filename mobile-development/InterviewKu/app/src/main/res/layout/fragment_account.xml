@@ -1,8 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.account.AccountFragment">
+    android:layout_height="match_parent">
 
-</FrameLayout>
+    <FrameLayout
+        android:id="@+id/action_bar"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="51.79dp"
+            android:layout_height="24dp"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <ImageView
+                android:layout_width="51.79dp"
+                android:layout_height="24dp"
+                android:layout_gravity="top|start"
+                android:background="@mipmap/ic_launcher"
+                android:scaleType="centerInside" />
+
+        </FrameLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/temporary_layer_399_641_display_name_p_p"
+        android:layout_width="0dp"
+        android:layout_height="114dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@+id/action_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="22dp"
+            android:src="@mipmap/ic_launcher"
+            app:civ_radius="36dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="0.5dp"
+            android:gravity="start|top"
+            android:includeFontPadding="false"
+            android:lineHeight="19.36dp"
+            android:text="Nama Lengkap"
+            android:textColor="#FF000000"
+            android:textSize="16dp"
+            tools:text="Nama Lengkap" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/profile"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="10dp"
+        android:clipChildren="false"
+        app:layout_constraintTop_toBottomOf="@+id/temporary_layer_399_641_display_name_p_p"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_account_box_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="19dp"
+            android:gravity="start|center_vertical"
+            android:includeFontPadding="false"
+            android:lineHeight="19.36dp"
+            android:text="Profile"
+            android:textColor="#FF000000"
+            android:textSize="16dp"
+            tools:text="Profile" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/text_to_speech"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="72dp"
+        android:clipChildren="false"
+        app:layout_constraintTop_toBottomOf="@+id/temporary_layer_399_641_display_name_p_p"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_spatial_audio_off_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="19dp"
+            android:gravity="start|center_vertical"
+            android:includeFontPadding="false"
+            android:textColor="#FF000000"
+            android:textSize="16dp"
+            tools:text="Text to Speech" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/change_password"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:clipChildren="false"
+        app:layout_constraintTop_toBottomOf="@+id/text_to_speech"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="19dp"
+            android:gravity="start|center_vertical"
+            android:includeFontPadding="false"
+            android:lineHeight="19.36dp"
+            android:text="Ganti Kata Sandi"
+            android:textColor="#FF000000"
+            android:textSize="16dp"
+            tools:text="Ganti Kata Sandi" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="320dp"
+            android:layout_marginBottom="16dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_lock_24" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/logout"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="124dp"
+        android:clipChildren="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="19dp"
+            android:gravity="start|center_vertical"
+            android:includeFontPadding="false"
+            android:lineHeight="19.36dp"
+            android:text="Logout"
+            android:textColor="#FF000000"
+            android:textSize="16dp"
+            tools:text="Logout" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="16dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_keyboard_arrow_down_24" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

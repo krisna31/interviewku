@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">InterviewKu</string>
     <string name="unexpected_error">Terjadi kesalahan. Silahkan coba lagi</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="email_required">requires email</string>
+    <string name="email_invalid">Invalid Email</string>
+    <string name="password_min">Password must contains minimum 8 character</string>
+    <string name="login_text">Log in to your account</string>
+    <string name="register_text">Don\'t Have Account? Sign up now!!</string>
+    <string name="name">Name</string>
+    <string name="name_required">Name Required</string>
+    <string name="register_account">Register Account</string>
+    <string name="register">REGISTER</string>
+    <string name="have_account">Already have an Account? Login Now!</string>
+    <string name="user_created">User Created</string>
+    Silahkan masukkan informasi tambahan terkait diri anda
+    <string name="Silahkan"> Silahkan masukkan informasi tambahan terkait diri anda</string>
 </resources>

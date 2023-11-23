@@ -3,152 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activities.profile.ProfileActivity">
+    android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/action_bar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:clipToPadding="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            tools:text="Profile"
-            android:layout_width="wrap_content"
-            android:layout_height="19dp"
-            android:layout_gravity="top|left"
-            android:layout_marginLeft="54dp"
-            android:layout_marginTop="15dp"
-            android:gravity="left|center_vertical"
-            android:includeFontPadding="false"
-            android:lineHeight="19.36dp"
-            android:text="Profile"
-            android:textColor="#FF000000"
-            android:textSize="18dp" />
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="top|left"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/baseline_keyboard_backspace_24" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/action_bar">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_gravity="top|left"
-            android:layout_marginTop="19dp"
-            android:clipChildren="false"
-            android:clipToPadding="false">
-
-            <EditText
-                android:id="@+id/editTextLastName"
-                android:layout_width="171dp"
-                android:layout_height="21dp"
-                android:layout_marginLeft="176dp"
-                android:layout_marginTop="8dp"
-                android:includeFontPadding="false"
-                android:lineHeight="14.52dp"
-                android:text="Nama Belakang"
-                android:textColor="#FF000000"
-                android:textSize="10dp"
-                tools:text="Nama Belakang" />
-
-            <EditText
-                android:id="@+id/editTextFirstName"
-                android:layout_width="151dp"
-                android:layout_height="21dp"
-                android:layout_marginTop="8dp"
-                android:includeFontPadding="false"
-                android:lineHeight="14.52dp"
-                android:text="Nama Depan"
-                android:textColor="#FF000000"
-                android:textSize="10dp"
-                tools:text="Nama Depan" />
-        </FrameLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_gravity="top|left"
-            android:gravity="left|center_vertical"
-            android:includeFontPadding="false"
-            android:lineHeight="14.52dp"
-            android:text="Nama Lengkap"
-            android:textColor="#FF000000"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            tools:text="Nama Lengkap" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/Email"
+    <TextView
+        android:id="@+id/Register_screen"
         android:layout_width="0dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_height="38dp"
+        android:fallbackLineSpacing="false"
+        android:gravity="left|top"
+        android:includeFontPadding="false"
+        android:lineHeight="19.36dp"
+        android:lineSpacingExtra="0.61dp"
+        android:textColor="#FF000000"
+        android:textSize="16dp"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_gravity="top|start"
-            android:layout_marginTop="19dp"
-            android:clipToPadding="false"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <EditText
-                android:id="@+id/Et_Email"
-                android:layout_width="348dp"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="text"
-                android:textColor="#FF000000"
-                android:textSize="10dp"
-                tools:text="Email" />
-        </FrameLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_gravity="top|start"
-            android:gravity="start|center_vertical"
-            android:includeFontPadding="false"
-            android:textColor="#FF000000"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Email" />
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/Silahkan" />
 
     <FrameLayout
-        android:id="@+id/Jenis_kelamin_profile"
+        android:id="@+id/jenis_kelamin"
         android:layout_width="0dp"
         android:layout_height="51dp"
         android:layout_marginStart="16dp"
@@ -158,7 +32,7 @@
         android:clipToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Email">
+        app:layout_constraintTop_toBottomOf="@+id/Register_screen">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -177,17 +51,16 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/baseline_keyboard_arrow_down_24" />
 
-
             <EditText
-                android:id="@+id/Et_jenis_kelamin_profile"
-                android:layout_width="345dp"
+                android:id="@+id/editTextJenisKelamin"
+                android:layout_width="350dp"
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="text"
                 android:text="Silahkan pilih "
                 android:textColor="#FF000000"
                 android:textSize="10dp"
-                tools:text="Silahkan Pilih" />
+                tools:text="Silahkan pilih" />
         </FrameLayout>
 
         <TextView
@@ -196,6 +69,8 @@
             android:layout_gravity="top|start"
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
+            android:lineHeight="14.52dp"
+            android:text="Jenis Kelamin"
             android:textColor="#FF000000"
             android:textSize="12dp"
             android:textStyle="bold"
@@ -205,17 +80,17 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/tanggal_lahir_profile"
+        android:id="@+id/tanggal_lahir"
         android:layout_width="0dp"
         android:layout_height="51dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Jenis_kelamin_profile">
+        app:layout_constraintTop_toBottomOf="@+id/jenis_kelamin">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -226,8 +101,8 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <EditText
-                android:id="@+id/Et_tanggal_lahir_profile"
-                android:layout_width="347dp"
+                android:id="@+id/editTextTanggalLahir"
+                android:layout_width="348dp"
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="text"
@@ -253,19 +128,18 @@
             tools:text="Tanggal Lahir" />
     </FrameLayout>
 
-
     <FrameLayout
-        android:id="@+id/domisili_profile"
+        android:id="@+id/domisili"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tanggal_lahir_profile">
+        app:layout_constraintTop_toBottomOf="@+id/tanggal_lahir">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -276,8 +150,8 @@
             android:clipToPadding="false">
 
             <EditText
-                android:id="@+id/et_domisili_profile"
-                android:layout_width="346dp"
+                android:id="@+id/editTextDomisili"
+                android:layout_width="348dp"
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="text"
@@ -289,30 +163,30 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="top|left"
             android:gravity="left|center_vertical"
             android:includeFontPadding="false"
             android:lineHeight="14.52dp"
             android:text="Domisili"
-            android:textStyle="bold"
             android:textColor="#FF000000"
             android:textSize="12dp"
+            android:textStyle="bold"
             tools:text="Domisili" />
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/bidang_pekerjaan_profile"
+        android:id="@+id/bidang_pekerjaan"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/domisili_profile">
+        app:layout_constraintTop_toBottomOf="@+id/domisili">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -331,8 +205,8 @@
                 android:src="@drawable/baseline_keyboard_arrow_down_24" />
 
             <EditText
-                android:id="@+id/et_bidang_pekerjaan_profile"
-                android:layout_width="347dp"
+                android:id="@+id/editTextBidangPekerjaan"
+                android:layout_width="348dp"
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="text"
@@ -358,7 +232,7 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/bt_profile"
+        android:id="@+id/bt_register_screen"
         android:layout_width="241dp"
         android:layout_height="43dp"
         android:layout_marginStart="16dp"
