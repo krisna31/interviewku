@@ -12,6 +12,7 @@
     </queries>
 
     <application
+        android:name=".InterviewKuApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -22,7 +23,24 @@
         android:theme="@style/Theme.InterviewKu"
         tools:targetApi="34">
         <activity
-            android:name=".ui.activities.interviewresult.InterviewResultActivity"
+            android:name=".ui.activities.splash.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activities.landing.LandingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.interviewtest.InterviewTestActivity"
@@ -31,38 +49,20 @@
             android:name=".ui.activities.interviewtrain.InterviewTrainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.tipsdetail.TipsDetailActivity"
+            android:name=".ui.activities.interviewresult.InterviewResultActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.interviewhistory.InterviewHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.changepassword.ChangePasswordActivity"
+            android:name=".ui.activities.tipsdetail.TipsDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.profile.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.splash.SplashActivity"
+            android:name=".ui.activities.changepassword.ChangePasswordActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.activities.landing.LandingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.register.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.login.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.main.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

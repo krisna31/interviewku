@@ -5,16 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.capstone.interviewku.databinding.FragmentRegisterDetailBinding
-import com.capstone.interviewku.ui.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterDetailFragment : Fragment() {
-    private lateinit var viewModel: RegisterDetailViewModel
-
     private var _binding: FragmentRegisterDetailBinding? = null
     private val binding
         get() = _binding!!
+
+    private val viewModel by viewModels<RegisterDetailViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,11 +27,6 @@ class RegisterDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProvider(
-            requireActivity(),
-            ViewModelFactory.getInstance(requireContext())
-        )[RegisterDetailViewModel::class.java]
     }
 
     override fun onDestroy() {

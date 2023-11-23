@@ -4,8 +4,11 @@ import com.capstone.interviewku.data.network.APIUtil
 import com.capstone.interviewku.data.network.service.InterviewKuAPIService
 import com.capstone.interviewku.data.preferences.AppPreferences
 import kotlinx.coroutines.flow.first
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class JobRepository private constructor(
+@Singleton
+class JobRepository @Inject constructor(
     private val apiService: InterviewKuAPIService,
     private val appPreferences: AppPreferences,
 ) {

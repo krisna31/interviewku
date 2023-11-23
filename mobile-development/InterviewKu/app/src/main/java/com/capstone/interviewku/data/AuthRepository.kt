@@ -8,8 +8,11 @@ import com.capstone.interviewku.data.network.service.InterviewKuAPIService
 import com.capstone.interviewku.data.preferences.AppPreferences
 import kotlinx.coroutines.flow.first
 import retrofit2.HttpException
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AuthRepository private constructor(
+@Singleton
+class AuthRepository @Inject constructor(
     private val apiService: InterviewKuAPIService,
     private val appPreferences: AppPreferences
 ) {

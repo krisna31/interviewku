@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.map
 
-class AppPreferences private constructor(private val dataStore: DataStore<Preferences>) {
+class AppPreferences(private val dataStore: DataStore<Preferences>) {
     private val accessTokenPreferencesKey = stringPreferencesKey("access_token_key")
     private val refreshTokenPreferencesKey = stringPreferencesKey("refresh_token_key")
 
@@ -32,18 +32,5 @@ class AppPreferences private constructor(private val dataStore: DataStore<Prefer
 
     suspend fun setRefreshToken(refreshToken: String) = dataStore.edit {
         it[refreshTokenPreferencesKey] = refreshToken
-    }
-
-    companion object {
-        const val DATASTORE_NAME = "interviewku_preferences"
-
-        @Volatile
-        private var instance: AppPreferences? = null
-
-        fun getInstance(dataStore: DataStore<Preferences>) = instance ?: synchronized(this) {
-            AppPreferences(dataStore).also {
-                instance = it
-            }
-        }
     }
 }

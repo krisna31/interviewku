@@ -4,14 +4,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.interviewku.databinding.ActivityInterviewResultBinding
-import com.capstone.interviewku.ui.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InterviewResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInterviewResultBinding
 
-    private val viewModel by viewModels<InterviewResultViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
+    private val viewModel by viewModels<InterviewResultViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

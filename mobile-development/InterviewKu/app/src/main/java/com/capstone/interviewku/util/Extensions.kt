@@ -7,12 +7,11 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.capstone.interviewku.BuildConfig
 import com.capstone.interviewku.R
 import com.capstone.interviewku.data.network.response.BaseResponse
-import com.capstone.interviewku.data.preferences.AppPreferences
 import com.google.gson.Gson
 import retrofit2.HttpException
 
 object Extensions {
-    val Context.dataStore by preferencesDataStore(AppPreferences.DATASTORE_NAME)
+    val Context.dataStore by preferencesDataStore(Constants.DATASTORE_NAME)
 
     fun Context.isPermissionGranted(permission: String) =
         checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
