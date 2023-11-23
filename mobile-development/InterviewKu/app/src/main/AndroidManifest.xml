@@ -22,6 +22,33 @@
         android:theme="@style/Theme.InterviewKu"
         tools:targetApi="34">
         <activity
+            android:name=".ui.activities.interviewresult.InterviewResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.interviewtest.InterviewTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.interviewtrain.InterviewTrainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.tipsdetail.TipsDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.interviewhistory.InterviewHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.changepassword.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.splash.SplashActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.landing.LandingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.register.RegisterActivity"
             android:exported="false" />
         <activity

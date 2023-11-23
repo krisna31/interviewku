@@ -2,7 +2,6 @@ package com.capstone.interviewku.data.network.service
 
 import com.capstone.interviewku.data.network.response.BaseResponse
 import com.capstone.interviewku.data.network.response.InterviewAnswerSubmitResponse
-import com.capstone.interviewku.data.network.response.InterviewAnswersResponse
 import com.capstone.interviewku.data.network.response.InterviewQuestionsResponse
 import com.capstone.interviewku.data.network.response.InterviewResultResponse
 import com.capstone.interviewku.data.network.response.JobFieldsResponse
@@ -28,13 +27,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface InterviewKuAPIService {
-    // answers
-    @GET("/answers/{questionId}")
-    suspend fun getInterviewAnswer(
-        @Header("Authorization") bearerToken: String,
-        @Path("questionId") questionId: String
-    ): InterviewAnswersResponse
-
     // authentications
     @POST("/authentications")
     @FormUrlEncoded
@@ -117,10 +109,10 @@ interface InterviewKuAPIService {
     @POST("/users")
     @FormUrlEncoded
     suspend fun register(
-        @Field("firstName") firstName: String,
-        @Field("lastName") lastName: String,
         @Field("email") email: String,
         @Field("password") password: String,
+        @Field("firstName") firstName: String,
+        @Field("lastName") lastName: String?,
     ): UserRegisterResponse
 
     @GET("/users")

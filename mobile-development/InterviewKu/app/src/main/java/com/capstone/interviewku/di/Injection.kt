@@ -3,6 +3,7 @@ package com.capstone.interviewku.di
 import android.content.Context
 import com.capstone.interviewku.data.AuthRepository
 import com.capstone.interviewku.data.InterviewRepository
+import com.capstone.interviewku.data.JobRepository
 import com.capstone.interviewku.data.TipsRepository
 import com.capstone.interviewku.data.UserRepository
 import com.capstone.interviewku.data.network.APIUtil
@@ -24,6 +25,12 @@ object Injection {
 
     fun provideInterviewRepository(context: Context) =
         InterviewRepository.getInstance(
+            provideInterviewKuAPIService(),
+            provideAppPreferences(context)
+        )
+
+    fun provideJobRepository(context: Context) =
+        JobRepository.getInstance(
             provideInterviewKuAPIService(),
             provideAppPreferences(context)
         )

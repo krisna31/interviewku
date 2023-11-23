@@ -1,4 +1,4 @@
-package com.capstone.interviewku.ui.fragments.home
+package com.capstone.interviewku.ui.fragments.registerdetail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.interviewku.databinding.FragmentHomeBinding
+import com.capstone.interviewku.databinding.FragmentRegisterDetailBinding
 import com.capstone.interviewku.ui.ViewModelFactory
 
-class HomeFragment : Fragment() {
-    private lateinit var viewModel: HomeViewModel
+class RegisterDetailFragment : Fragment() {
+    private lateinit var viewModel: RegisterDetailViewModel
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentRegisterDetailBinding? = null
     private val binding
         get() = _binding!!
 
@@ -20,7 +20,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(
             requireActivity(),
             ViewModelFactory.getInstance(requireContext())
-        )[HomeViewModel::class.java]
+        )[RegisterDetailViewModel::class.java]
     }
 
     override fun onDestroy() {
