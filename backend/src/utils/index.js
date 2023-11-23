@@ -47,6 +47,8 @@ function getFeedback(scoreParam, strukturs, repeat) {
   const xrepeat = repeat === 0 ? 0
     : repeat < 3 ? 1 : 2;
 
+  const struktursScoreIndex = strukturs < 0.5 ? 0 : 1;
+
   let total = score
   + (strukturs === 0 ? 1 : 5)
   + (xrepeat === 0 ? 5 : xrepeat === 1 ? 3 : 1);
@@ -62,7 +64,7 @@ function getFeedback(scoreParam, strukturs, repeat) {
   }
 
   // scoring
-  feedback.push(summary[total], scoring[score], struktur[strukturs], `dan ${repeatArray[xrepeat]}`);
+  feedback.push(summary[total], scoring[score], struktur[struktursScoreIndex], `dan ${repeatArray[xrepeat]}`);
   return `${feedback.join(', ')}.`;
 }
 

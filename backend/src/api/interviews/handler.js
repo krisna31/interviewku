@@ -91,8 +91,7 @@ class InterviewsHandler {
       });
 
       const strukturScore = await this._machineLearningService.getStrukturScore({
-        score,
-        question,
+        userAnswer,
       });
 
       testHistoryId = await this._interviewsService.updateAnswerByInterviewId({

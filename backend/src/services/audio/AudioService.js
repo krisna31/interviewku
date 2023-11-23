@@ -27,7 +27,7 @@ class AudioService {
   }
 
   async convertAudioToText(audio) {
-    return 'dummy text';
+    return 'DUMMY saya pada umumnya tidak suka seprti namun, menurut saya biasanya membuat daftar prioritas untuk menentukan tindakan yang paling mendesak. DUMMY';
     // return this._googleSpeechToText(audio);
   }
 
