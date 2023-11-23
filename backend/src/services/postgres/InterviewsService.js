@@ -336,8 +336,6 @@ class InterviewsService {
 
     const result = await this._pool.query(query);
 
-    console.log(result.rows[0]);
-
     if (result.rowCount > 0) {
       throw new InvariantError('Sesi Interview Masih Berlangsung');
     }

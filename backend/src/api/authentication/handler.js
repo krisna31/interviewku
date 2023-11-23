@@ -10,6 +10,7 @@ class AuthenticationsHandler {
     this._usersService = usersService;
     this._tokenManager = tokenManager;
     this._mailService = mailService;
+    this._READY_FOR_CHANGE_PASSWORD = 'READY';
   }
 
   async postAuthenticationHandler(request, h) {
@@ -99,7 +100,7 @@ class AuthenticationsHandler {
 
     await this._usersService.verifyOtp(email, otp);
 
-    await this._usersService.updateOtpToUser(email, '888888');
+    await this._usersService.updateOtpToUser(email, this._READY_FOR_CHANGE_PASSWORD);
 
     return {
       success: true,
@@ -110,7 +111,7 @@ class AuthenticationsHandler {
   async changePassword(request, h) {
     const { email, newPassword } = request.payload;
 
-    await this._usersService.verifyOtp(email, '888888');
+    await this._usersService.verifyOtp(email, this._READY_FOR_CHANGE_PASSWORD);
 
     await this._usersService.editUserPasswordByEmail(email, newPassword);
 
