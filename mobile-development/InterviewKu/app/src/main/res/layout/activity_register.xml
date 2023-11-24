@@ -24,7 +24,7 @@
         android:layout_marginTop="18dp"
         android:layout_marginEnd="16dp"
         android:text="@string/register_account"
-        android:textColor="@color/black"
+
         android:textSize="20sp"
         android:textStyle="bold"
         style="@style/Base.Theme.InterviewKu"
@@ -110,7 +110,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/have_account"
-        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         style="@style/Base.Theme.InterviewKu"
