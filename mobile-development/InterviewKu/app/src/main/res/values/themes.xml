@@ -5,6 +5,8 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/lightblue</item>
         <item name="colorPrimaryVariant">@color/lightblue</item>
+        <item name="android:textColor">@color/textColor</item>
+
     </style>
 
     <style name="Theme.InterviewKu" parent="Base.Theme.InterviewKu" />

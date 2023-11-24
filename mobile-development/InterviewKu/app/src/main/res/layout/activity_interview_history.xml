@@ -16,7 +16,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            tools:text="History"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:layout_gravity="top|left"
@@ -25,7 +24,8 @@
             android:gravity="left|center_vertical"
             android:includeFontPadding="false"
             android:textColor="#FF000000"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            tools:text="History" />
 
         <ImageView
             android:layout_width="24dp"
