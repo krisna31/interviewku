@@ -80,16 +80,4 @@ class InterviewRepository @Inject constructor(
                 interviewId
             )
         }
-
-    companion object {
-        @Volatile
-        private var instance: InterviewRepository? = null
-
-        fun getInstance(apiService: InterviewKuAPIService, appPreferences: AppPreferences) =
-            instance ?: synchronized(this) {
-                InterviewRepository(apiService, appPreferences).also {
-                    instance = it
-                }
-            }
-    }
 }

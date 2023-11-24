@@ -3,11 +3,10 @@ package com.capstone.interviewku.data
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.capstone.interviewku.data.network.APIUtil
-import com.capstone.interviewku.data.network.response.LoginResponse
+import com.capstone.interviewku.data.network.response.LoginData
 import com.capstone.interviewku.data.network.service.InterviewKuAPIService
 import com.capstone.interviewku.data.preferences.AppPreferences
 import kotlinx.coroutines.flow.first
-import retrofit2.HttpException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,6 +15,10 @@ class AuthRepository @Inject constructor(
     private val apiService: InterviewKuAPIService,
     private val appPreferences: AppPreferences
 ) {
+    suspend fun clearLoginData() {
+        appPreferences.clearToken()
+    }
+
     suspend fun changePassword(oldPassword: String, newPassword: String) =
         APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
             apiService.changePassword(
@@ -29,35 +32,20 @@ class AuthRepository @Inject constructor(
         it != null
     }
 
-    suspend fun login(email: String, password: String): LoginResponse {
-        val result = apiService.login(email, password)
+    suspend fun login(email: String, password: String) = apiService.login(email, password)
 
-        result.data?.let {
-            appPreferences.setAccessToken(it.accessToken)
-            appPreferences.setRefreshToken(it.refreshToken)
-        }
+    suspend fun logout() = apiService.logout(appPreferences.getRefreshToken().first() ?: "")
 
-        return result
+    suspend fun requestPasswordReset(email: String) = apiService.requestPasswordReset(email)
+
+    suspend fun recoverPassword(email: String, newPassword: String) =
+        apiService.recoverPassword(email, newPassword)
+
+    suspend fun saveLoginData(loginData: LoginData) {
+        appPreferences.setAccessToken(loginData.accessToken)
+        appPreferences.setRefreshToken(loginData.refreshToken)
     }
 
-    suspend fun logout() {
-        try {
-            apiService.logout(appPreferences.getRefreshToken().first() ?: "")
-        } catch (_: HttpException) {
-        }
-
-        appPreferences.clearToken()
-    }
-
-    companion object {
-        @Volatile
-        private var instance: AuthRepository? = null
-
-        fun getInstance(apiService: InterviewKuAPIService, appPreferences: AppPreferences) =
-            instance ?: synchronized(this) {
-                AuthRepository(apiService, appPreferences).also {
-                    instance = it
-                }
-            }
-    }
+    suspend fun verifyPasswordReset(email: String, otpCode: String) =
+        apiService.verifyPasswordReset(email, otpCode)
 }

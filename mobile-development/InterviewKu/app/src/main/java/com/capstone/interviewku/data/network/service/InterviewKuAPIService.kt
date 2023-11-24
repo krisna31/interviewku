@@ -105,6 +105,27 @@ interface InterviewKuAPIService {
         @Header("Authorization") bearerToken: String,
     ): JobPositionsResponse
 
+    // reset-password
+    @POST("/reset-password")
+    @FormUrlEncoded
+    suspend fun requestPasswordReset(
+        @Field("email") email: String,
+    ): BaseResponse
+
+    @POST("/reset-password/verify")
+    @FormUrlEncoded
+    suspend fun verifyPasswordReset(
+        @Field("email") email: String,
+        @Field("otp") otpCode: String,
+    ): BaseResponse
+
+    @PUT("/reset-password")
+    @FormUrlEncoded
+    suspend fun recoverPassword(
+        @Field("email") email: String,
+        @Field("newPassword") newPassword: String,
+    ): BaseResponse
+
     // users
     @POST("/users")
     @FormUrlEncoded

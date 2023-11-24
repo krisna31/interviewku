@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -41,9 +40,9 @@
         android:layout_height="114dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@+id/action_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/action_bar">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="72dp"
@@ -52,8 +51,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="22dp"
-            android:src="@mipmap/ic_launcher"
-            app:civ_radius="36dp" />
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,9 +74,9 @@
         android:layout_height="56dp"
         android:layout_marginTop="10dp"
         android:clipChildren="false"
-        app:layout_constraintTop_toBottomOf="@+id/temporary_layer_399_641_display_name_p_p"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temporary_layer_399_641_display_name_p_p">
 
         <ImageView
             android:layout_width="24dp"
@@ -110,9 +108,9 @@
         android:layout_height="56dp"
         android:layout_marginTop="72dp"
         android:clipChildren="false"
-        app:layout_constraintTop_toBottomOf="@+id/temporary_layer_399_641_display_name_p_p"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temporary_layer_399_641_display_name_p_p"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp">
 
@@ -144,9 +142,9 @@
         android:layout_height="56dp"
         android:layout_marginTop="8dp"
         android:clipChildren="false"
-        app:layout_constraintTop_toBottomOf="@+id/text_to_speech"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_to_speech"
         tools:layout_editor_absoluteX="0dp">
 
         <TextView
