@@ -78,7 +78,7 @@ class InterviewsService {
             retry_attempt = $7,
             struktur_score = $8,
             user_answer = $9,
-            updated_at = now()
+            updated_at = $10
           WHERE test_history_id = $1 AND question_order = $2 RETURNING id
       `,
       values: [
@@ -91,6 +91,7 @@ class InterviewsService {
         retryAttempt,
         strukturScore,
         userAnswer,
+        new Date(),
       ],
     };
 
@@ -193,8 +194,8 @@ class InterviewsService {
 
   async editInterviewByInterviewId({ interviewId, completed }) {
     const query = {
-      text: 'UPDATE test_histories SET completed = $2, updated_at = now() WHERE id = $1 RETURNING id',
-      values: [interviewId, completed],
+      text: 'UPDATE test_histories SET completed = $2, updated_at = $3 WHERE id = $1 RETURNING id',
+      values: [interviewId, completed, new Date()],
     };
 
     const result = await this._pool.query(query);
@@ -308,8 +309,8 @@ class InterviewsService {
 
   async validateInterviewToken({ interviewId, token }) {
     const query = {
-      text: 'SELECT * FROM interview_tokens WHERE test_histories_id = $1 AND token = $2 AND expired_at > now()',
-      values: [interviewId, token],
+      text: 'SELECT * FROM interview_tokens WHERE test_histories_id = $1 AND token = $2 AND expired_at > $3',
+      values: [interviewId, token, new Date()],
     };
 
     const result = await this._pool.query(query);
@@ -321,8 +322,8 @@ class InterviewsService {
 
   async deleteInterviewToken({ interviewId }) {
     const query = {
-      text: 'DELETE FROM interview_tokens WHERE test_histories_id = $1 OR expired_at < now()',
-      values: [interviewId],
+      text: 'DELETE FROM interview_tokens WHERE test_histories_id = $1 OR expired_at < $2',
+      values: [interviewId, new Date()],
     };
 
     await this._pool.query(query);

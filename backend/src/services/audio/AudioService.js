@@ -27,8 +27,7 @@ class AudioService {
   }
 
   async convertAudioToText(audio) {
-    return 'DUMMY saya pada umumnya tidak suka seprti namun, menurut saya biasanya membuat daftar prioritas untuk menentukan tindakan yang paling mendesak. DUMMY';
-    // return this._googleSpeechToText(audio);
+    return process.env.AUDIO_SERVICE === 'true' ? this._googleSpeechToText(audio) : 'DUMMY saya pada umumnya tidak suka seprti namun, menurut saya biasanya membuat daftar prioritas untuk menentukan tindakan yang paling mendesak. DUMMY';
   }
 
   async _googleSpeechToText(audio) {

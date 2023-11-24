@@ -165,6 +165,7 @@ class UsersService {
         id,
         firstName,
         lastName,
+        new Date(),
       ].filter((value) => value !== undefined),
     };
 
@@ -187,7 +188,7 @@ class UsersService {
     if (firstName !== undefined) queryText += ` first_name = $${index++},`;
     if (lastName !== undefined) queryText += ` last_name = $${index++},`;
 
-    queryText += ' updated_at = NOW() WHERE id = $1 RETURNING *;';
+    queryText += ` updated_at = $${index++} WHERE id = $1 RETURNING *;`;
     return queryText;
   }
 
@@ -279,6 +280,7 @@ class UsersService {
         gender,
         dateBirth,
         currentCity,
+        new Date(),
       ].filter((value) => value !== undefined),
     };
 
@@ -316,7 +318,7 @@ class UsersService {
     if (dateBirth !== undefined) queryText += ` date_birth = $${index++},`;
     if (currentCity !== undefined) queryText += ` current_city = $${index++},`;
 
-    queryText += ' updated_at = NOW() WHERE user_id = $1 RETURNING *;';
+    queryText += ` updated_at = $${index++} WHERE user_id = $1 RETURNING *;`;
     return queryText;
   }
 

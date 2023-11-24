@@ -1,0 +1,12 @@
+node_modules
+.env
+.env.prod
+bash.sh
+README.md
+truncate.sql
+.vscode
+migration
+postman
+.eslintrc.json
+.gitignore
+RUN_THIS_AFTER_NPM_INSTALL.sh
