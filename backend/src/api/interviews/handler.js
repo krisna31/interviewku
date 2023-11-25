@@ -18,14 +18,20 @@ class InterviewsHandler {
 
   async getQuestions(request, h) {
     // get mode from query
-    const { mode } = request.query;
+    const {
+      mode,
+      jobFieldId,
+    } = request.query;
     const { id: userId } = request.auth.credentials;
 
     // generate random total questions
     const totalQuestions = randomInRange(3, 5);
 
     // get questions by total questions
-    const questions = await this._questionsService.getQuestionsByTotalQuestion(totalQuestions);
+    const questions = await this._questionsService.getQuestionsByTotalQuestionAndJobFieldId({
+      totalQuestions,
+      jobFieldId,
+    });
 
     // insert data to test_histories table with mode and total questions
     const interviewId = await this._interviewsService.addInterview({

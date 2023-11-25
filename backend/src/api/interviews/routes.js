@@ -6,8 +6,9 @@ const {
   PostAnswersPayloadByInterviewIdSchema,
   PutInterviewPayloadSchema,
   InterviewDataResponseSchema,
+  GetQuestionsResponseSchema,
+  GetQuestionsQuerySchema,
 } = require('../../validator/interview/schema');
-const { GetQuestionsResponseSchema, GetQuestionsQuerySchema } = require('../../validator/questions/schema');
 
 const routes = (handler) => [
   {
