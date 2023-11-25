@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.profile.ProfileActivity">
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FF000000"
+        app:layout_constraintTop_toBottomOf="@id/action_bar" />
+
     <FrameLayout
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
@@ -16,7 +23,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            tools:text="Profile"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:layout_gravity="top|left"
@@ -26,8 +32,8 @@
             android:includeFontPadding="false"
             android:lineHeight="19.36dp"
             android:text="Profile"
-            android:textColor="#FF000000"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            tools:text="Profile" />
 
         <ImageView
             android:layout_width="24dp"
@@ -67,9 +73,6 @@
                 android:layout_marginLeft="176dp"
                 android:layout_marginTop="8dp"
                 android:includeFontPadding="false"
-                android:lineHeight="14.52dp"
-                android:text="Nama Belakang"
-                android:textColor="#FF000000"
                 android:textSize="10dp"
                 tools:text="Nama Belakang" />
 
@@ -79,9 +82,6 @@
                 android:layout_height="21dp"
                 android:layout_marginTop="8dp"
                 android:includeFontPadding="false"
-                android:lineHeight="14.52dp"
-                android:text="Nama Depan"
-                android:textColor="#FF000000"
                 android:textSize="10dp"
                 tools:text="Nama Depan" />
         </FrameLayout>
@@ -92,9 +92,6 @@
             android:layout_gravity="top|left"
             android:gravity="left|center_vertical"
             android:includeFontPadding="false"
-            android:lineHeight="14.52dp"
-            android:text="Nama Lengkap"
-            android:textColor="#FF000000"
             android:textSize="12dp"
             android:textStyle="bold"
             tools:text="Nama Lengkap" />
@@ -128,7 +125,6 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="text"
-                android:textColor="#FF000000"
                 android:textSize="10dp"
                 tools:text="Email" />
         </FrameLayout>
@@ -139,7 +135,6 @@
             android:layout_gravity="top|start"
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
-            android:textColor="#FF000000"
             android:textSize="12dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -184,8 +179,6 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="text"
-                android:text="Silahkan pilih "
-                android:textColor="#FF000000"
                 android:textSize="10dp"
                 tools:text="Silahkan Pilih" />
         </FrameLayout>
@@ -196,7 +189,6 @@
             android:layout_gravity="top|start"
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
-            android:textColor="#FF000000"
             android:textSize="12dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -231,8 +223,6 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="text"
-                android:text="Silahkan pilih "
-                android:textColor="#FF000000"
                 android:textSize="10dp"
                 tools:text="Belum Di Atur" />
         </FrameLayout>
@@ -243,9 +233,6 @@
             android:layout_gravity="top|start"
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
-            android:lineHeight="14.52dp"
-            android:text="Tanggal Lahir"
-            android:textColor="#FF000000"
             android:textSize="12dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -282,7 +269,6 @@
                 android:ems="10"
                 android:inputType="text"
                 android:text="Silahkan pilih "
-                android:textColor="#FF000000"
                 android:textSize="10dp"
                 tools:text="Belum Di Atur" />
         </FrameLayout>
@@ -295,9 +281,8 @@
             android:includeFontPadding="false"
             android:lineHeight="14.52dp"
             android:text="Domisili"
-            android:textStyle="bold"
-            android:textColor="#FF000000"
             android:textSize="12dp"
+            android:textStyle="bold"
             tools:text="Domisili" />
     </FrameLayout>
 
@@ -336,8 +321,6 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="text"
-                android:text="Silahkan pilih "
-                android:textColor="#FF000000"
                 android:textSize="10dp"
                 tools:text="Silahkan pilih" />
 
@@ -349,9 +332,6 @@
             android:layout_gravity="top|left"
             android:gravity="left|center_vertical"
             android:includeFontPadding="false"
-            android:lineHeight="14.52dp"
-            android:text="Bidang Pekerjaan"
-            android:textColor="#FF000000"
             android:textSize="12dp"
             android:textStyle="bold"
             tools:text="Bidang Pekerjaan" />

@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.interviewhistory.InterviewHistoryActivity">
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FF000000"
+        app:layout_constraintTop_toBottomOf="@id/action_bar" />
+
     <FrameLayout
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
@@ -23,7 +30,6 @@
             android:layout_marginTop="15dp"
             android:gravity="left|center_vertical"
             android:includeFontPadding="false"
-            android:textColor="#FF000000"
             android:textSize="20dp"
             tools:text="History" />
 
