@@ -18,13 +18,14 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/Base.Theme.InterviewKu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="16dp"
+
         android:text="@string/register_account"
-        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <EditText
-            android:id="@+id/ed_register_name"
+            android:id="@+id/et_register_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
@@ -64,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nameRegisterEditTextLayout">
 
         <EditText
-            android:id="@+id/ed_register_email"
+            android:id="@+id/et_register_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
@@ -84,7 +85,7 @@
         app:layout_constraintTop_toBottomOf="@+id/emailRegisterEditTextLayout">
 
         <EditText
-            android:id="@+id/ed_register_password"
+            android:id="@+id/et_register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
@@ -92,7 +93,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/btn_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -105,16 +106,16 @@
 
     <TextView
         android:id="@+id/login_text"
+        style="@style/Base.Theme.InterviewKu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/have_account"
-        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerButton" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
 
     <ProgressBar
         android:id="@+id/progressBar"
