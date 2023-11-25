@@ -15,6 +15,9 @@
     <string name="register">REGISTER</string>
     <string name="have_account">Already have an Account? Login Now!</string>
     <string name="user_created">User Created</string>
-    Silahkan masukkan informasi tambahan terkait diri anda
     <string name="Silahkan"> Silahkan masukkan informasi tambahan terkait diri anda</string>
+    <string name="title_home">Home</string>
+    <string name="title_TextToSpeach">TextToSpeach</string>
+    <string name="title_account">Account</string>
+    <string name="title_tips">Tips</string>
 </resources>

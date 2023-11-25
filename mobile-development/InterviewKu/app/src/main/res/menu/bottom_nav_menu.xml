@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_interview"
+        android:icon="@drawable/baseline_spatial_audio_off_24"
+        android:title="@string/title_TextToSpeach" />
+
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/baseline_account_box_24"
+        android:title="@string/title_account" />
+
+</menu>
