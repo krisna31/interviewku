@@ -29,10 +29,6 @@ class MachineLearningService {
       tokenizeUserAnswer = tf.mean(tokenizeUserAnswer);
       tokenizeUserAnswer = tokenizeUserAnswer.arraySync();
 
-      console.log(tokenizeUserAnswer);
-
-      console.log(tokenizeUserAnswer >= 0.5 ? 'BAGUS' : 'KURANG BAGUS');
-
       return tokenizeUserAnswer;
     } catch (err) {
       console.log(err);

@@ -3,7 +3,7 @@
 const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
-const { getFeedback, getDateAfterXMinutes } = require('../../utils');
+const { getFeedback, getDateAfterXMinutes, strukturScoreToFeedback } = require('../../utils');
 
 class InterviewsService {
   constructor() {
@@ -284,7 +284,7 @@ class InterviewsService {
       score: ans.score,
       duration: ans.duration,
       retryAttempt: ans.retry_attempt,
-      strukturScore: ans.struktur_score,
+      strukturFeedback: strukturScoreToFeedback(ans.struktur_score),
       jobFieldName: ans.job_field_name,
       feedback: getFeedback(ans.score, ans.struktur_score, ans.retry_attempt),
     }));

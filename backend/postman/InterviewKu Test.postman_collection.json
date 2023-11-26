@@ -3481,7 +3481,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/questions?mode=latihan&jobFieldId=6",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interview/questions?mode=latihan&jobFieldId=7",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
@@ -3498,7 +3498,7 @@
 								},
 								{
 									"key": "jobFieldId",
-									"value": "6"
+									"value": "7"
 								}
 							]
 						}

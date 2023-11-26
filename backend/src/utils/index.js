@@ -11,6 +11,10 @@ function randomInRange(start, end) {
   return process.env.APP_ENV === 'dev' ? 3 : Math.floor(Math.random() * (end - start + 1) + start);
 }
 
+function strukturScoreToFeedback(strukturScore) {
+  return strukturScore >= 0.5 ? 'Bagus' : 'Kurang Bagus';
+}
+
 function getFeedback(scoreParam, strukturs, repeat) {
   const summary = [
     'Dari jawaban yang kamu berikan kurang bagus',
@@ -93,4 +97,5 @@ module.exports = {
   getFeedback,
   sendCustomResponseByStatusCode,
   getDateAfterXMinutes,
+  strukturScoreToFeedback,
 };

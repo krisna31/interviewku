@@ -55,7 +55,7 @@ const InterviewDataResponseSchema = Joi.object({
       score: Joi.number().max(2147483647).allow(null).required(),
       duration: Joi.number().max(2147483647).allow(null).required(),
       retryAttempt: Joi.number().max(2147483647).allow(null).required(),
-      strukturScore: Joi.number().max(2147483647).allow(null).required(),
+      strukturFeedback: Joi.string().allow(null).required(),
       feedback: Joi.string().required(),
     })),
   }),
