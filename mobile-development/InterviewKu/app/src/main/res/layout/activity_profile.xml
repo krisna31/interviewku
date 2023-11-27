@@ -13,7 +13,7 @@
         android:background="#FF000000"
         app:layout_constraintTop_toBottomOf="@id/action_bar" />
 
-    <FrameLayout
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -22,320 +22,214 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="19dp"
-            android:layout_gravity="top|left"
-            android:layout_marginLeft="54dp"
-            android:layout_marginTop="15dp"
-            android:gravity="left|center_vertical"
-            android:includeFontPadding="false"
-            android:lineHeight="19.36dp"
-            android:text="Profile"
-            android:textSize="18dp"
-            tools:text="Profile" />
-
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="top|left"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="12dp"
             android:scaleType="centerInside"
             android:src="@drawable/baseline_keyboard_backspace_24" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/action_bar">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_gravity="top|left"
-            android:layout_marginTop="19dp"
-            android:clipChildren="false"
-            android:clipToPadding="false">
-
-            <EditText
-                android:id="@+id/editTextLastName"
-                android:layout_width="171dp"
-                android:layout_height="21dp"
-                android:layout_marginLeft="176dp"
-                android:layout_marginTop="8dp"
-                android:includeFontPadding="false"
-                android:textSize="10dp"
-                tools:text="Nama Belakang" />
-
-            <EditText
-                android:id="@+id/editTextFirstName"
-                android:layout_width="151dp"
-                android:layout_height="21dp"
-                android:layout_marginTop="8dp"
-                android:includeFontPadding="false"
-                android:textSize="10dp"
-                tools:text="Nama Depan" />
-        </FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_gravity="top|left"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="20dp"
             android:gravity="left|center_vertical"
             android:includeFontPadding="false"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            tools:text="Nama Lengkap" />
-    </FrameLayout>
+            android:textSize="20dp"
+            tools:text="Profile" />
 
-    <FrameLayout
-        android:id="@+id/Email"
-        android:layout_width="0dp"
-        android:layout_height="51dp"
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/editTextLastName"
+        android:layout_width="171dp"
+        android:layout_height="21dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:includeFontPadding="false"
+        android:textSize="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name">
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:text="Nama Belakang" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_gravity="top|start"
-            android:layout_marginTop="19dp"
-            android:clipToPadding="false"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <EditText
-                android:id="@+id/Et_Email"
-                android:layout_width="348dp"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="text"
-                android:textSize="10dp"
-                tools:text="Email" />
-        </FrameLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_gravity="top|start"
-            android:gravity="start|center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Email" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/Jenis_kelamin_profile"
-        android:layout_width="0dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
+    <EditText
+        android:id="@+id/editTextFirstName"
+        android:layout_width="187dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
+        android:layout_marginEnd="45dp"
+        android:includeFontPadding="false"
+
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Email">
+        app:layout_constraintStart_toEndOf="@+id/editTextLastName"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:text="Nama Depan" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_gravity="top|start"
-            android:layout_marginTop="19dp"
-            android:clipToPadding="false"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="2dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/baseline_keyboard_arrow_down_24" />
-
-
-            <EditText
-                android:id="@+id/Et_jenis_kelamin_profile"
-                android:layout_width="345dp"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="text"
-                android:textSize="10dp"
-                tools:text="Silahkan Pilih" />
-        </FrameLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_gravity="top|start"
-            android:gravity="start|center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Jenis Kelamin" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/tanggal_lahir_profile"
-        android:layout_width="0dp"
-        android:layout_height="51dp"
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_gravity="top|left"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:gravity="left|center_vertical"
+        android:includeFontPadding="false"
+        android:textSize="12dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Jenis_kelamin_profile">
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        tools:text="Nama Lengkap" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_gravity="top|start"
-            android:layout_marginTop="19dp"
-            android:clipToPadding="false"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <EditText
-                android:id="@+id/Et_tanggal_lahir_profile"
-                android:layout_width="347dp"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="text"
-                android:textSize="10dp"
-                tools:text="Belum Di Atur" />
-        </FrameLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_gravity="top|start"
-            android:gravity="start|center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Tanggal Lahir" />
-    </FrameLayout>
-
-
-    <FrameLayout
-        android:id="@+id/domisili_profile"
+    <EditText
+        android:id="@+id/Et_Email"
         android:layout_width="match_parent"
-        android:layout_height="51dp"
+        android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tanggal_lahir_profile">
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:text="Email" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_gravity="top|left"
-            android:layout_marginTop="19dp"
-            android:clipChildren="false"
-            android:clipToPadding="false">
 
-            <EditText
-                android:id="@+id/et_domisili_profile"
-                android:layout_width="346dp"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="text"
-                android:text="Silahkan pilih "
-                android:textSize="10dp"
-                tools:text="Belum Di Atur" />
-        </FrameLayout>
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_marginStart="16dp"
+        android:gravity="start|center_vertical"
+        android:includeFontPadding="false"
+        android:textSize="12dp"
+        android:textStyle="bold"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_gravity="top|left"
-            android:gravity="left|center_vertical"
-            android:includeFontPadding="false"
-            android:lineHeight="14.52dp"
-            android:text="Domisili"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            tools:text="Domisili" />
-    </FrameLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLastName"
+        tools:text="Email" />
 
-    <FrameLayout
-        android:id="@+id/bidang_pekerjaan_profile"
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_gravity="top|start"
+        android:layout_marginStart="16dp"
+        android:gravity="start|center_vertical"
+        android:includeFontPadding="false"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Et_Email"
+        tools:text="Jenis Kelamin" />
+
+    <Spinner
+        android:id="@+id/spinner_gender_profile"
         android:layout_width="match_parent"
-        android:layout_height="51dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        tools:layout_editor_absoluteX="16dp" />
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="start|center_vertical"
+        android:includeFontPadding="false"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_gender_profile"
+        tools:text="Tanggal Lahir" />
+
+    <EditText
+        android:id="@+id/Et_tanggal_lahir_profile"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="10dp"
+
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/domisili_profile">
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:text="Belum Di Atur" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_gravity="top|left"
-            android:layout_marginTop="19dp"
-            android:clipToPadding="false">
+    <EditText
+        android:id="@+id/et_domisili_profile"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Silahkan pilih "
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
 
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="2dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/baseline_keyboard_arrow_down_24" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        tools:text="Belum Di Atur" />
 
-            <EditText
-                android:id="@+id/et_bidang_pekerjaan_profile"
-                android:layout_width="347dp"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="text"
-                android:textSize="10dp"
-                tools:text="Silahkan pilih" />
 
-        </FrameLayout>
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_marginStart="16dp"
+        android:gravity="start|center_vertical"
+        android:includeFontPadding="false"
+        android:lineHeight="14.52dp"
+        android:text="Domisili"
+        android:textSize="12dp"
+        android:textStyle="bold"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_gravity="top|left"
-            android:gravity="left|center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            tools:text="Bidang Pekerjaan" />
-    </FrameLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Et_tanggal_lahir_profile"
+        tools:text="Domisili" />
+
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_gravity="top|left"
+        android:layout_marginStart="16dp"
+        android:gravity="left|center_vertical"
+        android:includeFontPadding="false"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_domisili_profile"
+        tools:text="Bidang Pekerjaan" />
+
+
+    <Spinner
+        android:id="@+id/spinner_job_position_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/bt_profile"
@@ -350,5 +244,15 @@
         app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

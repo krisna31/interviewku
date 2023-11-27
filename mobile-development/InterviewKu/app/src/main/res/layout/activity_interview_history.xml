@@ -13,38 +13,40 @@
         android:background="#FF000000"
         app:layout_constraintTop_toBottomOf="@id/action_bar" />
 
-    <FrameLayout
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:clipToPadding="false"
+        android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="19dp"
-            android:layout_gravity="top|left"
-            android:layout_marginLeft="54dp"
-            android:layout_marginTop="15dp"
-            android:gravity="left|center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="20dp"
-            tools:text="History" />
-
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="top|left"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
             android:scaleType="centerInside"
-            android:src="@drawable/baseline_keyboard_backspace_24" />
-    </FrameLayout>
+            android:src="@drawable/baseline_keyboard_backspace_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:includeFontPadding="false"
+            android:text="History"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_back"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvHistory"
+        android:id="@+id/rv_history"
         android:layout_width="412dp"
         android:layout_height="629dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,5 +55,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/action_bar"
         app:layout_constraintVertical_bias="0.055" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

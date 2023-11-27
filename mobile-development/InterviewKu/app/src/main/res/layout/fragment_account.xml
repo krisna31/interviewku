@@ -12,7 +12,7 @@
         android:background="#FF000000"
         app:layout_constraintTop_toBottomOf="@id/action_bar" />
 
-    <FrameLayout
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/action_bar"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -22,27 +22,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <FrameLayout
+        <ImageView
             android:layout_width="51.79dp"
             android:layout_height="24dp"
             android:layout_gravity="top|start"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:clipChildren="false"
-            android:clipToPadding="false">
+            android:background="@mipmap/ic_launcher"
+            android:scaleType="centerInside" />
 
-            <ImageView
-                android:layout_width="51.79dp"
-                android:layout_height="24dp"
-                android:layout_gravity="top|start"
-                android:background="@mipmap/ic_launcher"
-                android:scaleType="centerInside" />
+    </androidx.appcompat.widget.Toolbar>
 
-        </FrameLayout>
-    </FrameLayout>
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FF000000"
+        app:layout_constraintTop_toBottomOf="@+id/widget"
+        tools:layout_editor_absoluteX="0dp" />
 
-    <FrameLayout
-        android:id="@+id/temporary_layer_399_641_display_name_p_p"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/widget"
         android:layout_width="0dp"
         android:layout_height="114dp"
         android:clipChildren="false"
@@ -52,6 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/action_bar">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_circle_image"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_gravity="start"
@@ -64,155 +65,201 @@
             android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="112dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="0.5dp"
             android:gravity="start|top"
             android:includeFontPadding="false"
-            android:lineHeight="19.36dp"
-            android:text="Nama Lengkap"
             android:textColor="#FF000000"
             android:textSize="16dp"
             tools:text="Nama Lengkap" />
-    </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/profile"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="10dp"
-        android:clipChildren="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temporary_layer_399_641_display_name_p_p">
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/widget">
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#FF000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
         <ImageView
+            android:id="@+id/profile_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="start|top"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:scaleType="centerInside"
-            android:src="@drawable/baseline_account_box_24" />
+            android:src="@drawable/baseline_account_box_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/profile_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="19dp"
-            android:gravity="start|center_vertical"
-            android:includeFontPadding="false"
-            android:lineHeight="19.36dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="Profile"
             android:textColor="#FF000000"
-            android:textSize="16dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/profile_image"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Profile" />
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
-        android:id="@+id/text_to_speech"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="72dp"
-        android:clipChildren="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temporary_layer_399_641_display_name_p_p"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_texttospeach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cl_profile">
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#FF000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="start|top"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:scaleType="centerInside"
-            android:src="@drawable/baseline_spatial_audio_off_24" />
+            android:src="@drawable/baseline_spatial_audio_off_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:layout_gravity="start|top"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="19dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
             android:textColor="#FF000000"
             android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Text to Speech" />
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
-        android:id="@+id/change_password"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="8dp"
-        android:clipChildren="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_to_speech"
-        tools:layout_editor_absoluteX="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_reset_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cl_texttospeach">
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#FF000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:layout_gravity="start|top"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="19dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
-            android:lineHeight="19.36dp"
-            android:text="Ganti Kata Sandi"
             android:textColor="#FF000000"
             android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Ganti Kata Sandi" />
 
         <ImageView
+            android:id="@+id/imageView3"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="start|top"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="320dp"
-            android:layout_marginBottom="16dp"
             android:scaleType="centerInside"
-            android:src="@drawable/baseline_lock_24" />
-    </FrameLayout>
+            android:src="@drawable/baseline_lock_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
-        android:id="@+id/logout"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="124dp"
-        android:clipChildren="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile"
-        tools:ignore="MissingConstraints">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cl_reset_password">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:layout_gravity="start|top"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="19dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
             android:lineHeight="19.36dp"
             android:text="Logout"
             android:textColor="#FF000000"
             android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Logout" />
 
         <ImageView
+            android:id="@+id/imageView4"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical|start"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:scaleType="centerInside"
-            android:src="@drawable/baseline_keyboard_arrow_down_24" />
-    </FrameLayout>
+            android:src="@drawable/baseline_keyboard_arrow_down_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#FF000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
