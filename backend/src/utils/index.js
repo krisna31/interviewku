@@ -16,6 +16,10 @@ function strukturScoreToFeedback(strukturScore) {
 }
 
 function getFeedback(scoreParam, strukturs, repeat) {
+  if (scoreParam === null || strukturs === null || repeat === null) {
+    return '-';
+  }
+
   const summary = [
     'Dari jawaban yang kamu berikan kurang bagus',
     'Dari jawaban yang kamu berikan lumayan bagus',
@@ -63,10 +67,6 @@ function getFeedback(scoreParam, strukturs, repeat) {
         : total < 13 ? 3
           : total < 16 ? 4 : 4;
 
-  if (score === null || strukturs === null || repeat === null) {
-    return 'Tidak ada feedback yang bisa diberikan karena interview tidak selesai';
-  }
-
   // scoring
   feedback.push(summary[total], scoring[score], struktur[struktursScoreIndex], `dan ${repeatArray[xrepeat]}`);
   return `${feedback.join(', ')}.`;
@@ -90,6 +90,10 @@ function getDateAfterXMinutes(date, minutes) {
   return new Date(date.getTime() + minutes * 60000);
 }
 
+function changeToOneUntilFiveRange(number) {
+  return number !== null ? Math.round(number * 5) : null;
+}
+
 module.exports = {
   dateFromDBToRightFormatDate,
   utcToLocalTimeZone,
@@ -98,4 +102,5 @@ module.exports = {
   sendCustomResponseByStatusCode,
   getDateAfterXMinutes,
   strukturScoreToFeedback,
+  changeToOneUntilFiveRange,
 };

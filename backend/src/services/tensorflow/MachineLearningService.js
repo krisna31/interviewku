@@ -9,6 +9,10 @@ class MachineLearningService {
 
   async getScore({ userAnswer }) {
     // TODO get score from machine learning
+    if (userAnswer == null) {
+      return null;
+    }
+
     return 0.5;
   }
 

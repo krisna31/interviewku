@@ -3,7 +3,12 @@
 const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
-const { getFeedback, getDateAfterXMinutes, strukturScoreToFeedback } = require('../../utils');
+const {
+  getFeedback,
+  getDateAfterXMinutes,
+  changeToOneUntilFiveRange,
+  // strukturScoreToFeedback,
+} = require('../../utils');
 
 class InterviewsService {
   constructor() {
@@ -245,7 +250,7 @@ class InterviewsService {
       mode: interviewSession.mode,
       totalQuestions: interviewSession.total_questions,
       completed: interviewSession.completed,
-      score: interviewSession.avg_score,
+      score: changeToOneUntilFiveRange(interviewSession.avg_score),
       // strukturScore: interviewSession.avg_struktur_score,
       // retryAttempt: interviewSession.avg_retry_attempt,
       totalDuration: interviewSession.total_duration,
@@ -281,10 +286,10 @@ class InterviewsService {
       questionOrder: ans.question_order,
       userAnswer: ans.user_answer,
       audioUrl: ans.audio_url,
-      score: ans.score,
+      score: changeToOneUntilFiveRange(ans.score),
       duration: ans.duration,
       retryAttempt: ans.retry_attempt,
-      strukturFeedback: strukturScoreToFeedback(ans.struktur_score),
+      // strukturFeedback: strukturScoreToFeedback(ans.struktur_score),
       jobFieldName: ans.job_field_name,
       feedback: getFeedback(ans.score, ans.struktur_score, ans.retry_attempt),
     }));
