@@ -168,6 +168,20 @@ class InterviewsHandler {
     };
   }
 
+  async getAllInterview(request, h) {
+    const { id: userId } = request.auth.credentials;
+
+    const interviewData = await this._interviewsService.getAllInterviewByUserId({
+      userId,
+    });
+
+    return {
+      success: true,
+      message: 'Sesi Interview ditemukan',
+      data: interviewData,
+    };
+  }
+
   async getQuestionsByInterviewId(request, h) {
     const { interviewId } = request.params;
 

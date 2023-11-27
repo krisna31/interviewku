@@ -3405,14 +3405,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/questions?mode=xxx",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/questions?mode=xxx",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"questions"
 							],
 							"query": [
@@ -3481,14 +3481,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/questions?mode=latihan&jobFieldId=7",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/questions?mode=latihan&jobFieldId=7",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"questions"
 							],
 							"query": [
@@ -3552,14 +3552,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}/questions",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/{{interviewId}}/questions",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"{{interviewId}}",
 								"questions"
 							]
@@ -3653,14 +3653,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}/answers",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/{{interviewId}}/answers",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"{{interviewId}}",
 								"answers"
 							]
@@ -3755,14 +3755,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}/answers",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/{{interviewId}}/answers",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"{{interviewId}}",
 								"answers"
 							]
@@ -3831,14 +3831,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/{{interviewId}}",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"{{interviewId}}"
 							]
 						}
@@ -3932,14 +3932,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}/answers",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/{{interviewId}}/answers",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"{{interviewId}}",
 								"answers"
 							]
@@ -4034,14 +4034,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}/answers",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/{{interviewId}}/answers",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"{{interviewId}}",
 								"answers"
 							]
@@ -4110,14 +4110,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/{{interviewId}}",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"{{interviewId}}"
 							]
 						}
@@ -4211,14 +4211,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}/answers",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/{{interviewId}}/answers",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"{{interviewId}}",
 								"answers"
 							]
@@ -4287,14 +4287,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/{{interviewId}}",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"{{interviewId}}"
 							]
 						}
@@ -4362,14 +4362,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/{{interviewId}}",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"{{interviewId}}"
 							]
 						}
@@ -4422,15 +4422,74 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interview/{{interviewId}}",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/{{interviewId}}",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"interview",
+								"interviews",
 								"{{interviewId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one sesi Interview Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('it should response 200 status code', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									"\r",
+									"pm.test('response body should an object', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
+									"    pm.expect(responseJson.message).to.equal(`Sesi Interview ditemukan`);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenJohn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"interviews"
 							]
 						}
 					},

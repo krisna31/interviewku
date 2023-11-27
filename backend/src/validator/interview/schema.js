@@ -86,6 +86,21 @@ const GetQuestionsQuerySchema = Joi.object({
     .required(),
 }).label('Get Jobs Field Query');
 
+const ListOfInterviewDataResponseSchema = Joi.object({
+  success: Joi.boolean().default(true).required(),
+  message: Joi.string().default('Sesi interview berhasil ditutup').required(),
+  data: Joi.array().items(Joi.object({
+    interviewId: Joi.string().required(),
+    mode: Joi.string().valid('latihan', 'interview').required(),
+    totalQuestions: Joi.number().max(2147483647).required(),
+    completed: Joi.boolean().required(),
+    score: Joi.number().min(1).max(5).allow(null)
+      .required(),
+    totalDuration: Joi.number().max(2147483647).allow(null).required(),
+    feedback: Joi.string().required(),
+  })),
+}).label('List Of Interview History Response');
+
 module.exports = {
   PostAnswerParamsSchema,
   PostAnswerResponseSchema,
@@ -94,4 +109,5 @@ module.exports = {
   InterviewDataResponseSchema,
   GetQuestionsQuerySchema,
   GetQuestionsResponseSchema,
+  ListOfInterviewDataResponseSchema,
 };

@@ -8,12 +8,29 @@ const {
   InterviewDataResponseSchema,
   GetQuestionsResponseSchema,
   GetQuestionsQuerySchema,
+  ListOfInterviewDataResponseSchema,
 } = require('../../validator/interview/schema');
 
 const routes = (handler) => [
   {
     method: 'GET',
-    path: '/interview/questions',
+    path: '/interviews',
+    options: {
+      handler: (request, h) => handler.getAllInterview(request, h),
+      auth: 'interviewku_jwt',
+      validate: {
+        headers: WithTokenRequestSchema,
+        failAction: (request, h, error) => {
+          throw new InvariantError(error.message);
+        },
+      },
+      tags: ['api'],
+      response: { schema: ListOfInterviewDataResponseSchema },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/interviews/questions',
     options: {
       handler: (request, h) => handler.getQuestions(request, h),
       auth: 'interviewku_jwt',
@@ -30,7 +47,7 @@ const routes = (handler) => [
   },
   {
     method: 'GET',
-    path: '/interview/{interviewId}/questions',
+    path: '/interviews/{interviewId}/questions',
     options: {
       handler: (request, h) => handler.getQuestionsByInterviewId(request, h),
       auth: 'interviewku_jwt',
@@ -47,7 +64,7 @@ const routes = (handler) => [
   },
   {
     method: 'GET',
-    path: '/interview/{interviewId}',
+    path: '/interviews/{interviewId}',
     options: {
       handler: (request, h) => handler.getInterview(request, h),
       auth: 'interviewku_jwt',
@@ -64,7 +81,7 @@ const routes = (handler) => [
   },
   {
     method: 'POST',
-    path: '/interview/{interviewId}/answers',
+    path: '/interviews/{interviewId}/answers',
     options: {
       handler: (request, h) => handler.postAnswerByInterviewId(request, h),
       auth: 'interviewku_jwt',
@@ -88,7 +105,7 @@ const routes = (handler) => [
   },
   {
     method: 'PUT',
-    path: '/interview/{interviewId}',
+    path: '/interviews/{interviewId}',
     options: {
       handler: (request, h) => handler.closeInterviewSession(request, h),
       auth: 'interviewku_jwt',

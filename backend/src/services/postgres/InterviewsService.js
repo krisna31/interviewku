@@ -346,6 +346,48 @@ class InterviewsService {
       throw new InvariantError('Sesi Interview Masih Berlangsung');
     }
   }
+
+  async getAllInterviewByUserId({ userId }) {
+    const query = {
+      text: `
+        SELECT
+          th.id,
+          th.mode,
+          th.total_questions,
+          th.completed,
+          AVG(qah.score) AS avg_score,
+          AVG(qah.struktur_score) AS avg_struktur_score,
+          AVG(qah.retry_attempt) AS avg_retry_attempt,
+          SUM(qah.duration) AS total_duration,
+          th.created_at,
+          th.updated_at
+        FROM test_histories th
+        INNER JOIN question_answer_histories qah
+          ON th.id = qah.test_history_id
+        WHERE th.user_id = $1
+        GROUP BY th.id
+      `,
+      values: [userId],
+    };
+
+    const result = await this._pool.query(query);
+
+    return result.rows.map((interview) => ({
+      interviewId: interview.id,
+      mode: interview.mode,
+      totalQuestions: interview.total_questions,
+      completed: interview.completed,
+      score: changeToOneUntilFiveRange(interview.avg_score),
+      // strukturScore: interview.avg_struktur_score,
+      // retryAttempt: interview.avg_retry_attempt,
+      totalDuration: interview.total_duration,
+      feedback: getFeedback(
+        interview.avg_score,
+        interview.avg_struktur_score,
+        interview.avg_retry_attempt,
+      ),
+    }));
+  }
 }
 
 module.exports = InterviewsService;
