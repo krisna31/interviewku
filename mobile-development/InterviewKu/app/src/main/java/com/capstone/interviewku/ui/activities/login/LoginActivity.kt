@@ -2,19 +2,15 @@ package com.capstone.interviewku.ui.activities.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
-import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityLoginBinding
 import com.capstone.interviewku.ui.activities.main.MainActivity
 import com.capstone.interviewku.ui.activities.register.RegisterActivity
 import com.capstone.interviewku.util.Extensions.handleHttpException
 import com.capstone.interviewku.util.Result
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -33,28 +29,8 @@ class LoginActivity : AppCompatActivity() {
                 is Result.Success -> {
                     binding.progressBar.isVisible = false
 
-                    it.data.getData()?.let { loginResponse ->
-                        loginResponse.data?.let { loginData ->
-                            lifecycleScope.launch {
-                                viewModel.saveLoginData(loginData)
-
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    loginResponse.message,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-
-                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                                finish()
-                            }
-                        } ?: run {
-                            Toast.makeText(
-                                this,
-                                getString(R.string.unexpected_error),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    finish()
                 }
 
                 is Result.Loading -> {
@@ -72,10 +48,6 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.etLoginEmail.text.toString()
             val password = binding.etLoginPassword.text.toString()
             viewModel.login(email, password)
-        }
-
-        binding.registerText.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 }

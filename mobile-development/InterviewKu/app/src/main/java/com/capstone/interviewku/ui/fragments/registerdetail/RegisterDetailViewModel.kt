@@ -27,6 +27,8 @@ class RegisterDetailViewModel @Inject constructor(
     val jobPositionState: LiveData<Result<JobPositionsResponse>>
         get() = _jobPositionState
 
+    var birthDate: String? = null
+
     fun addUserIdentity(
         jobPositionId: Int,
         gender: String,

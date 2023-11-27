@@ -9,74 +9,41 @@
         android:id="@+id/Register_screen"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:fallbackLineSpacing="false"
         android:gravity="left|top"
         android:includeFontPadding="false"
         android:lineHeight="19.36dp"
         android:lineSpacingExtra="0.61dp"
-        android:textColor="#FF000000"
+        android:text="@string/Silahkan"
         android:textSize="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/Silahkan" />
-
-    <FrameLayout
-        android:id="@+id/jenis_kelamin"
-        android:layout_width="0dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Register_screen">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_gravity="top|start"
-            android:layout_marginTop="19dp"
-            android:clipToPadding="false"
-            app:layout_constraintStart_toStartOf="parent">
+    <TextView
+        android:id="@+id/tv_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_gravity="top|start"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start|center_vertical"
+        android:includeFontPadding="false"
+        android:lineHeight="14.52dp"
+        android:text="Jenis Kelamin"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Register_screen"
+        tools:text="Jenis Kelamin" />
 
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="2dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/baseline_keyboard_arrow_down_24" />
-
-            <EditText
-                android:id="@+id/editTextJenisKelamin"
-                android:layout_width="350dp"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="text"
-                android:text="Silahkan pilih "
-                android:textColor="#FF000000"
-                android:textSize="10dp"
-                tools:text="Silahkan pilih" />
-        </FrameLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_gravity="top|start"
-            android:gravity="start|center_vertical"
-            android:includeFontPadding="false"
-            android:lineHeight="14.52dp"
-            android:text="Jenis Kelamin"
-            android:textColor="#FF000000"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Jenis Kelamin" />
-    </FrameLayout>
+    <Spinner
+        android:id="@+id/spinner_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_gender" />
 
     <FrameLayout
         android:id="@+id/tanggal_lahir"
@@ -89,7 +56,7 @@
         android:clipToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jenis_kelamin">
+        app:layout_constraintTop_toBottomOf="@id/spinner_gender">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -99,16 +66,22 @@
             android:clipToPadding="false"
             app:layout_constraintStart_toStartOf="parent">
 
-            <EditText
-                android:id="@+id/editTextTanggalLahir"
+            <TextView
+                android:id="@+id/tv_birthdate"
                 android:layout_width="348dp"
                 android:layout_height="match_parent"
                 android:ems="10"
-                android:inputType="text"
-                android:text="Silahkan pilih "
-                android:textColor="#FF000000"
-                android:textSize="10dp"
-                tools:text="Belum Di Atur" />
+                android:gravity="center_vertical"
+                android:inputType="none"
+                android:text="Silahkan pilih" />
+
+            <ImageView
+                android:id="@+id/iv_birthdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:src="@drawable/baseline_calendar_month_24"
+                app:tint="?android:textColor" />
         </FrameLayout>
 
         <TextView
@@ -119,7 +92,6 @@
             android:includeFontPadding="false"
             android:lineHeight="14.52dp"
             android:text="Tanggal Lahir"
-            android:textColor="#FF000000"
             android:textSize="12dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -153,9 +125,8 @@
                 android:layout_width="348dp"
                 android:layout_height="match_parent"
                 android:ems="10"
+                android:hint="Silahkan pilih"
                 android:inputType="text"
-                android:text="Silahkan pilih "
-                android:textColor="#FF000000"
                 android:textSize="10dp"
                 tools:text="Belum Di Atur" />
         </FrameLayout>
@@ -168,70 +139,37 @@
             android:includeFontPadding="false"
             android:lineHeight="14.52dp"
             android:text="Domisili"
-            android:textColor="#FF000000"
             android:textSize="12dp"
             android:textStyle="bold"
             tools:text="Domisili" />
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/bidang_pekerjaan"
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
+    <TextView
+        android:id="@+id/tv_job_position"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_gravity="top|left"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:gravity="left|center_vertical"
+        android:includeFontPadding="false"
+        android:lineHeight="14.52dp"
+        android:text="Bidang Pekerjaan"
+        android:textSize="12dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/domisili">
+        app:layout_constraintTop_toBottomOf="@id/domisili"
+        tools:text="Bidang Pekerjaan" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_gravity="top|left"
-            android:layout_marginTop="19dp"
-            android:clipToPadding="false">
-
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="2dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/baseline_keyboard_arrow_down_24" />
-
-            <EditText
-                android:id="@+id/editTextBidangPekerjaan"
-                android:layout_width="348dp"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="text"
-                android:text="Silahkan pilih "
-                android:textColor="#FF000000"
-                android:textSize="10dp"
-                tools:text="Silahkan pilih" />
-
-        </FrameLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_gravity="top|left"
-            android:gravity="left|center_vertical"
-            android:includeFontPadding="false"
-            android:lineHeight="14.52dp"
-            android:text="Bidang Pekerjaan"
-            android:textColor="#FF000000"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            tools:text="Bidang Pekerjaan" />
-    </FrameLayout>
+    <Spinner
+        android:id="@+id/spinner_job_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_job_position" />
 
     <Button
-        android:id="@+id/bt_register_screen"
+        android:id="@+id/btn_register_screen"
         android:layout_width="241dp"
         android:layout_height="43dp"
         android:layout_marginStart="16dp"
@@ -242,5 +180,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

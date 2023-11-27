@@ -17,7 +17,8 @@
     <string name="user_created">User Created</string>
     <string name="Silahkan"> Silahkan masukkan informasi tambahan terkait diri anda</string>
     <string name="title_home">Home</string>
-    <string name="title_TextToSpeach">TextToSpeach</string>
-    <string name="title_account">Account</string>
+    <string name="title_interview">Interview</string>
     <string name="title_tips">Tips</string>
+    <string name="title_account">Account</string>
+    <string name="history">History</string>
 </resources>

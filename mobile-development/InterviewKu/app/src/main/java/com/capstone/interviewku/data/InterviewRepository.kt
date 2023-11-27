@@ -43,20 +43,20 @@ class InterviewRepository @Inject constructor(
         }
 
     suspend fun sendInterviewAnswer(
+        token: String,
         audio: File,
-        jobFieldName: String,
         jobPositionName: String,
         retryAttempt: Int,
         question: String,
         questionOrder: Int,
     ) = APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
         apiService.sendInterviewAnswer(
+            token = token.toRequestBody("text/plain".toMediaType()),
             audio = MultipartBody.Part.createFormData(
                 "audio",
                 audio.name,
                 audio.asRequestBody("audio/*".toMediaType())
             ),
-            jobFieldName = jobFieldName.toRequestBody("text/plain".toMediaType()),
             jobPositionName = jobPositionName.toRequestBody("text/plain".toMediaType()),
             retryAttempt = retryAttempt.toString().toRequestBody("text/plain".toMediaType()),
             question = question.toRequestBody("text/plain".toMediaType()),
@@ -64,12 +64,13 @@ class InterviewRepository @Inject constructor(
         )
     }
 
-    suspend fun endInterviewSession(interviewId: String) =
+    suspend fun endInterviewSession(interviewId: String, token: String) =
         APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
             apiService.endInterviewSession(
                 appPreferences.getBearerToken().first(),
                 interviewId,
-                true
+                true,
+                token
             )
         }
 

@@ -1,7 +1,5 @@
 package com.capstone.interviewku.data
 
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.map
 import com.capstone.interviewku.data.network.APIUtil
 import com.capstone.interviewku.data.network.response.LoginData
 import com.capstone.interviewku.data.network.service.InterviewKuAPIService
@@ -28,9 +26,7 @@ class AuthRepository @Inject constructor(
             )
         }
 
-    fun isLoggedIn() = appPreferences.getAccessToken().asLiveData().map {
-        it != null
-    }
+    suspend fun isLoggedIn() = appPreferences.getAccessToken().first() != null
 
     suspend fun login(email: String, password: String) = apiService.login(email, password)
 

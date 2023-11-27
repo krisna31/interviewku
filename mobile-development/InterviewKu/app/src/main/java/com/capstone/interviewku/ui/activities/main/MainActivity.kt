@@ -2,6 +2,9 @@ package com.capstone.interviewku.ui.activities.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,5 +17,16 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//        setSupportActionBar(binding.toolbar)
+//        supportActionBar?.apply {
+//            setDisplayUseLogoEnabled(true)
+//            setDisplayShowTitleEnabled(false)
+//            setLogo(R.mipmap.ic_launcher_round)
+//        }
+
+        binding.bottomNavMain.setupWithNavController(
+            findNavController(R.id.fragment_main)
+        )
     }
 }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.login.LoginActivity">
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="345dp"
@@ -17,13 +18,13 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/Base.Theme.InterviewKu"
         android:layout_width="215dp"
         android:layout_height="34dp"
         android:layout_marginTop="16dp"
         android:text="@string/login_text"
         android:textSize="20sp"
         android:textStyle="bold"
-        style="@style/Base.Theme.InterviewKu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
@@ -35,11 +36,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:hint="Email Address"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:hint="Email Address" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/et_login_password"
@@ -48,11 +49,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_login_email"
-        android:hint="Password" />
+        app:layout_constraintTop_toBottomOf="@+id/et_login_email" />
 
     <Button
         android:id="@+id/btn_login"
@@ -65,19 +66,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
-
-    <TextView
-        android:id="@+id/register_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/register_text"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        style="@style/Base.Theme.InterviewKu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <ProgressBar
         android:id="@+id/progressBar"

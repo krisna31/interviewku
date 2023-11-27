@@ -25,13 +25,17 @@ class LoginViewModel @Inject constructor(
         _loginState.value = Result.Loading
 
         try {
-            _loginState.value = Result.Success(SingleEvent(authRepository.login(email, password)))
+            val response = authRepository.login(email, password)
+
+            response.data?.let {
+                authRepository.saveLoginData(it)
+            } ?: run {
+                throw Exception()
+            }
+
+            _loginState.value = Result.Success(SingleEvent(response))
         } catch (e: Exception) {
             _loginState.value = Result.Error(SingleEvent(e))
         }
-    }
-
-    suspend fun saveLoginData(loginData: LoginData) {
-        authRepository.saveLoginData(loginData)
     }
 }

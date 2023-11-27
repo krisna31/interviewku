@@ -72,8 +72,8 @@ interface InterviewKuAPIService {
     @POST("/interview/{interviewId}/answers")
     @Multipart
     suspend fun sendInterviewAnswer(
+        @Part("token") token: RequestBody,
         @Part audio: MultipartBody.Part,
-        @Part("jobFieldName") jobFieldName: RequestBody,
         @Part("jobPositionName") jobPositionName: RequestBody,
         @Part("retryAttempt") retryAttempt: RequestBody,
         @Part("question") question: RequestBody,
@@ -86,6 +86,7 @@ interface InterviewKuAPIService {
         @Header("Authorization") bearerToken: String,
         @Path("interviewId") interviewId: String,
         @Field("completed") isCompleted: Boolean,
+        @Field("token") token: String
     ): InterviewResultResponse
 
     @GET("/interview/{interviewId}")

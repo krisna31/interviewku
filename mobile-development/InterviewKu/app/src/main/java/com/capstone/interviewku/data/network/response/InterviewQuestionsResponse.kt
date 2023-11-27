@@ -21,6 +21,9 @@ data class InterviewQuestionsData(
     @field:SerializedName("interviewId")
     val interviewId: String,
 
+    @field:SerializedName("token")
+    val token: String,
+
     @field:SerializedName("questions")
     val questions: List<InterviewQuestion>
 ) : Parcelable

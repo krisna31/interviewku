@@ -14,8 +14,14 @@
     <fragment
         android:id="@+id/navigation_interview"
         android:name="com.capstone.interviewku.ui.fragments.interview.InterviewFragment"
-        android:label="@string/title_TextToSpeach"
+        android:label="@string/title_interview"
         tools:layout="@layout/fragment_interview" />
+
+    <fragment
+        android:id="@+id/navigation_tips"
+        android:name="com.capstone.interviewku.ui.fragments.tips.TipsFragment"
+        android:label="@string/title_tips"
+        tools:layout="@layout/fragment_tips" />
 
     <fragment
         android:id="@+id/navigation_account"
