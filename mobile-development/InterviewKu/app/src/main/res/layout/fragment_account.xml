@@ -9,7 +9,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#FF000000"
+       android:background="@color/black"
         app:layout_constraintTop_toBottomOf="@id/action_bar" />
 
     <androidx.appcompat.widget.Toolbar
@@ -37,7 +37,7 @@
         android:id="@+id/divider1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#FF000000"
+        android:background="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/widget"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -69,7 +69,7 @@
             android:layout_marginTop="0.5dp"
             android:gravity="start|top"
             android:includeFontPadding="false"
-            android:textColor="#FF000000"
+            style="@style/Base.Theme.InterviewKu"
             android:textSize="16dp"
             tools:text="Nama Lengkap" />
 
@@ -87,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="#FF000000"
+            android:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_image" />
@@ -110,7 +110,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="Profile"
-            android:textColor="#FF000000"
+            style="@style/Base.Theme.InterviewKu"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/profile_image"
             app:layout_constraintTop_toTopOf="parent"
@@ -128,7 +128,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="#FF000000"
+            android:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -154,7 +154,7 @@
             android:layout_marginTop="16dp"
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
-            android:textColor="#FF000000"
+            style="@style/Base.Theme.InterviewKu"
             android:textSize="16dp"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent"
@@ -173,7 +173,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="#FF000000"
+            android:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -186,7 +186,7 @@
             android:layout_marginTop="16dp"
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
-            android:textColor="#FF000000"
+            style="@style/Base.Theme.InterviewKu"
             android:textSize="16dp"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toTopOf="parent"
@@ -222,7 +222,7 @@
             android:includeFontPadding="false"
             android:lineHeight="19.36dp"
             android:text="Logout"
-            android:textColor="#FF000000"
+            style="@style/Base.Theme.InterviewKu"
             android:textSize="16dp"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="parent"
@@ -245,7 +245,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="#FF000000"
+            android:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />

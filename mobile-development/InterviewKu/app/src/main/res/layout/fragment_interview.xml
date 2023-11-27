@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        android:background="#FF000000"
+        android:background="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -35,8 +35,9 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:includeFontPadding="false"
-        android:textColor="#FF000000"
+        style="@style/Base.Theme.InterviewKu"
         android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Interview Session" />
@@ -81,7 +82,7 @@
             android:includeFontPadding="false"
             android:lineHeight="19.36dp"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna eros, mattis eu eros ut, ultrices vulputate nisl."
-            android:textColor="#FF000000"
+            style="@style/Base.Theme.InterviewKu"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +129,7 @@
             android:includeFontPadding="false"
             android:lineHeight="19.36dp"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna eros, mattis eu eros ut, ultrices vulputate nisl."
-            android:textColor="#FF000000"
+            style="@style/Base.Theme.InterviewKu"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -6,4 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.interviewtest.InterviewTestActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="16dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_keyboard_backspace_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="Uji Kemampuan"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FF000000"
+        app:layout_constraintTop_toBottomOf="@id/action_bar" />
+
+
+    <ImageButton
+        android:id="@+id/ibtn_test"
+        android:layout_width="54dp"
+        android:layout_height="49dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        tools:layout_editor_absoluteX="178dp"
+        tools:layout_editor_absoluteY="602dp"
+        tools:ignore="MissingConstraints" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cv_interview_test"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="534dp"
+        android:layout_marginBottom="1dp"
+        android:src="@drawable/baseline_check_24"
+        app:civ_border_width="2dp"
+        app:civ_circle_background="true"
+        app:layout_constraintBottom_toTopOf="@+id/ibtn_test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cv_refresh"
+        android:layout_width="46dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="548dp"
+        android:src="@drawable/baseline_refresh_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.443"
+        app:layout_constraintStart_toEndOf="@+id/ibtn_test"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+
+        android:id="@+id/textView11"
+        android:layout_width="293dp"
+        android:layout_height="63dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:lineHeight="24.2dp"
+        android:text="@string/test"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
