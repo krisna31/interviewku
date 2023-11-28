@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 function dateFromDBToRightFormatDate(date) {
-  return date === null ? null : `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  return date === null ? null : `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${(date.getDate()).toString().padStart(2, '0')}`;
 }
 
 // function utcToLocalTimeZone(utcTime) {
