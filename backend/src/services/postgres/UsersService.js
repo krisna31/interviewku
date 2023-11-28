@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
 const AuthenticationError = require('../../exceptions/AuthenticationError');
-const { dateFromDBToRightFormatDate, utcToLocalTimeZone, getDateAfterXMinutes } = require('../../utils');
+const { dateFromDBToRightFormatDate, getDateAfterXMinutes } = require('../../utils');
 
 class UsersService {
   constructor() {
@@ -96,9 +96,6 @@ class UsersService {
       throw new NotFoundError('User tidak ditemukan');
     }
 
-    result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
-    result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
-
     return result.rows[0];
   }
 
@@ -145,9 +142,10 @@ class UsersService {
   async editUserPassword(id, password) {
     const hashedPassword = await bcrypt.hash(password, 10);
     const query = {
-      text: 'UPDATE users SET password = $1 WHERE id = $2',
-      values: [hashedPassword, id],
+      text: 'UPDATE users SET password = $1, updated_at = $3 WHERE id = $2',
+      values: [hashedPassword, id, new Date()],
     };
+
     const result = await this._pool.query(query);
     if (!result.rowCount) {
       throw new NotFoundError('Gagal memperbarui password. Id tidak ditemukan');
@@ -174,9 +172,6 @@ class UsersService {
     if (!result.rows.length) {
       throw new NotFoundError('User gagal diperbarui. Id tidak ditemukan');
     }
-
-    result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
-    result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
 
     return result.rows[0];
   }
@@ -216,9 +211,6 @@ class UsersService {
 
     result.rows[0].date_birth = dateFromDBToRightFormatDate(result.rows[0].date_birth);
 
-    result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
-    result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
-
     return result.rows[0];
   }
 
@@ -241,9 +233,6 @@ class UsersService {
     }
 
     result.rows[0].date_birth = dateFromDBToRightFormatDate(result.rows[0].date_birth);
-
-    result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
-    result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
 
     return result.rows[0];
   }
@@ -303,9 +292,6 @@ class UsersService {
 
     result.rows[0].date_birth = dateFromDBToRightFormatDate(result.rows[0].date_birth);
 
-    result.rows[0].created_at = utcToLocalTimeZone(result.rows[0].created_at);
-    result.rows[0].updated_at = utcToLocalTimeZone(result.rows[0].updated_at);
-
     return result.rows[0];
   }
 
@@ -325,8 +311,8 @@ class UsersService {
   async editUserPasswordByEmail(email, password) {
     const hashedPassword = await bcrypt.hash(password, 10);
     const query = {
-      text: 'UPDATE users SET password = $1 WHERE email = $2',
-      values: [hashedPassword, email],
+      text: 'UPDATE users SET password = $1, updated_at = $3 WHERE email = $2',
+      values: [hashedPassword, email, new Date()],
     };
 
     const result = await this._pool.query(query);
