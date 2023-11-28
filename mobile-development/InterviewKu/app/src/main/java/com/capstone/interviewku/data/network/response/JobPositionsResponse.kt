@@ -31,5 +31,5 @@ data class JobPosition(
     val name: String,
 
     @field:SerializedName("description")
-    val description: String,
+    val description: String?,
 ) : Parcelable

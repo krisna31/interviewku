@@ -18,6 +18,13 @@ class InterviewRepository @Inject constructor(
     private val apiService: InterviewKuAPIService,
     private val appPreferences: AppPreferences
 ) {
+    suspend fun getAllInterviews() =
+        APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
+            apiService.getAllInterviews(
+                appPreferences.getBearerToken().first()
+            )
+        }
+
     suspend fun startInterviewTrainSession() =
         APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
             apiService.startInterviewSession(

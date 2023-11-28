@@ -2,6 +2,7 @@ package com.capstone.interviewku.data.network.service
 
 import com.capstone.interviewku.data.network.response.BaseResponse
 import com.capstone.interviewku.data.network.response.InterviewAnswerSubmitResponse
+import com.capstone.interviewku.data.network.response.InterviewHistoryResponse
 import com.capstone.interviewku.data.network.response.InterviewQuestionsResponse
 import com.capstone.interviewku.data.network.response.InterviewResultResponse
 import com.capstone.interviewku.data.network.response.JobFieldsResponse
@@ -57,19 +58,24 @@ interface InterviewKuAPIService {
     ): BaseResponse
 
     // interview
-    @GET("/interview/questions")
+    @GET("/interviews")
+    suspend fun getAllInterviews(
+        @Header("Authorization") bearerToken: String,
+    ): InterviewHistoryResponse
+
+    @GET("/interviews/questions")
     suspend fun startInterviewSession(
         @Header("Authorization") bearerToken: String,
         @Query("mode") mode: String
     ): InterviewQuestionsResponse
 
-    @GET("/interview/{interviewId}/questions")
+    @GET("/interviews/{interviewId}/questions")
     suspend fun getCurrentInterviewQuestions(
         @Header("Authorization") bearerToken: String,
         @Path("interviewId") interviewId: String,
     ): InterviewQuestionsResponse
 
-    @POST("/interview/{interviewId}/answers")
+    @POST("/interviews/{interviewId}/answers")
     @Multipart
     suspend fun sendInterviewAnswer(
         @Part("token") token: RequestBody,
@@ -80,7 +86,7 @@ interface InterviewKuAPIService {
         @Part("questionOrder") questionOrder: RequestBody,
     ): InterviewAnswerSubmitResponse
 
-    @PUT("/interview/{interviewId}")
+    @PUT("/interviews/{interviewId}")
     @FormUrlEncoded
     suspend fun endInterviewSession(
         @Header("Authorization") bearerToken: String,
@@ -89,7 +95,7 @@ interface InterviewKuAPIService {
         @Field("token") token: String
     ): InterviewResultResponse
 
-    @GET("/interview/{interviewId}")
+    @GET("/interviews/{interviewId}")
     suspend fun getInterviewResult(
         @Header("Authorization") bearerToken: String,
         @Path("interviewId") interviewId: String,

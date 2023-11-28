@@ -13,13 +13,7 @@ data class UserDetailResponse(
     val message: String,
 
     @SerializedName("data")
-    val data: UserDetailData?,
-) : Parcelable
-
-@Parcelize
-data class UserDetailData(
-    @SerializedName("user")
-    val user: User
+    val data: User?,
 ) : Parcelable
 
 @Parcelize
@@ -27,13 +21,19 @@ data class User(
     @SerializedName("id")
     val id: String,
 
+    @SerializedName("firstName")
+    val firstname: String,
+
+    @SerializedName("lastName")
+    val lastname: String?,
+
     @SerializedName("email")
     val email: String,
 
-    @SerializedName("firstname")
-    val firstname: String,
+    @SerializedName("createdAt")
+    val createdAt: String,
 
-    @SerializedName("lastname")
-    val lastname: String?,
+    @SerializedName("updatedAt")
+    val updatedAt: String?,
 ) : Parcelable
 
