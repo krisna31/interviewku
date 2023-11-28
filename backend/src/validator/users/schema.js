@@ -63,6 +63,8 @@ const UserIdentityResponseSchema = Joi.object({
     userId: Joi.string().default('user-xxx'),
     firstName: Joi.string().default('first name'),
     lastName: Joi.string().default('last name').allow(null),
+    jobFieldId: Joi.number().max(2147483647).default(1).integer(),
+    jobFieldName: Joi.string().default('IT'),
     jobPositionId: Joi.number().max(2147483647).default(1).integer(),
     jobPositionName: Joi.string().default('Frontend'),
     gender: Joi.string().length(1).valid('p', 'l', 'P', 'L').default('L'),

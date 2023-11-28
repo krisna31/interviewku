@@ -137,6 +137,8 @@ class UserHandler {
       message: 'Identitas User Ditemukan',
       data: {
         userId: userIdentity.user_id,
+        jobFieldId: userIdentity.job_field_id,
+        jobFieldName: userIdentity.job_field_name,
         jobPositionId: userIdentity.job_position_id,
         jobPositionName: userIdentity.job_position_name,
         gender: userIdentity.gender,

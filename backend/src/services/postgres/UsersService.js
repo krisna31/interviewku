@@ -217,8 +217,10 @@ class UsersService {
   async getUserIdentity(userId) {
     const query = {
       text: `
-        SELECT *, name AS job_position_name FROM user_identities AS ui
+        SELECT *, jp.name AS job_position_name, jf.name AS job_field_name 
+        FROM user_identities AS ui
         INNER JOIN job_positions AS jp ON ui.job_position_id = jp.id
+        INNER JOIN job_fields AS jf ON jp.job_field_id = jf.id
         WHERE ui.user_id = $1;
       `,
       values: [userId],
