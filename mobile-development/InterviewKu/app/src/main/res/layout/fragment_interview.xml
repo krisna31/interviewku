@@ -22,12 +22,13 @@
         android:layout_marginStart="200dp"
         android:layout_marginTop="16dp"
         android:scaleType="centerInside"
-        android:src="@drawable/outline_alarm_on_24"
+        android:src="@drawable/baseline_history_24"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
+        style="@style/Base.Theme.InterviewKu"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_gravity="top|left"
@@ -35,7 +36,6 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:includeFontPadding="false"
-        style="@style/Base.Theme.InterviewKu"
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,6 +75,7 @@
 
         <TextView
             android:id="@+id/textViewDescription"
+            style="@style/Base.Theme.InterviewKu"
             android:layout_width="0dp"
             android:layout_height="76dp"
             android:layout_marginTop="3dp"
@@ -82,7 +83,6 @@
             android:includeFontPadding="false"
             android:lineHeight="19.36dp"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna eros, mattis eu eros ut, ultrices vulputate nisl."
-            style="@style/Base.Theme.InterviewKu"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -122,6 +122,7 @@
 
         <TextView
             android:id="@+id/tv_test"
+            style="@style/Base.Theme.InterviewKu"
             android:layout_width="0dp"
             android:layout_height="76dp"
             android:layout_marginTop="3dp"
@@ -129,7 +130,6 @@
             android:includeFontPadding="false"
             android:lineHeight="19.36dp"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna eros, mattis eu eros ut, ultrices vulputate nisl."
-            style="@style/Base.Theme.InterviewKu"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
