@@ -28,7 +28,7 @@
             android:layout_marginStart="8dp"
             android:gravity="center_vertical"
             android:includeFontPadding="false"
-            android:text="Uji Kemampuan"
+            android:text="@string/test_interview"
             android:textStyle="bold"
             android:textSize="16sp" />
 

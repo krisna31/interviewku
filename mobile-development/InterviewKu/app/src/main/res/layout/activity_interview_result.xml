@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:includeFontPadding="false"
-            android:text="Hasil Inteview"
+            android:text="@string/hasil"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
-        android:id="@+id/tv_"
+        android:id="@+id/tv_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SEMPURNA!!!"
@@ -77,11 +77,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
-        android:text="Informasi Interview"
+        android:text="@string/informasi"
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_rating" />
 
     <TextView
         android:id="@+id/tv_train"
@@ -219,7 +219,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Detail Penilaian"
+        android:text="@string/penilaian"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

@@ -38,11 +38,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:includeFontPadding="false"
-            android:text="History"
+            android:text="@string/history_interview"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_back"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
