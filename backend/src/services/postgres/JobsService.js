@@ -21,7 +21,7 @@ class JobsService {
 
   async getJobFields() {
     const query = {
-      text: 'SELECT * FROM job_fields',
+      text: 'SELECT * FROM job_fields WHERE id > 5',
     };
 
     const result = await this._pool.query(query);

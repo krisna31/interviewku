@@ -368,89 +368,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Add User with Already Taken Email",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"const port = pm.environment.get('port');\r",
-									"\r",
-									"const requestParams = {\r",
-									"  url: `http://localhost:${port}/users`,\r",
-									"  method: 'POST',\r",
-									"  header: {\r",
-									"    'Content-Type': 'application/json',\r",
-									"  },\r",
-									"  body: {\r",
-									"    mode: 'raw',\r",
-									"    raw: JSON.stringify({ username: 'dicoding', password: 'secret', fullname: 'Dicoding Indonesia' })\r",
-									"  }\r",
-									"};\r",
-									"pm.sendRequest(requestParams, (_, error) => {\r",
-									"    if (error) {\r",
-									"        console.error(error);\r",
-									"    }\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('it should response 400 status code', () => {\r",
-									"    pm.expect(pm.response).to.have.status(400);\r",
-									"});\r",
-									"\r",
-									"pm.test('response Content-Type header should have application/json value', () => {\r",
-									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
-									"}); \r",
-									"\r",
-									"pm.test('response body should an object', () => {\r",
-									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson).to.be.an('object');\r",
-									"});\r",
-									"\r",
-									"pm.test('response body have correct property and value', () => {\r",
-									"    const responseJson = pm.response.json();\r",
-									"\r",
-									"    pm.expect(responseJson.success).to.equal(false);\r",
-									"    pm.expect(responseJson.message).to.be.a('string');\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"interviewku_{{$timestamp}}\",\r\n    \"lastName\": \"lastName\",\r\n    \"email\": \"{{$timestamp}}-interviewKuTestPostman@gmail.com\",\r\n    \"password\": \"secret1\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/users",
-							"protocol": "{{protocol}}",
-							"host": [
-								"{{host}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -2547,7 +2464,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"jobPositionId\" : \"1\",\r\n    \"gender\" : \"p\",\r\n    \"dateBirth\" : \"2023-01-01\",\r\n    \"currentCity\" : \"Palembang\"\r\n}",
+							"raw": "{\r\n    \"jobPositionId\" : \"1\",\r\n    \"gender\" : \"p\",\r\n    \"dateBirth\" : \"2023-08-01\",\r\n    \"currentCity\" : \"Palembang\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2867,34 +2784,6 @@
 							"response": []
 						},
 						{
-							"name": "Add User Jane",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"jane\",\r\n    \"email\": \"jane@gmail.com\",\r\n    \"password\": \"secret1\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{protocol}}://{{host}}:{{port}}/users",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"users"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Login with User John",
 							"event": [
 								{
@@ -2924,56 +2813,6 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"email\": \"john@gmail.com\",\r\n    \"password\": \"secret1\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{protocol}}://{{host}}:{{port}}/authentications",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"authentications"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Login with User Jane",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"const responseJson = pm.response.json();\r",
-											"pm.environment.set('accessTokenJane', responseJson.data.accessToken);\r",
-											"pm.environment.set('refreshTokenJane', responseJson.data.refreshToken);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"email\": \"jane@gmail.com\",\r\n    \"password\": \"secret1\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3023,7 +2862,7 @@
 									"    pm.expect(responseJson.message).to.equal('Jobs Field Ditemukan');\r",
 									"    pm.expect(responseJson.data).to.be.an('object');\r",
 									"    pm.expect(responseJson.data.jobFields).to.be.an('array');\r",
-									"    pm.expect(responseJson.data.jobFields[0].id).to.equal(1);\r",
+									"    pm.expect(responseJson.data.jobFields[0].id).to.equal(6);\r",
 									"});\r",
 									""
 								],
@@ -3426,6 +3265,86 @@
 					"response": []
 				},
 				{
+					"name": "Start Interview Fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('it should response 200 status code', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									"\r",
+									"pm.test('response body should an object', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson.success).to.equal(true);\r",
+									"    pm.expect(responseJson.message).to.equal(`Sesi Interview ${responseJson.data.interviewId} telah dimulai`);\r",
+									"    pm.expect(responseJson.data.questions).to.be.an(`array`);\r",
+									"\r",
+									"    pm.environment.set('interviewId', responseJson.data.interviewId)\r",
+									"    pm.environment.set('o1', responseJson.data.questions[0].questionOrder)\r",
+									"    pm.environment.set('q1', responseJson.data.questions[0].question)\r",
+									"    pm.environment.set('o2', responseJson.data.questions[1].questionOrder)\r",
+									"    pm.environment.set('q2', responseJson.data.questions[1].question)\r",
+									"    pm.environment.set('o3', responseJson.data.questions[2].questionOrder)\r",
+									"    pm.environment.set('q3', responseJson.data.questions[2].question)\r",
+									"    pm.environment.set('interviewToken', responseJson.data.token)\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessTokenJohn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/questions?mode=latihan&jobFieldId=6",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"interviews",
+								"questions"
+							],
+							"query": [
+								{
+									"key": "mode",
+									"value": "latihan"
+								},
+								{
+									"key": "jobFieldId",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Start Interview Correct",
 					"event": [
 						{
@@ -3621,16 +3540,6 @@
 									"src": "/C:/Users/krisna/Downloads/WhatsApp Ptt 2023-11-15 at 20.18.50.ogg"
 								},
 								{
-									"key": "jobFieldName",
-									"value": "test",
-									"type": "text"
-								},
-								{
-									"key": "jobPositionName",
-									"value": "test",
-									"type": "text"
-								},
-								{
 									"key": "retryAttempt",
 									"value": "1",
 									"type": "text"
@@ -3721,16 +3630,6 @@
 									"key": "audio",
 									"type": "file",
 									"src": "/C:/Users/krisna/Downloads/WhatsApp Ptt 2023-11-21 at 19.52.38.ogg"
-								},
-								{
-									"key": "jobFieldName",
-									"value": "test",
-									"type": "text"
-								},
-								{
-									"key": "jobPositionName",
-									"value": "test",
-									"type": "text"
 								},
 								{
 									"key": "retryAttempt",

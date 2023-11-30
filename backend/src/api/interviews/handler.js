@@ -64,7 +64,7 @@ class InterviewsHandler {
     const {
       audio,
       // jobFieldName,
-      jobPositionName,
+      // jobPositionName,
       retryAttempt,
       question,
       questionOrder,
@@ -103,7 +103,7 @@ class InterviewsHandler {
       testHistoryId = await this._interviewsService.updateAnswerByInterviewId({
         interviewId,
         // jobFieldName,
-        jobPositionName,
+        // jobPositionName,
         audioUrl,
         score,
         duration,

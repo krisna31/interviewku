@@ -23,7 +23,6 @@ const PostAnswersPayloadByInterviewIdSchema = Joi.object({
     }).unknown().required(),
   },
   token: Joi.string().default('x*32').length(32).required(),
-  jobPositionName: Joi.string().default('Backend Developer').required(),
   retryAttempt: Joi.number().max(2147483647).default(0).required(),
   question: Joi.string().required(),
   questionOrder: Joi.number().max(2147483647).required(),
@@ -48,7 +47,6 @@ const InterviewDataResponseSchema = Joi.object({
     feedback: Joi.string().required(),
     answers: Joi.array().items(Joi.object({
       question: Joi.string().required(),
-      jobPositionName: Joi.string().allow(null).required(),
       jobFieldName: Joi.string().required(),
       questionOrder: Joi.number().max(2147483647).required(),
       userAnswer: Joi.string().allow(null).required(),

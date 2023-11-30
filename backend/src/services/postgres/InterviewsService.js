@@ -62,7 +62,7 @@ class InterviewsService {
   async updateAnswerByInterviewId({
     interviewId,
     // jobFieldName,
-    jobPositionName,
+    // jobPositionName,
     audioUrl,
     score,
     duration,
@@ -76,20 +76,18 @@ class InterviewsService {
     const query = {
       text: `
           UPDATE question_answer_histories SET
-            job_position_name = $3,
-            audio_url = $4,
-            score = $5,
-            duration = $6,
-            retry_attempt = $7,
-            struktur_score = $8,
-            user_answer = $9,
-            updated_at = $10
+            audio_url = $3,
+            score = $4,
+            duration = $5,
+            retry_attempt = $6,
+            struktur_score = $7,
+            user_answer = $8,
+            updated_at = $9
           WHERE test_history_id = $1 AND question_order = $2 RETURNING id
       `,
       values: [
         interviewId,
         questionOrder,
-        jobPositionName,
         audioUrl,
         score,
         duration,
@@ -282,7 +280,6 @@ class InterviewsService {
 
     return result.rows.map((ans) => ({
       question: ans.question,
-      jobPositionName: ans.job_position_name,
       questionOrder: ans.question_order,
       userAnswer: ans.user_answer,
       audioUrl: ans.audio_url,

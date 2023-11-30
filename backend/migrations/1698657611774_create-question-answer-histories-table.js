@@ -23,10 +23,6 @@ exports.up = (pgm) => {
       type: 'VARCHAR(50)',
       notNull: false,
     },
-    job_position_name: {
-      type: 'VARCHAR(50)',
-      notNull: false,
-    },
     audio_url: {
       type: 'TEXT',
       notNull: false,
