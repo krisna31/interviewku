@@ -40,7 +40,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Interview Session" />
+        tools:text="@string/fragment_sesion" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_train_session"
@@ -67,8 +67,9 @@
             android:gravity="left|bottom"
             android:includeFontPadding="false"
             android:lineHeight="19.36dp"
-            android:text="Latihan"
+            android:text="@string/train"
             android:textSize="16dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -115,8 +116,9 @@
             android:gravity="left|bottom"
             android:includeFontPadding="false"
             android:lineHeight="19.36dp"
-            android:text="Uji Kemampuan"
+            android:text="@string/test_interview"
             android:textSize="16dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

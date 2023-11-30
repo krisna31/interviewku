@@ -38,7 +38,7 @@
             android:gravity="left|center_vertical"
             android:includeFontPadding="false"
             android:textSize="20dp"
-            tools:text="Profile" />
+            tools:text="@string/profile" />
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -83,7 +83,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
-        tools:text="Nama Lengkap" />
+        tools:text="@string/nama" />
 
     <EditText
         android:id="@+id/Et_Email"
@@ -110,10 +110,9 @@
         android:includeFontPadding="false"
         android:textSize="12dp"
         android:textStyle="bold"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextLastName"
-        tools:text="Email" />
+        tools:text="@string/email" />
 
 
     <TextView
@@ -128,7 +127,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Et_Email"
-        tools:text="Jenis Kelamin" />
+        tools:text="@string/jenis" />
 
     <Spinner
         android:id="@+id/spinner_gender_profile"
@@ -152,7 +151,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_gender_profile"
-        tools:text="Tanggal Lahir" />
+        tools:text="@string/tanggal_lahir" />
 
     <EditText
         android:id="@+id/Et_tanggal_lahir_profile"
@@ -183,7 +182,6 @@
         android:text="Silahkan pilih "
         android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
@@ -201,10 +199,9 @@
         android:text="Domisili"
         android:textSize="12dp"
         android:textStyle="bold"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Et_tanggal_lahir_profile"
-        tools:text="Domisili" />
+        tools:text="@string/daerah" />
 
 
     <TextView

@@ -36,7 +36,7 @@
             android:layout_marginStart="45dp"
             android:gravity="left|center_vertical"
             android:includeFontPadding="false"
-            android:text="Sesi Latihan"
+            android:text="@string/train"
             android:textSize="20dp"
             android:textStyle="bold" />
 

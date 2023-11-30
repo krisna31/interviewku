@@ -11,7 +11,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="INSTRUKSI"
+        android:text="@string/intruksi"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
@@ -36,7 +36,7 @@
         android:id="@+id/btn_custom_train"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Mulai Latihan"
+        android:text="@string/button_custom_train"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
