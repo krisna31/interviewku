@@ -385,6 +385,19 @@ class InterviewsService {
       ),
     }));
   }
+
+  async validateIsInterviewExist({ interviewId }) {
+    const query = {
+      text: 'SELECT id FROM test_histories WHERE id = $1',
+      values: [interviewId],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (result.rowCount < 1) {
+      throw new InvariantError('Sesi Interview Tidak Ditemukan');
+    }
+  }
 }
 
 module.exports = InterviewsService;

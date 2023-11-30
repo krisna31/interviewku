@@ -72,6 +72,8 @@ class InterviewsHandler {
     } = request.payload;
     let testHistoryId;
 
+    await this._interviewsService.validateIsInterviewExist({ interviewId });
+
     await this._interviewsService.validateInterviewToken({ interviewId, token });
 
     const {
@@ -128,6 +130,8 @@ class InterviewsHandler {
     const { interviewId } = request.params;
     const { completed, token } = request.payload;
 
+    await this._interviewsService.validateIsInterviewExist({ interviewId });
+
     await this._interviewsService.validateInterviewToken({ interviewId, token });
 
     if (completed) {
@@ -154,6 +158,8 @@ class InterviewsHandler {
 
   async getInterview(request, h) {
     const { interviewId } = request.params;
+
+    await this._interviewsService.validateIsInterviewExist({ interviewId });
 
     await this._interviewsService.validateIsInterviewClosed({ interviewId });
 
@@ -184,6 +190,8 @@ class InterviewsHandler {
 
   async getQuestionsByInterviewId(request, h) {
     const { interviewId } = request.params;
+
+    await this._interviewsService.validateIsInterviewExist({ interviewId });
 
     const questions = await this._interviewsService.getQuestionsByInterviewId({
       interviewId,
