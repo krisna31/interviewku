@@ -90,7 +90,7 @@
         android:includeFontPadding="false"
         android:lineHeight="24.2dp"
         android:text="@string/test"
-        android:textSize="24dp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />

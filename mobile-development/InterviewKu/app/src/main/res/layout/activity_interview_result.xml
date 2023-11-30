@@ -39,7 +39,7 @@
             android:layout_marginStart="20dp"
             android:includeFontPadding="false"
             android:text="@string/hasil"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_back"
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SEMPURNA!!!"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.479"
@@ -78,7 +78,7 @@
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
         android:text="@string/informasi"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_rating" />
@@ -92,7 +92,7 @@
         android:layout_marginTop="12dp"
         android:gravity="left|center_vertical"
         android:includeFontPadding="false"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/informasi_interview"
         tools:text="Latihan" />
@@ -118,7 +118,7 @@
         android:layout_marginTop="12dp"
         android:gravity="left|center_vertical"
         android:includeFontPadding="false"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/tv_train"
         tools:text="15 oktober 2023, 10:23" />
@@ -144,7 +144,7 @@
         android:layout_marginTop="12dp"
         android:gravity="left|center_vertical"
         android:includeFontPadding="false"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toBottomOf="@+id/tv_calender"
         tools:text="IT (Front End)" />
@@ -170,7 +170,7 @@
         android:layout_marginTop="12dp"
         android:gravity="left|center_vertical"
         android:includeFontPadding="false"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
         app:layout_constraintTop_toBottomOf="@+id/tv_work"
         tools:text="12 Menit 45 Detik" />
@@ -196,7 +196,7 @@
         android:layout_marginTop="16dp"
         android:gravity="left|center_vertical"
         android:includeFontPadding="false"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/imageView9"
         app:layout_constraintTop_toBottomOf="@+id/tv_time"
         tools:text="Selesai" />
@@ -220,7 +220,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/penilaian"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_done" />

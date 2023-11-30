@@ -37,7 +37,7 @@
             android:gravity="left|center_vertical"
             android:includeFontPadding="false"
             android:text="@string/train"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>

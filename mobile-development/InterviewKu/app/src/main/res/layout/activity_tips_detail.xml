@@ -59,7 +59,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="145dp"
         android:text="Lorem ipsum dolor sit amet"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

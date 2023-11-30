@@ -70,7 +70,7 @@
             android:gravity="start|top"
             android:includeFontPadding="false"
             style="@style/Base.Theme.InterviewKu"
-            android:textSize="16dp"
+            android:textSize="16sp"
             tools:text="Nama Lengkap" />
 
     </androidx.appcompat.widget.Toolbar>
@@ -114,7 +114,7 @@
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/profile_image"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Profile" />
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -155,7 +155,7 @@
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
             style="@style/Base.Theme.InterviewKu"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/fragment_tts" />
@@ -187,7 +187,7 @@
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
             style="@style/Base.Theme.InterviewKu"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/fragment_kata_sandi" />
@@ -220,10 +220,8 @@
             android:layout_marginTop="16dp"
             android:gravity="start|center_vertical"
             android:includeFontPadding="false"
-            android:lineHeight="19.36dp"
-            android:text="Logout"
             style="@style/Base.Theme.InterviewKu"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/logout" />
