@@ -118,7 +118,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_texttospeach"
+        android:id="@+id/cl_text_to_speach"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/cl_profile">
@@ -166,7 +166,7 @@
         android:id="@+id/cl_reset_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/cl_texttospeach">
+        app:layout_constraintTop_toBottomOf="@+id/cl_text_to_speach">
 
         <View
             android:id="@+id/divider4"
