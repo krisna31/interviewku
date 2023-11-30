@@ -10,7 +10,6 @@ import com.capstone.interviewku.data.network.response.JobPositionsResponse
 import com.capstone.interviewku.data.network.response.LoginResponse
 import com.capstone.interviewku.data.network.response.RefreshTokenResponse
 import com.capstone.interviewku.data.network.response.UserDetailResponse
-import com.capstone.interviewku.data.network.response.UserIdentityModifyResponse
 import com.capstone.interviewku.data.network.response.UserIdentityResponse
 import com.capstone.interviewku.data.network.response.UserRegisterResponse
 import okhttp3.MultipartBody
@@ -66,7 +65,8 @@ interface InterviewKuAPIService {
     @GET("/interviews/questions")
     suspend fun startInterviewSession(
         @Header("Authorization") bearerToken: String,
-        @Query("mode") mode: String
+        @Query("mode") mode: String,
+        @Query("jobFieldId") jobFieldId: Int,
     ): InterviewQuestionsResponse
 
     @GET("/interviews/{interviewId}/questions")
@@ -78,9 +78,10 @@ interface InterviewKuAPIService {
     @POST("/interviews/{interviewId}/answers")
     @Multipart
     suspend fun sendInterviewAnswer(
+        @Header("Authorization") bearerToken: String,
+        @Path("interviewId") interviewId: String,
         @Part("token") token: RequestBody,
         @Part audio: MultipartBody.Part,
-        @Part("jobPositionName") jobPositionName: RequestBody,
         @Part("retryAttempt") retryAttempt: RequestBody,
         @Part("question") question: RequestBody,
         @Part("questionOrder") questionOrder: RequestBody,
@@ -162,15 +163,17 @@ interface InterviewKuAPIService {
         @Field("gender") gender: String,
         @Field("dateBirth") dateBirth: String,
         @Field("currentCity") currentCity: String
-    ): UserIdentityModifyResponse
+    ): UserIdentityResponse
 
     @PUT("/users/identity")
     @FormUrlEncoded
     suspend fun editUserIdentity(
         @Header("Authorization") bearerToken: String,
+        @Field("firstName") firstName: String,
+        @Field("lastName") lastName: String?,
         @Field("jobPositionId") jobPositionId: Int,
         @Field("gender") gender: String,
         @Field("dateBirth") dateBirth: String,
         @Field("currentCity") currentCity: String
-    ): UserIdentityModifyResponse
+    ): UserIdentityResponse
 }

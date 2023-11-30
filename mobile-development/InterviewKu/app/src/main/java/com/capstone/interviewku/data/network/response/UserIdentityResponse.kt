@@ -21,6 +21,18 @@ data class UserIdentity(
     @field:SerializedName("userId")
     val userId: String,
 
+    @SerializedName("firstName")
+    val firstname: String,
+
+    @SerializedName("lastName")
+    val lastname: String?,
+
+    @field:SerializedName("jobFieldId")
+    val jobFieldId: Int?,
+
+    @field:SerializedName("jobFieldName")
+    val jobFieldName: String?,
+
     @field:SerializedName("jobPositionId")
     val jobPositionId: Int?,
 
@@ -30,11 +42,11 @@ data class UserIdentity(
     @field:SerializedName("gender")
     val gender: String?,
 
-    @field:SerializedName("currentCity")
-    val currentCity: String?,
-
     @field:SerializedName("dateBirth")
     val dateBirth: String?,
+
+    @field:SerializedName("currentCity")
+    val currentCity: String?,
 
     @field:SerializedName("createdAt")
     val createdAt: String,

@@ -10,10 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/action_bar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/action_bar"
+        android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:clipChildren="false"
@@ -49,7 +49,7 @@
         android:clipToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/action_bar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_circle_image"

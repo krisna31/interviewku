@@ -25,19 +25,21 @@ class InterviewRepository @Inject constructor(
             )
         }
 
-    suspend fun startInterviewTrainSession() =
+    suspend fun startInterviewTrainSession(jobFieldId: Int) =
         APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
             apiService.startInterviewSession(
                 appPreferences.getBearerToken().first(),
-                InterviewMode.TRAIN.mode
+                InterviewMode.TRAIN.mode,
+                jobFieldId
             )
         }
 
-    suspend fun startInterviewTestSession() =
+    suspend fun startInterviewTestSession(jobFieldId: Int) =
         APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
             apiService.startInterviewSession(
                 appPreferences.getBearerToken().first(),
-                InterviewMode.TEST.mode
+                InterviewMode.TEST.mode,
+                jobFieldId
             )
         }
 
@@ -50,21 +52,22 @@ class InterviewRepository @Inject constructor(
         }
 
     suspend fun sendInterviewAnswer(
+        interviewId: String,
         token: String,
         audio: File,
-        jobPositionName: String,
         retryAttempt: Int,
         question: String,
         questionOrder: Int,
     ) = APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
         apiService.sendInterviewAnswer(
+            bearerToken = appPreferences.getBearerToken().first(),
+            interviewId = interviewId,
             token = token.toRequestBody("text/plain".toMediaType()),
             audio = MultipartBody.Part.createFormData(
                 "audio",
                 audio.name,
-                audio.asRequestBody("audio/*".toMediaType())
+                audio.asRequestBody("audio/amr".toMediaType())
             ),
-            jobPositionName = jobPositionName.toRequestBody("text/plain".toMediaType()),
             retryAttempt = retryAttempt.toString().toRequestBody("text/plain".toMediaType()),
             question = question.toRequestBody("text/plain".toMediaType()),
             questionOrder = questionOrder.toString().toRequestBody("text/plain".toMediaType()),

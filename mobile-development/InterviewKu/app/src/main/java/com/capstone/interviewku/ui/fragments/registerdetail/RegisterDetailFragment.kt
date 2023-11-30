@@ -60,7 +60,7 @@ class RegisterDetailFragment : Fragment() {
                     (binding.spinnerJobPosition.selectedItem as SpinnerModel?)?.value?.toIntOrNull()
 
                 Log.d("test", "onViewCreated: $gender $birthdate $currentCity $jobPositionId")
-                if (gender == null || birthdate == null || currentCity.isEmpty() || jobPositionId == null) {
+                if (gender == null || birthdate == null || currentCity.isEmpty() || jobPositionId == null || jobPositionId == -1) {
                     return@setOnClickListener
                 } else {
                     viewModel.addUserIdentity(jobPositionId, gender, birthdate, currentCity)
@@ -88,13 +88,19 @@ class RegisterDetailFragment : Fragment() {
                 is Result.Success -> {
                     binding.progressBar.isVisible = false
                     it.data.data?.let { jobPositionsResponseData ->
+                        val spinnerData = mutableListOf<SpinnerModel>()
+                        spinnerData.add(SpinnerModel("-1", "Silahkan Pilih"))
+                        spinnerData.addAll(
+                            jobPositionsResponseData.jobPositions.map { jobPosition ->
+                                SpinnerModel(jobPosition.id.toString(), jobPosition.name)
+                            }
+                        )
+
                         binding.btnRegisterScreen.isEnabled = true
                         binding.spinnerJobPosition.adapter = ArrayAdapter(
                             requireContext(),
                             R.layout.spinner_item,
-                            jobPositionsResponseData.jobPositions.map { jobPosition ->
-                                SpinnerModel(jobPosition.id.toString(), jobPosition.name)
-                            }
+                            spinnerData
                         )
                     }
                 }

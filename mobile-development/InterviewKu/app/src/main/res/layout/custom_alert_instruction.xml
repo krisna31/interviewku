@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp"
-    android:radius="16dp">
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/intruksi"
+        android:text="@string/instruction"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
@@ -26,11 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna eros, mattis eu eros ut, ultrices vulputate nisl. Duis sagittis eu turpis eget suscipit. In ultricies, sapien a rhoncus accumsan, libero nunc pharetra ante, non ultricies risus ipsum ut ipsum. In in augue libero. Suspendisse et scelerisque massa."
         app:layout_constraintBottom_toTopOf="@+id/btn_custom_train"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna eros, mattis eu eros ut, ultrices vulputate nisl. Duis sagittis eu turpis eget suscipit. In ultricies, sapien a rhoncus accumsan, libero nunc pharetra ante, non ultricies risus ipsum ut ipsum. In in augue libero. Suspendisse et scelerisque massa." />
 
     <Button
         android:id="@+id/btn_custom_train"
@@ -39,5 +38,6 @@
         android:text="@string/button_custom_train"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Mulai Latihan" />
 </androidx.constraintlayout.widget.ConstraintLayout>

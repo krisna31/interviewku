@@ -43,6 +43,8 @@ class UserRepository @Inject constructor(
     }
 
     suspend fun editUserIdentity(
+        firstName: String,
+        lastName: String?,
         jobPositionId: Int,
         gender: String,
         dateBirth: String,
@@ -50,6 +52,8 @@ class UserRepository @Inject constructor(
     ) = APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
         apiService.editUserIdentity(
             appPreferences.getBearerToken().first(),
+            firstName,
+            lastName,
             jobPositionId,
             gender,
             dateBirth,

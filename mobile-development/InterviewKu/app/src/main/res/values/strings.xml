@@ -23,6 +23,16 @@
     <string name="history">History</string>
     <string name="latihan">Mode untuk melatih kemampuan wawancara pada aplikasi ini</string>
     <string name="test">Silahkan berfokus pada\npertanyaan yang diberikan</string>
+    <string name="start_train">Mulai Latihan</string>
+    <string name="start_test">Mulai Uji Kemampuan</string>
+    <string name="train_instruction">Mode ini ditujukan untuk melatih kemampuan anda terhadap aplikasi ini</string>
+    <string name="test_instruction">Mode ini ditujukan untuk menguji kemampuan anda dalam wawancara secara keseluruhan</string>
+    <string name="instruction">Instruksi</string>
+    <string name="question_number">Pertanyaan %d</string>
+    <string name="training_session">Sesi Latihan</string>
+    <string name="record_failed">Gagal memulai perekaman suara. Pastikan tidak ada aplikasi lain yang menggunakan mikrofon</string>
+    <string name="training">Latihan</string>
+    <string name="testing">Uji Kemampuan</string>
     <string name="sandi_lama">Kata Sandi Lama</string>
     <string name="sandi_baru">Kata Sandi Baru</string>
     <string name="email_forget">Alamat Email</string>
@@ -43,7 +53,7 @@
     <string name="intruksi">INTRUKSI</string>
     <string name="button_custom_test">Mulai Uji Latihan</string>
     <string name="button_custom_train">Mulai Latihan</string>
-    <string name="fragment_tts">Text To Speach</string>
+    <string name="fragment_tts">Text To Speech</string>
     <string name="fragment_kata_sandi">Ganti Kata Sandi</string>
     <string name="logout">Logout</string>
     <string name="fragment_sesion">Interview Session</string>

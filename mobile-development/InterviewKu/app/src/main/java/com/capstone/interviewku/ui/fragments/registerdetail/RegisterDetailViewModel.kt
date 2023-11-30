@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.capstone.interviewku.data.JobRepository
 import com.capstone.interviewku.data.UserRepository
 import com.capstone.interviewku.data.network.response.JobPositionsResponse
-import com.capstone.interviewku.data.network.response.UserIdentityModifyResponse
+import com.capstone.interviewku.data.network.response.UserIdentityResponse
 import com.capstone.interviewku.util.Result
 import com.capstone.interviewku.util.SingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,8 +19,8 @@ class RegisterDetailViewModel @Inject constructor(
     private val jobRepository: JobRepository,
     private val userRepository: UserRepository
 ) : ViewModel() {
-    private val _addUserIdentityState = MutableLiveData<Result<UserIdentityModifyResponse>>()
-    val addUserIdentityState: LiveData<Result<UserIdentityModifyResponse>>
+    private val _addUserIdentityState = MutableLiveData<Result<UserIdentityResponse>>()
+    val addUserIdentityState: LiveData<Result<UserIdentityResponse>>
         get() = _addUserIdentityState
 
     private val _jobPositionState = MutableLiveData<Result<JobPositionsResponse>>()

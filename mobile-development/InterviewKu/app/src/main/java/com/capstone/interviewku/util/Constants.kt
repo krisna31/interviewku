@@ -5,4 +5,7 @@ object Constants {
     const val DATASTORE_NAME = "interviewku_preferences"
 
     const val SPLASH_SCREEN_DELAY = 3000L
+
+    const val AUDIO_FORMAT_SUFFIX = ".amr"
+    const val AUDIO_SAMPLE_RATE = 16000
 }
