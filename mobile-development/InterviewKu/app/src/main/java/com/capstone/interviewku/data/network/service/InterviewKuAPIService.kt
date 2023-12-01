@@ -58,7 +58,7 @@ interface InterviewKuAPIService {
 
     // interview
     @GET("/interviews")
-    suspend fun getAllInterviews(
+    suspend fun getAllInterviewResults(
         @Header("Authorization") bearerToken: String,
     ): InterviewHistoryResponse
 
@@ -97,7 +97,7 @@ interface InterviewKuAPIService {
     ): InterviewResultResponse
 
     @GET("/interviews/{interviewId}")
-    suspend fun getInterviewResult(
+    suspend fun getInterviewResultById(
         @Header("Authorization") bearerToken: String,
         @Path("interviewId") interviewId: String,
     ): InterviewResultResponse

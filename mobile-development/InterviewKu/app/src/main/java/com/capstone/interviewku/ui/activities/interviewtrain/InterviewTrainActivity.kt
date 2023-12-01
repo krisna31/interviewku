@@ -145,17 +145,6 @@ class InterviewTrainActivity : AppCompatActivity() {
         viewModel.prepareInterview()
     }
 
-    override fun onPause() {
-        viewModel.isRecording.value?.let {
-            if (it) {
-                viewModel.stopRecording()
-            }
-        }
-        textToSpeech?.stop()
-
-        super.onPause()
-    }
-
     private fun initializeJobFieldPicker() {
         jobPickerFragment = JobPickerFragment { jobFieldId ->
             InterviewInstructionFragment(InterviewInstructionFragment.TYPE_TRAIN) {
@@ -200,67 +189,60 @@ class InterviewTrainActivity : AppCompatActivity() {
         }
 
         viewModel.startInterviewState.observe(this) {
+            binding.progressBar.isVisible = it is Result.Loading
+
             when (it) {
                 is Result.Success -> {
-                    binding.progressBar.isVisible = false
+                    viewModel.moveToNextQuestion()
                 }
 
-                is Result.Loading -> {
-                    binding.progressBar.isVisible = true
-                }
+                is Result.Loading -> {}
 
                 is Result.Error -> {
-                    binding.progressBar.isVisible = false
                     it.exception.getData()?.handleHttpException(this)
-
                     // alertdialog ulang
                 }
             }
         }
 
         viewModel.submitInterviewState.observe(this) {
+            binding.progressBar.isVisible = it is Result.Loading
+            binding.civNext.isClickable = it is Result.Success
+            binding.ivRepeatAnswer.isClickable = it is Result.Success
+
             when (it) {
                 is Result.Success -> {
-                    binding.progressBar.isVisible = false
-                    binding.civNext.isClickable = true
-                    binding.ivRepeatAnswer.isClickable = true
+                    if (viewModel.isEndOfInterview) {
+                        binding.civNext.isVisible = false
+                        binding.ivRepeatAnswer.isVisible = false
+                        viewModel.endInterviewSession()
+                    } else {
+                        viewModel.moveToNextQuestion()
+                    }
                 }
 
-                is Result.Loading -> {
-                    binding.progressBar.isVisible = true
-                    binding.civNext.isClickable = false
-                    binding.ivRepeatAnswer.isClickable = false
-                }
+                is Result.Loading -> {}
 
                 is Result.Error -> {
-                    binding.progressBar.isVisible = false
-                    binding.civNext.isClickable = false
-                    binding.ivRepeatAnswer.isClickable = false
-
                     it.exception.getData()?.handleHttpException(this)
-
                     // alertdialog ulang
                 }
             }
         }
 
         viewModel.endInterviewState.observe(this) {
+            binding.progressBar.isVisible = it is Result.Loading
+
             when (it) {
                 is Result.Success -> {
-                    binding.progressBar.isVisible = false
-
                     // to result activity
                     Toast.makeText(this, it.data.message, Toast.LENGTH_SHORT).show()
                 }
 
-                is Result.Loading -> {
-                    binding.progressBar.isVisible = true
-                }
+                is Result.Loading -> {}
 
                 is Result.Error -> {
-                    binding.progressBar.isVisible = false
                     it.exception.getData()?.handleHttpException(this)
-
                     // alertdialog ulang
                 }
             }
@@ -302,18 +284,6 @@ class InterviewTrainActivity : AppCompatActivity() {
             binding.ivRepeatAnswer.isVisible = isAnswered
 
             binding.civRecord.isVisible = !isAnswered
-        }
-
-        viewModel.isEndOfInterview.observe(this) { isEnd ->
-            binding.civNext.setOnClickListener {
-                viewModel.sendAnswer()
-
-                if (isEnd == true) {
-                    binding.civNext.isVisible = false
-                    binding.ivRepeatAnswer.isVisible = false
-                    viewModel.endInterviewSession()
-                }
-            }
         }
 
         viewModel.isRecording.observe(this) { isRecording ->
@@ -385,22 +355,20 @@ class InterviewTrainActivity : AppCompatActivity() {
     }
 
     private fun stopRecording() {
-        lifecycleScope.launch {
-            try {
-                mediaRecorder?.apply {
-                    stop()
-                    release()
-                }
-
-                audioFile?.let {
-                    viewModel.setAnswer(it)
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            } finally {
-                mediaRecorder = null
-                viewModel.stopRecording()
+        try {
+            mediaRecorder?.apply {
+                stop()
+                release()
             }
+
+            audioFile?.let {
+                viewModel.setAnswer(it)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            mediaRecorder = null
+            viewModel.stopRecording()
         }
     }
 }

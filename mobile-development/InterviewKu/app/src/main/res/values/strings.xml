@@ -22,7 +22,7 @@
     <string name="title_account">Account</string>
     <string name="history">History</string>
     <string name="latihan">Mode untuk melatih kemampuan wawancara pada aplikasi ini</string>
-    <string name="test">Silahkan berfokus pada\npertanyaan yang diberikan</string>
+    <string name="test_instruction_screen">Silahkan berfokus pada\npertanyaan yang diberikan</string>
     <string name="start_train">Mulai Latihan</string>
     <string name="start_test">Mulai Uji Kemampuan</string>
     <string name="train_instruction">Mode ini ditujukan untuk melatih kemampuan anda terhadap aplikasi ini</string>

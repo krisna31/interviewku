@@ -18,10 +18,18 @@ class InterviewRepository @Inject constructor(
     private val apiService: InterviewKuAPIService,
     private val appPreferences: AppPreferences
 ) {
-    suspend fun getAllInterviews() =
+    suspend fun getAllInterviewResults() =
         APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
-            apiService.getAllInterviews(
+            apiService.getAllInterviewResults(
                 appPreferences.getBearerToken().first()
+            )
+        }
+
+    suspend fun getInterviewResultById(interviewId: String) =
+        APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
+            apiService.getInterviewResultById(
+                appPreferences.getBearerToken().first(),
+                interviewId
             )
         }
 
@@ -81,14 +89,6 @@ class InterviewRepository @Inject constructor(
                 interviewId,
                 true,
                 token
-            )
-        }
-
-    suspend fun getInterviewResult(interviewId: String) =
-        APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
-            apiService.getInterviewResult(
-                appPreferences.getBearerToken().first(),
-                interviewId
             )
         }
 }

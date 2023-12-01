@@ -3,7 +3,6 @@ package com.capstone.interviewku.ui.activities.interviewtrain
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.capstone.interviewku.data.InterviewRepository
 import com.capstone.interviewku.data.JobRepository
@@ -46,11 +45,8 @@ class InterviewTrainViewModel @Inject constructor(
     val currentQuestionIsAnswered: LiveData<Boolean>
         get() = _currentQuestionIsAnswered
 
-    val isEndOfInterview = currentQuestionOrder.map {
-        interviewData?.let { interviewQuestionsData ->
-            return@map it == interviewQuestionsData.questions.size
-        }
-    }
+    val isEndOfInterview
+        get() = currentQuestionOrder.value == interviewData?.questions?.size
 
     private val _isRecording = MutableLiveData(false)
     val isRecording: LiveData<Boolean>
@@ -78,24 +74,6 @@ class InterviewTrainViewModel @Inject constructor(
     private var timer: Timer? = null
     private var seconds: Int = 0
 
-    private fun moveToNextQuestion() {
-        interviewData?.let { interviewQuestionsData ->
-            _currentQuestionOrder.value?.plus(1)?.let { currentOrder ->
-                _currentDuration.value = "00:00:00"
-                _currentQuestion.value = interviewQuestionsData.questions[currentOrder - 1].question
-                _currentQuestionOrder.value = currentOrder
-                _currentQuestionIsAnswered.value = false
-
-                interviewAnswers.add(
-                    InterviewAnswer(
-                        question = interviewQuestionsData.questions[currentOrder - 1].question,
-                        questionOrder = interviewQuestionsData.questions[currentOrder - 1].questionOrder,
-                    )
-                )
-            }
-        }
-    }
-
     private fun sendInterviewAnswer(
         audio: File,
         retryAttempt: Int,
@@ -116,10 +94,6 @@ class InterviewTrainViewModel @Inject constructor(
                 )
 
                 _submitInterviewState.value = Result.Success(response)
-
-                if (isEndOfInterview.value == false) {
-                    moveToNextQuestion()
-                }
             } ?: run {
                 throw Exception()
             }
@@ -141,6 +115,24 @@ class InterviewTrainViewModel @Inject constructor(
             }
         } catch (e: Exception) {
             _endInterviewState.value = Result.Error(SingleEvent(e))
+        }
+    }
+
+    fun moveToNextQuestion() {
+        interviewData?.let { interviewQuestionsData ->
+            _currentQuestionOrder.value?.plus(1)?.let { currentOrder ->
+                _currentDuration.value = "00:00:00"
+                _currentQuestion.value = interviewQuestionsData.questions[currentOrder - 1].question
+                _currentQuestionOrder.value = currentOrder
+                _currentQuestionIsAnswered.value = false
+
+                interviewAnswers.add(
+                    InterviewAnswer(
+                        question = interviewQuestionsData.questions[currentOrder - 1].question,
+                        questionOrder = interviewQuestionsData.questions[currentOrder - 1].questionOrder,
+                    )
+                )
+            }
         }
     }
 
@@ -206,7 +198,6 @@ class InterviewTrainViewModel @Inject constructor(
                 interviewData = interviewQuestionsData.copy(
                     questions = interviewQuestionsData.questions.sortedBy { it.questionOrder }
                 )
-                moveToNextQuestion()
             } ?: run {
                 throw Exception()
             }
