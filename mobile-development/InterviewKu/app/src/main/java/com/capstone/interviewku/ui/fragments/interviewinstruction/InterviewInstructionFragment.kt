@@ -1,6 +1,7 @@
 package com.capstone.interviewku.ui.fragments.interviewinstruction
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.capstone.interviewku.databinding.CustomAlertInstructionBinding
 
 class InterviewInstructionFragment(
     private val dialogType: String,
-    private val onDialogClosed: () -> Unit,
+    private val onButtonClick: () -> Unit,
 ) : DialogFragment() {
     private var _binding: CustomAlertInstructionBinding? = null
     private val binding
@@ -68,8 +69,20 @@ class InterviewInstructionFragment(
         )
 
         binding.btnCustomTrain.setOnClickListener {
-            onDialogClosed()
+            onButtonClick()
             dismiss()
+        }
+
+        dialog?.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                if (event.action == KeyEvent.ACTION_UP) {
+                    dismiss()
+                    requireActivity().finish()
+                    return@setOnKeyListener true
+                }
+            }
+
+            false
         }
     }
 

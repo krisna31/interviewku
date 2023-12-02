@@ -10,6 +10,7 @@ import android.speech.tts.TextToSpeech
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
@@ -42,82 +43,59 @@ class InterviewTrainActivity : AppCompatActivity() {
     private val checkTTSDataLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
             if (activityResult.resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
-                if (activityResult.data?.getStringArrayListExtra(TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES)
-                        ?.firstOrNull { it.contains("ind-idn") } != null
+                if (activityResult
+                        .data
+                        ?.getStringArrayListExtra(TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES)
+                        ?.firstOrNull { it.contains(Constants.TTS_EXTRA_VOICE_INDONESIA) } != null
                 ) {
                     textToSpeech = TextToSpeech(
                         this,
                         { initCode ->
                             if (initCode == TextToSpeech.SUCCESS) {
                                 textToSpeech?.apply {
-                                    language = Locale.forLanguageTag("id-ID")
+                                    language = Locale.forLanguageTag(Constants.TTS_LANGUAGE_TAG)
                                 }
                             } else {
                                 Toast.makeText(
                                     this@InterviewTrainActivity,
-                                    "Silahkan mengecek fitur Google TTS di perangkat anda",
+                                    getString(R.string.tts_init_failed),
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                         },
-                        "com.google.android.tts"
+                        Constants.GOOGLE_TTS_PACKAGE_NAME
                     )
                 } else {
                     // no indonesia data
                     Toast.makeText(
                         this@InterviewTrainActivity,
-                        "Anda belum memasang data suara Bahasa Indonesia. Silahkan memasang data suara Bahasa Indonesia",
+                        getString(R.string.no_indonesian_tts_data),
                         Toast.LENGTH_SHORT
                     ).show()
-
-                    try {
-                        startActivity(Intent(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA).apply {
-                            setPackage("com.google.android.tts")
-                        })
-                    } catch (e: Exception) {
-                        if (e is ActivityNotFoundException) {
-                            Toast.makeText(
-                                this,
-                                "Silahkan mengunduh Google TTS di Play Store",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
+                    installTTSData()
                 }
             } else {
                 // no data at all
                 Toast.makeText(
                     this@InterviewTrainActivity,
-                    "Anda tidak memiliki data suara. Silahkan memasang data suara Bahasa Indonesia",
+                    getString(R.string.no_tts_data),
                     Toast.LENGTH_SHORT
                 ).show()
-
-                try {
-                    startActivity(Intent(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA).apply {
-                        setPackage("com.google.android.tts")
-                    })
-                } catch (e: Exception) {
-                    if (e is ActivityNotFoundException) {
-                        Toast.makeText(
-                            this,
-                            "Silahkan mengunduh Google TTS di Play Store",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+                installTTSData()
             }
         }
     private val microphonePermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-            Toast.makeText(
-                this,
-                if (it) {
-                    "Anda dapat merekam suara anda"
-                } else {
-                    "Izin merekam suara harus diperbolehkan agar fitur perekaman dapat digunakan"
-                },
-                Toast.LENGTH_SHORT
-            ).show()
+            if (it) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.mic_permission_granted),
+                    Toast.LENGTH_SHORT
+                ).show()
+                initializeAll()
+            } else {
+                showMicrophonePermissionDialog()
+            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,8 +106,12 @@ class InterviewTrainActivity : AppCompatActivity() {
 
         if (!isPermissionGranted(Manifest.permission.RECORD_AUDIO)) {
             microphonePermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+        } else {
+            initializeAll()
         }
+    }
 
+    private fun initializeAll() {
         initializeJobFieldPicker()
         initializeTTS()
         observeViewmodelData()
@@ -148,7 +130,8 @@ class InterviewTrainActivity : AppCompatActivity() {
     private fun initializeJobFieldPicker() {
         jobPickerFragment = JobPickerFragment { jobFieldId ->
             InterviewInstructionFragment(InterviewInstructionFragment.TYPE_TRAIN) {
-                viewModel.startInterviewSession(jobFieldId)
+                viewModel.setJobFieldId(jobFieldId)
+                viewModel.startInterviewSession()
             }.show(supportFragmentManager, null)
         }
         jobPickerFragment.show(supportFragmentManager, null)
@@ -156,15 +139,32 @@ class InterviewTrainActivity : AppCompatActivity() {
 
     private fun initializeTTS() {
         try {
-            Intent(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA).apply {
-                setPackage("com.google.android.tts")
-                checkTTSDataLauncher.launch(this)
-            }
+            checkTTSDataLauncher.launch(
+                Intent(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA).apply {
+                    setPackage(Constants.GOOGLE_TTS_PACKAGE_NAME)
+                }
+            )
         } catch (e: Exception) {
             if (e is ActivityNotFoundException) {
                 Toast.makeText(
                     this,
-                    "Silahkan mengunduh Google TTS di Play Store",
+                    getString(R.string.no_google_tts),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun installTTSData() {
+        try {
+            startActivity(Intent(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA).apply {
+                setPackage(Constants.GOOGLE_TTS_PACKAGE_NAME)
+            })
+        } catch (e: Exception) {
+            if (e is ActivityNotFoundException) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.no_google_tts),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -183,7 +183,21 @@ class InterviewTrainActivity : AppCompatActivity() {
                 is Result.Error -> {
                     it.exception.getData()?.handleHttpException(this)
 
-                    // alertdialog ulang
+                    val alertDialog = AlertDialog.Builder(this)
+                        .setCancelable(false)
+                        .setPositiveButton(getString(R.string.try_again)) { _, _ ->
+                            viewModel.prepareInterview()
+                        }
+                        .setNegativeButton(getString(R.string.exit)) { _, _ ->
+                            finish()
+                        }
+                        .setTitle(getString(R.string.error))
+                        .setMessage(getString(R.string.prepare_interview_failed))
+                        .create()
+
+                    if (!isFinishing) {
+                        alertDialog.show()
+                    }
                 }
             }
         }
@@ -200,7 +214,22 @@ class InterviewTrainActivity : AppCompatActivity() {
 
                 is Result.Error -> {
                     it.exception.getData()?.handleHttpException(this)
-                    // alertdialog ulang
+
+                    val alertDialog = AlertDialog.Builder(this)
+                        .setCancelable(false)
+                        .setPositiveButton(getString(R.string.try_again)) { _, _ ->
+                            viewModel.startInterviewSession()
+                        }
+                        .setNegativeButton(getString(R.string.exit)) { _, _ ->
+                            finish()
+                        }
+                        .setTitle(getString(R.string.error))
+                        .setMessage(getString(R.string.start_interview_failed))
+                        .create()
+
+                    if (!isFinishing) {
+                        alertDialog.show()
+                    }
                 }
             }
         }
@@ -225,7 +254,22 @@ class InterviewTrainActivity : AppCompatActivity() {
 
                 is Result.Error -> {
                     it.exception.getData()?.handleHttpException(this)
-                    // alertdialog ulang
+
+                    val alertDialog = AlertDialog.Builder(this)
+                        .setCancelable(false)
+                        .setPositiveButton(getString(R.string.try_again)) { _, _ ->
+                            viewModel.sendAnswer()
+                        }
+                        .setNegativeButton(getString(R.string.exit)) { _, _ ->
+                            finish()
+                        }
+                        .setTitle(getString(R.string.error))
+                        .setMessage(getString(R.string.submit_answer_failed))
+                        .create()
+
+                    if (!isFinishing) {
+                        alertDialog.show()
+                    }
                 }
             }
         }
@@ -235,7 +279,6 @@ class InterviewTrainActivity : AppCompatActivity() {
 
             when (it) {
                 is Result.Success -> {
-                    // to result activity
                     Toast.makeText(this, it.data.message, Toast.LENGTH_SHORT).show()
                 }
 
@@ -243,7 +286,22 @@ class InterviewTrainActivity : AppCompatActivity() {
 
                 is Result.Error -> {
                     it.exception.getData()?.handleHttpException(this)
-                    // alertdialog ulang
+
+                    val alertDialog = AlertDialog.Builder(this)
+                        .setCancelable(false)
+                        .setPositiveButton(getString(R.string.try_again)) { _, _ ->
+                            viewModel.endInterviewSession()
+                        }
+                        .setNegativeButton(getString(R.string.exit)) { _, _ ->
+                            finish()
+                        }
+                        .setTitle(getString(R.string.error))
+                        .setMessage(getString(R.string.end_interview_failed))
+                        .create()
+
+                    if (!isFinishing) {
+                        alertDialog.show()
+                    }
                 }
             }
         }
@@ -255,23 +313,8 @@ class InterviewTrainActivity : AppCompatActivity() {
         viewModel.currentQuestion.observe(this) {
             lifecycleScope.launch {
                 binding.tvQuestion.text = it
-
                 delay(1000)
-
-                textToSpeech?.speak(
-                    it,
-                    TextToSpeech.QUEUE_FLUSH,
-                    null,
-                    ""
-                ) ?: run {
-                    Toast.makeText(
-                        this@InterviewTrainActivity,
-                        "TTS belum diinisialisasi",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    initializeTTS()
-                }
+                speakTTS(it)
             }
         }
 
@@ -310,6 +353,41 @@ class InterviewTrainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun showMicrophonePermissionDialog() {
+        val alertDialog = AlertDialog.Builder(this)
+            .setCancelable(false)
+            .setPositiveButton(getString(R.string.try_again)) { _, _ ->
+                microphonePermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+            }
+            .setNegativeButton(getString(R.string.exit)) { _, _ ->
+                finish()
+            }
+            .setTitle(getString(R.string.permission_title))
+            .setMessage(getString(R.string.mic_permission_prompt))
+            .create()
+
+        if (!isFinishing) {
+            alertDialog.show()
+        }
+    }
+
+    private fun speakTTS(text: String) {
+        textToSpeech?.speak(
+            text,
+            TextToSpeech.QUEUE_FLUSH,
+            null,
+            ""
+        ) ?: run {
+            Toast.makeText(
+                this@InterviewTrainActivity,
+                getString(R.string.tts_not_initialized),
+                Toast.LENGTH_SHORT
+            ).show()
+
+            initializeTTS()
         }
     }
 

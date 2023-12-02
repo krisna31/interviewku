@@ -1,6 +1,7 @@
 package com.capstone.interviewku.util
 
 import android.content.Context
+import android.text.format.DateUtils
 import android.util.Patterns
 import com.capstone.interviewku.R
 import java.text.SimpleDateFormat
@@ -27,11 +28,7 @@ object Helpers {
     fun isPasswordValid(password: String) = Pattern.matches("[a-zA-Z].*[0-9]", password)
 
     fun secondsToString(seconds: Int): String {
-        val hour = seconds / 3600
-        val minute = (seconds % 3600) / 60
-        val second = seconds % 60
-
-        return String.format("%02d:%02d:%02d", hour, minute, second)
+        return DateUtils.formatElapsedTime(seconds.toLong())
     }
 
     fun tzTimeStringToDate(dateString: String): Date? {

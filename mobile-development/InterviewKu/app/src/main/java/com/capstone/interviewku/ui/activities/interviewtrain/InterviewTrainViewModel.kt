@@ -74,33 +74,7 @@ class InterviewTrainViewModel @Inject constructor(
     private var timer: Timer? = null
     private var seconds: Int = 0
 
-    private fun sendInterviewAnswer(
-        audio: File,
-        retryAttempt: Int,
-        question: String,
-        questionOrder: Int
-    ) = viewModelScope.launch {
-        _submitInterviewState.value = Result.Loading
-
-        try {
-            interviewData?.let { interviewQuestionsData ->
-                val response = interviewRepository.sendInterviewAnswer(
-                    interviewQuestionsData.interviewId,
-                    interviewQuestionsData.token,
-                    audio,
-                    retryAttempt,
-                    question,
-                    questionOrder
-                )
-
-                _submitInterviewState.value = Result.Success(response)
-            } ?: run {
-                throw Exception()
-            }
-        } catch (e: Exception) {
-            _submitInterviewState.value = Result.Error(SingleEvent(e))
-        }
-    }
+    private var jobFieldId: Int? = null
 
     fun endInterviewSession() = viewModelScope.launch {
         _endInterviewState.value = Result.Loading
@@ -148,7 +122,7 @@ class InterviewTrainViewModel @Inject constructor(
                     _prepareInterviewState.value = Result.Success(
                         JobFieldModel(
                             userIdentity.jobFieldId ?: -1,
-                            jobFieldsResponseData.jobFields
+                            jobFieldsResponseData.jobFields.sortedBy { it.name }
                         )
                     )
                 } ?: run {
@@ -162,18 +136,36 @@ class InterviewTrainViewModel @Inject constructor(
         }
     }
 
-    fun sendAnswer() {
-        currentQuestionOrder.value?.let {
-            interviewAnswers[it - 1].apply {
-                audio?.let { audioFile ->
-                    sendInterviewAnswer(
-                        audioFile,
-                        retryAttempt,
-                        question,
-                        questionOrder
-                    )
+    fun sendAnswer() = viewModelScope.launch {
+        _submitInterviewState.value = Result.Loading
+
+        try {
+            interviewData?.let { interviewQuestionsData ->
+                currentQuestionOrder.value?.let {
+                    interviewAnswers[it - 1].apply {
+                        audio?.let { audioFile ->
+                            val response = interviewRepository.sendInterviewAnswer(
+                                interviewQuestionsData.interviewId,
+                                interviewQuestionsData.token,
+                                audioFile,
+                                retryAttempt,
+                                question,
+                                questionOrder
+                            )
+
+                            _submitInterviewState.value = Result.Success(response)
+                        } ?: run {
+                            throw Exception()
+                        }
+                    }
+                } ?: run {
+                    throw Exception()
                 }
+            } ?: run {
+                throw Exception()
             }
+        } catch (e: Exception) {
+            _submitInterviewState.value = Result.Error(SingleEvent(e))
         }
     }
 
@@ -188,22 +180,27 @@ class InterviewTrainViewModel @Inject constructor(
         }
     }
 
-    fun startInterviewSession(jobFieldId: Int) = viewModelScope.launch {
+    fun setJobFieldId(jobFieldId: Int) {
+        this.jobFieldId = jobFieldId
+    }
+
+    fun startInterviewSession() = viewModelScope.launch {
         _startInterviewState.value = Result.Loading
 
         try {
-            val response = interviewRepository.startInterviewTrainSession(jobFieldId)
+            jobFieldId?.let { id ->
+                val response = interviewRepository.startInterviewTrainSession(id)
 
-            response.data?.let { interviewQuestionsData ->
-                interviewData = interviewQuestionsData.copy(
-                    questions = interviewQuestionsData.questions.sortedBy { it.questionOrder }
-                )
-            } ?: run {
-                throw Exception()
+                response.data?.let { interviewQuestionsData ->
+                    interviewData = interviewQuestionsData.copy(
+                        questions = interviewQuestionsData.questions.sortedBy { it.questionOrder }
+                    )
+                } ?: run {
+                    throw Exception()
+                }
+
+                _startInterviewState.value = Result.Success(response)
             }
-
-            _startInterviewState.value = Result.Success(response)
-
         } catch (e: Exception) {
             _startInterviewState.value = Result.Error(SingleEvent(e))
         }

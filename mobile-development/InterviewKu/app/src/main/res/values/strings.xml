@@ -15,7 +15,7 @@
     <string name="register">REGISTER</string>
     <string name="have_account">Already have an Account? Login Now!</string>
     <string name="user_created">User Created</string>
-    <string name="Silahkan"> Silahkan masukkan informasi tambahan terkait diri anda</string>
+    <string name="Silahkan">Silahkan masukkan informasi tambahan terkait diri anda</string>
     <string name="title_home">Home</string>
     <string name="title_interview">Interview</string>
     <string name="title_tips">Tips</string>
@@ -59,4 +59,19 @@
     <string name="fragment_sesion">Interview Session</string>
     <string name="performa">Performa</string>
     <string name="tips_interview">Tips Interview</string>
+    <string name="mic_permission_granted">Anda dapat merekam suara anda</string>
+    <string name="mic_permission_prompt">Izin merekam suara harus diberikan agar fitur perekaman dapat digunakan</string>
+    <string name="no_google_tts">Silahkan mengunduh Google TTS di Play Store</string>
+    <string name="no_tts_data">Anda tidak memiliki data suara. Silahkan memasang data suara Bahasa Indonesia</string>
+    <string name="no_indonesian_tts_data">Anda belum memasang data suara Bahasa Indonesia. Silahkan memasang data suara Bahasa Indonesia</string>
+    <string name="tts_init_failed">Silahkan mengecek fitur Google TTS di perangkat anda</string>
+    <string name="permission_title">Perizinan Aplikasi</string>
+    <string name="try_again">Coba Lagi</string>
+    <string name="exit">Keluar</string>
+    <string name="error">Terjadi Kesalahan</string>
+    <string name="prepare_interview_failed">Gagal untuk mempersiapkan sesi. Silahkan coba lagi</string>
+    <string name="start_interview_failed">Gagal untuk memulai sesi. Silahkan coba lagi</string>
+    <string name="submit_answer_failed">Gagal untuk mengirim jawaban. SIlahkan coba lagi</string>
+    <string name="end_interview_failed">Gagal untuk mengakhiri sesi. Silahkan coba lagi</string>
+    <string name="tts_not_initialized">TTS belum diinisialisasi</string>
 </resources>

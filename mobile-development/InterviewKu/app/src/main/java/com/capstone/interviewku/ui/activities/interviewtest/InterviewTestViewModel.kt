@@ -58,52 +58,7 @@ class InterviewTestViewModel @Inject constructor(
     private val interviewAnswers = mutableListOf<InterviewAnswer>()
     private var interviewData: InterviewQuestionsData? = null
 
-    private fun moveToNextQuestion() {
-        interviewData?.let { interviewQuestionsData ->
-            currentQuestionOrder += 1
-            _currentQuestion.value =
-                interviewQuestionsData.questions[currentQuestionOrder - 1].question
-
-            interviewAnswers.add(
-                InterviewAnswer(
-                    question = interviewQuestionsData.questions[currentQuestionOrder - 1].question,
-                    questionOrder = interviewQuestionsData.questions[currentQuestionOrder - 1].questionOrder,
-                )
-            )
-        }
-    }
-
-    private fun sendInterviewAnswer(
-        audio: File,
-        retryAttempt: Int,
-        question: String,
-        questionOrder: Int
-    ) = viewModelScope.launch {
-        _submitInterviewState.value = Result.Loading
-
-        try {
-            interviewData?.let { interviewQuestionsData ->
-                val response = interviewRepository.sendInterviewAnswer(
-                    interviewQuestionsData.interviewId,
-                    interviewQuestionsData.token,
-                    audio,
-                    retryAttempt,
-                    question,
-                    questionOrder
-                )
-
-                _submitInterviewState.value = Result.Success(response)
-
-                if (!isEndOfInterview) {
-                    moveToNextQuestion()
-                }
-            } ?: run {
-                throw Exception()
-            }
-        } catch (e: Exception) {
-            _submitInterviewState.value = Result.Error(SingleEvent(e))
-        }
-    }
+    private var jobFieldId: Int? = null
 
     fun endInterviewSession() = viewModelScope.launch {
         _endInterviewState.value = Result.Loading
@@ -121,6 +76,21 @@ class InterviewTestViewModel @Inject constructor(
         }
     }
 
+    fun moveToNextQuestion() {
+        interviewData?.let { interviewQuestionsData ->
+            currentQuestionOrder += 1
+            _currentQuestion.value =
+                interviewQuestionsData.questions[currentQuestionOrder - 1].question
+
+            interviewAnswers.add(
+                InterviewAnswer(
+                    question = interviewQuestionsData.questions[currentQuestionOrder - 1].question,
+                    questionOrder = interviewQuestionsData.questions[currentQuestionOrder - 1].questionOrder,
+                )
+            )
+        }
+    }
+
     fun prepareInterview() = viewModelScope.launch {
         _prepareInterviewState.value = Result.Loading
 
@@ -133,7 +103,7 @@ class InterviewTestViewModel @Inject constructor(
                     _prepareInterviewState.value = Result.Success(
                         JobFieldModel(
                             userIdentity.jobFieldId ?: -1,
-                            jobFieldsResponseData.jobFields
+                            jobFieldsResponseData.jobFields.sortedBy { it.name }
                         )
                     )
                 } ?: run {
@@ -152,16 +122,32 @@ class InterviewTestViewModel @Inject constructor(
         interviewAnswers[currentQuestionOrder - 1].retryAttempt += 1
     }
 
-    fun sendAnswer() {
-        interviewAnswers[currentQuestionOrder - 1].apply {
-            audio?.let { audioFile ->
-                sendInterviewAnswer(
-                    audioFile,
-                    retryAttempt,
-                    question,
-                    questionOrder
-                )
+    fun sendAnswer() = viewModelScope.launch {
+        _submitInterviewState.value = Result.Loading
+
+        try {
+            interviewData?.let { interviewQuestionsData ->
+                interviewAnswers[currentQuestionOrder - 1].apply {
+                    audio?.let { audioFile ->
+                        val response = interviewRepository.sendInterviewAnswer(
+                            interviewQuestionsData.interviewId,
+                            interviewQuestionsData.token,
+                            audioFile,
+                            retryAttempt,
+                            question,
+                            questionOrder
+                        )
+
+                        _submitInterviewState.value = Result.Success(response)
+                    } ?: run {
+                        throw Exception()
+                    }
+                }
+            } ?: run {
+                throw Exception()
             }
+        } catch (e: Exception) {
+            _submitInterviewState.value = Result.Error(SingleEvent(e))
         }
     }
 
@@ -169,22 +155,27 @@ class InterviewTestViewModel @Inject constructor(
         interviewAnswers[currentQuestionOrder - 1].audio = audio
     }
 
-    fun startInterviewSession(jobFieldId: Int) = viewModelScope.launch {
+    fun setJobFieldId(jobFieldId: Int) {
+        this.jobFieldId = jobFieldId
+    }
+
+    fun startInterviewSession() = viewModelScope.launch {
         _startInterviewState.value = Result.Loading
 
         try {
-            val response = interviewRepository.startInterviewTestSession(jobFieldId)
+            jobFieldId?.let { id ->
+                val response = interviewRepository.startInterviewTrainSession(id)
 
-            response.data?.let { interviewQuestionsData ->
-                interviewData = interviewQuestionsData.copy(
-                    questions = interviewQuestionsData.questions.sortedBy { it.questionOrder }
-                )
-                moveToNextQuestion()
-            } ?: run {
-                throw Exception()
+                response.data?.let { interviewQuestionsData ->
+                    interviewData = interviewQuestionsData.copy(
+                        questions = interviewQuestionsData.questions.sortedBy { it.questionOrder }
+                    )
+                } ?: run {
+                    throw Exception()
+                }
+
+                _startInterviewState.value = Result.Success(response)
             }
-
-            _startInterviewState.value = Result.Success(response)
         } catch (e: Exception) {
             _startInterviewState.value = Result.Error(SingleEvent(e))
         }

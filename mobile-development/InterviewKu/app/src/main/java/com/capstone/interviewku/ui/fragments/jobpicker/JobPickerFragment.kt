@@ -1,6 +1,7 @@
 package com.capstone.interviewku.ui.fragments.jobpicker
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ import com.capstone.interviewku.util.JobFieldModel
 import com.capstone.interviewku.util.SpinnerModel
 
 class JobPickerFragment(
-    private val onDialogClosed: (Int) -> Unit,
+    private val onJobSelected: (Int) -> Unit,
 ) : DialogFragment() {
     private var _binding: CustomAlertJobBinding? = null
     private val binding
@@ -45,7 +46,7 @@ class JobPickerFragment(
                 ?.toIntOrNull()
 
             if (jobFieldId != null && jobFieldId != -1) {
-                onDialogClosed(jobFieldId)
+                onJobSelected(jobFieldId)
                 dismiss()
             }
         }
@@ -63,6 +64,18 @@ class JobPickerFragment(
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
         binding.spinner.isEnabled = false
+
+        dialog?.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                if (event.action == KeyEvent.ACTION_UP) {
+                    dismiss()
+                    requireActivity().finish()
+                    return@setOnKeyListener true
+                }
+            }
+
+            false
+        }
     }
 
     override fun onDestroy() {
@@ -71,9 +84,6 @@ class JobPickerFragment(
     }
 
     fun setData(jobFieldModel: JobFieldModel) {
-        binding.progressBar.isVisible = false
-        binding.spinner.isEnabled = true
-
         val spinnerData = mutableListOf<SpinnerModel>()
         spinnerData.add(SpinnerModel("-1", "Silahkan Pilih"))
         spinnerData.addAll(
@@ -82,10 +92,19 @@ class JobPickerFragment(
             }
         )
 
-        binding.spinner.adapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_item,
-            spinnerData
-        )
+        val selectedIndex = jobFieldModel.jobFields.indexOfFirst {
+            it.id == jobFieldModel.selectedId
+        }
+
+        binding.progressBar.isVisible = false
+        binding.spinner.apply {
+            isEnabled = true
+            adapter = ArrayAdapter(
+                requireContext(),
+                R.layout.spinner_item,
+                spinnerData
+            )
+            setSelection(selectedIndex + 1)
+        }
     }
 }

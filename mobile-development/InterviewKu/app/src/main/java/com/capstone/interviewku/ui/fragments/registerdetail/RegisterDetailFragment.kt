@@ -83,15 +83,17 @@ class RegisterDetailFragment : Fragment() {
             ).show(parentFragmentManager, "")
         }
 
-        viewModel.jobPositionState.observe(viewLifecycleOwner) {
-            when (it) {
+        viewModel.jobPositionState.observe(viewLifecycleOwner) { jobPositionsResponseResult ->
+            when (jobPositionsResponseResult) {
                 is Result.Success -> {
                     binding.progressBar.isVisible = false
-                    it.data.data?.let { jobPositionsResponseData ->
+                    jobPositionsResponseResult.data.data?.let { jobPositionsResponseData ->
                         val spinnerData = mutableListOf<SpinnerModel>()
                         spinnerData.add(SpinnerModel("-1", "Silahkan Pilih"))
                         spinnerData.addAll(
-                            jobPositionsResponseData.jobPositions.map { jobPosition ->
+                            jobPositionsResponseData.jobPositions.sortedBy {
+                                it.id
+                            }.map { jobPosition ->
                                 SpinnerModel(jobPosition.id.toString(), jobPosition.name)
                             }
                         )
@@ -111,7 +113,8 @@ class RegisterDetailFragment : Fragment() {
 
                 is Result.Error -> {
                     binding.progressBar.isVisible = false
-                    it.exception.getData()?.handleHttpException(requireContext())
+                    jobPositionsResponseResult.exception.getData()
+                        ?.handleHttpException(requireContext())
                 }
             }
         }
