@@ -409,6 +409,20 @@ class InterviewsService {
       throw new InvariantError('Sesi Interview Tidak Ditemukan');
     }
   }
+
+  async getJobFieldNameByInterviewAndOrder({ interviewId, questionOrder }) {
+    const query = {
+      text: `
+        SELECT job_field_name FROM question_answer_histories
+        WHERE test_history_id = $1 AND question_order = $2
+      `,
+      values: [interviewId, questionOrder],
+    };
+
+    const result = await this._pool.query(query);
+
+    return result.rows[0].job_field_name;
+  }
 }
 
 module.exports = InterviewsService;

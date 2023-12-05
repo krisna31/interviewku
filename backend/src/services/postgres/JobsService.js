@@ -69,6 +69,21 @@ class JobsService {
 
     return result.rows[0].name;
   }
+
+  async getJobFieldIdByJobFieldName({ jobFieldName }) {
+    const query = {
+      text: 'SELECT id FROM job_fields WHERE name = $1',
+      values: [jobFieldName],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new InvariantError('Job Field tidak valid');
+    }
+
+    return result.rows[0].id;
+  }
 }
 
 module.exports = JobsService;

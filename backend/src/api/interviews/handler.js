@@ -9,6 +9,7 @@ class InterviewsHandler {
     machineLearningService,
     audioService,
     jobsService,
+    answersService,
   }) {
     this._questionsService = questionsService;
     this._interviewsService = interviewsService;
@@ -16,6 +17,7 @@ class InterviewsHandler {
     this._machineLearningService = machineLearningService;
     this._audioService = audioService;
     this._jobsService = jobsService;
+    this._answersService = answersService;
   }
 
   async getQuestions(request, h) {
@@ -102,8 +104,18 @@ class InterviewsHandler {
 
       const userAnswer = await this._audioService.convertAudioToText(audio);
 
+      const allAnswer = await this._answersService.getAllAnswers({ question });
+
+      const jobFieldName = await this._interviewsService
+        .getJobFieldNameByInterviewAndOrder({
+          interviewId,
+          questionOrder,
+        });
+
       const score = await this._machineLearningService.getScore({
         userAnswer,
+        field: jobFieldName,
+        allAnswer,
       });
 
       const strukturScore = await this._machineLearningService.getStrukturScore({

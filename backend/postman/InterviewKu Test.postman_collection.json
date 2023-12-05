@@ -3265,14 +3265,14 @@
 					"response": []
 				},
 				{
-					"name": "Start Interview Fail",
+					"name": "Start Interview Wrong Job Field",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('it should response 200 status code', () => {\r",
-									"    pm.expect(pm.response).to.have.status(200);\r",
+									"pm.test('it should response 400 status code', () => {\r",
+									"    pm.expect(pm.response).to.have.status(400);\r",
 									"});\r",
 									"\r",
 									"pm.test('response Content-Type header should have application/json value', () => {\r",
@@ -3287,18 +3287,8 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
-									"    pm.expect(responseJson.success).to.equal(true);\r",
-									"    pm.expect(responseJson.message).to.equal(`Sesi Interview ${responseJson.data.interviewId} telah dimulai`);\r",
-									"    pm.expect(responseJson.data.questions).to.be.an(`array`);\r",
-									"\r",
-									"    pm.environment.set('interviewId', responseJson.data.interviewId)\r",
-									"    pm.environment.set('o1', responseJson.data.questions[0].questionOrder)\r",
-									"    pm.environment.set('q1', responseJson.data.questions[0].question)\r",
-									"    pm.environment.set('o2', responseJson.data.questions[1].questionOrder)\r",
-									"    pm.environment.set('q2', responseJson.data.questions[1].question)\r",
-									"    pm.environment.set('o3', responseJson.data.questions[2].questionOrder)\r",
-									"    pm.environment.set('q3', responseJson.data.questions[2].question)\r",
-									"    pm.environment.set('interviewToken', responseJson.data.token)\r",
+									"    pm.expect(responseJson.success).to.equal(false);\r",
+									"    pm.expect(responseJson.message).to.equal('\\\"jobFieldId\\\" must be greater than or equal to 6');\r",
 									"});\r",
 									""
 								],
@@ -3320,7 +3310,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/questions?mode=latihan&jobFieldId=6",
+							"raw": "{{protocol}}://{{host}}:{{port}}/interviews/questions?mode=latihan&jobFieldId=5",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
@@ -3337,7 +3327,7 @@
 								},
 								{
 									"key": "jobFieldId",
-									"value": "6"
+									"value": "5"
 								}
 							]
 						}
@@ -4336,7 +4326,7 @@
 					"response": []
 				},
 				{
-					"name": "Get one sesi Interview Copy",
+					"name": "Get All Interview belongs to this user",
 					"event": [
 						{
 							"listen": "test",

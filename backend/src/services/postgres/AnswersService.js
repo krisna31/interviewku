@@ -24,6 +24,28 @@ class AnswersService {
 
     return result.rows;
   }
+
+  async getAllAnswers({ question }) {
+    const query = {
+      text: `
+      SELECT answer
+      FROM answers 
+        where question_id = (
+          select id from questions
+          where question = $1
+        )
+      `,
+      values: [question],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (result.rowCount < 1) {
+      throw new InvariantError('Data Masih Kosong');
+    }
+
+    return result.rows;
+  }
 }
 
 module.exports = AnswersService;

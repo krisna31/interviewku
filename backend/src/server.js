@@ -163,6 +163,7 @@ require('dotenv').config();
         machineLearningService,
         audioService,
         jobsService,
+        answersService,
       },
     },
   ]);
