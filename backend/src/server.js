@@ -162,6 +162,7 @@ require('dotenv').config();
         storageService,
         machineLearningService,
         audioService,
+        jobsService,
       },
     },
   ]);

@@ -45,6 +45,8 @@ const InterviewDataResponseSchema = Joi.object({
       .required(),
     totalDuration: Joi.number().max(2147483647).allow(null).required(),
     feedback: Joi.string().required(),
+    jobFieldName: Joi.string().required(),
+    startedAt: Joi.date().required(),
     answers: Joi.array().items(Joi.object({
       question: Joi.string().required(),
       jobFieldName: Joi.string().required(),
@@ -96,6 +98,8 @@ const ListOfInterviewDataResponseSchema = Joi.object({
       .required(),
     totalDuration: Joi.number().max(2147483647).allow(null).required(),
     feedback: Joi.string().required(),
+    startedAt: Joi.date().required(),
+    jobFieldName: Joi.string().required(),
   })),
 }).label('List Of Interview History Response');
 

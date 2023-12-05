@@ -8,12 +8,14 @@ class InterviewsHandler {
     storageService,
     machineLearningService,
     audioService,
+    jobsService,
   }) {
     this._questionsService = questionsService;
     this._interviewsService = interviewsService;
     this._storageService = storageService;
     this._machineLearningService = machineLearningService;
     this._audioService = audioService;
+    this._jobsService = jobsService;
   }
 
   async getQuestions(request, h) {
@@ -24,20 +26,26 @@ class InterviewsHandler {
     } = request.query;
     const { id: userId } = request.auth.credentials;
 
+    const jobFieldName = await this._jobsService.getJobFieldNameByJobFieldId({
+      jobFieldId,
+    });
+
     // generate random total questions
     const totalQuestions = randomInRange(3, 5);
 
     // get questions by total questions
-    const questions = await this._questionsService.getQuestionsByTotalQuestionAndJobFieldId({
-      totalQuestions,
-      jobFieldId,
-    });
+    const questions = await this._questionsService
+      .getQuestionsByTotalQuestionAndJobFieldId({
+        totalQuestions,
+        jobFieldId,
+      });
 
     // insert data to test_histories table with mode and total questions
     const interviewId = await this._interviewsService.addInterview({
       userId,
       mode,
       totalQuestions,
+      jobFieldName,
     });
 
     const token = await this._interviewsService.generateInterviewToken({ interviewId });

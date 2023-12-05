@@ -19,6 +19,10 @@ exports.up = (pgm) => {
       type: 'VARCHAR(50)',
       notNull: true,
     },
+    job_field_name: {
+      type: 'VARCHAR(50)',
+      notNull: false,
+    },
     total_questions: {
       type: 'integer',
       notNull: true,

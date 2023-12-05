@@ -10,6 +10,7 @@ module.exports = {
     storageService,
     machineLearningService,
     audioService,
+    jobsService,
   }) => {
     const interviewsHandler = new InterviewsHandler({
       questionsService,
@@ -17,6 +18,7 @@ module.exports = {
       storageService,
       machineLearningService,
       audioService,
+      jobsService,
     });
     server.route(routes(interviewsHandler));
   },

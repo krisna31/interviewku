@@ -42,12 +42,17 @@ class InterviewsService {
     }));
   }
 
-  async addInterview({ userId, mode, totalQuestions }) {
+  async addInterview({
+    userId,
+    mode,
+    totalQuestions,
+    jobFieldName,
+  }) {
     const id = `sesi-interview-${nanoid(16)}`;
 
     const query = {
-      text: 'INSERT INTO test_histories (id, user_id, mode, total_questions) VALUES ($1, $2, $3, $4) RETURNING id',
-      values: [id, userId, mode, totalQuestions],
+      text: 'INSERT INTO test_histories (id, user_id, mode, total_questions, job_field_name) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+      values: [id, userId, mode, totalQuestions, jobFieldName],
     };
 
     const result = await this._pool.query(query);
@@ -220,6 +225,7 @@ class InterviewsService {
           th.mode,
           th.total_questions,
           th.completed,
+          th.job_field_name,
           AVG(qah.score) AS avg_score,
           AVG(qah.struktur_score) AS avg_struktur_score,
           AVG(qah.retry_attempt) AS avg_retry_attempt,
@@ -252,6 +258,8 @@ class InterviewsService {
       // strukturScore: interviewSession.avg_struktur_score,
       // retryAttempt: interviewSession.avg_retry_attempt,
       totalDuration: interviewSession.total_duration,
+      startedAt: interviewSession.created_at,
+      jobFieldName: interviewSession.job_field_name,
       feedback: getFeedback(
         interviewSession.avg_score,
         interviewSession.avg_struktur_score,
@@ -352,6 +360,7 @@ class InterviewsService {
           th.mode,
           th.total_questions,
           th.completed,
+          th.job_field_name,
           AVG(qah.score) AS avg_score,
           AVG(qah.struktur_score) AS avg_struktur_score,
           AVG(qah.retry_attempt) AS avg_retry_attempt,
@@ -378,11 +387,13 @@ class InterviewsService {
       // strukturScore: interview.avg_struktur_score,
       // retryAttempt: interview.avg_retry_attempt,
       totalDuration: interview.total_duration,
+      jobFieldName: interview.job_field_name,
       feedback: getFeedback(
         interview.avg_score,
         interview.avg_struktur_score,
         interview.avg_retry_attempt,
       ),
+      startedAt: interview.created_at,
     }));
   }
 

@@ -50,6 +50,25 @@ class JobsService {
       // updatedAt: jobPosition.updated_at,
     }));
   }
+
+  async getJobFieldNameByJobFieldId({ jobFieldId }) {
+    const query = {
+      text: 'SELECT name FROM job_fields WHERE id = $1',
+      values: [jobFieldId],
+    };
+
+    if (jobFieldId < 6) {
+      throw new InvariantError('Job Field tidak valid');
+    }
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new InvariantError('Job Field tidak valid');
+    }
+
+    return result.rows[0].name;
+  }
 }
 
 module.exports = JobsService;
