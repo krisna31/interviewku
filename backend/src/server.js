@@ -16,12 +16,14 @@ const jobs = require('./api/jobs');
 // const questions = require('./api/questions');
 const answers = require('./api/answers');
 const interviews = require('./api/interviews');
+const articles = require('./api/articles');
 
 const authentications = require('./api/authentication');
 const TokenManager = require('./tokenize/TokenManager');
 const JobsService = require('./services/postgres/JobsService');
 const QuestionsService = require('./services/postgres/QuestionsService');
 const AnswersService = require('./services/postgres/AnswersService');
+const ArticlesService = require('./services/postgres/ArticlesService');
 const InterviewsService = require('./services/postgres/InterviewsService');
 const StorageService = require('./services/storage/StorageService');
 const MachineLearningService = require('./services/tensorflow/MachineLearningService');
@@ -43,6 +45,7 @@ require('dotenv').config();
   const machineLearningService = new MachineLearningService();
   const audioService = new AudioService();
   const mailService = new MailService();
+  const articlesService = new ArticlesService();
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -164,6 +167,12 @@ require('dotenv').config();
         audioService,
         jobsService,
         answersService,
+      },
+    },
+    {
+      plugin: articles,
+      options: {
+        articlesService,
       },
     },
   ]);

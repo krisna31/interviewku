@@ -35,6 +35,12 @@ exports.up = (pgm) => {
       notNull: false,
     },
   });
+
+  pgm.sql(`
+    INSERT INTO articles (title, subtitle, author, cover_img_url, content, created_at, updated_at)
+    VALUES 
+      ('Tips and Tricks for Interviews', 'Mastering the Interview Process', 'YourName', 'url_to_cover_image', '# Tips and Tricks for Interviews\n\nYour article content goes here.', NOW(), NOW());
+  `);
 };
 
 exports.down = (pgm) => {
