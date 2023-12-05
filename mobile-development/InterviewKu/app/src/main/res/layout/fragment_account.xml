@@ -9,7 +9,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-       android:background="@color/black"
+        android:background="@color/black"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <androidx.appcompat.widget.Toolbar
@@ -41,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/widget"
         tools:layout_editor_absoluteX="0dp" />
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/widget"
         android:layout_width="0dp"
@@ -48,6 +49,7 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
@@ -62,19 +64,20 @@
             android:src="@mipmap/ic_launcher" />
 
         <TextView
+            android:id="@+id/tv_name_account"
+            style="@style/Base.Theme.InterviewKu"
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
             android:layout_marginTop="0.5dp"
             android:gravity="start|top"
             android:includeFontPadding="false"
-            style="@style/Base.Theme.InterviewKu"
+            android:text="Nama Lengkap"
             android:textSize="16sp"
             tools:text="Nama Lengkap" />
 
     </androidx.appcompat.widget.Toolbar>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_profile"
@@ -105,16 +108,15 @@
 
         <TextView
             android:id="@+id/profile_text"
+            style="@style/Base.Theme.InterviewKu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/profile"
-            style="@style/Base.Theme.InterviewKu"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/profile_image"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -147,18 +149,15 @@
 
         <TextView
             android:id="@+id/textView3"
+            style="@style/Base.Theme.InterviewKu"
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
-            android:layout_gravity="start|top"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:gravity="start|center_vertical"
-            android:includeFontPadding="false"
-            style="@style/Base.Theme.InterviewKu"
+            android:text="@string/fragment_tts"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/fragment_tts" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -179,18 +178,15 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
         <TextView
+            style="@style/Base.Theme.InterviewKu"
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
-            android:layout_gravity="start|top"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:gravity="start|center_vertical"
-            android:includeFontPadding="false"
-            style="@style/Base.Theme.InterviewKu"
+            android:text="@string/fragment_kata_sandi"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/fragment_kata_sandi" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -213,18 +209,15 @@
         app:layout_constraintTop_toBottomOf="@+id/cl_reset_password">
 
         <TextView
+            style="@style/Base.Theme.InterviewKu"
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
-            android:layout_gravity="start|top"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:gravity="start|center_vertical"
-            android:includeFontPadding="false"
-            style="@style/Base.Theme.InterviewKu"
+            android:text="@string/logout"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/logout" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView4"
