@@ -59,12 +59,27 @@ class RegisterDetailFragment : Fragment() {
                 val jobPositionId =
                     (binding.spinnerJobPosition.selectedItem as SpinnerModel?)?.value?.toIntOrNull()
 
-                Log.d("test", "onViewCreated: $gender $birthdate $currentCity $jobPositionId")
-                if (gender == null || birthdate == null || currentCity.isEmpty() || jobPositionId == null || jobPositionId == -1) {
+                if (gender == null) {
+                    showToast(getString(R.string.gender_required))
                     return@setOnClickListener
-                } else {
-                    viewModel.addUserIdentity(jobPositionId, gender, birthdate, currentCity)
                 }
+
+                if (birthdate == null) {
+                    showToast(getString(R.string.birthdate_required))
+                    return@setOnClickListener
+                }
+
+                if (currentCity.isEmpty()) {
+                    showToast(getString(R.string.current_city_required))
+                    return@setOnClickListener
+                }
+
+                if (jobPositionId == null || jobPositionId == -1) {
+                    showToast(getString(R.string.job_position_required))
+                    return@setOnClickListener
+                }
+
+                viewModel.addUserIdentity(jobPositionId, gender, birthdate, currentCity)
             }
         }
 
@@ -143,6 +158,10 @@ class RegisterDetailFragment : Fragment() {
         viewModel.getJobPositions()
     }
 
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+    
     override fun onDestroy() {
         _binding = null
         super.onDestroy()

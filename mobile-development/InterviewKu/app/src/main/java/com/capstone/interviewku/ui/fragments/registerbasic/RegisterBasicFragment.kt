@@ -41,7 +41,9 @@ class RegisterBasicFragment : Fragment() {
             val firstName = binding.etRegisterFirstName.text.toString()
             val lastName = binding.etRegisterLastName.text.toString()
 
-            viewModel.register(email, password, firstName, lastName)
+            if (isStrongPassword(password)) {
+                viewModel.register(email, password, firstName, lastName)
+            }
         }
 
         viewModel.registerState.observe(viewLifecycleOwner) {
@@ -64,6 +66,38 @@ class RegisterBasicFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun isStrongPassword(password: String): Boolean {
+        val minLength = 8
+        val hasUppercase = Regex("[A-Z]").containsMatchIn(password)
+        val hasDigit = Regex("[0-9]").containsMatchIn(password)
+        val hasSpecialChar = Regex("[!@#\$%^&*()]").containsMatchIn(password)
+
+        val isStrong = password.length >= minLength &&
+                hasUppercase && hasDigit && hasSpecialChar
+
+        if (password.length < minLength) {
+            showToast(getString(R.string.password_requires_min_length))
+        }
+
+        if (!hasUppercase) {
+            showToast(getString(R.string.password_requires_uppercase))
+        }
+
+        if (!hasDigit) {
+            showToast(getString(R.string.password_requires_digit))
+        }
+
+        if (!hasSpecialChar) {
+            showToast(getString(R.string.password_requires_special_char))
+        }
+
+        return isStrong
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {

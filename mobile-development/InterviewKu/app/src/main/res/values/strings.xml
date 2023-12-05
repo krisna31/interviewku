@@ -74,4 +74,13 @@
     <string name="submit_answer_failed">Gagal untuk mengirim jawaban. SIlahkan coba lagi</string>
     <string name="end_interview_failed">Gagal untuk mengakhiri sesi. Silahkan coba lagi</string>
     <string name="tts_not_initialized">TTS belum diinisialisasi</string>
+    <string name="password_requires_uppercase">password membutuhkan huruf besar</string>
+    <string name="password_requires_digit">password membutuhkan angka</string>
+    <string name="password_requires_special_char">password membutuhkan karakter khusus</string>
+    <string name="password_requires_min_length">Password membutuhkan 8 karakter</string>
+    <string name="gender_required">Silakan pilih jenis kelamin</string>
+    <string name="birthdate_required">Silakan pilih tanggal lahir</string>
+    <string name="current_city_required">Silakan masukkan kota tempat tinggal</string>
+    <string name="job_position_required">Silakan pilih posisi pekerjaan</string>
+
 </resources>
