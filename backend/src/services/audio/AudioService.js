@@ -7,9 +7,10 @@ const InvariantError = require('../../exceptions/InvariantError');
 class AudioService {
   constructor() {
     this._getDurationService = getAudioDurationInSeconds;
-    this._googleSpeech = new speech.SpeechClient({
-      keyFilename: process.env.GOOGLE_SERVICE_ACCOUNT_KEY,
-    });
+    this._googleSpeech = process.env.GOOGLE_SERVICE_ACCOUNT_KEY !== false
+      ? new speech.SpeechClient({
+        keyFilename: process.env.GOOGLE_SERVICE_ACCOUNT_KEY,
+      }) : new speech.SpeechClient();
   }
 
   async validateAudio(audio) {
