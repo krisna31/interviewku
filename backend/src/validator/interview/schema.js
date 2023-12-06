@@ -51,7 +51,7 @@ const InterviewDataResponseSchema = Joi.object({
       question: Joi.string().required(),
       jobFieldName: Joi.string().required(),
       questionOrder: Joi.number().max(2147483647).required(),
-      userAnswer: Joi.string().allow(null).required(),
+      userAnswer: Joi.string().allow(null).allow('').required(),
       audioUrl: Joi.string().allow(null).required(),
       score: Joi.number().min(0).max(5).allow(null)
         .required(),
