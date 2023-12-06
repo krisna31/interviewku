@@ -89,12 +89,24 @@ const GetQuestionsQuerySchema = Joi.object({
 const ListOfInterviewDataResponseSchema = Joi.object({
   success: Joi.boolean().default(true).required(),
   message: Joi.string().default('Sesi interview berhasil ditutup').required(),
+  meta: Joi.object().keys({
+    count: Joi.number().default(1).required(),
+    currentPage: Joi.number().default(1).required(),
+    totalData: Joi.number().default(1).required(),
+    nextUrl: Joi.string().allow(null),
+    previousUrl: Joi.string().allow(null),
+    firstPageUrl: Joi.string().required(),
+    lastPageUrl: Joi.string().required(),
+    limit: Joi.number().default(10).required(),
+  })
+    .label('Meta')
+    .required(),
   data: Joi.array().items(Joi.object({
     interviewId: Joi.string().required(),
     mode: Joi.string().valid('latihan', 'interview').required(),
     totalQuestions: Joi.number().max(2147483647).required(),
     completed: Joi.boolean().required(),
-    score: Joi.number().min(1).max(5).allow(null)
+    score: Joi.number().min(0).max(5).allow(null)
       .required(),
     totalDuration: Joi.number().max(2147483647).allow(null).required(),
     feedback: Joi.string().required(),

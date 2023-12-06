@@ -3072,9 +3072,8 @@
 									"    const responseJson = pm.response.json();\r",
 									"\r",
 									"    pm.expect(responseJson.success).to.equal(true);\r",
-									"    pm.expect(responseJson.message).to.equal('Semua Articles berhasil ditemukan');\r",
-									"    pm.expect(responseJson.data).to.be.an('object');\r",
-									"    pm.expect(responseJson.data.articles).to.be.an('array');\r",
+									"    pm.expect(responseJson.message).to.equal('Articles berhasil ditemukan');\r",
+									"    pm.expect(responseJson.data).to.be.an('array');\r",
 									"});\r",
 									""
 								],
@@ -3096,7 +3095,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/articles",
+							"raw": "{{protocol}}://{{host}}:{{port}}/articles?page=1&limit=10",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
@@ -3104,6 +3103,16 @@
 							"port": "{{port}}",
 							"path": [
 								"articles"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -3156,7 +3165,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/articles/1",
+							"raw": "{{protocol}}://{{host}}:{{port}}/articles/33",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
@@ -3164,7 +3173,7 @@
 							"port": "{{port}}",
 							"path": [
 								"articles",
-								"1"
+								"33"
 							]
 						}
 					},

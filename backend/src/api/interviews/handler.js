@@ -196,14 +196,31 @@ class InterviewsHandler {
 
   async getAllInterview(request, h) {
     const { id: userId } = request.auth.credentials;
+    const { page = 1, limit = 10 } = request.query;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    const totalData = await this._interviewsService.getTotalDataByUserId({ userId });
 
     const interviewData = await this._interviewsService.getAllInterviewByUserId({
       userId,
+      limit,
+      offset: startIndex,
     });
 
     return {
       success: true,
       message: 'Sesi Interview ditemukan',
+      meta: {
+        count: interviewData.length || 0,
+        currentPage: +page,
+        totalData: +totalData || 0,
+        nextUrl: endIndex < totalData ? `${process.env.BASE_URL}/interviews?page=${+page + 1}&limit=${limit}` : null,
+        previousUrl: startIndex > 0 ? `${process.env.BASE_URL}/interviews?page=${+page - 1}&limit=${limit}` : null,
+        firstPageUrl: `${process.env.BASE_URL}/interviews?page=1&limit=${limit}`,
+        lastPageUrl: `${process.env.BASE_URL}/interviews?page=${Math.ceil(totalData / limit)}&limit=${limit}`,
+        limit: +limit,
+      },
       data: interviewData,
     };
   }

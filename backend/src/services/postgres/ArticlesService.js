@@ -6,9 +6,10 @@ class ArticlesService {
     this._pool = new Pool();
   }
 
-  async getAllArticles() {
+  async getAllArticles({ limit = 10, offset = 0 }) {
     const query = {
-      text: 'SELECT * FROM articles',
+      text: 'SELECT * FROM articles LIMIT $1 OFFSET $2',
+      values: [limit, offset],
     };
 
     const result = await this._pool.query(query);
@@ -19,9 +20,19 @@ class ArticlesService {
       subtitle: article.subtitle,
       content: article.content,
       coverImgUrl: article.cover_img_url,
-      // createdAt: article.created_at,
+      createdAt: article.created_at,
       // updatedAt: article.updated_at,
     }));
+  }
+
+  async getTotalData() {
+    const query = {
+      text: 'SELECT COUNT(*) FROM articles',
+    };
+
+    const result = await this._pool.query(query);
+
+    return result.rows[0].count;
   }
 
   async getArticleById(articleId) {

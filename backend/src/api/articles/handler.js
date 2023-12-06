@@ -5,14 +5,34 @@ class ArticlesHandler {
   }
 
   async getAllArticlesHandler(request, h) {
-    const articles = await this._articlesService.getAllArticles();
+    // get page and limit
+    const { page = 1, limit = 10 } = request.query;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    // get total data
+    const totalData = await this._articlesService.getTotalData();
+
+    // get all articles
+    const articles = await this._articlesService.getAllArticles({
+      limit,
+      offset: startIndex,
+    });
 
     return {
       success: true,
-      message: 'Semua Articles berhasil ditemukan',
-      data: {
-        articles,
+      message: 'Articles berhasil ditemukan',
+      meta: {
+        count: articles.length || 0,
+        currentPage: +page,
+        totalData: +totalData || 0,
+        nextUrl: endIndex < totalData ? `${process.env.BASE_URL}/articles?page=${+page + 1}&limit=${limit}` : null,
+        previousUrl: startIndex > 0 ? `${process.env.BASE_URL}/articles?page=${+page - 1}&limit=${limit}` : null,
+        firstPageUrl: `${process.env.BASE_URL}/articles?page=1&limit=${limit}`,
+        lastPageUrl: `${process.env.BASE_URL}/articles?page=${Math.ceil(totalData / limit)}&limit=${limit}`,
+        limit: +limit,
       },
+      data: articles,
     };
   }
 

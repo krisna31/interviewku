@@ -352,7 +352,7 @@ class InterviewsService {
     }
   }
 
-  async getAllInterviewByUserId({ userId }) {
+  async getAllInterviewByUserId({ userId, limit, offset }) {
     const query = {
       text: `
         SELECT
@@ -372,8 +372,9 @@ class InterviewsService {
           ON th.id = qah.test_history_id
         WHERE th.user_id = $1
         GROUP BY th.id
+        LIMIT $2 OFFSET $3
       `,
-      values: [userId],
+      values: [userId, limit, offset],
     };
 
     const result = await this._pool.query(query);
@@ -422,6 +423,17 @@ class InterviewsService {
     const result = await this._pool.query(query);
 
     return result.rows[0].job_field_name;
+  }
+
+  async getTotalDataByUserId({ userId }) {
+    const query = {
+      text: 'SELECT COUNT(*) FROM test_histories WHERE user_id = $1',
+      values: [userId],
+    };
+
+    const result = await this._pool.query(query);
+
+    return result.rows[0].count;
   }
 }
 
