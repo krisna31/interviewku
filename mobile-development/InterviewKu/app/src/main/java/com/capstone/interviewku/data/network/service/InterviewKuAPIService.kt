@@ -60,6 +60,8 @@ interface InterviewKuAPIService {
     @GET("/interviews")
     suspend fun getAllInterviewResults(
         @Header("Authorization") bearerToken: String,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
     ): InterviewHistoryResponse
 
     @GET("/interviews/questions")

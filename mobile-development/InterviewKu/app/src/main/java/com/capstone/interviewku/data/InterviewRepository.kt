@@ -1,9 +1,14 @@
 package com.capstone.interviewku.data
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.liveData
 import com.capstone.interviewku.data.network.APIUtil
 import com.capstone.interviewku.data.network.service.InterviewKuAPIService
 import com.capstone.interviewku.data.network.types.InterviewMode
+import com.capstone.interviewku.data.paging.InterviewHistoryPagingSource
 import com.capstone.interviewku.data.preferences.AppPreferences
+import com.capstone.interviewku.util.Constants
 import kotlinx.coroutines.flow.first
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -18,12 +23,14 @@ class InterviewRepository @Inject constructor(
     private val apiService: InterviewKuAPIService,
     private val appPreferences: AppPreferences
 ) {
-    suspend fun getAllInterviewResults() =
-        APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
-            apiService.getAllInterviewResults(
-                appPreferences.getBearerToken().first()
-            )
+    fun getAllInterviewResults() = Pager(
+        config = PagingConfig(
+            pageSize = Constants.INTERVIEW_HISTORY_PAGE_SIZE
+        ),
+        pagingSourceFactory = {
+            InterviewHistoryPagingSource(apiService, appPreferences)
         }
+    ).liveData
 
     suspend fun getInterviewResultById(interviewId: String) =
         APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
@@ -48,14 +55,6 @@ class InterviewRepository @Inject constructor(
                 appPreferences.getBearerToken().first(),
                 InterviewMode.TEST.mode,
                 jobFieldId
-            )
-        }
-
-    suspend fun getInterviewQuestions(interviewId: String) =
-        APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
-            apiService.getCurrentInterviewQuestions(
-                appPreferences.getBearerToken().first(),
-                interviewId
             )
         }
 

@@ -1,43 +1,37 @@
-<!-- res/layout/custom_alert_dialog_two_textviews.xml -->
+<?xml version="1.0" encoding="utf-8" ?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp">
+    android:padding="@dimen/root_padding">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tv_instruction_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/instruction"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_instructions"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_custom_train"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_instruction_title"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna eros, mattis eu eros ut, ultrices vulputate nisl. Duis sagittis eu turpis eget suscipit. In ultricies, sapien a rhoncus accumsan, libero nunc pharetra ante, non ultricies risus ipsum ut ipsum. In in augue libero. Suspendisse et scelerisque massa." />
 
     <Button
-        android:id="@+id/btn_custom_train"
-        android:layout_width="0dp"
+        android:id="@+id/btn_continue"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_custom_train"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_instructions"
         tools:text="Mulai Latihan" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

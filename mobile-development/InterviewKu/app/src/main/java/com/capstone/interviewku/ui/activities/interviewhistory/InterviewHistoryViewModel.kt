@@ -1,12 +1,16 @@
 package com.capstone.interviewku.ui.activities.interviewhistory
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.capstone.interviewku.data.InterviewRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class InterviewHistoryViewModel @Inject constructor(
-    private val interviewRepository: InterviewRepository
+    interviewRepository: InterviewRepository
 ) : ViewModel() {
+    val allInterviewResults =
+        interviewRepository.getAllInterviewResults().cachedIn(viewModelScope)
 }

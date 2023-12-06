@@ -4,5 +4,6 @@
     android:id="@+id/tv_spinner_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
+    android:padding="@dimen/root_padding"
+    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
     tools:text="Item" />

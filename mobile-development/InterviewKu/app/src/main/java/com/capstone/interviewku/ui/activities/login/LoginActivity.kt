@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
                     binding.progressBar.isVisible = false
 
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                    finish()
+                    finishAffinity()
                 }
 
                 is Result.Loading -> {

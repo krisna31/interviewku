@@ -7,30 +7,12 @@
     tools:context=".ui.activities.tipsdetail.TipsDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/action_bar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:clipToPadding="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="start|center_vertical"
-            android:layout_marginStart="16dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/baseline_keyboard_backspace_24" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:text="@string/judul"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -39,17 +21,17 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#FF000000"
-        app:layout_constraintTop_toBottomOf="@id/action_bar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <ImageView
         android:id="@+id/fullscreenImageView"
         android:layout_width="414dp"
         android:layout_height="255dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/img_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tv_detail_tips"
@@ -58,22 +40,22 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="145dp"
-        android:text="Lorem ipsum dolor sit amet"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullscreenImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/fullscreenImageView"
+        tools:text="Lorem ipsum dolor sit amet" />
 
     <TextView
         android:id="@+id/tv_date_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Dibuat pada : 15 Oktober 2023, 10:00"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_tips" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail_tips"
+        tools:text="Dibuat pada : 15 Oktober 2023, 10:00" />
 
     <TextView
         android:id="@+id/tv_detail_deskripsi"
@@ -81,11 +63,11 @@
         android:layout_height="334dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis bibendum leo. Vivamus ac mi ac enim elementum pretium id malesuada tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam eu ipsum a est interdum bibendum. Nulla faucibus tortor non est iaculis, molestie placerat nulla convallis. Phasellus at mauris neque. Etiam et eros ultrices, accumsan quam ut, volutpat massa. Etiam egestas ultricies volutpat. Praesent quis odio rutrum, gravida nibh in, sollicitudin lorem. Morbi nisl diam, condimentum venenatis nisi at, mattis lobortis turpis. Etiam sodales lectus non sem tristique, nec volutpat felis tempus. Ut ut elit id nibh imperdiet facilisis vitae sed massa. In erat sem, dapibus eu tempor ac, congue vel massa. Vestibulum ex tortor, bibendum nec sem sed, efficitur viverra lorem.
-Nulla commodo magna sed malesuada rutrum. Nam a sem ut velit bibendum fermentum id non felis. Morbi elementum blandit tellus, sed venenatis nibh egestas at. Cras egestas dolor eget quam maximus aliquam. Integer in ex aliquet urna scelerisque venenatis. Morbi mollis bibendum nulla, at porttitor lectus facilisis ut. Proin in nisi at enim sagittis luctus at vitae elit. Nam sit amet nibh non nunc efficitur sollicitudin. Nulla lectus eros, blandit egestas augue sit amet, finibus maximus ipsum. Integer sit amet odio dapibus, dapibus massa eu, vulputate augue. Maecenas convallis sem lorem, ut imperdiet lacus feugiat quis. Integer sagittis sapien felis, ac vehicula odio sagittis auctor. Etiam sit amet auctor purus, eget bibendum tellus. Donec sit amet felis ac erat ultricies dignissim nec eget magna. Nullam imperdiet pretium urna, vel varius felis fringilla at."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_date_tips" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_date_tips"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis bibendum leo. Vivamus ac mi ac enim elementum pretium id malesuada tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam eu ipsum a est interdum bibendum. Nulla faucibus tortor non est iaculis, molestie placerat nulla convallis. Phasellus at mauris neque. Etiam et eros ultrices, accumsan quam ut, volutpat massa. Etiam egestas ultricies volutpat. Praesent quis odio rutrum, gravida nibh in, sollicitudin lorem. Morbi nisl diam, condimentum venenatis nisi at, mattis lobortis turpis. Etiam sodales lectus non sem tristique, nec volutpat felis tempus. Ut ut elit id nibh imperdiet facilisis vitae sed massa. In erat sem, dapibus eu tempor ac, congue vel massa. Vestibulum ex tortor, bibendum nec sem sed, efficitur viverra lorem.
+Nulla commodo magna sed malesuada rutrum. Nam a sem ut velit bibendum fermentum id non felis. Morbi elementum blandit tellus, sed venenatis nibh egestas at. Cras egestas dolor eget quam maximus aliquam. Integer in ex aliquet urna scelerisque venenatis. Morbi mollis bibendum nulla, at porttitor lectus facilisis ut. Proin in nisi at enim sagittis luctus at vitae elit. Nam sit amet nibh non nunc efficitur sollicitudin. Nulla lectus eros, blandit egestas augue sit amet, finibus maximus ipsum. Integer sit amet odio dapibus, dapibus massa eu, vulputate augue. Maecenas convallis sem lorem, ut imperdiet lacus feugiat quis. Integer sagittis sapien felis, ac vehicula odio sagittis auctor. Etiam sit amet auctor purus, eget bibendum tellus. Donec sit amet felis ac erat ultricies dignissim nec eget magna. Nullam imperdiet pretium urna, vel varius felis fringilla at." />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,6 +39,12 @@ data class InterviewResultData(
     @field:SerializedName("feedback")
     val feedback: String,
 
+    @field:SerializedName("jobFieldName")
+    val jobFieldName: String,
+
+    @field:SerializedName("startedAt")
+    val startedAt: String,
+
     @field:SerializedName("answers")
     val answers: List<InterviewResultItem>,
 ) : Parcelable
@@ -47,9 +53,6 @@ data class InterviewResultData(
 data class InterviewResultItem(
     @field:SerializedName("question")
     val question: String,
-
-    @field:SerializedName("jobPositionName")
-    val jobPositionName: String?,
 
     @field:SerializedName("jobFieldName")
     val jobFieldName: String,
@@ -71,9 +74,6 @@ data class InterviewResultItem(
 
     @field:SerializedName("retryAttempt")
     val retryAttempt: Int?,
-
-    @field:SerializedName("strukturFeedback")
-    val strukturFeedback: String,
 
     @field:SerializedName("feedback")
     val feedback: String,

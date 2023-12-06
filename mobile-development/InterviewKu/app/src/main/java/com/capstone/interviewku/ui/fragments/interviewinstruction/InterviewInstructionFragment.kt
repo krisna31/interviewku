@@ -36,7 +36,7 @@ class InterviewInstructionFragment(
 
         val context = requireContext()
 
-        binding.textView2.text = context.resources.getString(
+        binding.tvInstructions.text = context.resources.getString(
             when (dialogType) {
                 TYPE_TRAIN -> {
                     R.string.train_instruction
@@ -52,7 +52,7 @@ class InterviewInstructionFragment(
             }
         )
 
-        binding.btnCustomTrain.text = context.resources.getString(
+        binding.btnContinue.text = context.resources.getString(
             when (dialogType) {
                 TYPE_TRAIN -> {
                     R.string.start_train
@@ -68,7 +68,7 @@ class InterviewInstructionFragment(
             }
         )
 
-        binding.btnCustomTrain.setOnClickListener {
+        binding.btnContinue.setOnClickListener {
             onButtonClick()
             dismiss()
         }

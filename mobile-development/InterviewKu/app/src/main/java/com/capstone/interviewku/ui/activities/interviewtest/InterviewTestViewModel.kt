@@ -164,7 +164,7 @@ class InterviewTestViewModel @Inject constructor(
 
         try {
             jobFieldId?.let { id ->
-                val response = interviewRepository.startInterviewTrainSession(id)
+                val response = interviewRepository.startInterviewTestSession(id)
 
                 response.data?.let { interviewQuestionsData ->
                     interviewData = interviewQuestionsData.copy(

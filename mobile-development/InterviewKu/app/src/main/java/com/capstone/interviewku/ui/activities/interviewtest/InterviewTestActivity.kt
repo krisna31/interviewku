@@ -17,6 +17,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityInterviewTestBinding
+import com.capstone.interviewku.ui.activities.interviewresult.InterviewResultActivity
 import com.capstone.interviewku.ui.fragments.interviewinstruction.InterviewInstructionFragment
 import com.capstone.interviewku.ui.fragments.jobpicker.JobPickerFragment
 import com.capstone.interviewku.util.Constants
@@ -64,7 +65,9 @@ class InterviewTestActivity : AppCompatActivity() {
                                             }
                                         }
 
-                                        override fun onError(utteranceId: String?) {}
+                                        @Deprecated("Deprecated in Java")
+                                        override fun onError(utteranceId: String?) {
+                                        }
                                     })
                                 }
                             } else {
@@ -128,7 +131,7 @@ class InterviewTestActivity : AppCompatActivity() {
         initializeTTS()
         observeViewmodelData()
 
-        binding.civNext.setOnClickListener {
+        binding.ivNext.setOnClickListener {
             stopRecording()
             viewModel.sendAnswer()
         }
@@ -146,7 +149,7 @@ class InterviewTestActivity : AppCompatActivity() {
 
     private fun initializeJobFieldPicker() {
         jobPickerFragment = JobPickerFragment { jobFieldId ->
-            InterviewInstructionFragment(InterviewInstructionFragment.TYPE_TRAIN) {
+            InterviewInstructionFragment(InterviewInstructionFragment.TYPE_TEST) {
                 viewModel.setJobFieldId(jobFieldId)
                 viewModel.startInterviewSession()
             }.show(supportFragmentManager, null)
@@ -253,13 +256,13 @@ class InterviewTestActivity : AppCompatActivity() {
 
         viewModel.submitInterviewState.observe(this) {
             binding.progressBar.isVisible = it is Result.Loading
-            binding.civNext.isClickable = it is Result.Success
+            binding.ivNext.isClickable = it is Result.Success
             binding.ivRepeatQuestion.isClickable = it is Result.Success
 
             when (it) {
                 is Result.Success -> {
                     if (viewModel.isEndOfInterview) {
-                        binding.civNext.isVisible = false
+                        binding.ivNext.isVisible = false
                         binding.ivRepeatQuestion.isVisible = false
                         viewModel.endInterviewSession()
                     } else {
@@ -296,8 +299,16 @@ class InterviewTestActivity : AppCompatActivity() {
 
             when (it) {
                 is Result.Success -> {
-                    // to result activity
-                    Toast.makeText(this, it.data.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.interview_finished), Toast.LENGTH_SHORT)
+                        .show()
+                    it.data.data?.let { data ->
+                        startActivity(
+                            Intent(this, InterviewResultActivity::class.java).apply {
+                                putExtra(InterviewResultActivity.INTERVIEW_ID_KEY, data.interviewId)
+                            }
+                        )
+                    }
+                    finish()
                 }
 
                 is Result.Loading -> {}
@@ -332,7 +343,8 @@ class InterviewTestActivity : AppCompatActivity() {
         }
 
         viewModel.isRecording.observe(this) { isRecording ->
-            binding.civNext.isVisible = isRecording
+            binding.ivNext.isVisible = isRecording
+            binding.ivRecording.isVisible = isRecording
             binding.ivRepeatQuestion.isVisible = isRecording
         }
     }

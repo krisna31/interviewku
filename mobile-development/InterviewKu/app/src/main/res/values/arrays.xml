@@ -8,4 +8,11 @@
         <item>Laki-laki</item>
         <item>Perempuan</item>
     </string-array>
+    <string-array name="rating_summary">
+        <item>Sangat Kurang</item>
+        <item>Kurang Bagus</item>
+        <item>Cukup Bagus</item>
+        <item>Bagus!</item>
+        <item>Sempurna!!!</item>
+    </string-array>
 </resources>

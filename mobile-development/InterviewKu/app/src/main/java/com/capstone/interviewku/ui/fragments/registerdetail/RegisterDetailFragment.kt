@@ -3,6 +3,7 @@ package com.capstone.interviewku.ui.fragments.registerdetail
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -156,6 +157,17 @@ class RegisterDetailFragment : Fragment() {
         }
 
         viewModel.getJobPositions()
+
+        view.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                if (event.action == KeyEvent.ACTION_UP) {
+                    requireActivity().finishAffinity()
+                    return@setOnKeyListener true
+                }
+            }
+
+            false
+        }
     }
 
     private fun showToast(message: String) {

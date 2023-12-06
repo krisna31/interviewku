@@ -17,6 +17,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityInterviewTrainBinding
+import com.capstone.interviewku.ui.activities.interviewresult.InterviewResultActivity
 import com.capstone.interviewku.ui.fragments.interviewinstruction.InterviewInstructionFragment
 import com.capstone.interviewku.ui.fragments.jobpicker.JobPickerFragment
 import com.capstone.interviewku.util.Constants
@@ -116,7 +117,8 @@ class InterviewTrainActivity : AppCompatActivity() {
         initializeTTS()
         observeViewmodelData()
 
-        binding.civNext.setOnClickListener {
+        binding.ivNext.setOnClickListener {
+            textToSpeech?.stop()
             viewModel.sendAnswer()
         }
 
@@ -236,17 +238,19 @@ class InterviewTrainActivity : AppCompatActivity() {
 
         viewModel.submitInterviewState.observe(this) {
             binding.progressBar.isVisible = it is Result.Loading
-            binding.civNext.isClickable = it is Result.Success
+            binding.ivNext.isClickable = it is Result.Success
             binding.ivRepeatAnswer.isClickable = it is Result.Success
 
             when (it) {
                 is Result.Success -> {
-                    if (viewModel.isEndOfInterview) {
-                        binding.civNext.isVisible = false
-                        binding.ivRepeatAnswer.isVisible = false
-                        viewModel.endInterviewSession()
-                    } else {
-                        viewModel.moveToNextQuestion()
+                    viewModel.currentQuestionOrder.value?.let { currentOrder ->
+                        if (currentOrder.first == currentOrder.second) {
+                            binding.ivNext.isVisible = false
+                            binding.ivRepeatAnswer.isVisible = false
+                            viewModel.endInterviewSession()
+                        } else {
+                            viewModel.moveToNextQuestion()
+                        }
                     }
                 }
 
@@ -279,7 +283,16 @@ class InterviewTrainActivity : AppCompatActivity() {
 
             when (it) {
                 is Result.Success -> {
-                    Toast.makeText(this, it.data.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.interview_finished), Toast.LENGTH_SHORT)
+                        .show()
+                    it.data.data?.let { data ->
+                        startActivity(
+                            Intent(this, InterviewResultActivity::class.java).apply {
+                                putExtra(InterviewResultActivity.INTERVIEW_ID_KEY, data.interviewId)
+                            }
+                        )
+                    }
+                    finish()
                 }
 
                 is Result.Loading -> {}
@@ -319,18 +332,19 @@ class InterviewTrainActivity : AppCompatActivity() {
         }
 
         viewModel.currentQuestionOrder.observe(this) {
-            binding.tvQuestionOrder.text = getString(R.string.question_number, it)
+            binding.tvQuestionOrder.text =
+                getString(R.string.question_order_template, it.first, it.second)
         }
 
         viewModel.currentQuestionIsAnswered.observe(this) { isAnswered ->
-            binding.civNext.isVisible = isAnswered
+            binding.ivNext.isVisible = isAnswered
             binding.ivRepeatAnswer.isVisible = isAnswered
 
-            binding.civRecord.isVisible = !isAnswered
+            binding.ivRecord.isVisible = !isAnswered
         }
 
         viewModel.isRecording.observe(this) { isRecording ->
-            binding.civRecord.apply {
+            binding.ivRecord.apply {
                 setImageDrawable(
                     if (isRecording) {
                         AppCompatResources.getDrawable(

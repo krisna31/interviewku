@@ -12,8 +12,38 @@ data class InterviewHistoryResponse(
     @field:SerializedName("message")
     val message: String,
 
+    @field:SerializedName("meta")
+    val meta: InterviewHistoryMeta?,
+
     @field:SerializedName("data")
-    val data: InterviewHistoryData?,
+    val data: List<InterviewHistoryData>?,
+) : Parcelable
+
+@Parcelize
+data class InterviewHistoryMeta(
+    @field:SerializedName("count")
+    val count: Int,
+
+    @field:SerializedName("currentPage")
+    val currentPage: Int,
+
+    @field:SerializedName("totalData")
+    val totalData: Int,
+
+    @field:SerializedName("nextUrl")
+    val nextUrl: String?,
+
+    @field:SerializedName("previousUrl")
+    val previousUrl: String?,
+
+    @field:SerializedName("firstPageUrl")
+    val firstPageUrl: String,
+
+    @field:SerializedName("lastPageUrl")
+    val lastPageUrl: String,
+
+    @field:SerializedName("limit")
+    val limit: Int,
 ) : Parcelable
 
 @Parcelize
@@ -31,11 +61,17 @@ data class InterviewHistoryData(
     val completed: Boolean,
 
     @field:SerializedName("score")
-    val score: Double?,
+    val score: Int?,
 
     @field:SerializedName("totalDuration")
     val totalDuration: Double?,
 
+    @field:SerializedName("jobFieldName")
+    val jobFieldName: String,
+
     @field:SerializedName("feedback")
-    val feedback: String,
+    val feedback: String?,
+
+    @field:SerializedName("startedAt")
+    val startedAt: String,
 ) : Parcelable

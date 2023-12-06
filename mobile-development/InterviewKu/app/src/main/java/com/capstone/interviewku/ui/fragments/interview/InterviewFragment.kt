@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.FragmentInterviewBinding
+import com.capstone.interviewku.ui.activities.interviewhistory.InterviewHistoryActivity
 import com.capstone.interviewku.ui.activities.interviewtest.InterviewTestActivity
 import com.capstone.interviewku.ui.activities.interviewtrain.InterviewTrainActivity
 
@@ -19,6 +21,7 @@ class InterviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentInterviewBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,6 +40,23 @@ class InterviewFragment : Fragment() {
         binding.clTestSession.setOnClickListener {
             context.apply {
                 startActivity(Intent(this, InterviewTestActivity::class.java))
+            }
+        }
+
+        binding.toolbar.apply {
+            setLogo(R.mipmap.ic_launcher_round)
+            inflateMenu(R.menu.menu_fragment_interview)
+            binding.toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.menu_fragment_interview_history -> {
+                        startActivity(Intent(context, InterviewHistoryActivity::class.java))
+                        true
+                    }
+
+                    else -> {
+                        false
+                    }
+                }
             }
         }
     }

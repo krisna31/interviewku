@@ -28,7 +28,7 @@
     <string name="train_instruction">Mode ini ditujukan untuk melatih kemampuan anda terhadap aplikasi ini</string>
     <string name="test_instruction">Mode ini ditujukan untuk menguji kemampuan anda dalam wawancara secara keseluruhan</string>
     <string name="instruction">Instruksi</string>
-    <string name="question_number">Pertanyaan %d</string>
+    <string name="question_order_template">Pertanyaan %d / %d</string>
     <string name="training_session">Sesi Latihan</string>
     <string name="record_failed">Gagal memulai perekaman suara. Pastikan tidak ada aplikasi lain yang menggunakan mikrofon</string>
     <string name="training">Latihan</string>
@@ -37,7 +37,7 @@
     <string name="sandi_baru">Kata Sandi Baru</string>
     <string name="email_forget">Alamat Email</string>
     <string name="history_interview">History</string>
-    <string name="hasil">Hasil Interview</string>
+    <string name="interview_result">Hasil Interview</string>
     <string name="informasi">Informasi Interview</string>
     <string name="penilaian">Detail Penilaian</string>
     <string name="test_interview">Uji Kemampuan</string>
@@ -82,5 +82,22 @@
     <string name="birthdate_required">Silakan pilih tanggal lahir</string>
     <string name="current_city_required">Silakan masukkan kota tempat tinggal</string>
     <string name="job_position_required">Silakan pilih posisi pekerjaan</string>
-
+    <string name="change_password">Ganti Kata Sandi</string>
+    <string name="old_password">Kata Sandi Lama</string>
+    <string name="new_password">Kata Sandi Baru</string>
+    <string name="send_recovery_email">Kirim Email Pemulihan</string>
+    <string name="feedback">Umpan Balik</string>
+    <string name="question_not_answered">Pertanyaan tidak dijawab. Silahkan mencoba lagi pada sesi baru.</string>
+    <string name="not_finished_message">Silahkan mencoba sesi baru untuk memperoleh nilai keseluruhan</string>
+    <string name="not_finished">Sesi tidak selesai</string>
+    <string name="scoring_detail">Detail Penilaian</string>
+    <string name="additional_information">Informasi Tambahan</string>
+    <string name="next">Lanjut</string>
+    <string name="mode_template">Mode %s</string>
+    <string name="started_at_template">Waktu: %s</string>
+    <string name="job_field_template">Bidang Pekerjaan: %s</string>
+    <string name="duration_label_template">Durasi: %s</string>
+    <string name="duration_template">%02d Menit %02d Detik</string>
+    <string name="retry_count_template">%d kali</string>
+    <string name="interview_finished">Sesi Interview telah selesai!</string>
 </resources>

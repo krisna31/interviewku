@@ -41,7 +41,7 @@ class JobPickerFragment(
         binding.progressBar.isVisible = true
         binding.btnCustomJob.isEnabled = false
         binding.btnCustomJob.setOnClickListener {
-            val jobFieldId = (binding.spinner.selectedItem as SpinnerModel?)
+            val jobFieldId = (binding.spinnerJobField.selectedItem as SpinnerModel?)
                 ?.value
                 ?.toIntOrNull()
 
@@ -51,19 +51,20 @@ class JobPickerFragment(
             }
         }
 
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                binding.btnCustomJob.isEnabled = position != 0
-            }
+        binding.spinnerJobField.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    binding.btnCustomJob.isEnabled = position != 0
+                }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-        binding.spinner.isEnabled = false
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+        binding.spinnerJobField.isEnabled = false
 
         dialog?.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -97,7 +98,7 @@ class JobPickerFragment(
         }
 
         binding.progressBar.isVisible = false
-        binding.spinner.apply {
+        binding.spinnerJobField.apply {
             isEnabled = true
             adapter = ArrayAdapter(
                 requireContext(),

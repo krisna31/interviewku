@@ -12,4 +12,6 @@ object Constants {
     const val GOOGLE_TTS_PACKAGE_NAME = "com.google.android.tts"
     const val TTS_EXTRA_VOICE_INDONESIA = "ind-idn"
     const val TTS_LANGUAGE_TAG = "id-ID"
+
+    const val INTERVIEW_HISTORY_PAGE_SIZE = 10
 }

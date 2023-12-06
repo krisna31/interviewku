@@ -29,7 +29,7 @@ class InterviewTrainViewModel @Inject constructor(
     private val jobRepository: JobRepository,
     private val userRepository: UserRepository,
 ) : ViewModel() {
-    private val _currentDuration = MutableLiveData("00:00:00")
+    private val _currentDuration = MutableLiveData("00:00")
     val currentDuration: LiveData<String>
         get() = _currentDuration
 
@@ -37,16 +37,13 @@ class InterviewTrainViewModel @Inject constructor(
     val currentQuestion: LiveData<String>
         get() = _currentQuestion
 
-    private val _currentQuestionOrder = MutableLiveData(0)
-    val currentQuestionOrder: LiveData<Int>
+    private val _currentQuestionOrder = MutableLiveData(Pair(0, 0))
+    val currentQuestionOrder: LiveData<Pair<Int, Int>>
         get() = _currentQuestionOrder
 
     private val _currentQuestionIsAnswered = MutableLiveData(false)
     val currentQuestionIsAnswered: LiveData<Boolean>
         get() = _currentQuestionIsAnswered
-
-    val isEndOfInterview
-        get() = currentQuestionOrder.value == interviewData?.questions?.size
 
     private val _isRecording = MutableLiveData(false)
     val isRecording: LiveData<Boolean>
@@ -94,16 +91,19 @@ class InterviewTrainViewModel @Inject constructor(
 
     fun moveToNextQuestion() {
         interviewData?.let { interviewQuestionsData ->
-            _currentQuestionOrder.value?.plus(1)?.let { currentOrder ->
-                _currentDuration.value = "00:00:00"
-                _currentQuestion.value = interviewQuestionsData.questions[currentOrder - 1].question
+            _currentQuestionOrder.value?.let { prevOrder ->
+                val currentOrder = Pair(prevOrder.first + 1, interviewQuestionsData.questions.size)
+
+                _currentDuration.value = "00:00"
+                _currentQuestion.value =
+                    interviewQuestionsData.questions[currentOrder.first - 1].question
                 _currentQuestionOrder.value = currentOrder
                 _currentQuestionIsAnswered.value = false
 
                 interviewAnswers.add(
                     InterviewAnswer(
-                        question = interviewQuestionsData.questions[currentOrder - 1].question,
-                        questionOrder = interviewQuestionsData.questions[currentOrder - 1].questionOrder,
+                        question = interviewQuestionsData.questions[currentOrder.first - 1].question,
+                        questionOrder = interviewQuestionsData.questions[currentOrder.first - 1].questionOrder,
                     )
                 )
             }
@@ -142,7 +142,7 @@ class InterviewTrainViewModel @Inject constructor(
         try {
             interviewData?.let { interviewQuestionsData ->
                 currentQuestionOrder.value?.let {
-                    interviewAnswers[it - 1].apply {
+                    interviewAnswers[it.first - 1].apply {
                         audio?.let { audioFile ->
                             val response = interviewRepository.sendInterviewAnswer(
                                 interviewQuestionsData.interviewId,
@@ -171,12 +171,12 @@ class InterviewTrainViewModel @Inject constructor(
 
     fun setAnswer(audio: File?) {
         currentQuestionOrder.value?.let {
-            interviewAnswers[it - 1].audio = audio
+            interviewAnswers[it.first - 1].audio = audio
             _currentQuestionIsAnswered.value = audio != null
         }
 
         if (audio == null) {
-            _currentDuration.value = "00:00:00"
+            _currentDuration.value = "00:00"
         }
     }
 
