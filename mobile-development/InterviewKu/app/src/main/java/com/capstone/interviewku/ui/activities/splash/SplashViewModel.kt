@@ -10,4 +10,5 @@ class SplashViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
     suspend fun isLoggedIn() = authRepository.isLoggedIn()
+
 }

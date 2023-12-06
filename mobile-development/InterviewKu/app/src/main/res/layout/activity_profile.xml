@@ -37,96 +37,90 @@
             android:layout_marginStart="20dp"
             android:gravity="left|center_vertical"
             android:includeFontPadding="false"
-            android:textSize="20sp"
-            tools:text="@string/profile" />
+            android:text="@string/profile"
+            android:textSize="20sp" />
 
 
     </androidx.appcompat.widget.Toolbar>
 
     <EditText
         android:id="@+id/editTextLastName"
-        android:layout_width="171dp"
-        android:layout_height="21dp"
+        android:layout_width="180sp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:includeFontPadding="false"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        tools:text="Nama Belakang" />
+        android:text="Nama Belakang"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/editTextFirstName"
+        app:layout_constraintTop_toTopOf="@+id/editTextFirstName" />
 
     <EditText
         android:id="@+id/editTextFirstName"
-        android:layout_width="187dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="45dp"
+        android:layout_width="180sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:includeFontPadding="false"
+        android:text="Nama Depan"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextLastName"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        tools:text="Nama Depan" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="15dp"
-        android:layout_gravity="top|left"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:gravity="left|center_vertical"
         android:includeFontPadding="false"
+        android:text="@string/nama"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        tools:text="@string/nama" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <EditText
         android:id="@+id/Et_Email"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="text"
-        android:textSize="12sp"
+        android:text="Email"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        tools:text="Email" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:gravity="start|center_vertical"
         android:includeFontPadding="false"
+        android:text="@string/email"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLastName"
-        tools:text="@string/email" />
 
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="top|start"
         android:layout_marginStart="16dp"
         android:gravity="start|center_vertical"
         android:includeFontPadding="false"
+        android:text="@string/jenis"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Et_Email"
-        tools:text="@string/jenis" />
+        app:layout_constraintTop_toBottomOf="@+id/Et_Email" />
 
     <Spinner
         android:id="@+id/spinner_gender_profile"
@@ -141,49 +135,47 @@
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="start|center_vertical"
         android:includeFontPadding="false"
+        android:text="@string/tanggal_lahir"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_gender_profile"
-        tools:text="@string/tanggal_lahir" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_gender_profile" />
 
     <EditText
         android:id="@+id/Et_tanggal_lahir_profile"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:ems="10"
         android:inputType="text"
-        android:textSize="12sp"
+        android:text="Belum Di Atur"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        tools:text="Belum Di Atur" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <EditText
         android:id="@+id/et_domisili_profile"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="text"
         android:text="Silahkan pilih "
-        android:textSize="10dp"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
-        tools:text="Belum Di Atur" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
 
     <TextView
@@ -194,27 +186,24 @@
         android:gravity="start|center_vertical"
         android:includeFontPadding="false"
         android:lineHeight="14.52dp"
-        android:text="Domisili"
+        android:text="@string/daerah"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Et_tanggal_lahir_profile"
-        tools:text="@string/daerah" />
+        app:layout_constraintTop_toBottomOf="@+id/Et_tanggal_lahir_profile" />
 
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="15dp"
-        android:layout_gravity="top|left"
         android:layout_marginStart="16dp"
-        android:gravity="left|center_vertical"
         android:includeFontPadding="false"
+        android:text="Bidang Pekerjaan"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_domisili_profile"
-        tools:text="Bidang Pekerjaan" />
+        app:layout_constraintTop_toBottomOf="@+id/et_domisili_profile" />
 
 
     <Spinner

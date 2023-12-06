@@ -1,5 +1,6 @@
 package com.capstone.interviewku.ui.fragments.account
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -11,8 +12,15 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.capstone.interviewku.databinding.FragmentAccountBinding
+import com.capstone.interviewku.ui.activities.changepassword.ChangePasswordActivity
+import com.capstone.interviewku.ui.activities.interviewhistory.InterviewHistoryActivity
+import com.capstone.interviewku.ui.activities.login.LoginActivity
+import com.capstone.interviewku.ui.activities.profile.ProfileActivity
+import com.capstone.interviewku.ui.activities.splash.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AccountFragment : Fragment() {
@@ -33,15 +41,27 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (requireActivity() as MenuHost).addMenuProvider(
-            object : MenuProvider {
-                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                    menu.clear()
-                }
+        binding.clProfile.setOnClickListener {
+            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            startActivity(intent)
+        }
 
-                override fun onMenuItemSelected(menuItem: MenuItem): Boolean = true
-            }
-        )
+        binding.clTextToSpeach.setOnClickListener {
+            val intent = Intent(requireContext(), InterviewHistoryActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.clResetPassword.setOnClickListener {
+            val intent = Intent(requireContext(), ChangePasswordActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.clLogout.setOnClickListener {
+            val loginIntent = Intent(requireContext(), LoginActivity::class.java)
+            loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(loginIntent)
+        }
+
     }
 
     override fun onDestroy() {
