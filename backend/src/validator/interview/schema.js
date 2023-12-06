@@ -41,7 +41,7 @@ const InterviewDataResponseSchema = Joi.object({
     mode: Joi.string().valid('latihan', 'interview').required(),
     totalQuestions: Joi.number().max(2147483647).required(),
     completed: Joi.boolean().required(),
-    score: Joi.number().min(1).max(5).allow(null)
+    score: Joi.number().min(0).max(5).allow(null)
       .required(),
     totalDuration: Joi.number().max(2147483647).allow(null).required(),
     feedback: Joi.string().required(),
@@ -53,7 +53,7 @@ const InterviewDataResponseSchema = Joi.object({
       questionOrder: Joi.number().max(2147483647).required(),
       userAnswer: Joi.string().allow(null).required(),
       audioUrl: Joi.string().allow(null).required(),
-      score: Joi.number().min(1).max(5).allow(null)
+      score: Joi.number().min(0).max(5).allow(null)
         .required(),
       duration: Joi.number().max(2147483647).allow(null).required(),
       retryAttempt: Joi.number().max(2147483647).allow(null).required(),
