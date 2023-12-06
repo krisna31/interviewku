@@ -3,7 +3,7 @@ const InvariantError = require('../../exceptions/InvariantError');
 
 class StorageService {
   constructor() {
-    const storage = process.env.GOOGLE_SERVICE_ACCOUNT_KEY !== false ? new Storage({
+    const storage = process.env.GOOGLE_SERVICE_ACCOUNT_KEY !== 'false' ? new Storage({
       keyFilename: process.env.GOOGLE_SERVICE_ACCOUNT_KEY,
     }) : new Storage();
     const bucket = storage.bucket(process.env.AUDIO_BUCKET_NAME);
@@ -16,10 +16,11 @@ class StorageService {
       throw new InvariantError('No audio uploaded.');
     }
 
-    const filename = `${+new Date()}-${userId}-${audio.filename}`.replaceAll(' ', '');
+    const filename = `audio/${+new Date()}-${userId}-${audio.filename}`.replaceAll(' ', '');
 
     const options = {
       destination: filename,
+      // public: true,
       // Optional:
       // Set a generation-match precondition to avoid potential race conditions
       // and data corruptions. The request to upload is aborted if the object's
