@@ -1704,7 +1704,7 @@ exports.up = (pgm) => {
     (81, 'Saya menggunakan metode Matiks Eisenhower untuk mengelompokkan tugas-tugas menjadi empat kategori: penting dan mendesak, penting tapi tidak mendesak, mendesak tapi tidak penting, tidak mendesak dan tidak penting.'),
     (81, 'Saya berkomunikasi secara terbuka dengan pemangku kepentingan untuk memahami prioritas mereka. Ini membantu saya menilai proyek mana yang harus diprioritaskan berdasarkan kebutuhan mereka.'),
     (81, 'Saya membuat daftar tugas harian atau mingguan dan memberikan bobot atau nilai prioritas pada setiap tugas. Dengan cara ini, saya dapat dengan jelas melihat proyek mana yang harus diselesaikan terlebih dahulu.'),
-    (81, 'Saya menggunakan pendekatan MoSCoW (Must, Should, Could, Won't) untuk mengidentifikasi kebutuhan inti dan fitur-fitur yang dapat ditunda dalam proyek. Hal ini membantu saya menyusun prioritas dengan lebih baik.'),
+    (81, 'Saya menggunakan pendekatan MoSCoW (Must, Should, Could, Won''t) untuk mengidentifikasi kebutuhan inti dan fitur-fitur yang dapat ditunda dalam proyek. Hal ini membantu saya menyusun prioritas dengan lebih baik.'),
     (81, 'Saya fokus pada proyek-proyek yang memiliki dampak besar pada pelanggan atau pengguna akhir. Meningkatkan pengalaman pengguna adalah salah satu faktor penting dalam menentukan prioritas.'),
     (81, 'Saya mengidentifikasi proyek-proyek yang memiliki keterkaitan atau dependensi dan memprioritaskan mereka bersama-sama. Ini membantu menghindari situasi di mana satu proyek menghambat kemajuan proyek lainnya.'),
     (81, 'Saya selalu menyimpan waktu untuk menangani proyek mendesak yang muncul secara tiba-tiba. Saya dapat mengalokasikan slot waktu di jadwal saya untuk menangani permintaan darurat tanpa mengganggu prioritas yang ada.'),
@@ -2749,7 +2749,7 @@ exports.up = (pgm) => {
     (133, 'Sebagai Staff Manager, saya akan menciptakan lingkungan kerja yang mendukung pertumbuhan staf. Saya akan memberikan pelatihan yang relevan dan memastikan bahwa setiap anggota staf memiliki rencana pengembangan yang terstruktur.'),
     (133, 'Saya akan memandang peran Staff Manager sebagai mentor dan pembimbing bagi staf hotel. Saya akan memberikan umpan balik yang konstruktif dan membantu mereka merencanakan karier mereka dengan bijaksana.'),
     (133, 'Dalam peran Staff Manager, saya akan mengawasi dan mengelola staf dengan pendekatan berbasis tim. Saya akan mengadakan pertemuan tim reguler untuk berbagi pengetahuan dan pengalaman serta mendorong pelatihan lintas departemen.'),
-    (133, 'Saya akan menjadi Staff Manager yang mendukung pengembangan staf dengan mengidentifikasi potensi dan memberikan pelatihan yang sesuai. Saya juga akan memberikan umpan balik terbuka dan jujur ​​untuk membantu staf memperbaiki kinerja mereka.'),
+    (133, 'Saya akan menjadi Staff Manager yang mendukung pengembangan staf dengan mengidentifikasi potensi dan memberikan pelatihan yang sesuai. Saya juga akan memberikan umpan balik terbuka dan jujur untuk membantu staf memperbaiki kinerja mereka.'),
     (133, 'Sebagai Staff Manager, saya akan berperan aktif dalam mengelola staf dengan fokus pada pengembangan individu. Saya akan merencanakan pelatihan berdasarkan kebutuhan staf dan memberikan kesempatan untuk memperoleh pengalaman yang berharga.'),
     (133, 'Tugas utama saya sebagai Staff Manager adalah memastikan bahwa staf hotel terus berkembang. Saya akan mengadakan program pelatihan rutin, menyediakan dukungan berkelanjutan, dan memberikan peluang untuk tanggung jawab tambahan.'),
     (133, 'Saya akan menjadi Staff Manager yang mendorong pertumbuhan staf dengan memberikan pelatihan yang relevan dan mengadakan sesi pembinaan. Saya juga akan mengidentifikasi bakat internal dan memberikan kesempatan untuk memajukan karier mereka.'),
@@ -2818,8 +2818,7 @@ exports.up = (pgm) => {
     (136, 'Saya selalu berusaha untuk tetap terhubung dengan perkembangan terbaru dalam industri perhotelan melalui pelatihan, konferensi, dan jaringan profesional. Ini memastikan bahwa saya selalu siap untuk tantangan baru.'),
     (136, 'Pengalaman saya dalam berkolaborasi dengan berbagai vendor dan mitra bisnis dalam perhotelan memungkinkan saya untuk membawa sumber daya dan kesempatan baru ke hotel tempat saya bekerja.'),
     (136, 'Saya memiliki komitmen untuk meningkatkan kualitas layanan dan pengalaman tamu secara berkelanjutan. Saya percaya bahwa dengan dedikasi dan kerja keras, kita dapat mencapai prestasi luar biasa dalam industri ini.'),
-    (136, 'Saya memiliki hasrat yang besar untuk industri perhotelan dan kepuasan tamu. Saya percaya bahwa dengan dedikasi, inovasi, dan kualitas layanan yang tinggi, saya dapat membuat perbedaan positif dalam setiap hotel tempat saya bekerja.')
-    ;
+    (136, 'Saya memiliki hasrat yang besar untuk industri perhotelan dan kepuasan tamu. Saya percaya bahwa dengan dedikasi, inovasi, dan kualitas layanan yang tinggi, saya dapat membuat perbedaan positif dalam setiap hotel tempat saya bekerja.');
   `);
 };
 
