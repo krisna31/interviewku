@@ -32,15 +32,15 @@ exports.up = (pgm) => {
     INSERT INTO questions(job_field_id, question)
     VALUES
       (1, 'Bisakah Anda menjelaskan apa yang membuat Anda tertarik untuk bekerja di perusahaan ini?'),
-      (1, 'Apa yang Anda ketahui tentang perusahaan saya?'),
-      (1, 'Kenapa anda memilih perusahaan saya daripada perusahaan lainnya?'),
+      (1, 'Apa yang Anda ketahui tentang perusahaan ini?'),
+      (1, 'Kenapa anda memilih perusahaan ini daripada perusahaan lainnya?'),
       
-      (2, 'Apa proyek atau pencapaian terbesar dalam karier Anda, dan bagaimana Anda berkontribusi dalam proyek tersebut?'),
+      (2, 'Apa proyek atau pencapaian terbesar dalam karier Anda, dan apa berkontribusi Anda dalam proyek tersebut?'),
       (2, 'Bisakah Anda berbagi contoh tentang bagaimana Anda meningkatkan efisiensi atau produktivitas dalam project Anda sebelumnya?'),
       (2, 'Apakah Anda memiliki keterampilan khusus atau sertifikasi yang relevan dengan pekerjaan ini?'),
       (2, 'Apakah Anda memiliki pengalaman bekerja di dalam tim? Kontribusi apa yang anda berikan?'),
 
-      (3, 'Mengapa anda melamar posisi ini?'),
+      (3, 'Mengapa anda melamar di posisi ini?'),
       (3, 'Apa yang anda ketahui mengenai posisi ini?'),
       (3, 'Berdasarkan yang anda ketahui, tugas apa saja yang dilakukan pada posisi ini?'),
       (3, 'Apa yang membuat Anda yakin bahwa posisi ini adalah langkah yang tepat dalam perkembangan karier Anda?'),
@@ -56,9 +56,9 @@ exports.up = (pgm) => {
       (5, 'Bagaimana Anda berpikir kontribusi Anda akan mendukung tujuan dan pertumbuhan perusahaan?'),
       (5, 'Bagaimana Anda mengukur kesuksesan Anda di tempat kerja dan bagaimana Anda berencana untuk mencapainya di perusahaan ini?'),
       (5, 'Apakah anda merasa cocok dengan pekerjaan ini?'),
-      (5, 'Apa keinginan anda dimasa yang akan datang?'),
+      (5, 'Apa keinginan anda dimasa yang akan datang setelah bergabung di perusahaan ini?'),
       (5, 'Jika anda diterima pada posisi yang anda inginkan, Hal apa yang akan anda lakukan untuk kedepannya?'),
-      (5, 'Apa yang Anda harapkan dan dapat Anda kontribusikan kepada perusahaan saya?'),
+      (5, 'Apa yang Anda harapkan dan dapat Anda kontribusikan kepada perusahaan ini?'),
       (5, 'Bagaimana Anda menjaga keseimbangan antara pekerjaan dan kehidupan pribadi?'),
       (5, 'Bagaimana Anda mengatasi kelelahan atau kejenuhan dalam pekerjaan?'),
 
