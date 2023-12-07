@@ -6,101 +6,187 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.home.HomeFragment">
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="51.79dp"
-            android:layout_height="24dp"
-            android:layout_gravity="top|start"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:background="@mipmap/ic_launcher"
-            android:scaleType="centerInside" />
 
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Halo, User!"
-        android:textSize="26dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-    <TextView
-        android:id="@+id/textView4"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_greeting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="@dimen/root_padding"
+                android:text="@string/home_greeting_template"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_quote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/tv_greeting"
+                tools:text="“Lorem ipsum dolor sit amet, consectetur adipiscing elit.”\n-Quote Maker" />
+
+            <TextView
+                android:id="@+id/tv_choose_interest_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/root_padding"
+                android:layout_marginTop="20dp"
+                android:text="@string/choose_your_interest"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_quote" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipgroup_interest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:isScrollContainer="true"
+                android:paddingHorizontal="@dimen/root_padding"
+                app:layout_constraintTop_toBottomOf="@id/tv_choose_interest_title">
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="Bidang 1"
+                    tools:visibility="visible" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <Button
+                android:id="@+id/btn_interest_start_train"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="16dp"
+                android:text="@string/interview_train_try"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chipgroup_interest" />
+
+            <TextView
+                android:id="@+id/tv_performance_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/root_padding"
+                android:layout_marginTop="20dp"
+                android:text="@string/interview_performance_title"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_interest_start_train" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_interview_performance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/root_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tv_performance_title"
+                tools:ignore="RtlSymmetry"
+                tools:listitem="@layout/item_interview_performance" />
+
+            <TextView
+                android:id="@+id/tv_no_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="4dp"
+                android:text="@string/no_history"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/tv_performance_title" />
+
+            <Button
+                android:id="@+id/btn_no_history_start_train"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="8dp"
+                android:text="@string/interview_train_try"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_no_history" />
+
+            <Button
+                android:id="@+id/btn_no_history_start_test"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="8dp"
+                android:text="@string/interview_test_try"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_no_history_start_train" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="btn_no_history_start_test, rv_interview_performance" />
+
+            <TextView
+                android:id="@+id/tv_tips_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/navigation_tips"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barrier1" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_interview_tips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/root_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tv_tips_title"
+                tools:ignore="RtlSymmetry"
+                tools:listitem="@layout/item_tips_home" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="“Lorem ipsum dolor sit amet, consectetur adipiscing elit.”
--Quote Maker"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/performa"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_history_result"
-        android:layout_width="420dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/tips_interview"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_history_result" />
-
-    <ImageView
-        android:id="@+id/left"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="16dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

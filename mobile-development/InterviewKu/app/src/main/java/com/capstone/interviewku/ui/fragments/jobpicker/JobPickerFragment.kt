@@ -39,8 +39,8 @@ class JobPickerFragment(
         super.onViewCreated(view, savedInstanceState)
 
         binding.progressBar.isVisible = true
-        binding.btnCustomJob.isEnabled = false
-        binding.btnCustomJob.setOnClickListener {
+        binding.btnNext.isEnabled = false
+        binding.btnNext.setOnClickListener {
             val jobFieldId = (binding.spinnerJobField.selectedItem as SpinnerModel?)
                 ?.value
                 ?.toIntOrNull()
@@ -59,7 +59,7 @@ class JobPickerFragment(
                     position: Int,
                     id: Long
                 ) {
-                    binding.btnCustomJob.isEnabled = position != 0
+                    binding.btnNext.isEnabled = position != 0
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}

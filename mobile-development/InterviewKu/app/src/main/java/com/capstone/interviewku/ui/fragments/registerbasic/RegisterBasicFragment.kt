@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -38,31 +37,31 @@ class RegisterBasicFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRegister.setOnClickListener {
-            val email = binding.etRegisterEmail.text.toString()
-            val password = binding.etRegisterPassword.text.toString()
-            val firstName = binding.etRegisterFirstName.text.toString()
-            val lastName = binding.etRegisterLastName.text.toString()
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            val firstName = binding.etFirstname.text.toString()
+            val lastName = binding.etLastname.text.toString()
 
             val errorMessages = mutableListOf<String>()
 
             if (firstName.isEmpty()) {
                 errorMessages.add("First name tidak boleh kosong")
-                binding.etRegisterFirstName.error = errorMessages.last()
+                binding.etFirstname.error = errorMessages.last()
             }
 
             if (lastName.isEmpty()) {
                 errorMessages.add("Last name tidak boleh kosong")
-                binding.etRegisterLastName.error = errorMessages.last()
+                binding.etLastname.error = errorMessages.last()
             }
 
             if (!Helpers.isEmailValid(email)) {
                 errorMessages.add("Email tidak valid")
-                binding.etRegisterEmail.error = errorMessages.last()
+                binding.etEmail.error = errorMessages.last()
             }
 
             if (!Helpers.isPasswordValid(password)) {
                 errorMessages.add("Password harus minimal 8 karakter, terdapat 1 huruf kapital, dan 1 karakter simbol")
-                binding.etRegisterPassword.error = errorMessages.last()
+                binding.etPassword.error = errorMessages.last()
             }
 
             if (errorMessages.isEmpty()) {

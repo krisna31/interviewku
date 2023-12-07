@@ -16,7 +16,7 @@
             android:id="@+id/tv_job_field_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/work_custom"
+            android:text="@string/select_job_field_title"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,19 +25,22 @@
 
         <Spinner
             android:id="@+id/spinner_job_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
             android:layout_marginTop="16dp"
-            android:padding="@dimen/root_padding"
-            app:layout_constraintTop_toBottomOf="@+id/tv_job_field_title" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_job_field_title" />
 
         <Button
-            android:id="@+id/btn_custom_job"
-            android:layout_width="match_parent"
+            android:id="@+id/btn_next"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/next"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_job_field" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_job_field" />
 
         <ProgressBar
             android:id="@+id/progress_bar"

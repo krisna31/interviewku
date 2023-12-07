@@ -55,16 +55,14 @@
                 android:progressTint="#FFE940"
                 android:rating="3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_job_field" />
+                app:layout_constraintTop_toBottomOf="@id/tv_job_field" />
 
             <TextView
                 android:id="@+id/tv_rating_summary"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rating_bar_score"
                 tools:text="Sempurna!!!" />
 
@@ -73,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="@string/not_finished_message"
+                android:text="@string/interview_not_finished_description"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/tv_rating_summary" />
@@ -158,6 +156,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.capstone.interviewku.databinding.ActivityLoginBinding
 import com.capstone.interviewku.ui.activities.main.MainActivity
-import com.capstone.interviewku.ui.activities.register.RegisterActivity
 import com.capstone.interviewku.util.Extensions.handleHttpException
 import com.capstone.interviewku.util.Result
 import dagger.hilt.android.AndroidEntryPoint

@@ -10,7 +10,7 @@
         android:id="@+id/tv_instruction_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/instruction"
+        android:text="@string/interview_instruction_title"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,14 +23,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_instruction_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_instruction_title"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna eros, mattis eu eros ut, ultrices vulputate nisl. Duis sagittis eu turpis eget suscipit. In ultricies, sapien a rhoncus accumsan, libero nunc pharetra ante, non ultricies risus ipsum ut ipsum. In in augue libero. Suspendisse et scelerisque massa." />
 
     <Button
         android:id="@+id/btn_continue"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_instructions"
         tools:text="Mulai Latihan" />
 

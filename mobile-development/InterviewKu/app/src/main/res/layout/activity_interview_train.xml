@@ -23,7 +23,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:text="Pertanyaan 1 / 3" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintVertical_bias="0.35"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna eros, mattis eu eros ut, ultrices vulputate nisl. Duis sagittis eu turpis eget suscipit. In ultricies, sapien a rhoncus accumsan, libero nunc pharetra ante, non ultricies risus ipsum ut ipsum. In in augue libero. Suspendisse et scelerisque massa?" />
 

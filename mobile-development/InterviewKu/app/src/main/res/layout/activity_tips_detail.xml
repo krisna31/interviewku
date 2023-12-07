@@ -10,64 +10,79 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:clipToPadding="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </androidx.appcompat.widget.Toolbar>
 
-    <View
-        android:id="@+id/divider"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#FF000000"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-    <ImageView
-        android:id="@+id/fullscreenImageView"
-        android:layout_width="414dp"
-        android:layout_height="255dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        tools:src="@tools:sample/avatars" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/root_padding">
 
-    <TextView
-        android:id="@+id/tv_detail_tips"
+            <ImageView
+                android:id="@+id/iv_cover"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:importantForAccessibility="no"
+                android:scaleType="fitCenter"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/iv_cover"
+                tools:text="Lorem ipsum dolor sit amet" />
+
+            <TextView
+                android:id="@+id/tv_created_at"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="4dp"
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                tools:text="Dibuat pada : 15 Oktober 2023, 10:00" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="16dp"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_created_at"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis bibendum leo. Vivamus ac mi ac enim elementum pretium id malesuada tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam eu ipsum a est interdum bibendum. Nulla faucibus tortor non est iaculis, molestie placerat nulla convallis. Phasellus at mauris neque. Etiam et eros ultrices, accumsan quam ut, volutpat massa. Etiam egestas ultricies volutpat. Praesent quis odio rutrum, gravida nibh in, sollicitudin lorem. Morbi nisl diam, condimentum venenatis nisi at, mattis lobortis turpis. Etiam sodales lectus non sem tristique, nec volutpat felis tempus. Ut ut elit id nibh imperdiet facilisis vitae sed massa. In erat sem, dapibus eu tempor ac, congue vel massa. Vestibulum ex tortor" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="145dp"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullscreenImageView"
-        tools:text="Lorem ipsum dolor sit amet" />
-
-    <TextView
-        android:id="@+id/tv_date_tips"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_tips"
-        tools:text="Dibuat pada : 15 Oktober 2023, 10:00" />
-
-    <TextView
-        android:id="@+id/tv_detail_deskripsi"
-        android:layout_width="378dp"
-        android:layout_height="334dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_date_tips"
-        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis bibendum leo. Vivamus ac mi ac enim elementum pretium id malesuada tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam eu ipsum a est interdum bibendum. Nulla faucibus tortor non est iaculis, molestie placerat nulla convallis. Phasellus at mauris neque. Etiam et eros ultrices, accumsan quam ut, volutpat massa. Etiam egestas ultricies volutpat. Praesent quis odio rutrum, gravida nibh in, sollicitudin lorem. Morbi nisl diam, condimentum venenatis nisi at, mattis lobortis turpis. Etiam sodales lectus non sem tristique, nec volutpat felis tempus. Ut ut elit id nibh imperdiet facilisis vitae sed massa. In erat sem, dapibus eu tempor ac, congue vel massa. Vestibulum ex tortor, bibendum nec sem sed, efficitur viverra lorem.
-Nulla commodo magna sed malesuada rutrum. Nam a sem ut velit bibendum fermentum id non felis. Morbi elementum blandit tellus, sed venenatis nibh egestas at. Cras egestas dolor eget quam maximus aliquam. Integer in ex aliquet urna scelerisque venenatis. Morbi mollis bibendum nulla, at porttitor lectus facilisis ut. Proin in nisi at enim sagittis luctus at vitae elit. Nam sit amet nibh non nunc efficitur sollicitudin. Nulla lectus eros, blandit egestas augue sit amet, finibus maximus ipsum. Integer sit amet odio dapibus, dapibus massa eu, vulputate augue. Maecenas convallis sem lorem, ut imperdiet lacus feugiat quis. Integer sagittis sapien felis, ac vehicula odio sagittis auctor. Etiam sit amet auctor purus, eget bibendum tellus. Donec sit amet felis ac erat ultricies dignissim nec eget magna. Nullam imperdiet pretium urna, vel varius felis fringilla at." />
-
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

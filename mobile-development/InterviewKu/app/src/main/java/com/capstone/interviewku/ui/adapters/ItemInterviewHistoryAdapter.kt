@@ -47,11 +47,11 @@ class ItemInterviewHistoryAdapter(
                     R.string.mode_template,
                     when (data.mode) {
                         InterviewMode.TRAIN.mode -> {
-                            getString(R.string.training)
+                            getString(R.string.interview_train)
                         }
 
                         InterviewMode.TEST.mode -> {
-                            getString(R.string.testing)
+                            getString(R.string.interview_test)
                         }
 
                         else -> {
@@ -62,9 +62,11 @@ class ItemInterviewHistoryAdapter(
 
                 data.score?.let {
                     binding.ratingBarScore.rating = it.toFloat()
+                    binding.tvScoreDescription.text =
+                        resources.getStringArray(R.array.rating_summary)[it - 1]
                 } ?: run {
                     binding.ratingBarScore.isVisible = false
-                    binding.tvNotFinished.isVisible = true
+                    binding.tvScoreDescription.text = getString(R.string.interview_not_finished)
                 }
 
                 binding.tvJobField.text = getString(R.string.job_field_template, data.jobFieldName)

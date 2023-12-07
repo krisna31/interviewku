@@ -4,6 +4,6 @@
     <item
         android:id="@+id/menu_fragment_interview_history"
         android:icon="@drawable/baseline_history_24"
-        android:title="@string/history"
+        android:title="@string/interview_history"
         app:showAsAction="always" />
 </menu>

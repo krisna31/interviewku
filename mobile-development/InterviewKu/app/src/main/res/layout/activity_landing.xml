@@ -4,86 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/motion_scene"
+    app:layoutDescription="@xml/activity_landing_scene"
     tools:context=".ui.activities.landing.LandingActivity">
 
     <ImageView
-        android:id="@+id/left"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/iv_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="56dp"
+        android:importantForAccessibility="no"
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_left"
+        android:layout_width="225dp"
+        android:layout_height="225dp"
+        android:importantForAccessibility="no"
         android:src="@drawable/img_landing_1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.318"
-        android:importantForAccessibility="no" />
+        app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
     <ImageView
-        android:id="@+id/center"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="225dp"
+        android:layout_height="225dp"
+        android:alpha="0"
+        android:importantForAccessibility="no"
         android:src="@drawable/img_landing_2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_left"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.318"
-        android:importantForAccessibility="no" />
+        app:layout_constraintTop_toTopOf="@id/iv_left" />
 
     <ImageView
-        android:id="@+id/right"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="225dp"
+        android:layout_height="225dp"
+        android:alpha="0"
+        android:importantForAccessibility="no"
         android:src="@drawable/img_landing_3"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_left"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.318"
-        android:importantForAccessibility="no" />
+        app:layout_constraintTop_toTopOf="@id/iv_left" />
 
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btn_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnLogin"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.891"
-        app:layout_constraintWidth_percent="0.4" />
-
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/root_padding"
         android:layout_marginEnd="8dp"
-        android:text="Login"
+        android:layout_marginBottom="56dp"
+        android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_login"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="@dimen/root_padding"
+        android:text="@string/login"
+        app:layout_constraintBottom_toBottomOf="@id/btn_register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/btnRegister"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89"
-        app:layout_constraintWidth_percent="0.4" />
+        app:layout_constraintStart_toEndOf="@id/btn_register"
+        app:layout_constraintTop_toTopOf="@id/btn_register" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/second"
+        motion:constraintSetStart="@id/first"
+        motion:duration="1000">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/first">
+        <Constraint
+            android:id="@+id/iv_left"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            motion:layout_constraintBottom_toTopOf="@id/btn_register"
+            motion:layout_constraintTop_toBottomOf="@id/iv_logo"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            motion:layout_constraintBottom_toBottomOf="@id/iv_left"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="@id/iv_left"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="@dimen/root_padding" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/second">
+        <Constraint
+            android:id="@+id/iv_left"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            motion:layout_constraintBottom_toTopOf="@id/btn_register"
+            motion:layout_constraintTop_toBottomOf="@id/iv_logo"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="@dimen/root_padding"
+            android:alpha="0" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            motion:layout_constraintBottom_toBottomOf="@id/iv_left"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="@id/iv_left"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="@dimen/root_padding" />
+    </ConstraintSet>
+    <Transition
+        motion:constraintSetStart="@+id/second"
+        motion:constraintSetEnd="@+id/third" />
+    <ConstraintSet android:id="@+id/third" >
+        <Constraint
+            android:id="@+id/iv_left"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            motion:layout_constraintBottom_toTopOf="@id/btn_register"
+            motion:layout_constraintTop_toBottomOf="@id/iv_logo"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:alpha="0"
+            android:layout_marginBottom="@dimen/root_padding" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            motion:layout_constraintBottom_toBottomOf="@id/iv_left"
+            android:alpha="1"
+            motion:layout_constraintTop_toTopOf="@id/iv_left"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            motion:layout_constraintBottom_toBottomOf="@id/iv_left"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="@id/iv_left"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+</MotionScene>

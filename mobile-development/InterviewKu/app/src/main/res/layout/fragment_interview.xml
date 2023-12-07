@@ -22,13 +22,13 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <TextView
             android:id="@+id/tv_train_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/training"
+            android:text="@string/interview_train"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_train_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_train_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -57,13 +57,13 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_train_session">
+        app:layout_constraintTop_toBottomOf="@id/cl_train_session">
 
         <TextView
             android:id="@+id/tv_test_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/testing"
+            android:text="@string/interview_test"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_test_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_test_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,7 +2,6 @@ package com.capstone.interviewku.ui.fragments.registerdetail
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -51,12 +50,12 @@ class RegisterDetailFragment : Fragment() {
             Helpers.getGenders(requireContext())
         )
 
-        binding.btnRegisterScreen.apply {
+        binding.btnSaveProfile.apply {
             isEnabled = false
             setOnClickListener {
                 val gender = (binding.spinnerGender.selectedItem as SpinnerModel?)?.value
                 val birthdate = viewModel.birthDate
-                val currentCity = binding.editTextDomisili.text.toString()
+                val currentCity = binding.etCurrentCity.text.toString()
                 val jobPositionId =
                     (binding.spinnerJobPosition.selectedItem as SpinnerModel?)?.value?.toIntOrNull()
 
@@ -84,7 +83,7 @@ class RegisterDetailFragment : Fragment() {
             }
         }
 
-        binding.ivBirthdate.setOnClickListener {
+        binding.clBirthdate.setOnClickListener {
             DatePickerFragment(
                 object : DatePickerListener {
                     override fun onDateSet(year: Int, month: Int, dayOfMonth: Int) {
@@ -114,7 +113,7 @@ class RegisterDetailFragment : Fragment() {
                             }
                         )
 
-                        binding.btnRegisterScreen.isEnabled = true
+                        binding.btnSaveProfile.isEnabled = true
                         binding.spinnerJobPosition.adapter = ArrayAdapter(
                             requireContext(),
                             R.layout.spinner_item,
@@ -173,7 +172,7 @@ class RegisterDetailFragment : Fragment() {
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
-    
+
     override fun onDestroy() {
         _binding = null
         super.onDestroy()

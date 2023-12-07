@@ -34,7 +34,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_question" />
+            app:layout_constraintTop_toBottomOf="@id/tv_item_question" />
 
         <RatingBar
             android:id="@+id/rating_bar_item_score"
@@ -46,7 +46,7 @@
             android:progressTint="#FFE940"
             android:rating="3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_question" />
+            app:layout_constraintTop_toBottomOf="@id/tv_item_question" />
 
         <ImageView
             android:id="@+id/iv_item_duration"
@@ -55,7 +55,7 @@
             android:layout_marginTop="8dp"
             android:src="@drawable/baseline_history_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rating_bar_item_score" />
+            app:layout_constraintTop_toBottomOf="@id/rating_bar_item_score" />
 
         <TextView
             android:id="@+id/tv_item_duration"
@@ -75,7 +75,7 @@
             android:layout_marginTop="4dp"
             android:src="@drawable/baseline_refresh_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_item_duration" />
+            app:layout_constraintTop_toBottomOf="@id/iv_item_duration" />
 
         <TextView
             android:id="@+id/tv_item_retry_question"
@@ -84,7 +84,7 @@
             android:layout_marginStart="8dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             app:layout_constraintBottom_toBottomOf="@id/iv_item_retry_question"
-            app:layout_constraintStart_toEndOf="@+id/iv_item_retry_question"
+            app:layout_constraintStart_toEndOf="@id/iv_item_retry_question"
             app:layout_constraintTop_toTopOf="@id/iv_item_retry_question"
             tools:text="1 Kali" />
 

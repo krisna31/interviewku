@@ -58,11 +58,11 @@ class InterviewResultActivity : AppCompatActivity() {
                                 R.string.mode_template,
                                 when (data.mode) {
                                     InterviewMode.TRAIN.mode -> {
-                                        getString(R.string.training)
+                                        getString(R.string.interview_train)
                                     }
 
                                     InterviewMode.TEST.mode -> {
-                                        getString(R.string.testing)
+                                        getString(R.string.interview_test)
                                     }
 
                                     else -> {
@@ -98,7 +98,7 @@ class InterviewResultActivity : AppCompatActivity() {
                                         seconds
                                     )
                                 } else {
-                                    getString(R.string.not_finished)
+                                    getString(R.string.interview_not_finished)
                                 }
                             )
 
@@ -116,7 +116,7 @@ class InterviewResultActivity : AppCompatActivity() {
                                 binding.ratingBarScore.isVisible = false
                                 binding.tvFeedbackTitle.isVisible = false
 
-                                binding.tvRatingSummary.text = getString(R.string.not_finished)
+                                binding.tvRatingSummary.text = getString(R.string.interview_not_finished)
                             }
                         }
                     }

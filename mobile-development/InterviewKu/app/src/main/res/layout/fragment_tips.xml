@@ -6,44 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.tips.TipsFragment">
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#FF000000"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="51.79dp"
-            android:layout_height="24dp"
-            android:layout_gravity="start|center_vertical"
-            android:layout_marginStart="12dp"
-            android:background="@mipmap/ic_launcher"
-            android:scaleType="centerInside" />
 
     </androidx.appcompat.widget.Toolbar>
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_List_Tips"
-        android:layout_width="412dp"
-        android:layout_height="629dp"
+        android:id="@+id/rv_interview_tips"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/root_padding"
+        android:paddingTop="@dimen/root_padding"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.055"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:listitem="@layout/item_tips_screen" />
 
     <ProgressBar
@@ -54,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -193,7 +193,7 @@ class InterviewTrainActivity : AppCompatActivity() {
                         .setNegativeButton(getString(R.string.exit)) { _, _ ->
                             finish()
                         }
-                        .setTitle(getString(R.string.error))
+                        .setTitle(getString(R.string.error_title))
                         .setMessage(getString(R.string.prepare_interview_failed))
                         .create()
 
@@ -225,7 +225,7 @@ class InterviewTrainActivity : AppCompatActivity() {
                         .setNegativeButton(getString(R.string.exit)) { _, _ ->
                             finish()
                         }
-                        .setTitle(getString(R.string.error))
+                        .setTitle(getString(R.string.error_title))
                         .setMessage(getString(R.string.start_interview_failed))
                         .create()
 
@@ -267,7 +267,7 @@ class InterviewTrainActivity : AppCompatActivity() {
                         .setNegativeButton(getString(R.string.exit)) { _, _ ->
                             finish()
                         }
-                        .setTitle(getString(R.string.error))
+                        .setTitle(getString(R.string.error_title))
                         .setMessage(getString(R.string.submit_answer_failed))
                         .create()
 
@@ -308,7 +308,7 @@ class InterviewTrainActivity : AppCompatActivity() {
                         .setNegativeButton(getString(R.string.exit)) { _, _ ->
                             finish()
                         }
-                        .setTitle(getString(R.string.error))
+                        .setTitle(getString(R.string.error_title))
                         .setMessage(getString(R.string.end_interview_failed))
                         .create()
 

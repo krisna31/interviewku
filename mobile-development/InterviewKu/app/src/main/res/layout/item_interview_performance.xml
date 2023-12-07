@@ -2,9 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/root_padding"
+    android:layout_marginEnd="@dimen/root_padding"
     app:cardCornerRadius="@dimen/corner_radius"
     app:cardElevation="@dimen/card_elevation">
 
@@ -26,7 +26,6 @@
             android:id="@+id/tv_job_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_mode"
             tools:text="Bidang: IT" />
@@ -36,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:barrierMargin="12dp"
+            app:barrierMargin="4dp"
             app:constraint_referenced_ids="tv_job_field" />
 
         <RatingBar
@@ -55,7 +54,7 @@
             android:id="@+id/tv_score_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/rating_bar_score"
             tools:text="Sempurna!!!" />
@@ -64,7 +63,7 @@
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_score_description"
             tools:text="Waktu: 15 Oktober 2023, 11:00" />

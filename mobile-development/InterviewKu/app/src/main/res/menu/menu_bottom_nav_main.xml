@@ -4,21 +4,21 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:title="@string/navigation_home" />
 
     <item
         android:id="@+id/navigation_interview"
         android:icon="@drawable/baseline_spatial_audio_off_24"
-        android:title="@string/title_interview" />
+        android:title="@string/navigation_interview" />
 
     <item
         android:id="@+id/navigation_tips"
         android:icon="@drawable/baseline_lightbulb_24"
-        android:title="@string/title_tips" />
+        android:title="@string/navigation_tips" />
 
     <item
         android:id="@+id/navigation_account"
         android:icon="@drawable/baseline_person_24"
-        android:title="@string/title_account" />
+        android:title="@string/navigation_account" />
 
 </menu>
