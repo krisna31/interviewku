@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +21,7 @@ import com.capstone.interviewku.ui.activities.login.LoginActivity
 import com.capstone.interviewku.ui.activities.profile.ProfileActivity
 import com.capstone.interviewku.ui.activities.splash.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import com.capstone.interviewku.util.Result
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -57,12 +59,30 @@ class AccountFragment : Fragment() {
         }
 
         binding.clLogout.setOnClickListener {
-            val loginIntent = Intent(requireContext(), LoginActivity::class.java)
-            loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(loginIntent)
+            viewModel.logout()
+            navigateToLoginScreen()
         }
-
+        viewModel.logoutState.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+                is Result.Success -> {
+                    binding.progressBar.isVisible = false
+                    navigateToLoginScreen()
+                }
+                is Result.Error -> {
+                    binding.progressBar.isVisible = false
+                    val error = result.exception
+                }
+            }
+        }
     }
+    private fun navigateToLoginScreen() {
+        val loginIntent = Intent(requireContext(), LoginActivity::class.java)
+        loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(loginIntent)
+        }
 
     override fun onDestroy() {
         _binding = null

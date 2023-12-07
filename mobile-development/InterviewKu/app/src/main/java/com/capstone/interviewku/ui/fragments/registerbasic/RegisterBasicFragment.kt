@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.FragmentRegisterBasicBinding
 import com.capstone.interviewku.ui.fragments.registerdetail.RegisterDetailFragment
 import com.capstone.interviewku.util.Extensions.handleHttpException
+import com.capstone.interviewku.util.Helpers
 import com.capstone.interviewku.util.Result
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,10 +43,33 @@ class RegisterBasicFragment : Fragment() {
             val firstName = binding.etRegisterFirstName.text.toString()
             val lastName = binding.etRegisterLastName.text.toString()
 
-            if (isStrongPassword(password)) {
+            val errorMessages = mutableListOf<String>()
+
+            if (firstName.isEmpty()) {
+                errorMessages.add("First name tidak boleh kosong")
+                binding.etRegisterFirstName.error = errorMessages.last()
+            }
+
+            if (lastName.isEmpty()) {
+                errorMessages.add("Last name tidak boleh kosong")
+                binding.etRegisterLastName.error = errorMessages.last()
+            }
+
+            if (!Helpers.isEmailValid(email)) {
+                errorMessages.add("Email tidak valid")
+                binding.etRegisterEmail.error = errorMessages.last()
+            }
+
+            if (!Helpers.isPasswordValid(password)) {
+                errorMessages.add("Password harus minimal 8 karakter, terdapat 1 huruf kapital, dan 1 karakter simbol")
+                binding.etRegisterPassword.error = errorMessages.last()
+            }
+
+            if (errorMessages.isEmpty()) {
                 viewModel.register(email, password, firstName, lastName)
             }
         }
+
 
         viewModel.registerState.observe(viewLifecycleOwner) {
             when (it) {
@@ -66,38 +91,6 @@ class RegisterBasicFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun isStrongPassword(password: String): Boolean {
-        val minLength = 8
-        val hasUppercase = Regex("[A-Z]").containsMatchIn(password)
-        val hasDigit = Regex("[0-9]").containsMatchIn(password)
-        val hasSpecialChar = Regex("[!@#\$%^&*()]").containsMatchIn(password)
-
-        val isStrong = password.length >= minLength &&
-                hasUppercase && hasDigit && hasSpecialChar
-
-        if (password.length < minLength) {
-            showToast(getString(R.string.password_requires_min_length))
-        }
-
-        if (!hasUppercase) {
-            showToast(getString(R.string.password_requires_uppercase))
-        }
-
-        if (!hasDigit) {
-            showToast(getString(R.string.password_requires_digit))
-        }
-
-        if (!hasSpecialChar) {
-            showToast(getString(R.string.password_requires_special_char))
-        }
-
-        return isStrong
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {

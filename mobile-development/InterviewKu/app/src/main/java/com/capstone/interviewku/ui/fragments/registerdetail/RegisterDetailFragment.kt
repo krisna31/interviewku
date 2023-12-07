@@ -61,22 +61,22 @@ class RegisterDetailFragment : Fragment() {
                     (binding.spinnerJobPosition.selectedItem as SpinnerModel?)?.value?.toIntOrNull()
 
                 if (gender == null) {
-                    showToast(getString(R.string.gender_required))
+                    showToast("Semua kolom harus diisi")
                     return@setOnClickListener
                 }
 
                 if (birthdate == null) {
-                    showToast(getString(R.string.birthdate_required))
+                    showToast("Semua kolom harus diisi")
                     return@setOnClickListener
                 }
 
                 if (currentCity.isEmpty()) {
-                    showToast(getString(R.string.current_city_required))
+                    binding.editTextDomisili.error = "Kolom ini harus diisi"
                     return@setOnClickListener
                 }
 
                 if (jobPositionId == null || jobPositionId == -1) {
-                    showToast(getString(R.string.job_position_required))
+                    showToast("Semua kolom harus diisi")
                     return@setOnClickListener
                 }
 
