@@ -13,6 +13,7 @@
         android:text="@string/interview_instruction_title"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:theme="@style/Base.Theme.InterviewKu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:textSize="16sp"
+        android:theme="@style/Base.Theme.InterviewKu"
         app:layout_constraintTop_toBottomOf="@id/tv_instruction_title"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna eros, mattis eu eros ut, ultrices vulputate nisl. Duis sagittis eu turpis eget suscipit. In ultricies, sapien a rhoncus accumsan, libero nunc pharetra ante, non ultricies risus ipsum ut ipsum. In in augue libero. Suspendisse et scelerisque massa." />
 

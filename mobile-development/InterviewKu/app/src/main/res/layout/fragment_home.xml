@@ -34,6 +34,7 @@
                 android:text="@string/home_greeting_template"
                 android:textSize="28sp"
                 android:textStyle="bold"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -43,6 +44,7 @@
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="8dp"
                 android:textSize="16sp"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toBottomOf="@id/tv_greeting"
                 tools:text="“Lorem ipsum dolor sit amet, consectetur adipiscing elit.”\n-Quote Maker" />
 
@@ -55,6 +57,7 @@
                 android:text="@string/choose_your_interest"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_quote" />
 
@@ -96,6 +99,7 @@
                 android:text="@string/interview_performance_title"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_interest_start_train" />
 
@@ -119,6 +123,7 @@
                 android:layout_marginTop="4dp"
                 android:text="@string/no_history"
                 android:textSize="16sp"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toBottomOf="@id/tv_performance_title" />
 
             <Button
@@ -159,6 +164,7 @@
                 android:text="@string/navigation_tips"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/barrier1" />
 

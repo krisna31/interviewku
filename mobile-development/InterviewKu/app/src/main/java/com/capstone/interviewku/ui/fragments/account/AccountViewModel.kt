@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.interviewku.data.AuthRepository
 import com.capstone.interviewku.data.UserRepository
+import com.capstone.interviewku.data.network.response.User
 import com.capstone.interviewku.util.SingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -22,6 +23,10 @@ class AccountViewModel @Inject constructor(
     val logoutState: LiveData<Result<Unit>>
         get() = _logoutState
 
+    private val _getUserState = MutableLiveData<Result<User>>()
+    val getUserState: LiveData<Result<User>>
+        get() = _getUserState
+
     fun logout() = viewModelScope.launch {
         _logoutState.value = Result.Loading
 
@@ -35,5 +40,17 @@ class AccountViewModel @Inject constructor(
             _logoutState.value = Result.Error(SingleEvent(e))
         }
 
+    }
+
+    fun getUser() = viewModelScope.launch {
+        _getUserState.value = Result.Loading
+
+        try {
+            val userResult = userRepository.getUser()
+
+        } catch (e: Exception) {
+            Log.e("AccountViewModel", "Error getting user", e)
+            _getUserState.value = Result.Error(SingleEvent(e))
+        }
     }
 }

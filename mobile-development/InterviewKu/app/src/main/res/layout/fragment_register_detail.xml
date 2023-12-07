@@ -22,6 +22,7 @@
                 android:text="@string/register_detail_instruction"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +34,7 @@
                 android:layout_marginTop="32dp"
                 android:text="@string/gender"
                 android:textStyle="bold"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_register_detail_title" />
 
@@ -50,6 +52,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/birthdate"
                 android:textStyle="bold"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/spinner_gender" />
 
@@ -92,20 +95,26 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/current_city"
                 android:textStyle="bold"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_birthdate" />
 
-            <EditText
-                android:id="@+id/et_current_city"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_current_city"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:hint="@string/current_city"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:maxLines="1"
-                app:layout_constraintTop_toBottomOf="@id/tv_current_city_title" />
+                app:layout_constraintTop_toBottomOf="@id/tv_current_city_title">
 
+                <EditText
+                    android:id="@+id/et_current_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/current_city"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"/>
+            </com.google.android.material.textfield.TextInputLayout>
             <TextView
                 android:id="@+id/tv_job_position_title"
                 android:layout_width="wrap_content"
@@ -113,8 +122,9 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/job_position"
                 android:textStyle="bold"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_current_city" />
+                app:layout_constraintTop_toBottomOf="@id/til_current_city" />
 
             <Spinner
                 android:id="@+id/spinner_job_position"

@@ -36,6 +36,7 @@
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
             <com.google.android.material.textfield.TextInputLayout
