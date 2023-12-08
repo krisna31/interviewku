@@ -30,6 +30,7 @@ class InterviewResultActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
+            setDisplayShowHomeEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.interview_result)
         }
@@ -48,7 +49,9 @@ class InterviewResultActivity : AppCompatActivity() {
 
             viewModel.getInterviewResultById(interviewId)
             viewModel.interviewResultState.observe(this) {
+                binding.clContent.isVisible = it is Result.Success
                 binding.progressBar.isVisible = it is Result.Loading
+
                 when (it) {
                     is Result.Success -> {
                         it.data.data?.let { data ->
@@ -104,10 +107,15 @@ class InterviewResultActivity : AppCompatActivity() {
 
                             if (data.completed) {
                                 data.score?.let { score ->
-                                    if (score.toInt() in 1..5) {
-                                        binding.tvRatingSummary.text =
-                                            resources.getStringArray(R.array.rating_summary)[score.toInt() - 1]
+                                    val scoreValid = if (score.toInt() in 0..5) {
+                                        score.toInt()
+                                    } else {
+                                        0
                                     }
+
+                                    binding.ratingBarScore.rating = scoreValid.toFloat()
+                                    binding.tvRatingSummary.text =
+                                        resources.getStringArray(R.array.rating_summary)[scoreValid]
                                 }
 
                                 binding.tvFeedback.text = data.feedback
@@ -116,7 +124,8 @@ class InterviewResultActivity : AppCompatActivity() {
                                 binding.ratingBarScore.isVisible = false
                                 binding.tvFeedbackTitle.isVisible = false
 
-                                binding.tvRatingSummary.text = getString(R.string.interview_not_finished)
+                                binding.tvRatingSummary.text =
+                                    getString(R.string.interview_not_finished)
                             }
                         }
                     }
@@ -133,9 +142,9 @@ class InterviewResultActivity : AppCompatActivity() {
         }
     }
 
-    override fun onNavigateUp(): Boolean {
+    override fun onSupportNavigateUp(): Boolean {
         finish()
-        return super.onNavigateUp()
+        return super.onSupportNavigateUp()
     }
 
     companion object {

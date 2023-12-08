@@ -70,7 +70,7 @@ class RegisterDetailFragment : Fragment() {
                 }
 
                 if (currentCity.isEmpty()) {
-                    binding.editTextDomisili.error = "Kolom ini harus diisi"
+                    binding.etCurrentCity.error = "Kolom ini harus diisi"
                     return@setOnClickListener
                 }
 
@@ -104,14 +104,14 @@ class RegisterDetailFragment : Fragment() {
                     binding.progressBar.isVisible = false
                     jobPositionsResponseResult.data.data?.let { jobPositionsResponseData ->
                         val spinnerData = mutableListOf<SpinnerModel>()
-                        spinnerData.add(SpinnerModel("-1", "Silahkan Pilih"))
                         spinnerData.addAll(
                             jobPositionsResponseData.jobPositions.sortedBy {
-                                it.id
+                                it.name
                             }.map { jobPosition ->
                                 SpinnerModel(jobPosition.id.toString(), jobPosition.name)
                             }
                         )
+                        spinnerData.add(0, SpinnerModel("-1", "Silahkan Pilih"))
 
                         binding.btnSaveProfile.isEnabled = true
                         binding.spinnerJobPosition.adapter = ArrayAdapter(

@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -57,16 +58,33 @@ class InterviewTestActivity : AppCompatActivity() {
                                     language = Locale.forLanguageTag("id-ID")
                                     setOnUtteranceProgressListener(object :
                                         UtteranceProgressListener() {
-                                        override fun onStart(utteranceId: String?) {}
+                                        override fun onStart(utteranceId: String?) {
+                                            runOnUiThread {
+                                                binding.lottieSpeakingAnim.apply {
+                                                    isVisible = true
+                                                    playAnimation()
+                                                }
+                                            }
+                                        }
 
                                         override fun onDone(utteranceId: String?) {
                                             runOnUiThread {
+                                                binding.lottieSpeakingAnim.apply {
+                                                    isVisible = false
+                                                    cancelAnimation()
+                                                }
                                                 startRecording()
                                             }
                                         }
 
                                         @Deprecated("Deprecated in Java")
                                         override fun onError(utteranceId: String?) {
+                                            runOnUiThread {
+                                                binding.lottieSpeakingAnim.apply {
+                                                    isVisible = false
+                                                    cancelAnimation()
+                                                }
+                                            }
                                         }
                                     })
                                 }
@@ -119,11 +137,32 @@ class InterviewTestActivity : AppCompatActivity() {
         binding = ActivityInterviewTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setDisplayShowHomeEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+            title = getString(R.string.interview_test)
+        }
+
+        onBackPressedDispatcher.addCallback {
+            onExitDialog()
+        }
+
         if (!isPermissionGranted(Manifest.permission.RECORD_AUDIO)) {
             microphonePermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
         } else {
             initializeAll()
         }
+    }
+
+    override fun onStop() {
+        textToSpeech?.stop()
+        super.onStop()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onExitDialog()
+        return super.onSupportNavigateUp()
     }
 
     private fun initializeAll() {
@@ -228,6 +267,7 @@ class InterviewTestActivity : AppCompatActivity() {
             when (it) {
                 is Result.Success -> {
                     viewModel.moveToNextQuestion()
+                    binding.tvInterviewTestInstruction.isVisible = true
                 }
 
                 is Result.Loading -> {}
@@ -256,14 +296,14 @@ class InterviewTestActivity : AppCompatActivity() {
 
         viewModel.submitInterviewState.observe(this) {
             binding.progressBar.isVisible = it is Result.Loading
-            binding.ivNext.isClickable = it is Result.Success
-            binding.ivRepeatQuestion.isClickable = it is Result.Success
 
             when (it) {
                 is Result.Success -> {
                     if (viewModel.isEndOfInterview) {
+                        binding.tvInterviewTestInstruction.isVisible = false
                         binding.ivNext.isVisible = false
                         binding.ivRepeatQuestion.isVisible = false
+
                         viewModel.endInterviewSession()
                     } else {
                         viewModel.moveToNextQuestion()
@@ -346,6 +386,24 @@ class InterviewTestActivity : AppCompatActivity() {
             binding.ivNext.isVisible = isRecording
             binding.ivRecording.isVisible = isRecording
             binding.ivRepeatQuestion.isVisible = isRecording
+        }
+    }
+
+    private fun onExitDialog() {
+        val alertDialog = AlertDialog.Builder(this)
+            .setCancelable(false)
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                finish()
+            }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setTitle(getString(R.string.exit_from_session))
+            .setMessage(getString(R.string.interview_exit_confirm))
+            .create()
+
+        if (!isFinishing) {
+            alertDialog.show()
         }
     }
 

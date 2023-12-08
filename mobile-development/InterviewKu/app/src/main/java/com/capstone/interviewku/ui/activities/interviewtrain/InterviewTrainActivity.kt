@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -105,11 +106,32 @@ class InterviewTrainActivity : AppCompatActivity() {
         binding = ActivityInterviewTrainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setDisplayShowHomeEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+            title = getString(R.string.interview_train)
+        }
+
+        onBackPressedDispatcher.addCallback {
+            onExitDialog()
+        }
+
         if (!isPermissionGranted(Manifest.permission.RECORD_AUDIO)) {
             microphonePermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
         } else {
             initializeAll()
         }
+    }
+
+    override fun onStop() {
+        textToSpeech?.stop()
+        super.onStop()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onExitDialog()
+        return super.onSupportNavigateUp()
     }
 
     private fun initializeAll() {
@@ -210,6 +232,10 @@ class InterviewTrainActivity : AppCompatActivity() {
             when (it) {
                 is Result.Success -> {
                     viewModel.moveToNextQuestion()
+
+                    binding.tvQuestionOrder.isVisible = true
+                    binding.tvQuestion.isVisible = true
+                    binding.tvTimer.isVisible = true
                 }
 
                 is Result.Loading -> {}
@@ -238,8 +264,10 @@ class InterviewTrainActivity : AppCompatActivity() {
 
         viewModel.submitInterviewState.observe(this) {
             binding.progressBar.isVisible = it is Result.Loading
-            binding.ivNext.isClickable = it is Result.Success
-            binding.ivRepeatAnswer.isClickable = it is Result.Success
+
+            binding.ivNext.isVisible = it is Result.Success
+            binding.ivRepeatAnswer.isVisible = it is Result.Success
+            binding.tvTimer.isVisible = it is Result.Success
 
             when (it) {
                 is Result.Success -> {
@@ -247,6 +275,8 @@ class InterviewTrainActivity : AppCompatActivity() {
                         if (currentOrder.first == currentOrder.second) {
                             binding.ivNext.isVisible = false
                             binding.ivRepeatAnswer.isVisible = false
+                            binding.tvTimer.isVisible = false
+
                             viewModel.endInterviewSession()
                         } else {
                             viewModel.moveToNextQuestion()
@@ -337,10 +367,12 @@ class InterviewTrainActivity : AppCompatActivity() {
         }
 
         viewModel.currentQuestionIsAnswered.observe(this) { isAnswered ->
-            binding.ivNext.isVisible = isAnswered
-            binding.ivRepeatAnswer.isVisible = isAnswered
+            if (viewModel.currentQuestionOrder.value?.first != 0) {
+                binding.ivNext.isVisible = isAnswered
+                binding.ivRepeatAnswer.isVisible = isAnswered
 
-            binding.ivRecord.isVisible = !isAnswered
+                binding.ivRecord.isVisible = !isAnswered
+            }
         }
 
         viewModel.isRecording.observe(this) { isRecording ->
@@ -367,6 +399,24 @@ class InterviewTrainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun onExitDialog() {
+        val alertDialog = AlertDialog.Builder(this)
+            .setCancelable(false)
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                finish()
+            }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setTitle(getString(R.string.exit_from_session))
+            .setMessage(getString(R.string.interview_exit_confirm))
+            .create()
+
+        if (!isFinishing) {
+            alertDialog.show()
         }
     }
 

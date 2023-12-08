@@ -2,7 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="lightblue">#0ACDFF</color>
-    <color name="textColor">#000000</color>
-    <color name="textColorDarkMode">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="brown">#AD9C89</color>
+    <color name="cream">#FFEDD5</color>
+    <color name="green">#5EEB5B</color>
+    <color name="light_blue">#0ACDFF</color>
+    <color name="dark_blue">#0083A3</color>
+    <color name="red">#CC2936</color>
 </resources>

@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
-import java.util.regex.Pattern
 
 object Helpers {
     fun getGenders(context: Context): MutableList<SpinnerModel> {
@@ -25,7 +24,11 @@ object Helpers {
 
     fun isEmailValid(email: String) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
-    fun isPasswordValid(password: String) = Pattern.matches("[a-zA-Z0-9].*", password)
+    fun isPasswordValid(password: String) =
+        password.length >= 8
+                && password.contains(Regex("[a-z]"))
+                && password.contains(Regex("[A-Z]"))
+                && password.contains(Regex("[0-9]"))
 
     fun secondsToString(seconds: Int): String {
         return DateUtils.formatElapsedTime(seconds.toLong())

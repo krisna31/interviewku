@@ -18,8 +18,9 @@
         android:id="@+id/rv_interview_tips"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="@dimen/root_padding"
-        android:paddingTop="@dimen/root_padding"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingHorizontal="@dimen/list_item_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:listitem="@layout/item_tips_screen" />

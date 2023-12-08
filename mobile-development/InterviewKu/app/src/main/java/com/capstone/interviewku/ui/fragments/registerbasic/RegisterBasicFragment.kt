@@ -60,7 +60,7 @@ class RegisterBasicFragment : Fragment() {
             }
 
             if (!Helpers.isPasswordValid(password)) {
-                errorMessages.add("Password harus minimal 8 karakter, terdapat 1 huruf kapital, dan 1 karakter simbol")
+                errorMessages.add("Password harus minimal 8 karakter dan terdapat minimal 1 huruf kapital dan 1 karakter angka")
                 binding.etPassword.error = errorMessages.last()
             }
 

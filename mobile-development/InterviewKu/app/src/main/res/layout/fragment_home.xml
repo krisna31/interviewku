@@ -6,20 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.home.HomeFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/card_elevation"
         app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.appcompat.widget.Toolbar>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="@dimen/card_elevation" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toBottomOf="@id/appbarlayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,7 +41,6 @@
                 android:text="@string/home_greeting_template"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -44,7 +50,6 @@
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="8dp"
                 android:textSize="16sp"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toBottomOf="@id/tv_greeting"
                 tools:text="“Lorem ipsum dolor sit amet, consectetur adipiscing elit.”\n-Quote Maker" />
 
@@ -57,7 +62,6 @@
                 android:text="@string/choose_your_interest"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_quote" />
 
@@ -86,6 +90,7 @@
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="16dp"
                 android:text="@string/interview_train_try"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/chipgroup_interest" />
@@ -99,7 +104,6 @@
                 android:text="@string/interview_performance_title"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_interest_start_train" />
 
@@ -108,8 +112,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:clipToPadding="false"
                 android:orientation="horizontal"
-                android:paddingStart="@dimen/root_padding"
+                android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/tv_performance_title"
                 tools:ignore="RtlSymmetry"
@@ -120,10 +125,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/root_padding"
-                android:layout_marginTop="4dp"
+                android:paddingHorizontal="@dimen/list_item_padding"
                 android:text="@string/no_history"
                 android:textSize="16sp"
-                android:theme="@style/Base.Theme.InterviewKu"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/tv_performance_title" />
 
             <Button
@@ -133,6 +138,7 @@
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="8dp"
                 android:text="@string/interview_train_try"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_no_history" />
@@ -144,6 +150,7 @@
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="8dp"
                 android:text="@string/interview_test_try"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_no_history_start_train" />
@@ -159,12 +166,11 @@
                 android:id="@+id/tv_tips_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/root_padding"
                 android:layout_marginTop="20dp"
                 android:text="@string/navigation_tips"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/barrier1" />
 
@@ -173,8 +179,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:clipToPadding="false"
                 android:orientation="horizontal"
-                android:paddingStart="@dimen/root_padding"
+                android:overScrollMode="never"
+                android:paddingHorizontal="@dimen/list_item_padding"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/tv_tips_title"
                 tools:ignore="RtlSymmetry"
@@ -192,7 +200,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/appbarlayout"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

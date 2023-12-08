@@ -61,9 +61,15 @@ class ItemInterviewHistoryAdapter(
                 )
 
                 data.score?.let {
-                    binding.ratingBarScore.rating = it.toFloat()
+                    val score = if (it in 0..5) {
+                        it
+                    } else {
+                        0
+                    }
+
+                    binding.ratingBarScore.rating = score.toFloat()
                     binding.tvScoreDescription.text =
-                        resources.getStringArray(R.array.rating_summary)[it - 1]
+                        resources.getStringArray(R.array.rating_summary)[score]
                 } ?: run {
                     binding.ratingBarScore.isVisible = false
                     binding.tvScoreDescription.text = getString(R.string.interview_not_finished)

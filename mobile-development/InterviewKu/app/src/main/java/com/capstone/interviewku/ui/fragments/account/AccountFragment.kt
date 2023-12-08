@@ -1,29 +1,24 @@
 package com.capstone.interviewku.ui.fragments.account
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.FragmentAccountBinding
 import com.capstone.interviewku.ui.activities.changepassword.ChangePasswordActivity
 import com.capstone.interviewku.ui.activities.interviewhistory.InterviewHistoryActivity
-import com.capstone.interviewku.ui.activities.login.LoginActivity
+import com.capstone.interviewku.ui.activities.landing.LandingActivity
 import com.capstone.interviewku.ui.activities.profile.ProfileActivity
-import com.capstone.interviewku.ui.activities.splash.SplashViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.capstone.interviewku.util.Extensions.handleHttpException
 import com.capstone.interviewku.util.Result
-import kotlinx.coroutines.launch
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AccountFragment : Fragment() {
@@ -44,46 +39,57 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val activity = requireActivity()
+
         binding.clProfile.setOnClickListener {
-            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            val intent = Intent(activity, ProfileActivity::class.java)
             startActivity(intent)
         }
 
         binding.clTextToSpeach.setOnClickListener {
-            val intent = Intent(requireContext(), InterviewHistoryActivity::class.java)
+            val intent = Intent(activity, InterviewHistoryActivity::class.java)
             startActivity(intent)
         }
 
         binding.clResetPassword.setOnClickListener {
-            val intent = Intent(requireContext(), ChangePasswordActivity::class.java)
+            val intent = Intent(activity, ChangePasswordActivity::class.java)
             startActivity(intent)
         }
 
         binding.clLogout.setOnClickListener {
             viewModel.logout()
-            navigateToLoginScreen()
         }
+
+        binding.toolbar.apply {
+            setLogo(R.mipmap.ic_launcher_round)
+        }
+
         viewModel.logoutState.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
                     binding.progressBar.isVisible = true
                 }
+
                 is Result.Success -> {
                     binding.progressBar.isVisible = false
-                    navigateToLoginScreen()
+                    Toast.makeText(activity, getString(R.string.logout_success), Toast.LENGTH_SHORT)
+                        .show()
+                    navigateToLandingScreen(activity)
                 }
+
                 is Result.Error -> {
                     binding.progressBar.isVisible = false
-                    val error = result.exception
+                    result.exception.getData()?.handleHttpException(activity)
                 }
             }
         }
     }
-    private fun navigateToLoginScreen() {
-        val loginIntent = Intent(requireContext(), LoginActivity::class.java)
-        loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+    private fun navigateToLandingScreen(activity: Activity) {
+        val loginIntent = Intent(requireContext(), LandingActivity::class.java)
         startActivity(loginIntent)
-        }
+        activity.finishAffinity()
+    }
 
     override fun onDestroy() {
         _binding = null

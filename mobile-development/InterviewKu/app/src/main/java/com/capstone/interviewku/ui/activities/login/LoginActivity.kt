@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import com.capstone.interviewku.databinding.ActivityLoginBinding
 import com.capstone.interviewku.ui.activities.main.MainActivity
 import com.capstone.interviewku.util.Extensions.handleHttpException
+import com.capstone.interviewku.util.Extensions.hideKeyboard
 import com.capstone.interviewku.util.Result
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,6 +48,8 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.etLoginEmail.text.toString()
             val password = binding.etLoginPassword.text.toString()
             viewModel.login(email, password)
+
+            hideKeyboard(it)
         }
     }
 }

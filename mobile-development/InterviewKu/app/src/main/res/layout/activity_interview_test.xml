@@ -17,27 +17,33 @@
 
     <TextView
         android:id="@+id/tv_interview_test_instruction"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/root_padding"
         android:layout_marginTop="@dimen/root_padding"
         android:text="@string/interview_test_screen_instruction"
         android:textAlignment="center"
         android:textSize="24sp"
         android:theme="@style/Base.Theme.InterviewKu"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:visibility="visible" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_speaking_anim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintVertical_bias="0.35"
-        app:lottie_rawRes="@raw/bubble_anim" />
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/bubble_anim"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/iv_repeat_question"
@@ -45,22 +51,25 @@
         android:layout_height="56dp"
         android:importantForAccessibility="no"
         android:src="@drawable/baseline_refresh_24"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/lottie_speaking_anim"
         app:layout_constraintEnd_toEndOf="@id/lottie_speaking_anim"
         app:layout_constraintStart_toStartOf="@id/lottie_speaking_anim"
-        app:layout_constraintTop_toTopOf="@id/lottie_speaking_anim" />
+        app:layout_constraintTop_toTopOf="@id/lottie_speaking_anim"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/iv_recording"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginBottom="@dimen/root_padding"
-        android:alpha="0.3"
         android:importantForAccessibility="no"
         android:src="@drawable/baseline_mic_24"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/iv_next"
@@ -69,9 +78,11 @@
         android:layout_marginBottom="@dimen/root_padding"
         android:importantForAccessibility="no"
         android:src="@drawable/baseline_arrow_forward_24"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/iv_recording" />
+        app:layout_constraintStart_toEndOf="@id/iv_recording"
+        tools:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

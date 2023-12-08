@@ -1,5 +1,6 @@
 package com.capstone.interviewku.ui.fragments.jobpicker
 
+import android.app.ActionBar.LayoutParams
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -79,6 +80,11 @@ class JobPickerFragment(
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        dialog?.window?.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+    }
+
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
@@ -86,12 +92,14 @@ class JobPickerFragment(
 
     fun setData(jobFieldModel: JobFieldModel) {
         val spinnerData = mutableListOf<SpinnerModel>()
-        spinnerData.add(SpinnerModel("-1", "Silahkan Pilih"))
         spinnerData.addAll(
-            jobFieldModel.jobFields.map { jobField ->
+            jobFieldModel.jobFields.sortedBy {
+                it.name
+            }.map { jobField ->
                 SpinnerModel(jobField.id.toString(), jobField.name)
             }
         )
+        spinnerData.add(0, SpinnerModel("-1", "Silahkan Pilih"))
 
         val selectedIndex = jobFieldModel.jobFields.indexOfFirst {
             it.id == jobFieldModel.selectedId

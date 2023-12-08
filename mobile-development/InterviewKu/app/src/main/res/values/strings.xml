@@ -91,4 +91,9 @@
     <string name="question_order_template">Pertanyaan %d / %d</string>
     <string name="retry_count_template">%d kali</string>
     <string name="started_at_template">Waktu: %s</string>
+    <string name="logout_success">Berhasil keluar dari akun anda</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="exit_from_session">Keluar dari sesi</string>
+    <string name="interview_exit_confirm">Apakah anda yakin ingin keluar dari sesi? Anda akan dianggap tidak menyelesaikan sesi ini</string>
 </resources>

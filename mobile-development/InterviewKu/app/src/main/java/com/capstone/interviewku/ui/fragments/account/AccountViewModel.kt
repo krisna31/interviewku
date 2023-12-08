@@ -8,10 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.capstone.interviewku.data.AuthRepository
 import com.capstone.interviewku.data.UserRepository
 import com.capstone.interviewku.data.network.response.User
+import com.capstone.interviewku.util.Result
 import com.capstone.interviewku.util.SingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import com.capstone.interviewku.util.Result
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,7 +32,14 @@ class AccountViewModel @Inject constructor(
         _logoutState.value = Result.Loading
 
         try {
-            authRepository.logout()
+            try {
+                authRepository.logout()
+            } catch (httpException: HttpException) {
+                if (httpException.code() !in 400..500) {
+                    throw httpException
+                }
+            }
+
             authRepository.clearLoginData()
 
             _logoutState.value = Result.Success(Unit)

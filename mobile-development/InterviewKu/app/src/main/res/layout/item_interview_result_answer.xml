@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
     android:layout_height="450dp"
-    android:layout_marginEnd="@dimen/root_padding"
-    app:cardCornerRadius="@dimen/corner_radius"
-    app:cardElevation="@dimen/card_elevation">
+    android:layout_margin="@dimen/list_item_margin"
+    app:cardCornerRadius="@dimen/corner_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -44,7 +43,7 @@
             android:isIndicator="true"
             android:numStars="5"
             android:progressTint="#FFE940"
-            android:rating="3"
+            android:rating="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_item_question" />
 
@@ -53,7 +52,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="8dp"
-            android:src="@drawable/baseline_history_24"
+            android:src="@drawable/baseline_timer_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rating_bar_item_score" />
 

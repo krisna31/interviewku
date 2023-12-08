@@ -1,12 +1,9 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.InterviewKu" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">@color/lightblue</item>
-        <item name="colorPrimaryVariant">@color/lightblue</item>
-        <item name="android:textColor">@color/textColor</item>
-
+        <item name="colorPrimary">@color/light_blue</item>
+        <item name="colorPrimaryVariant">@color/dark_blue</item>
+        <item name="iconTint">@color/black</item>
     </style>
 
     <style name="Theme.InterviewKu" parent="Base.Theme.InterviewKu" />

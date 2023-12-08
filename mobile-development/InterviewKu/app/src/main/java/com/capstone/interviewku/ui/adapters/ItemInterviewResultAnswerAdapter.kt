@@ -46,15 +46,21 @@ class ItemInterviewResultAnswerAdapter :
             )
 
             data.userAnswer?.let {
-                data.score?.let {
-                    binding.ratingBarItemScore.rating = it.toFloat()
+                data.score?.let { score ->
+                    val scoreValid = if (score.toInt() in 0..5) {
+                        score
+                    } else {
+                        0
+                    }
+
+                    binding.ratingBarItemScore.rating = scoreValid.toFloat()
                 } ?: run {
                     binding.ratingBarItemScore.isVisible = false
                 }
 
                 data.duration?.let { duration ->
-                    val minutes = duration / 60
-                    val seconds = duration % 60
+                    val minutes = (duration / 60).toInt()
+                    val seconds = (duration % 60).toInt()
                     binding.tvItemDuration.text = getString(
                         R.string.duration_template,
                         minutes,

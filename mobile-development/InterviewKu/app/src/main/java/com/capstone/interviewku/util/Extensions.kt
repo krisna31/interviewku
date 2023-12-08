@@ -2,6 +2,8 @@ package com.capstone.interviewku.util
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.datastore.preferences.preferencesDataStore
 import com.capstone.interviewku.BuildConfig
@@ -12,6 +14,11 @@ import retrofit2.HttpException
 
 object Extensions {
     val Context.dataStore by preferencesDataStore(Constants.DATASTORE_NAME)
+
+    fun Context.hideKeyboard(view: View) =
+        (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+            hideSoftInputFromWindow(view.windowToken, 0)
+        }
 
     fun Context.isPermissionGranted(permission: String) =
         checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
