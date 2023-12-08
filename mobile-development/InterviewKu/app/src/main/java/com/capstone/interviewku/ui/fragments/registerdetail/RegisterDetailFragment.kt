@@ -2,6 +2,8 @@ package com.capstone.interviewku.ui.fragments.registerdetail
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -59,27 +61,11 @@ class RegisterDetailFragment : Fragment() {
                 val jobPositionId =
                     (binding.spinnerJobPosition.selectedItem as SpinnerModel?)?.value?.toIntOrNull()
 
-                if (gender == null) {
-                    showToast("Semua kolom harus diisi")
-                    return@setOnClickListener
+                if (isValidInput(gender, birthdate, currentCity, jobPositionId)) {
+                    viewModel.addUserIdentity(jobPositionId!!, gender!!, birthdate!!, currentCity)
+                } else {
+                    showToast("Semua kolom harus diisi dengan benar")
                 }
-
-                if (birthdate == null) {
-                    showToast("Semua kolom harus diisi")
-                    return@setOnClickListener
-                }
-
-                if (currentCity.isEmpty()) {
-                    binding.etCurrentCity.error = "Kolom ini harus diisi"
-                    return@setOnClickListener
-                }
-
-                if (jobPositionId == null || jobPositionId == -1) {
-                    showToast("Semua kolom harus diisi")
-                    return@setOnClickListener
-                }
-
-                viewModel.addUserIdentity(jobPositionId, gender, birthdate, currentCity)
             }
         }
 
@@ -97,6 +83,17 @@ class RegisterDetailFragment : Fragment() {
                 }
             ).show(parentFragmentManager, "")
         }
+
+        binding.etCurrentCity.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+
+                updateSaveButtonStatus()
+            }
+        })
 
         viewModel.jobPositionState.observe(viewLifecycleOwner) { jobPositionsResponseResult ->
             when (jobPositionsResponseResult) {
@@ -176,5 +173,18 @@ class RegisterDetailFragment : Fragment() {
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+    }
+    private fun updateSaveButtonStatus() {
+        val gender = (binding.spinnerGender.selectedItem as SpinnerModel?)?.value
+        val birthdate = viewModel.birthDate
+        val currentCity = binding.etCurrentCity.text.toString()
+        val jobPositionId =
+            (binding.spinnerJobPosition.selectedItem as SpinnerModel?)?.value?.toIntOrNull()
+
+        binding.btnSaveProfile.isEnabled = isValidInput(gender, birthdate, currentCity, jobPositionId)
+    }
+
+    private fun isValidInput(gender: String?, birthdate: String?, currentCity: String, jobPositionId: Int?): Boolean {
+        return gender != null && birthdate != null && currentCity.isNotEmpty() && jobPositionId != null && jobPositionId != -1
     }
 }

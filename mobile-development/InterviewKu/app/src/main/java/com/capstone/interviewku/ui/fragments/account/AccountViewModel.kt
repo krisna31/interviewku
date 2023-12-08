@@ -55,10 +55,14 @@ class AccountViewModel @Inject constructor(
 
         try {
             val userResult = userRepository.getUser()
-
+            userResult.data?.let { userData ->
+                _getUserState.value = Result.Success(userData)
+            } ?: run {
+                throw Exception("User data is null")
+            }
         } catch (e: Exception) {
             Log.e("AccountViewModel", "Error getting user", e)
             _getUserState.value = Result.Error(SingleEvent(e))
-        }
+            }
     }
 }

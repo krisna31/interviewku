@@ -86,7 +86,8 @@
     <string name="tts_init_failed">Silahkan mengecek fitur Google TTS di perangkat anda</string>
     <string name="tts_not_initialized">TTS belum diinisialisasi</string>
     <string name="unexpected_error">Terjadi kesalahan. Silahkan coba lagi</string>
-
+    <string name="eror_email">Email Tidak Valid</string>
+    <string name="eror_password">Kata Sandi Salah</string>
     <!--  TEMPLATE  -->
     <string name="duration_label_template">Durasi: %s</string>
     <string name="duration_template">%02d Menit %02d Detik</string>

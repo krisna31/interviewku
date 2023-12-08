@@ -1,11 +1,13 @@
 package com.capstone.interviewku.ui.fragments.account
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -39,6 +41,8 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupObservers()
+
         val activity = requireActivity()
 
         binding.clProfile.setOnClickListener {
@@ -57,7 +61,7 @@ class AccountFragment : Fragment() {
         }
 
         binding.clLogout.setOnClickListener {
-            viewModel.logout()
+            showLogoutConfirmationDialog(requireActivity())
         }
 
         binding.toolbar.apply {
@@ -83,6 +87,44 @@ class AccountFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setupObservers() {
+        viewModel.getUser()
+        viewModel.getUserState.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+                is Result.Success -> {
+                    binding.progressBar.isVisible = false
+                    binding.tvFullname.text = "${result.data?.firstname} ${result.data?.lastname}"
+                }
+                is Result.Error -> {
+                    binding.progressBar.isVisible = false
+                    Toast.makeText(context, "Error: ${result.exception}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun showLogoutConfirmationDialog(activity: Activity) {
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.custom_alert_logout, null)
+        val dialog = AlertDialog.Builder(context)
+            .setView(dialogView)
+            .create()
+
+        dialogView.findViewById<Button>(R.id.btn_Confirm_Logout).setOnClickListener {
+            viewModel.logout()
+            dialog.dismiss()
+            navigateToLandingScreen(activity)
+        }
+
+        dialogView.findViewById<Button>(R.id.btn_Cancel_Logout).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun navigateToLandingScreen(activity: Activity) {
