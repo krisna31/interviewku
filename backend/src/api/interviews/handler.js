@@ -181,7 +181,7 @@ class InterviewsHandler {
 
     await this._interviewsService.validateIsInterviewExist({ interviewId });
 
-    await this._interviewsService.validateIsInterviewClosed({ interviewId });
+    // await this._interviewsService.validateIsInterviewClosed({ interviewId });
 
     const interviewData = await this._interviewsService.getInterviewDataByInterviewId({
       interviewId,
