@@ -25,12 +25,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="34">
         <activity
-            android:name=".ui.activities.forgetpass.ForgetPasswordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.recoverpass.RecoverPasswordActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.activities.splash.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -49,9 +43,17 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.register.RegisterActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            android:name=".ui.activities.registerbasic.RegisterBasicActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.registerdetail.RegisterDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.forgetpass.ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.recoverpass.RecoverPasswordActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activities.main.MainActivity"
             android:exported="false"

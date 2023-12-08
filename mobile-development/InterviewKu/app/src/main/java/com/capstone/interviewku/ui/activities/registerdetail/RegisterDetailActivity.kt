@@ -1,20 +1,16 @@
-package com.capstone.interviewku.ui.fragments.registerdetail
+package com.capstone.interviewku.ui.activities.registerdetail
 
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.capstone.interviewku.R
-import com.capstone.interviewku.databinding.FragmentRegisterDetailBinding
+import com.capstone.interviewku.databinding.ActivityRegisterDetailBinding
 import com.capstone.interviewku.ui.activities.main.MainActivity
 import com.capstone.interviewku.ui.fragments.datepicker.DatePickerFragment
 import com.capstone.interviewku.ui.fragments.datepicker.DatePickerListener
@@ -28,28 +24,21 @@ import java.util.Calendar
 import java.util.Locale
 
 @AndroidEntryPoint
-class RegisterDetailFragment : Fragment() {
-    private var _binding: FragmentRegisterDetailBinding? = null
-    private val binding
-        get() = _binding!!
+class RegisterDetailActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRegisterDetailBinding
 
     private val viewModel by viewModels<RegisterDetailViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRegisterDetailBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding = ActivityRegisterDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.spinnerGender.adapter = ArrayAdapter(
-            requireContext(),
+            this,
             R.layout.spinner_item,
-            Helpers.getGenders(requireContext())
+            Helpers.getGenders(this)
         )
 
         binding.btnSaveProfile.apply {
@@ -81,7 +70,7 @@ class RegisterDetailFragment : Fragment() {
                         binding.tvBirthdate.text = viewModel.birthDate
                     }
                 }
-            ).show(parentFragmentManager, "")
+            ).show(supportFragmentManager, "")
         }
 
         binding.etCurrentCity.addTextChangedListener(object : TextWatcher {
@@ -95,7 +84,7 @@ class RegisterDetailFragment : Fragment() {
             }
         })
 
-        viewModel.jobPositionState.observe(viewLifecycleOwner) { jobPositionsResponseResult ->
+        viewModel.jobPositionState.observe(this) { jobPositionsResponseResult ->
             when (jobPositionsResponseResult) {
                 is Result.Success -> {
                     binding.progressBar.isVisible = false
@@ -112,7 +101,7 @@ class RegisterDetailFragment : Fragment() {
 
                         binding.btnSaveProfile.isEnabled = true
                         binding.spinnerJobPosition.adapter = ArrayAdapter(
-                            requireContext(),
+                            this,
                             R.layout.spinner_item,
                             spinnerData
                         )
@@ -126,19 +115,19 @@ class RegisterDetailFragment : Fragment() {
                 is Result.Error -> {
                     binding.progressBar.isVisible = false
                     jobPositionsResponseResult.exception.getData()
-                        ?.handleHttpException(requireContext())
+                        ?.handleHttpException(this)
                 }
             }
         }
 
-        viewModel.addUserIdentityState.observe(viewLifecycleOwner) {
+        viewModel.addUserIdentityState.observe(this) {
             when (it) {
                 is Result.Success -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, it.data.message, Toast.LENGTH_SHORT).show()
 
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
-                    requireActivity().finishAffinity()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
                 }
 
                 is Result.Loading -> {
@@ -147,33 +136,18 @@ class RegisterDetailFragment : Fragment() {
 
                 is Result.Error -> {
                     binding.progressBar.isVisible = false
-                    it.exception.getData()?.handleHttpException(requireContext())
+                    it.exception.getData()?.handleHttpException(this)
                 }
             }
         }
 
         viewModel.getJobPositions()
-
-        view.setOnKeyListener { _, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                if (event.action == KeyEvent.ACTION_UP) {
-                    requireActivity().finishAffinity()
-                    return@setOnKeyListener true
-                }
-            }
-
-            false
-        }
     }
 
     private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
-    }
     private fun updateSaveButtonStatus() {
         val gender = (binding.spinnerGender.selectedItem as SpinnerModel?)?.value
         val birthdate = viewModel.birthDate
@@ -181,10 +155,16 @@ class RegisterDetailFragment : Fragment() {
         val jobPositionId =
             (binding.spinnerJobPosition.selectedItem as SpinnerModel?)?.value?.toIntOrNull()
 
-        binding.btnSaveProfile.isEnabled = isValidInput(gender, birthdate, currentCity, jobPositionId)
+        binding.btnSaveProfile.isEnabled =
+            isValidInput(gender, birthdate, currentCity, jobPositionId)
     }
 
-    private fun isValidInput(gender: String?, birthdate: String?, currentCity: String, jobPositionId: Int?): Boolean {
+    private fun isValidInput(
+        gender: String?,
+        birthdate: String?,
+        currentCity: String,
+        jobPositionId: Int?
+    ): Boolean {
         return gender != null && birthdate != null && currentCity.isNotEmpty() && jobPositionId != null && jobPositionId != -1
     }
 }

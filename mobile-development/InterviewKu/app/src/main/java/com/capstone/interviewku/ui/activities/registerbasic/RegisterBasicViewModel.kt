@@ -1,4 +1,4 @@
-package com.capstone.interviewku.ui.fragments.registerbasic
+package com.capstone.interviewku.ui.activities.registerbasic
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

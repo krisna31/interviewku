@@ -1,5 +1,7 @@
 package com.capstone.interviewku.data.network.service
 
+import com.capstone.interviewku.data.network.response.ArticleDetailResponse
+import com.capstone.interviewku.data.network.response.ArticlesResponse
 import com.capstone.interviewku.data.network.response.BaseResponse
 import com.capstone.interviewku.data.network.response.InterviewAnswerSubmitResponse
 import com.capstone.interviewku.data.network.response.InterviewHistoryResponse
@@ -27,6 +29,20 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface InterviewKuAPIService {
+    // articles
+    @GET("/articles")
+    suspend fun getAllArticles(
+        @Header("Authorization") bearerToken: String,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+    ): ArticlesResponse
+
+    @GET("/articles/{articleId}")
+    suspend fun getArticleById(
+        @Header("Authorization") bearerToken: String,
+        @Path("articleId") articleId: Int,
+    ): ArticleDetailResponse
+
     // authentications
     @POST("/authentications")
     @FormUrlEncoded
@@ -69,12 +85,6 @@ interface InterviewKuAPIService {
         @Header("Authorization") bearerToken: String,
         @Query("mode") mode: String,
         @Query("jobFieldId") jobFieldId: Int,
-    ): InterviewQuestionsResponse
-
-    @GET("/interviews/{interviewId}/questions")
-    suspend fun getCurrentInterviewQuestions(
-        @Header("Authorization") bearerToken: String,
-        @Path("interviewId") interviewId: String,
     ): InterviewQuestionsResponse
 
     @POST("/interviews/{interviewId}/answers")

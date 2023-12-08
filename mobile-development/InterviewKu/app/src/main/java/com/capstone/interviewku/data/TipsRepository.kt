@@ -12,18 +12,5 @@ class TipsRepository @Inject constructor(
     private val appPreferences: AppPreferences,
     private val database: InterviewKuDatabase
 ) {
-    companion object {
-        @Volatile
-        private var instance: TipsRepository? = null
 
-        fun getInstance(
-            apiService: InterviewKuAPIService,
-            appPreferences: AppPreferences,
-            database: InterviewKuDatabase
-        ) = instance ?: synchronized(this) {
-            TipsRepository(apiService, appPreferences, database).also {
-                instance = it
-            }
-        }
-    }
 }

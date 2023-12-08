@@ -4,12 +4,37 @@ import android.content.Context
 import android.text.format.DateUtils
 import android.util.Patterns
 import com.capstone.interviewku.R
+import com.capstone.interviewku.data.network.response.Article
+import com.capstone.interviewku.data.network.response.ArticleItem
+import com.capstone.interviewku.data.room.entity.ArticleEntity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
 object Helpers {
+    fun articleEntityToArticleResponse(articleEntity: ArticleEntity) = Article(
+        id = articleEntity.id,
+        title = articleEntity.title,
+        author = articleEntity.author,
+        subtitle = articleEntity.subtitle,
+        content = articleEntity.content,
+        coverImgUrl = articleEntity.coverImgUrl,
+        createdAt = articleEntity.createdAt,
+        updatedAt = articleEntity.updatedAt
+    )
+
+    fun articleResponseToArticleEntity(article: ArticleItem) = ArticleEntity(
+        id = article.id,
+        title = article.title,
+        author = article.author,
+        subtitle = article.subtitle,
+        content = article.content,
+        coverImgUrl = article.coverImgUrl,
+        createdAt = article.createdAt,
+        updatedAt = article.updatedAt
+    )
+
     fun getGenders(context: Context): MutableList<SpinnerModel> {
         val labelArray = context.resources.getStringArray(R.array.gender_label)
         val valueArray = context.resources.getStringArray(R.array.gender)

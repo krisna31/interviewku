@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/root_padding">
+    tools:context=".ui.activities.registerdetail.RegisterDetailActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,7 +13,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/root_padding">
 
             <TextView
                 android:id="@+id/tv_register_detail_title"

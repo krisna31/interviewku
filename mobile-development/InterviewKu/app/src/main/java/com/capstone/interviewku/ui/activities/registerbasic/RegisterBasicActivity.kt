@@ -1,42 +1,31 @@
-package com.capstone.interviewku.ui.fragments.registerbasic
+package com.capstone.interviewku.ui.activities.registerbasic
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commitNow
-import androidx.fragment.app.viewModels
-import com.capstone.interviewku.R
-import com.capstone.interviewku.databinding.FragmentRegisterBasicBinding
-import com.capstone.interviewku.ui.fragments.registerdetail.RegisterDetailFragment
+import com.capstone.interviewku.databinding.ActivityRegisterBasicBinding
+import com.capstone.interviewku.ui.activities.registerdetail.RegisterDetailActivity
 import com.capstone.interviewku.util.Extensions.handleHttpException
 import com.capstone.interviewku.util.Helpers
 import com.capstone.interviewku.util.Result
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterBasicFragment : Fragment() {
-    private var _binding: FragmentRegisterBasicBinding? = null
-    private val binding
-        get() = _binding!!
+class RegisterBasicActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRegisterBasicBinding
 
     private val viewModel by viewModels<RegisterBasicViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRegisterBasicBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding = ActivityRegisterBasicBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setupTextWatchers()
 
@@ -51,14 +40,14 @@ class RegisterBasicFragment : Fragment() {
             }
         }
 
-        viewModel.registerState.observe(viewLifecycleOwner) {
+        viewModel.registerState.observe(this) {
             when (it) {
                 is Result.Success -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
-                    parentFragmentManager.commitNow(allowStateLoss = true) {
-                        replace(R.id.frame_layout_root, RegisterDetailFragment())
-                    }
+                    Toast.makeText(this, it.data.message, Toast.LENGTH_SHORT).show()
+
+                    startActivity(Intent(this, RegisterDetailActivity::class.java))
+                    finishAffinity()
                 }
 
                 is Result.Loading -> {
@@ -67,7 +56,7 @@ class RegisterBasicFragment : Fragment() {
 
                 is Result.Error -> {
                     binding.progressBar.isVisible = false
-                    it.exception.getData()?.handleHttpException(requireContext())
+                    it.exception.getData()?.handleHttpException(this)
                 }
             }
         }
@@ -94,7 +83,12 @@ class RegisterBasicFragment : Fragment() {
         binding.etLastname.addTextChangedListener(textWatcher)
     }
 
-    private fun validateInputs(email: String, password: String, firstName: String, lastName: String): Boolean {
+    private fun validateInputs(
+        email: String,
+        password: String,
+        firstName: String,
+        lastName: String
+    ): Boolean {
         var isValid = true
 
         if (firstName.isEmpty()) {
@@ -119,19 +113,13 @@ class RegisterBasicFragment : Fragment() {
         }
 
         if (!Helpers.isPasswordValid(password)) {
-            binding.etPassword.error = "Password harus minimal 8 karakter, terdapat 1 huruf kapital, dan 1 karakter simbol"
+            binding.etPassword.error =
+                "Password harus minimal 8 karakter, terdapat 1 huruf kapital, dan 1 karakter simbol"
             isValid = false
         } else {
             binding.etPassword.error = null
         }
 
         return isValid
-    }
-
-
-
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
     }
 }
