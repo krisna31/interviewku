@@ -48,6 +48,8 @@ class InterviewHistoryActivity : AppCompatActivity() {
         interviewHistoryAdapter.addLoadStateListener {
             binding.progressBar.isVisible =
                 it.refresh == LoadState.Loading || it.append == LoadState.Loading
+            binding.tvNoItem.isVisible =
+                it.refresh != LoadState.Loading && interviewHistoryAdapter.itemCount == 0
         }
 
         viewModel.allInterviewResults.observe(this) {

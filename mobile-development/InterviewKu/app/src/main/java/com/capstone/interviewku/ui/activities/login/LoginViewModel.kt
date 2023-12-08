@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.interviewku.data.AuthRepository
-import com.capstone.interviewku.data.network.response.LoginData
 import com.capstone.interviewku.data.network.response.LoginResponse
 import com.capstone.interviewku.util.Result
 import com.capstone.interviewku.util.SingleEvent

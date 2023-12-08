@@ -10,6 +10,7 @@
     <string name="email">Alamat Email</string>
     <string name="error_title">Terjadi Kesalahan</string>
     <string name="exit">Keluar</string>
+    <string name="exit_from_session">Keluar dari sesi</string>
     <string name="feedback">Umpan Balik</string>
     <string name="firstname">Nama Depan</string>
     <string name="fullname">Nama Lengkap</string>
@@ -33,6 +34,7 @@
     <string name="navigation_tips">Tips</string>
     <string name="new_password">Kata Sandi Baru</string>
     <string name="next">Lanjut</string>
+    <string name="no">Tidak</string>
     <string name="old_password">Kata Sandi Lama</string>
     <string name="password">Kata Sandi</string>
     <string name="permission_title">Perizinan Aplikasi</string>
@@ -46,18 +48,21 @@
     <string name="start_train">Mulai Latihan</string>
     <string name="try_again">Coba Lagi</string>
     <string name="tts_setting">Pengaturan Text To Speech</string>
+    <string name="yes">Ya</string>
 
     <!--  MESSAGE / INSTRUCTION  -->
     <string name="birthdate_required">Silakan pilih tanggal lahir</string>
     <string name="current_city_required">Silakan masukkan kota domisili</string>
     <string name="end_interview_failed">Gagal untuk mengakhiri sesi. Silahkan coba lagi</string>
     <string name="gender_required">Silakan pilih jenis kelamin</string>
+    <string name="interview_exit_confirm">Apakah anda yakin ingin keluar dari sesi? Anda akan dianggap tidak menyelesaikan sesi ini</string>
     <string name="interview_finished">Sesi Interview telah selesai!</string>
     <string name="interview_not_finished">Sesi tidak selesai</string>
     <string name="interview_not_finished_description">Silahkan mencoba sesi baru untuk memperoleh nilai keseluruhan</string>
     <string name="interview_test_screen_instruction">Silahkan berfokus pada pertanyaan yang diberikan</string>
     <string name="job_position_required">Silakan pilih posisi pekerjaan</string>
     <string name="login_instruction">Silahkan masuk ke akun anda</string>
+    <string name="logout_success">Berhasil keluar dari akun anda</string>
     <string name="mic_permission_granted">Anda dapat merekam suara anda</string>
     <string name="mic_permission_prompt">Izin merekam suara harus diberikan agar fitur perekaman dapat digunakan</string>
     <string name="no_google_tts">Silahkan mengunduh Google TTS di Play Store</string>
@@ -91,9 +96,4 @@
     <string name="question_order_template">Pertanyaan %d / %d</string>
     <string name="retry_count_template">%d kali</string>
     <string name="started_at_template">Waktu: %s</string>
-    <string name="logout_success">Berhasil keluar dari akun anda</string>
-    <string name="yes">Ya</string>
-    <string name="no">Tidak</string>
-    <string name="exit_from_session">Keluar dari sesi</string>
-    <string name="interview_exit_confirm">Apakah anda yakin ingin keluar dari sesi? Anda akan dianggap tidak menyelesaikan sesi ini</string>
 </resources>

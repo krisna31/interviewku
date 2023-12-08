@@ -141,7 +141,7 @@ class RegisterDetailFragment : Fragment() {
                     Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
 
                     startActivity(Intent(requireContext(), MainActivity::class.java))
-                    requireActivity().finish()
+                    requireActivity().finishAffinity()
                 }
 
                 is Result.Loading -> {
