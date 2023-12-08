@@ -117,7 +117,6 @@ class AccountFragment : Fragment() {
         dialogView.findViewById<Button>(R.id.btn_Confirm_Logout).setOnClickListener {
             viewModel.logout()
             dialog.dismiss()
-            navigateToLandingScreen(activity)
         }
 
         dialogView.findViewById<Button>(R.id.btn_Cancel_Logout).setOnClickListener {

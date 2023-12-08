@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -58,6 +60,20 @@ class RegisterDetailActivity : AppCompatActivity() {
             }
         }
 
+        binding.spinnerJobPosition.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    updateSaveButtonStatus()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+
         binding.clBirthdate.setOnClickListener {
             DatePickerFragment(
                 object : DatePickerListener {
@@ -68,6 +84,7 @@ class RegisterDetailActivity : AppCompatActivity() {
                                 time
                             })
                         binding.tvBirthdate.text = viewModel.birthDate
+                        updateSaveButtonStatus()
                     }
                 }
             ).show(supportFragmentManager, "")
@@ -79,7 +96,6 @@ class RegisterDetailActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
-
                 updateSaveButtonStatus()
             }
         })
@@ -135,6 +151,7 @@ class RegisterDetailActivity : AppCompatActivity() {
                 }
 
                 is Result.Error -> {
+                    binding.btnSaveProfile.isEnabled = false
                     binding.progressBar.isVisible = false
                     it.exception.getData()?.handleHttpException(this)
                 }
@@ -149,11 +166,11 @@ class RegisterDetailActivity : AppCompatActivity() {
     }
 
     private fun updateSaveButtonStatus() {
-        val gender = (binding.spinnerGender.selectedItem as SpinnerModel?)?.value
+        val gender = (binding.spinnerGender.selectedItem as SpinnerModel).value
         val birthdate = viewModel.birthDate
         val currentCity = binding.etCurrentCity.text.toString()
         val jobPositionId =
-            (binding.spinnerJobPosition.selectedItem as SpinnerModel?)?.value?.toIntOrNull()
+            (binding.spinnerJobPosition.selectedItem as SpinnerModel).value.toIntOrNull()
 
         binding.btnSaveProfile.isEnabled =
             isValidInput(gender, birthdate, currentCity, jobPositionId)

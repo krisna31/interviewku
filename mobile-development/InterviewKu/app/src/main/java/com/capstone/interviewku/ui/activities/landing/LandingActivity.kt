@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityLandingBinding
 import com.capstone.interviewku.ui.activities.login.LoginActivity
-import com.capstone.interviewku.ui.activities.register.RegisterActivity
+import com.capstone.interviewku.ui.activities.registerbasic.RegisterBasicActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -26,7 +26,7 @@ class LandingActivity : AppCompatActivity() {
         }
 
         binding.btnRegister.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            startActivity(Intent(this, RegisterBasicActivity::class.java))
         }
 
         binding.root.apply {
