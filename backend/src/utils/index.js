@@ -91,7 +91,10 @@ function getDateAfterXMinutes(date, minutes) {
 }
 
 function changeToOneUntilFiveRange(number) {
-  return number !== null ? Math.round(number * 5) : null;
+  if (number === null) return null
+  const result = Math.round(number * 5)
+
+  return result <= 1 ? 1 : result;
 }
 
 module.exports = {
