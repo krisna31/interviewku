@@ -19,9 +19,10 @@ class ArticlesService {
       title: article.title,
       subtitle: article.subtitle,
       content: article.content,
+      author: article.author,
       coverImgUrl: article.cover_img_url,
       createdAt: article.created_at,
-      // updatedAt: article.updated_at,
+      updatedAt: article.updated_at,
     }));
   }
 

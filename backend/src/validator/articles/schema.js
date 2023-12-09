@@ -19,10 +19,11 @@ const GetArticlesResponseSchema = Joi.object({
     id: Joi.number().max(2147483647).default(1).required(),
     title: Joi.string().default('Tips and Tricks for Interviews').required(),
     subtitle: Joi.string().default('Mastering the Interview Process').required(),
+    author: Joi.string().default('interviewku team').required(),
     content: Joi.string().default('# Tips and Tricks for Interviews\n\nYour article content goes here.').required(),
     coverImgUrl: Joi.string().default('url_to_cover_image').required(),
     createdAt: Joi.date().required(),
-    // updatedAt: Joi.date().allow(null),
+    updatedAt: Joi.date().allow(null),
   })
     .label('Articles'))
     .required(),
