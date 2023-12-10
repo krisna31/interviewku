@@ -17,6 +17,10 @@ exports.up = (pgm) => {
       type: 'VARCHAR(50)',
       notNull: true,
     },
+    source: {
+      type: 'TEXT',
+      notNull: true,
+    },
     cover_img_url: {
       type: 'TEXT',
       notNull: true,
@@ -37,9 +41,9 @@ exports.up = (pgm) => {
   });
 
   pgm.sql(`
-    INSERT INTO articles (title, subtitle, author, cover_img_url, content, created_at, updated_at)
+    INSERT INTO articles (title, subtitle, author, source, cover_img_url, content, created_at, updated_at)
     VALUES 
-      ('Tips and Tricks for Interviews', 'Mastering the Interview Process', 'YourName', 'url_to_cover_image', '# Tips and Tricks for Interviews\n\nYour article content goes here.', NOW(), NOW());
+      ('Tips and Tricks for Interviews', 'Mastering the Interview Process', 'original or example.com', 'YourName', 'url_to_cover_image', '# Tips and Tricks for Interviews\n\nYour article content goes here.', NOW(), NOW());
   `);
 };
 
