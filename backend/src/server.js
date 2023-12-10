@@ -17,6 +17,7 @@ const jobs = require('./api/jobs');
 const answers = require('./api/answers');
 const interviews = require('./api/interviews');
 const articles = require('./api/articles');
+const healthCheck = require('./api/health-check');
 
 const authentications = require('./api/authentication');
 const TokenManager = require('./tokenize/TokenManager');
@@ -30,6 +31,7 @@ const MachineLearningService = require('./services/tensorflow/MachineLearningSer
 const AudioService = require('./services/audio/AudioService');
 const { sendCustomResponseByStatusCode } = require('./utils');
 const MailService = require('./services/email/MailService');
+const HealthCheckService = require('./services/health-check/HealthCheckService');
 
 // initialize dotenv
 require('dotenv').config();
@@ -46,6 +48,7 @@ require('dotenv').config();
   const audioService = new AudioService();
   const mailService = new MailService();
   const articlesService = new ArticlesService();
+  const healthCheckService = new HealthCheckService();
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -173,6 +176,12 @@ require('dotenv').config();
       plugin: articles,
       options: {
         articlesService,
+      },
+    },
+    {
+      plugin: healthCheck,
+      options: {
+        healthCheckService,
       },
     },
   ]);
