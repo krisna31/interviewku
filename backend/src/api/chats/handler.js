@@ -1,0 +1,87 @@
+/* eslint-disable no-unused-vars */
+class ChatsHandler {
+  constructor({ chatsService, machineLearningService }) {
+    this._chatsService = chatsService;
+    this._machineLearningService = machineLearningService;
+  }
+
+  async postChatHandler(request, h) {
+    const { id: userId } = request.auth.credentials;
+    const { question } = request.payload;
+
+    const answer = await this._machineLearningService.getAnswerFromQuestion(question);
+
+    const chatData = await this._chatsService.addChat({ userId, question, answer });
+
+    return h.response({
+      success: true,
+      message: 'Chat berhasil dijawab',
+      data: {
+        id: chatData.id,
+        question: chatData.question,
+        answer: chatData.answer,
+        createdAt: chatData.created_at,
+        updatedAt: chatData.updated_at,
+      },
+    }).code(201);
+  }
+
+  async getAllChatsHandler(request, h) {
+    // get page and limit
+    const { page = 1, limit = 10 } = request.query;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    // get total data
+    const totalData = await this._chatsService.getTotalData();
+
+    // get all chats
+    const chats = await this._chatsService.getAllChats({
+      limit,
+      offset: startIndex,
+    });
+
+    return {
+      success: true,
+      message: 'Chats berhasil ditemukan',
+      meta: {
+        count: chats.length || 0,
+        currentPage: +page,
+        totalData: +totalData || 0,
+        nextUrl: endIndex < totalData ? `${process.env.BASE_URL}/chats?page=${+page + 1}&limit=${limit}` : null,
+        previousUrl: startIndex > 0 ? `${process.env.BASE_URL}/chats?page=${+page - 1}&limit=${limit}` : null,
+        firstPageUrl: `${process.env.BASE_URL}/chats?page=1&limit=${limit}`,
+        lastPageUrl: `${process.env.BASE_URL}/chats?page=${Math.ceil(totalData / limit)}&limit=${limit}`,
+        limit: +limit,
+      },
+      data: chats.map((chat) => ({
+        id: chat.id,
+        userId: chat.userId,
+        question: chat.question,
+        answer: chat.answer,
+        createdAt: chat.created_at,
+        updatedAt: chat.updated_at,
+      })),
+    };
+  }
+
+  async getChatById(request, h) {
+    const { chatId } = request.params;
+    const chat = await this._chatsService.getChatById(chatId);
+
+    return {
+      success: true,
+      message: 'Chat berhasil ditemukan',
+      data: {
+        id: chat.id,
+        userId: chat.userId,
+        question: chat.question,
+        answer: chat.answer,
+        createdAt: chat.created_at,
+        updatedAt: chat.updated_at,
+      },
+    };
+  }
+}
+
+module.exports = ChatsHandler;

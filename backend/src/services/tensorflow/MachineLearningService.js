@@ -33,6 +33,12 @@ class MachineLearningService {
     };
   }
 
+  async getAnswerFromQuestion(question) {
+    // TODO: get and return answer
+
+    return 'answer';
+  }
+
   async getScore({
     userAnswer, field, allAnswer,
   }) {
