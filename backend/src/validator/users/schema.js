@@ -56,13 +56,11 @@ const PostUserIdentityPayloadSchema = Joi.object({
   currentCity: Joi.string().max(100).default('Riau').required(),
 }).label('User Identity Payload');
 
-const UserIdentityResponseSchema = Joi.object({
+const PostIdentityResponseSchema = Joi.object({
   success: Joi.boolean().default(true).required(),
   message: Joi.string().default('Identitas User berhasil ditambahkan').required(),
   data: Joi.object({
-    userId: Joi.string().default('user-xxx'),
-    firstName: Joi.string().default('first name'),
-    lastName: Joi.string().default('last name').allow(null),
+    userId: Joi.string().default('user-xxx').required(),
     jobFieldId: Joi.number().max(2147483647).default(1).integer(),
     jobFieldName: Joi.string().default('IT'),
     jobPositionId: Joi.number().max(2147483647).default(1).integer(),
@@ -73,7 +71,27 @@ const UserIdentityResponseSchema = Joi.object({
     createdAt: Joi.date().default('2023-11-09T09:18:07.659Z'),
     updatedAt: Joi.any().default(null),
   }),
-}).label('GET | POST | PUT for User Identity Response Success');
+}).label('GET | PUT for User Identity Response Success');
+
+const UserIdentityResponseSchema = Joi.object({
+  success: Joi.boolean().default(true).required(),
+  message: Joi.string().default('Identitas User berhasil ditambahkan').required(),
+  data: Joi.object({
+    userId: Joi.string().default('user-xxx').required(),
+    firstName: Joi.string().default('first name').required(),
+    lastName: Joi.string().default('last name').allow(null).required(),
+    email: Joi.string().default('interviewku@gmail.com'),
+    jobFieldId: Joi.number().max(2147483647).default(1).integer(),
+    jobFieldName: Joi.string().default('IT'),
+    jobPositionId: Joi.number().max(2147483647).default(1).integer(),
+    jobPositionName: Joi.string().default('Frontend'),
+    gender: Joi.string().length(1).valid('p', 'l', 'P', 'L').default('L'),
+    dateBirth: Joi.date().default('2023-01-01').max('now'),
+    currentCity: Joi.string().max(100).default('Lampung'),
+    createdAt: Joi.date().default('2023-11-09T09:18:07.659Z'),
+    updatedAt: Joi.any().default(null),
+  }),
+}).label('GET | PUT for User Identity Response Success');
 
 const DeleteUserIdentityResponseSchema = Joi.object({
   success: Joi.boolean().default(true).required(),
@@ -101,4 +119,5 @@ module.exports = {
   UserIdentityResponseSchema,
   DeleteUserIdentityResponseSchema,
   PutChangeUserIdentityPayloadSchema,
+  PostIdentityResponseSchema,
 };

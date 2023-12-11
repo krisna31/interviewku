@@ -8,6 +8,7 @@ const {
   UserIdentityResponseSchema,
   DeleteUserIdentityResponseSchema,
   PutChangeUserIdentityPayloadSchema,
+  PostIdentityResponseSchema,
 } = require('../../validator/users/schema');
 
 const routes = (handler) => [
@@ -56,7 +57,7 @@ const routes = (handler) => [
           throw new InvariantError(error.message);
         },
       },
-      response: { schema: UserIdentityResponseSchema },
+      response: { schema: PostIdentityResponseSchema },
     },
   },
   {

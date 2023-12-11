@@ -108,6 +108,7 @@ class UserHandler {
         userId: userIdentity.user_id,
         firstName: userIdentity.first_name,
         lastName: userIdentity.last_name,
+        email: userIdentity.email,
         jobPositionId: userIdentity.job_position_id,
         gender: userIdentity.gender,
         dateBirth: userIdentity.date_birth,
@@ -137,6 +138,9 @@ class UserHandler {
       message: 'Identitas User Ditemukan',
       data: {
         userId: userIdentity.user_id,
+        firstName: userIdentity.first_name,
+        lastName: userIdentity.last_name,
+        email: userIdentity.email,
         jobFieldId: userIdentity.job_field_id,
         jobFieldName: userIdentity.job_field_name,
         jobPositionId: userIdentity.job_position_id,
