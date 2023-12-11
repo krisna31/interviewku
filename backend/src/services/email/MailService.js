@@ -14,8 +14,8 @@ class MailService {
 
   sendEmail(targetEmail, content) {
     const message = {
-      // from: 'interviewku-reset-password@interviewku.com',
-      from: 'interviewku',
+      from: 'interviewku-reset-password@interviewku.tech',
+      // from: 'interviewku',
       to: targetEmail,
       subject: 'Reset Password Interviewku',
       html: content,
