@@ -1,17 +1,25 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable max-len */
-/* eslint-disable no-plusplus */
 /* eslint-disable class-methods-use-this */
+/* eslint-disable no-restricted-syntax */
 const fs = require('fs');
 const tf = require('@tensorflow/tfjs-node');
 
 class MachineLearningService {
   constructor() {
+    // common_words
     this._commonWords = JSON.parse(fs.readFileSync(`${__dirname}/common_words.json`, 'utf8'));
+    // struktur model and tokenizer
     this._strukturModel = tf.loadLayersModel(tf.io.fileSystem(`${__dirname}/tfjs_model/struktur_model/model.json`));
     this._strukturModelTokenizer = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/struktur_model/tokenizer_dict.json`, 'utf8'));
+
+    // similarity model and tokenizer
     this._similarityModel = tf.loadLayersModel(tf.io.fileSystem(`${__dirname}/tfjs_model/similarity_model/model.json`));
     this._similarityModelTokenizer = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/similarity_model/tokenizer_dict.json`, 'utf8'));
+
+    // chat bot model, tokenizer, and tags class
+    this._chatbotModel = tf.loadLayersModel(tf.io.fileSystem(`${__dirname}/tfjs_model/chatbot_model/model.json`));
+    this._chatbotModelTokenizer = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/chatbot_model/tokenizer_dict_chatbot.json`, 'utf8'));
+    this._chatbotModelTagsClassJson = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/chatbot_model/chatbot_result_decoder.json`, 'utf8'));
+    this._chatbotModelResponseJson = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/chatbot_model/responses_chatbot.json`, 'utf8'));
 
     this._questionClass = {
       'General - Tentang Perusahaan': 0,
@@ -31,12 +39,66 @@ class MachineLearningService {
       Hiburan: 14,
       Perhotelan: 15,
     };
+
+    this._replaceWords = [
+      ['online', ['daring', 'remote']],
+      ['meeting', ['gmeet', 'zoom']],
+      ['persiapan', ['persiapkan', 'disiapkan', 'dipersiapkan']],
+      ['cv', ['curiculum vitae', 'resume']],
+      ['penutup', ['closing statement']],
+      ['mereschedule', ['jadwal ulang', 'menjadwalkan ulang', 'mengubah jadwal', 'merubah jadwal', 'pindah jadwal']],
+      ['pewawancara', ['hrd']],
+      ['bagus', ['menarik', 'keren', 'tepat']],
+      ['kesalahan umum', ['kesalahan kecil']],
+      ['saran', ['tips']],
+      ['pakaian', ['baju', 'setelan', 'kostum']],
+    ];
   }
 
   async getAnswerFromQuestion(question) {
-    // TODO: get and return answer
+    return new Promise((resolve, reject) => {
+      this._chatbotModel.then((res) => {
+        // preprocessing text
+        const processedText = this.chatbotPreprocessingText(question);
+        const tokenizedText = this.tokenize(processedText, this._chatbotModelTokenizer, 13);
 
-    return 'answer';
+        // predict text
+        // const result = res.predict(tf.tensor2d(tokenizedText));
+        // const tagResult = result.argMax(-1).arraySync()[0];
+        const predictResult = res.predict(tf.tensor2d(tokenizedText));
+        const tagResultSequence = predictResult.argMax(-1).arraySync()[0];
+        const tagResult = this.getKeyByValue(this._chatbotModelTagsClassJson, tagResultSequence);
+
+        const resultList = this._chatbotModelResponseJson[tagResult];
+        const randomIndex = Math.floor(Math.random() * resultList.length);
+        const result = resultList[randomIndex];
+        resolve(result);
+      }).catch((err) => {
+        console.error('🚀 ~ file: MachineLearningService.js:94 ~ MachineLearningService ~ this._chatbotModel.then ~ err:', err);
+        reject(err);
+      });
+    });
+  }
+
+  chatbotPreprocessingText(sentence) {
+    const filteredWords = sentence.toLowerCase().replace(/[^\w\d\s]/g, '');
+    const words = filteredWords.split(/\s+/);
+
+    const cleanedWords = [];
+    for (const word of words) {
+      let replaced = false;
+      for (const [replacement, target] of this._replaceWords) {
+        if (target.includes(word)) {
+          cleanedWords.push(replacement);
+          replaced = true;
+        }
+      }
+      if (!replaced) {
+        cleanedWords.push(word);
+      }
+    }
+
+    return cleanedWords.join(' ');
   }
 
   async getScore({
@@ -56,17 +118,13 @@ class MachineLearningService {
 
     // menghitung similarity jawaban dari membandingkan jawaban user ke jawaban dataset
     const listScore = [];
-    for (let i = 0; i < allAnswer.length; i++) {
+    for (let i = 0; i < allAnswer.length; i += 1) {
       listScore.push(this.cosineSimilarity(userAnswer, allAnswer[i].answer));
     }
     const resultSimilarity = Math.max(...listScore);
 
-    console.log('field jawaban:', predictField);
-    console.log('similarity:', resultSimilarity);
-
     // Komposisi score akhir yaitu 70% field dan 30% similarity
     const finalScore = (resultField * 0.7) + (resultSimilarity * 0.3);
-    console.log('final score:', finalScore);
 
     return finalScore;
   }
@@ -83,6 +141,7 @@ class MachineLearningService {
         const result = similarity.argMax(-1).arraySync()[0];
         resolve(this.getKeyByValue(this._questionClass, result));
       }).catch((err) => {
+        console.error('🚀 ~ file: MachineLearningService.js:143 ~ MachineLearningService ~ this._similarityModel.then ~ err:', err);
         reject(err);
       });
     });
@@ -107,7 +166,7 @@ class MachineLearningService {
 
       return tokenizeUserAnswer;
     } catch (err) {
-      console.log(err);
+      console.error('🚀 ~ file: MachineLearningService.js:168 ~ MachineLearningService ~ getStrukturScore ~ err:', err);
       throw new Error(`Error loading model: ${err}`);
     }
   }
@@ -142,7 +201,7 @@ class MachineLearningService {
   reverseNonSimilar(arr1, arr2) {
     const similar = [];
     const nonsimilar = [];
-    for (let i = 0; i < arr1.length; i++) {
+    for (let i = 0; i < arr1.length; i += 1) {
       if (arr1[i] === arr2[i] && arr1[i] !== null) {
         similar.push(arr2[i]);
         // eslint-disable-next-line no-continue
@@ -158,7 +217,7 @@ class MachineLearningService {
     const filteredWords = sentence.replace(/[^\w\d\s]/g, '').split(/\s+/);
     let words = filteredWords.filter((word) => word.length > 0);
     let prevLen = words.length;
-    for (let i = 0; i < commonWords.length; i++) {
+    for (let i = 0; i < commonWords.length; i += 1) {
       if (words.length <= maxLength) break;
       words = words.filter((word) => word.toLowerCase() !== commonWords[i].word);
       if (words.length === prevLen) break;
@@ -198,13 +257,13 @@ class MachineLearningService {
     let count2 = 0;
     for (const element of arr1a) {
       if (!set2.has(element)) {
-        count1++;
+        count1 += 1;
       }
     }
 
     for (const element of arr2a) {
       if (!set1.has(element)) {
-        count2++;
+        count2 += 1;
       }
     }
     const arr1b = [...arr1a].concat(new Array(count2).fill(null));
@@ -217,7 +276,7 @@ class MachineLearningService {
     // calculate magnitude of the vector, ||D1|| = sqrt(D1^2 + D2^2 + ... + Dn^2)
     const D1 = [];
     const D2 = [];
-    for (let i = 0; i < arr1c.length; i++) {
+    for (let i = 0; i < arr1c.length; i += 1) {
       if (i < totalSameWord) {
         D1.push(1); D2.push(1);
       } else if (arr1c[i] === null) {
@@ -231,7 +290,7 @@ class MachineLearningService {
     let D1D2 = 0;
     const D1Sum = D1.reduce((a, b) => a + b, 0);
     const D2Sum = D2.reduce((a, b) => a + b, 0);
-    for (let i = 0; i < D1.length; i++) {
+    for (let i = 0; i < D1.length; i += 1) {
       D1D2 += D1[i] * D2[i];
     }
 

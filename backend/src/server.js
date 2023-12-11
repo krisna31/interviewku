@@ -199,7 +199,6 @@ require('dotenv').config();
   // extension function before response check and handle error
   server.ext('onPreResponse', (request, h) => {
     const { response } = request;
-    console.log(response.message);
 
     const statusCode = response?.output?.statusCode;
 
@@ -227,6 +226,9 @@ require('dotenv').config();
       if (!response.isServer) {
         return h.continue;
       }
+
+      console.error('🚀 ~ file: server.js:227 ~ server.ext ~ response:', response.message);
+
       const newResponse = h.response({
         success: false,
         message: process.env.APP_ENV === 'dev' ? `terjadi kegagalan pada server kami - ${response.message}` : 'terjadi kegagalan pada server kami',
@@ -238,5 +240,5 @@ require('dotenv').config();
   });
 
   await server.start();
-  console.log(`Server Berjalan di ${server.info.uri}`);
+  console.info(`Server Berjalan di ${server.info.uri}`);
 })();
