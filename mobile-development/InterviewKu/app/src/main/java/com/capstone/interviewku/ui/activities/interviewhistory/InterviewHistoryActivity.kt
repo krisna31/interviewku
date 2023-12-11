@@ -35,9 +35,19 @@ class InterviewHistoryActivity : AppCompatActivity() {
         val interviewHistoryAdapter = ItemInterviewHistoryAdapter {
             startActivity(
                 Intent(this, InterviewResultActivity::class.java).apply {
-                    putExtra(InterviewResultActivity.INTERVIEW_ID_KEY, it.interviewId)
+                    putExtra(InterviewResultActivity.EXTRA_INTERVIEW_ID_KEY, it.interviewId)
                 }
             )
+        }.also { adapter ->
+            adapter.addLoadStateListener { combinedLoadStates ->
+                binding.progressBar.isVisible =
+                    combinedLoadStates.refresh == LoadState.Loading
+                            || combinedLoadStates.append == LoadState.Loading
+
+                binding.tvNoItem.isVisible =
+                    combinedLoadStates.refresh != LoadState.Loading
+                            && adapter.itemCount == 0
+            }
         }
 
         binding.rvHistory.apply {
@@ -45,14 +55,7 @@ class InterviewHistoryActivity : AppCompatActivity() {
             adapter = interviewHistoryAdapter
         }
 
-        interviewHistoryAdapter.addLoadStateListener {
-            binding.progressBar.isVisible =
-                it.refresh == LoadState.Loading || it.append == LoadState.Loading
-            binding.tvNoItem.isVisible =
-                it.refresh != LoadState.Loading && interviewHistoryAdapter.itemCount == 0
-        }
-
-        viewModel.allInterviewResults.observe(this) {
+        viewModel.interviewResults.observe(this) {
             interviewHistoryAdapter.submitData(lifecycle, it)
         }
     }

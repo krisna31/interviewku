@@ -5,7 +5,6 @@ import android.text.format.DateUtils
 import android.util.Patterns
 import com.capstone.interviewku.R
 import com.capstone.interviewku.data.network.response.Article
-import com.capstone.interviewku.data.network.response.ArticleItem
 import com.capstone.interviewku.data.room.entity.ArticleEntity
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -16,24 +15,32 @@ object Helpers {
     fun articleEntityToArticleResponse(articleEntity: ArticleEntity) = Article(
         id = articleEntity.id,
         title = articleEntity.title,
-        author = articleEntity.author,
         subtitle = articleEntity.subtitle,
+        author = articleEntity.author,
+        source = articleEntity.source,
         content = articleEntity.content,
         coverImgUrl = articleEntity.coverImgUrl,
         createdAt = articleEntity.createdAt,
         updatedAt = articleEntity.updatedAt
     )
 
-    fun articleResponseToArticleEntity(article: ArticleItem) = ArticleEntity(
+    fun articleResponseToArticleEntity(article: Article) = ArticleEntity(
         id = article.id,
         title = article.title,
-        author = article.author,
         subtitle = article.subtitle,
+        author = article.author,
+        source = article.source,
         content = article.content,
         coverImgUrl = article.coverImgUrl,
         createdAt = article.createdAt,
         updatedAt = article.updatedAt
     )
+
+    fun dateToIndonesianFormat(date: Date): String =
+        SimpleDateFormat(
+            Constants.DATE_FORMAT,
+            Locale.forLanguageTag(Constants.INDONESIA_LANGUAGE_TAG)
+        ).format(date)
 
     fun getGenders(context: Context): MutableList<SpinnerModel> {
         val labelArray = context.resources.getStringArray(R.array.gender_label)

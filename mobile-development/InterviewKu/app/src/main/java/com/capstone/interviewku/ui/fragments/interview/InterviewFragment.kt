@@ -21,7 +21,6 @@ class InterviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentInterviewBinding.inflate(inflater, container, false)
         return binding.root
     }

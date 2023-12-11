@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
@@ -49,13 +50,23 @@
                 tools:text="Lorem ipsum dolor sit amet" />
 
             <TextView
-                android:id="@+id/tv_created_at"
+                android:id="@+id/tv_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="4dp"
                 android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
+                tools:text="Sumber : InterviewKu" />
+
+            <TextView
+                android:id="@+id/tv_created_at"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="4dp"
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                app:layout_constraintTop_toBottomOf="@id/tv_author"
                 tools:text="Dibuat pada : 15 Oktober 2023, 10:00" />
 
             <TextView
@@ -70,19 +81,18 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_created_at"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis bibendum leo. Vivamus ac mi ac enim elementum pretium id malesuada tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam eu ipsum a est interdum bibendum. Nulla faucibus tortor non est iaculis, molestie placerat nulla convallis. Phasellus at mauris neque. Etiam et eros ultrices, accumsan quam ut, volutpat massa. Etiam egestas ultricies volutpat. Praesent quis odio rutrum, gravida nibh in, sollicitudin lorem. Morbi nisl diam, condimentum venenatis nisi at, mattis lobortis turpis. Etiam sodales lectus non sem tristique, nec volutpat felis tempus. Ut ut elit id nibh imperdiet facilisis vitae sed massa. In erat sem, dapibus eu tempor ac, congue vel massa. Vestibulum ex tortor" />
 
+            <TextView
+                android:id="@+id/tv_source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="16dp"
+                android:autoLink="web"
+                app:layout_constraintTop_toBottomOf="@id/tv_content"
+                tools:text="Sumber: website" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

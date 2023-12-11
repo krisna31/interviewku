@@ -16,7 +16,7 @@ data class ArticlesResponse(
     val meta: ArticlesMeta?,
 
     @field:SerializedName("data")
-    val data: List<ArticleItem>?,
+    val data: List<Article>?,
 ) : Parcelable
 
 @Parcelize
@@ -44,33 +44,6 @@ data class ArticlesMeta(
 
     @field:SerializedName("limit")
     val limit: Int,
-) : Parcelable
-
-@Parcelize
-data class ArticleItem(
-    @field:SerializedName("id")
-    val id: Int,
-
-    @field:SerializedName("title")
-    val title: String,
-
-    @field:SerializedName("author")
-    val author: String,
-
-    @field:SerializedName("subtitle")
-    val subtitle: String,
-
-    @field:SerializedName("content")
-    val content: String,
-
-    @field:SerializedName("coverImgUrl")
-    val coverImgUrl: String,
-
-    @field:SerializedName("createdAt")
-    val createdAt: String,
-
-    @field:SerializedName("updatedAt")
-    val updatedAt: String?,
 ) : Parcelable
 
 

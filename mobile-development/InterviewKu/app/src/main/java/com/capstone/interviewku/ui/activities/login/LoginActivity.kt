@@ -95,10 +95,10 @@ class LoginActivity : AppCompatActivity() {
         val password = binding.etLoginPassword.text.toString()
 
         if (!Helpers.isEmailValid(email)) {
-            binding.etLoginEmail.error = getString(R.string.eror_email)
+            binding.etLoginEmail.error = getString(R.string.email_invalid)
             binding.btnLogin.isEnabled = false
         } else if (!Helpers.isPasswordValid(password)) {
-            binding.etLoginPassword.error = getString(R.string.eror_password)
+            binding.etLoginPassword.error = getString(R.string.wrong_password)
             binding.btnLogin.isEnabled = false
         } else {
             binding.etLoginEmail.error = null

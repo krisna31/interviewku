@@ -11,6 +11,6 @@ import javax.inject.Inject
 class InterviewHistoryViewModel @Inject constructor(
     interviewRepository: InterviewRepository
 ) : ViewModel() {
-    val allInterviewResults =
-        interviewRepository.getAllInterviewResults().cachedIn(viewModelScope)
+    val interviewResults =
+        interviewRepository.getPagedInterviewResults().cachedIn(viewModelScope)
 }

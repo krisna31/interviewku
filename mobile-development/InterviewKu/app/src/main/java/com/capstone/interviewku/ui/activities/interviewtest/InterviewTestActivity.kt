@@ -187,12 +187,12 @@ class InterviewTestActivity : AppCompatActivity() {
     }
 
     private fun initializeJobFieldPicker() {
-        jobPickerFragment = JobPickerFragment { jobFieldId ->
+        jobPickerFragment = JobPickerFragment(onJobSelected = { jobFieldId ->
             InterviewInstructionFragment(InterviewInstructionFragment.TYPE_TEST) {
                 viewModel.setJobFieldId(jobFieldId)
                 viewModel.startInterviewSession()
             }.show(supportFragmentManager, null)
-        }
+        })
         jobPickerFragment.show(supportFragmentManager, null)
     }
 
@@ -344,7 +344,7 @@ class InterviewTestActivity : AppCompatActivity() {
                     it.data.data?.let { data ->
                         startActivity(
                             Intent(this, InterviewResultActivity::class.java).apply {
-                                putExtra(InterviewResultActivity.INTERVIEW_ID_KEY, data.interviewId)
+                                putExtra(InterviewResultActivity.EXTRA_INTERVIEW_ID_KEY, data.interviewId)
                             }
                         )
                     }

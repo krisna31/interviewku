@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.interviewku.data.InterviewRepository
-import com.capstone.interviewku.data.network.response.InterviewResultResponse
+import com.capstone.interviewku.data.network.response.InterviewResultData
 import com.capstone.interviewku.util.Result
 import com.capstone.interviewku.util.SingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,18 +16,25 @@ import javax.inject.Inject
 class InterviewResultViewModel @Inject constructor(
     private val interviewRepository: InterviewRepository
 ) : ViewModel() {
-    private val _interviewResultState = MutableLiveData<Result<InterviewResultResponse>>()
-    val interviewResultState: LiveData<Result<InterviewResultResponse>>
+    private val _interviewResultState = MutableLiveData<Result<InterviewResultData>>()
+    val interviewResultState: LiveData<Result<InterviewResultData>>
         get() = _interviewResultState
 
     fun getInterviewResultById(interviewId: String) = viewModelScope.launch {
         _interviewResultState.value = Result.Loading
 
         try {
-            val response = interviewRepository.getInterviewResultById(interviewId)
-            _interviewResultState.value = Result.Success(response)
+            interviewRepository.getInterviewResultById(interviewId).data?.let {
+                _interviewResultState.value = Result.Success(it)
+            } ?: run {
+                throw Exception()
+            }
         } catch (e: Exception) {
             _interviewResultState.value = Result.Error(SingleEvent(e))
         }
+    }
+
+    fun setInterviewResult(interviewResultData: InterviewResultData) {
+        _interviewResultState.value = Result.Success(interviewResultData)
     }
 }

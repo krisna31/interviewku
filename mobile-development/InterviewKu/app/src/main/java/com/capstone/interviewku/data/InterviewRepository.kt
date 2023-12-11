@@ -23,7 +23,16 @@ class InterviewRepository @Inject constructor(
     private val apiService: InterviewKuAPIService,
     private val appPreferences: AppPreferences
 ) {
-    fun getAllInterviewResults() = Pager(
+    suspend fun getInterviewResults(page: Int, limit: Int) =
+        APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
+            apiService.getAllInterviewResults(
+                appPreferences.getBearerToken().first(),
+                page,
+                limit,
+            )
+        }
+
+    fun getPagedInterviewResults() = Pager(
         config = PagingConfig(
             pageSize = Constants.INTERVIEW_HISTORY_PAGE_SIZE
         ),

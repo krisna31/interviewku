@@ -55,7 +55,8 @@ class InterviewTrainActivity : AppCompatActivity() {
                         { initCode ->
                             if (initCode == TextToSpeech.SUCCESS) {
                                 textToSpeech?.apply {
-                                    language = Locale.forLanguageTag(Constants.TTS_LANGUAGE_TAG)
+                                    language =
+                                        Locale.forLanguageTag(Constants.INDONESIA_LANGUAGE_TAG)
                                 }
                             } else {
                                 Toast.makeText(
@@ -148,16 +149,20 @@ class InterviewTrainActivity : AppCompatActivity() {
             viewModel.setAnswer(null)
         }
 
-        viewModel.prepareInterview()
+        viewModel.prepareInterview(intent.getIntExtra(EXTRA_JOB_FIELD_ID, -1))
     }
 
     private fun initializeJobFieldPicker() {
-        jobPickerFragment = JobPickerFragment { jobFieldId ->
-            InterviewInstructionFragment(InterviewInstructionFragment.TYPE_TRAIN) {
+        jobPickerFragment = JobPickerFragment(
+            onJobSelected = { jobFieldId ->
                 viewModel.setJobFieldId(jobFieldId)
-                viewModel.startInterviewSession()
-            }.show(supportFragmentManager, null)
-        }
+
+                InterviewInstructionFragment(InterviewInstructionFragment.TYPE_TRAIN) {
+                    viewModel.startInterviewSession()
+                }.show(supportFragmentManager, null)
+            },
+            initialJobFieldId = intent.getIntExtra(EXTRA_JOB_FIELD_ID, -1)
+        )
         jobPickerFragment.show(supportFragmentManager, null)
     }
 
@@ -210,7 +215,7 @@ class InterviewTrainActivity : AppCompatActivity() {
                     val alertDialog = AlertDialog.Builder(this)
                         .setCancelable(false)
                         .setPositiveButton(getString(R.string.try_again)) { _, _ ->
-                            viewModel.prepareInterview()
+                            viewModel.prepareInterview(intent.getIntExtra(EXTRA_JOB_FIELD_ID, -1))
                         }
                         .setNegativeButton(getString(R.string.exit)) { _, _ ->
                             finish()
@@ -318,7 +323,10 @@ class InterviewTrainActivity : AppCompatActivity() {
                     it.data.data?.let { data ->
                         startActivity(
                             Intent(this, InterviewResultActivity::class.java).apply {
-                                putExtra(InterviewResultActivity.INTERVIEW_ID_KEY, data.interviewId)
+                                putExtra(
+                                    InterviewResultActivity.EXTRA_INTERVIEW_ID_KEY,
+                                    data.interviewId
+                                )
                             }
                         )
                     }
@@ -512,5 +520,9 @@ class InterviewTrainActivity : AppCompatActivity() {
             mediaRecorder = null
             viewModel.stopRecording()
         }
+    }
+
+    companion object {
+        const val EXTRA_JOB_FIELD_ID = "EXTRA_JOB_FIELD_ID"
     }
 }

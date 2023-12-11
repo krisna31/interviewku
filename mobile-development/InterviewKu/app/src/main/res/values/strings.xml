@@ -48,11 +48,13 @@
     <string name="start_train">Mulai Latihan</string>
     <string name="try_again">Coba Lagi</string>
     <string name="tts_setting">Pengaturan Text To Speech</string>
+    <string name="welcome">Selamat datang di InterviewKu</string>
     <string name="yes">Ya</string>
 
     <!--  MESSAGE / INSTRUCTION  -->
     <string name="birthdate_required">Silakan pilih tanggal lahir</string>
     <string name="current_city_required">Silakan masukkan kota domisili</string>
+    <string name="email_invalid">Email Tidak Valid</string>
     <string name="end_interview_failed">Gagal untuk mengakhiri sesi. Silahkan coba lagi</string>
     <string name="gender_required">Silakan pilih jenis kelamin</string>
     <string name="interview_exit_confirm">Apakah anda yakin ingin keluar dari sesi? Anda akan dianggap tidak menyelesaikan sesi ini</string>
@@ -86,15 +88,19 @@
     <string name="tts_init_failed">Silahkan mengecek fitur Google TTS di perangkat anda</string>
     <string name="tts_not_initialized">TTS belum diinisialisasi</string>
     <string name="unexpected_error">Terjadi kesalahan. Silahkan coba lagi</string>
-    <string name="eror_email">Email Tidak Valid</string>
-    <string name="eror_password">Kata Sandi Salah</string>
+    <string name="wrong_password">Kata Sandi Salah</string>
+
     <!--  TEMPLATE  -->
+    <string name="author_template">Dibuat oleh: %s</string>
+    <string name="created_at_template">Dibuat pada: %s</string>
     <string name="duration_label_template">Durasi: %s</string>
     <string name="duration_template">%02d Menit %02d Detik</string>
+    <string name="first_last_name_template">%s %s</string>
     <string name="home_greeting_template">Halo, %s!</string>
     <string name="job_field_template">Bidang Pekerjaan: %s</string>
     <string name="mode_template">Mode %s</string>
     <string name="question_order_template">Pertanyaan %d / %d</string>
     <string name="retry_count_template">%d kali</string>
+    <string name="source_template">Sumber: %s</string>
     <string name="started_at_template">Waktu: %s</string>
 </resources>

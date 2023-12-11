@@ -31,7 +31,7 @@ import retrofit2.http.Query
 interface InterviewKuAPIService {
     // articles
     @GET("/articles")
-    suspend fun getAllArticles(
+    suspend fun getArticles(
         @Header("Authorization") bearerToken: String,
         @Query("page") page: Int,
         @Query("limit") limit: Int,

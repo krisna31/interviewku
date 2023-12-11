@@ -13,7 +13,7 @@ data class ArticleDetailResponse(
     val message: String,
 
     @field:SerializedName("data")
-    val data: Article,
+    val data: Article?,
 ) : Parcelable
 
 @Parcelize
@@ -24,11 +24,14 @@ data class Article(
     @field:SerializedName("title")
     val title: String,
 
+    @field:SerializedName("subtitle")
+    val subtitle: String,
+
     @field:SerializedName("author")
     val author: String,
 
-    @field:SerializedName("subtitle")
-    val subtitle: String,
+    @field:SerializedName("source")
+    val source: String,
 
     @field:SerializedName("content")
     val content: String,

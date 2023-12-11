@@ -11,7 +11,6 @@ import com.capstone.interviewku.data.network.response.InterviewHistoryData
 import com.capstone.interviewku.data.network.types.InterviewMode
 import com.capstone.interviewku.databinding.ItemInterviewHistoryBinding
 import com.capstone.interviewku.util.Helpers
-import java.text.DateFormat
 
 class ItemInterviewHistoryAdapter(
     private val onItemClick: (InterviewHistoryData) -> Unit
@@ -59,28 +58,27 @@ class ItemInterviewHistoryAdapter(
                         }
                     }
                 )
+                binding.tvJobField.text = getString(R.string.job_field_template, data.jobFieldName)
 
                 data.score?.let {
-                    val score = if (it in 0..5) {
+                    val score = if (it in 1..5) {
                         it
                     } else {
-                        0
+                        1
                     }
 
                     binding.ratingBarScore.rating = score.toFloat()
                     binding.tvScoreDescription.text =
-                        resources.getStringArray(R.array.rating_summary)[score]
+                        resources.getStringArray(R.array.rating_summary)[score - 1]
                 } ?: run {
                     binding.ratingBarScore.isVisible = false
                     binding.tvScoreDescription.text = getString(R.string.interview_not_finished)
                 }
 
-                binding.tvJobField.text = getString(R.string.job_field_template, data.jobFieldName)
                 binding.tvDate.text = getString(
                     R.string.started_at_template,
-                    Helpers.tzTimeStringToDate(data.startedAt)?.also {
-                        DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.DEFAULT)
-                            .format(it)
+                    Helpers.tzTimeStringToDate(data.startedAt)?.also { date ->
+                        Helpers.dateToIndonesianFormat(date)
                     } ?: run {
                         "-"
                     }
