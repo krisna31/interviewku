@@ -5,4 +5,5 @@
     <dimen name="root_padding">20dp</dimen>
     <dimen name="list_item_margin">8dp</dimen>
     <dimen name="list_item_padding">12dp</dimen>
+    <dimen name="max_dialog_width">400dp</dimen>
 </resources>

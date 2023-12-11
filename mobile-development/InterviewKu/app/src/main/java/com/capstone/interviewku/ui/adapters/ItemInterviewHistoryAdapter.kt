@@ -77,7 +77,7 @@ class ItemInterviewHistoryAdapter(
 
                 binding.tvDate.text = getString(
                     R.string.started_at_template,
-                    Helpers.tzTimeStringToDate(data.startedAt)?.also { date ->
+                    Helpers.tzTimeStringToDate(data.startedAt)?.let { date ->
                         Helpers.dateToIndonesianFormat(date)
                     } ?: run {
                         "-"

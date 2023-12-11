@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ArticleDetailResponse(
+data class ChatbotDetailResponse(
     @field:SerializedName("success")
     val success: Boolean,
 
@@ -13,5 +13,5 @@ data class ArticleDetailResponse(
     val message: String,
 
     @field:SerializedName("data")
-    val data: Article?,
+    val data: Chat?,
 ) : Parcelable

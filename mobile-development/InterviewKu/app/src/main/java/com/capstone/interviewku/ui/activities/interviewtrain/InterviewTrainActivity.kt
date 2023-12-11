@@ -3,6 +3,8 @@ package com.capstone.interviewku.ui.activities.interviewtrain
 import android.Manifest
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
@@ -34,12 +36,15 @@ import java.util.Locale
 @AndroidEntryPoint
 class InterviewTrainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInterviewTrainBinding
+    private lateinit var interviewInstructionFragment: InterviewInstructionFragment
     private lateinit var jobPickerFragment: JobPickerFragment
+    private lateinit var mediaPlayer: MediaPlayer
 
     private var audioFile: File? = null
-    private var audioFilename: String? = null
+    private var isTestRecording = false
     private var mediaRecorder: MediaRecorder? = null
     private var textToSpeech: TextToSpeech? = null
+
     private val viewModel by viewModels<InterviewTrainViewModel>()
 
     private val checkTTSDataLauncher =
@@ -55,35 +60,33 @@ class InterviewTrainActivity : AppCompatActivity() {
                         { initCode ->
                             if (initCode == TextToSpeech.SUCCESS) {
                                 textToSpeech?.apply {
-                                    language =
-                                        Locale.forLanguageTag(Constants.INDONESIA_LANGUAGE_TAG)
+                                    language = Locale.forLanguageTag(
+                                        Constants.INDONESIA_LANGUAGE_TAG
+                                    )
                                 }
+                                interviewInstructionFragment.setTTSStatus(
+                                    getString(R.string.ready)
+                                )
                             } else {
-                                Toast.makeText(
-                                    this@InterviewTrainActivity,
-                                    getString(R.string.tts_init_failed),
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                interviewInstructionFragment.setTTSStatus(
+                                    getString(R.string.tts_init_failed)
+                                )
                             }
                         },
                         Constants.GOOGLE_TTS_PACKAGE_NAME
                     )
                 } else {
                     // no indonesia data
-                    Toast.makeText(
-                        this@InterviewTrainActivity,
-                        getString(R.string.no_indonesian_tts_data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    interviewInstructionFragment.setTTSStatus(
+                        getString(R.string.no_indonesian_tts_data)
+                    )
                     installTTSData()
                 }
             } else {
                 // no data at all
-                Toast.makeText(
-                    this@InterviewTrainActivity,
-                    getString(R.string.no_tts_data),
-                    Toast.LENGTH_SHORT
-                ).show()
+                interviewInstructionFragment.setTTSStatus(
+                    getString(R.string.no_tts_data)
+                )
                 installTTSData()
             }
         }
@@ -118,6 +121,41 @@ class InterviewTrainActivity : AppCompatActivity() {
             onExitDialog()
         }
 
+        interviewInstructionFragment = InterviewInstructionFragment(
+            dialogType = InterviewInstructionFragment.TYPE_TRAIN,
+            onViewCreated = {
+                initializeTTS()
+            },
+            onContinueClick = {
+                viewModel.startInterviewSession()
+            },
+            onTTSReinitClick = {
+                initializeTTS()
+            },
+            onTTSCheckClick = {
+                textToSpeech?.speak(
+                    getString(R.string.tts_sample_sound),
+                    TextToSpeech.QUEUE_FLUSH,
+                    null,
+                    ""
+                )
+            },
+            onMicCheckClick = {
+                if (isTestRecording) {
+                    stopRecording(true)
+                } else {
+                    startRecording(true)
+                }
+            },
+        )
+        jobPickerFragment = JobPickerFragment(
+            onJobSelected = { jobFieldId ->
+                viewModel.setJobFieldId(jobFieldId)
+                interviewInstructionFragment.show(supportFragmentManager, null)
+            },
+            initialJobFieldId = intent.getIntExtra(EXTRA_JOB_FIELD_ID, -1)
+        )
+
         if (!isPermissionGranted(Manifest.permission.RECORD_AUDIO)) {
             microphonePermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
         } else {
@@ -127,6 +165,7 @@ class InterviewTrainActivity : AppCompatActivity() {
 
     override fun onStop() {
         textToSpeech?.stop()
+        mediaPlayer.stop()
         super.onStop()
     }
 
@@ -136,8 +175,7 @@ class InterviewTrainActivity : AppCompatActivity() {
     }
 
     private fun initializeAll() {
-        initializeJobFieldPicker()
-        initializeTTS()
+        initializeMediaPlayer()
         observeViewmodelData()
 
         binding.ivNext.setOnClickListener {
@@ -149,21 +187,23 @@ class InterviewTrainActivity : AppCompatActivity() {
             viewModel.setAnswer(null)
         }
 
+        jobPickerFragment.show(supportFragmentManager, null)
         viewModel.prepareInterview(intent.getIntExtra(EXTRA_JOB_FIELD_ID, -1))
     }
 
-    private fun initializeJobFieldPicker() {
-        jobPickerFragment = JobPickerFragment(
-            onJobSelected = { jobFieldId ->
-                viewModel.setJobFieldId(jobFieldId)
+    private fun initializeMediaPlayer() {
+        mediaPlayer = if (Build.VERSION.SDK_INT >= 34) {
+            MediaPlayer(this)
+        } else {
+            MediaPlayer()
+        }
 
-                InterviewInstructionFragment(InterviewInstructionFragment.TYPE_TRAIN) {
-                    viewModel.startInterviewSession()
-                }.show(supportFragmentManager, null)
-            },
-            initialJobFieldId = intent.getIntExtra(EXTRA_JOB_FIELD_ID, -1)
+        mediaPlayer.setAudioAttributes(
+            AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build()
         )
-        jobPickerFragment.show(supportFragmentManager, null)
     }
 
     private fun initializeTTS() {
@@ -363,9 +403,11 @@ class InterviewTrainActivity : AppCompatActivity() {
 
         viewModel.currentQuestion.observe(this) {
             lifecycleScope.launch {
-                binding.tvQuestion.text = it
-                delay(1000)
-                speakTTS(it)
+                if (it.isNotEmpty()) {
+                    binding.tvQuestion.text = it
+                    delay(1000)
+                    speakTTS(it)
+                }
             }
         }
 
@@ -452,18 +494,10 @@ class InterviewTrainActivity : AppCompatActivity() {
             TextToSpeech.QUEUE_FLUSH,
             null,
             ""
-        ) ?: run {
-            Toast.makeText(
-                this@InterviewTrainActivity,
-                getString(R.string.tts_not_initialized),
-                Toast.LENGTH_SHORT
-            ).show()
-
-            initializeTTS()
-        }
+        )
     }
 
-    private fun startRecording() {
+    private fun startRecording(isTesting: Boolean = false) {
         try {
             mediaRecorder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 MediaRecorder(this)
@@ -476,24 +510,28 @@ class InterviewTrainActivity : AppCompatActivity() {
                 setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB)
                 setAudioSamplingRate(Constants.AUDIO_SAMPLE_RATE)
 
-                audioFilename = System.currentTimeMillis().toString().also { filename ->
-                    audioFile =
-                        File.createTempFile(filename, Constants.AUDIO_FORMAT_SUFFIX, cacheDir)
-                            .also {
-                                setOutputFile(
-                                    it.outputStream().fd
-                                )
-                            }
+                audioFile = File.createTempFile(
+                    System.currentTimeMillis().toString(),
+                    Constants.AUDIO_FORMAT_SUFFIX,
+                    cacheDir
+                ).also {
+                    setOutputFile(
+                        it.outputStream().fd
+                    )
                 }
 
                 prepare()
                 start()
             }
 
-            viewModel.startRecording()
+            if (!isTesting) {
+                viewModel.startRecording()
+            } else {
+                isTestRecording = true
+            }
         } catch (e: Exception) {
             audioFile = null
-            audioFilename = null
+            isTestRecording = false
 
             Toast.makeText(
                 this,
@@ -501,10 +539,12 @@ class InterviewTrainActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
             e.printStackTrace()
+        } finally {
+            interviewInstructionFragment.setIsRecording(isTestRecording)
         }
     }
 
-    private fun stopRecording() {
+    private fun stopRecording(isTesting: Boolean = false) {
         try {
             mediaRecorder?.apply {
                 stop()
@@ -512,13 +552,26 @@ class InterviewTrainActivity : AppCompatActivity() {
             }
 
             audioFile?.let {
-                viewModel.setAnswer(it)
+                if (isTesting) {
+                    mediaPlayer.reset()
+                    mediaPlayer.setDataSource(it.inputStream().fd)
+                    mediaPlayer.prepare()
+                    mediaPlayer.start()
+                } else {
+                    viewModel.setAnswer(it)
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
             mediaRecorder = null
-            viewModel.stopRecording()
+
+            if (isTesting) {
+                isTestRecording = false
+                interviewInstructionFragment.setIsRecording(false)
+            } else {
+                viewModel.stopRecording()
+            }
         }
     }
 

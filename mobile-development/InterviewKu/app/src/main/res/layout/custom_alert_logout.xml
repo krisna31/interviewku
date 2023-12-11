@@ -3,40 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="24dp">
+    android:maxWidth="@dimen/max_dialog_width"
+    android:padding="@dimen/root_padding">
 
     <TextView
-        android:id="@+id/tv_Logout_Confirmation"
+        android:id="@+id/tv_logout_confirmation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Are you sure you want to logout?"
+        android:text="@string/logout_confirmation"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_Confirm_Logout"
+        android:id="@+id/btn_confirm_logout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Yes"
-        app:layout_constraintEnd_toStartOf="@id/btn_Cancel_Logout"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintHorizontal_weight="1"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="@dimen/root_padding"
+        android:text="@string/yes"
+        app:layout_constraintEnd_toStartOf="@id/btn_cancel_logout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_Logout_Confirmation" />
+        app:layout_constraintTop_toBottomOf="@id/tv_logout_confirmation" />
 
     <Button
-        android:id="@+id/btn_Cancel_Logout"
+        android:id="@+id/btn_cancel_logout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="No"
+        android:layout_marginHorizontal="8dp"
+        android:text="@string/no"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/btn_Confirm_Logout"
-        app:layout_constraintTop_toBottomOf="@id/tv_Logout_Confirmation" />
+        app:layout_constraintStart_toEndOf="@id/btn_confirm_logout"
+        app:layout_constraintTop_toTopOf="@id/btn_confirm_logout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

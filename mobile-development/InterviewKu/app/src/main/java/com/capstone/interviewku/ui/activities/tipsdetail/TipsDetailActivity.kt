@@ -8,7 +8,6 @@ import com.capstone.interviewku.R
 import com.capstone.interviewku.data.room.entity.ArticleEntity
 import com.capstone.interviewku.databinding.ActivityTipsDetailBinding
 import com.capstone.interviewku.util.Helpers
-import dagger.hilt.android.AndroidEntryPoint
 import io.noties.markwon.Markwon
 import io.noties.markwon.ext.strikethrough.StrikethroughPlugin
 import io.noties.markwon.ext.tables.TablePlugin
@@ -16,7 +15,6 @@ import io.noties.markwon.ext.tasklist.TaskListPlugin
 import io.noties.markwon.html.HtmlPlugin
 import io.noties.markwon.image.glide.GlideImagesPlugin
 
-@AndroidEntryPoint
 class TipsDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTipsDetailBinding
 

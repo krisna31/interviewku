@@ -89,9 +89,15 @@ class HomeFragment : Fragment() {
                 Intent(context, InterviewTestActivity::class.java)
             )
         }
+        
+        binding.swlMain.setOnRefreshListener {
+            binding.swlMain.isRefreshing = false
+            viewModel.loadAllData()
+        }
 
         viewModel.allDataState.observe(viewLifecycleOwner) { homeScreenModel ->
             binding.progressBar.isVisible = homeScreenModel is Result.Loading
+            binding.swlMain.isEnabled = homeScreenModel !is Result.Loading
 
             setContentVisibility(false)
             binding.chipgroupInterest.removeAllViews()
@@ -192,6 +198,7 @@ class HomeFragment : Fragment() {
         binding.tvChooseInterestTitle.isVisible = isVisible
         binding.tvPerformanceTitle.isVisible = isVisible
         binding.tvTipsTitle.isVisible = isVisible
+        binding.rvInterviewTips.isVisible = isVisible
 
         if (!isVisible) {
             binding.rvInterviewPerformance.isVisible = false

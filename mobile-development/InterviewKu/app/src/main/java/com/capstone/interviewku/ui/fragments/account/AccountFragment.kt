@@ -96,10 +96,12 @@ class AccountFragment : Fragment() {
                 is Result.Loading -> {
                     binding.progressBar.isVisible = true
                 }
+
                 is Result.Success -> {
                     binding.progressBar.isVisible = false
                     binding.tvFullname.text = "${result.data?.firstname} ${result.data?.lastname}"
                 }
+
                 is Result.Error -> {
                     binding.progressBar.isVisible = false
                     Toast.makeText(context, "Error: ${result.exception}", Toast.LENGTH_SHORT).show()
@@ -114,12 +116,12 @@ class AccountFragment : Fragment() {
             .setView(dialogView)
             .create()
 
-        dialogView.findViewById<Button>(R.id.btn_Confirm_Logout).setOnClickListener {
+        dialogView.findViewById<Button>(R.id.btn_confirm_logout).setOnClickListener {
             viewModel.logout()
             dialog.dismiss()
         }
 
-        dialogView.findViewById<Button>(R.id.btn_Cancel_Logout).setOnClickListener {
+        dialogView.findViewById<Button>(R.id.btn_cancel_logout).setOnClickListener {
             dialog.dismiss()
         }
 

@@ -17,6 +17,12 @@
         tools:layout="@layout/fragment_interview" />
 
     <fragment
+        android:id="@+id/navigation_chatbot"
+        android:name="com.capstone.interviewku.ui.fragments.chat.ChatbotFragment"
+        android:label="@string/chatbot"
+        tools:layout="@layout/fragment_chatbot" />
+
+    <fragment
         android:id="@+id/navigation_tips"
         android:name="com.capstone.interviewku.ui.fragments.tips.TipsFragment"
         android:label="@string/navigation_tips"

@@ -3,6 +3,8 @@ package com.capstone.interviewku.data.network.service
 import com.capstone.interviewku.data.network.response.ArticleDetailResponse
 import com.capstone.interviewku.data.network.response.ArticlesResponse
 import com.capstone.interviewku.data.network.response.BaseResponse
+import com.capstone.interviewku.data.network.response.ChatbotDetailResponse
+import com.capstone.interviewku.data.network.response.ChatbotResponse
 import com.capstone.interviewku.data.network.response.InterviewAnswerSubmitResponse
 import com.capstone.interviewku.data.network.response.InterviewHistoryResponse
 import com.capstone.interviewku.data.network.response.InterviewQuestionsResponse
@@ -71,6 +73,27 @@ interface InterviewKuAPIService {
         @Field("oldPassword") oldPassword: String,
         @Field("newPassword") newPassword: String,
     ): BaseResponse
+
+    // chats
+    @GET("/chats")
+    suspend fun getChatHistory(
+        @Header("Authorization") bearerToken: String,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+    ): ChatbotResponse
+
+    @POST("/chats")
+    @FormUrlEncoded
+    suspend fun sendQuestion(
+        @Header("Authorization") bearerToken: String,
+        @Field("question") question: String,
+    ): ChatbotDetailResponse
+
+    @GET("/chats/{chatId}")
+    suspend fun getChatById(
+        @Header("Authorization") bearerToken: String,
+        @Path("chatId") chatId: String,
+    ): ChatbotDetailResponse
 
     // interview
     @GET("/interviews")

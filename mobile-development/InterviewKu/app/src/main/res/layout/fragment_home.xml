@@ -21,182 +21,190 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swl_main"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:fillViewport="true"
-        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbarlayout">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
 
-            <TextView
-                android:id="@+id/tv_greeting"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/root_padding"
-                android:layout_marginTop="@dimen/root_padding"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/home_greeting_template" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_welcome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/root_padding"
-                android:layout_marginTop="8dp"
-                android:text="@string/welcome"
-                android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/tv_greeting" />
+                <TextView
+                    android:id="@+id/tv_greeting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/root_padding"
+                    android:layout_marginTop="@dimen/root_padding"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/home_greeting_template" />
 
-            <TextView
-                android:id="@+id/tv_choose_interest_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/root_padding"
-                android:layout_marginTop="20dp"
-                android:text="@string/choose_your_interest"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_welcome" />
+                <TextView
+                    android:id="@+id/tv_welcome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/root_padding"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/welcome"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_greeting" />
 
-            <HorizontalScrollView
-                android:id="@+id/sv_interest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:overScrollMode="never"
-                android:scrollbars="none"
-                app:layout_constraintTop_toBottomOf="@id/tv_choose_interest_title">
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipgroup_interest"
+                <TextView
+                    android:id="@+id/tv_choose_interest_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/root_padding"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/choose_your_interest"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_welcome" />
+
+                <HorizontalScrollView
+                    android:id="@+id/sv_interest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    app:layout_constraintTop_toBottomOf="@id/tv_choose_interest_title">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipgroup_interest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:isScrollContainer="true"
+                        android:paddingHorizontal="@dimen/root_padding"
+                        app:singleSelection="true">
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </HorizontalScrollView>
+
+                <Button
+                    android:id="@+id/btn_interest_start_train"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/root_padding"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/interview_train_try"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sv_interest" />
+
+                <TextView
+                    android:id="@+id/tv_performance_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/root_padding"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/interview_performance_title"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_interest_start_train" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_interview_performance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:isScrollContainer="true"
-                    android:paddingHorizontal="@dimen/root_padding"
-                    app:singleSelection="true">
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:paddingHorizontal="@dimen/list_item_padding"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/tv_performance_title"
+                    tools:ignore="RtlSymmetry"
+                    tools:listitem="@layout/item_interview_performance" />
 
-                </com.google.android.material.chip.ChipGroup>
+                <TextView
+                    android:id="@+id/tv_no_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/root_padding"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/no_history"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/tv_performance_title" />
 
-            </HorizontalScrollView>
+                <Button
+                    android:id="@+id/btn_no_history_start_train"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/root_padding"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/interview_train_try"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_no_history" />
 
-            <Button
-                android:id="@+id/btn_interest_start_train"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/root_padding"
-                android:layout_marginTop="16dp"
-                android:text="@string/interview_train_try"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sv_interest" />
+                <Button
+                    android:id="@+id/btn_no_history_start_test"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/root_padding"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/interview_test_try"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_no_history_start_train" />
 
-            <TextView
-                android:id="@+id/tv_performance_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/root_padding"
-                android:layout_marginTop="20dp"
-                android:text="@string/interview_performance_title"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_interest_start_train" />
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrier1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="btn_no_history_start_test, rv_interview_performance" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_interview_performance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:overScrollMode="never"
-                android:paddingHorizontal="@dimen/list_item_padding"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/tv_performance_title"
-                tools:ignore="RtlSymmetry"
-                tools:listitem="@layout/item_interview_performance" />
+                <TextView
+                    android:id="@+id/tv_tips_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/root_padding"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/navigation_tips"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/barrier1" />
 
-            <TextView
-                android:id="@+id/tv_no_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/root_padding"
-                android:layout_marginTop="8dp"
-                android:text="@string/no_history"
-                android:textSize="16sp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/tv_performance_title" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_interview_tips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:paddingHorizontal="@dimen/list_item_padding"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/tv_tips_title"
+                    tools:ignore="RtlSymmetry"
+                    tools:listitem="@layout/item_tips_home" />
 
-            <Button
-                android:id="@+id/btn_no_history_start_train"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/root_padding"
-                android:layout_marginTop="8dp"
-                android:text="@string/interview_train_try"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_no_history" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/btn_no_history_start_test"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/root_padding"
-                android:layout_marginTop="8dp"
-                android:text="@string/interview_test_try"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_no_history_start_train" />
+        </androidx.core.widget.NestedScrollView>
 
-            <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/barrier1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:barrierDirection="bottom"
-                app:constraint_referenced_ids="btn_no_history_start_test, rv_interview_performance" />
 
-            <TextView
-                android:id="@+id/tv_tips_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/root_padding"
-                android:layout_marginTop="20dp"
-                android:text="@string/navigation_tips"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/barrier1" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_interview_tips"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:overScrollMode="never"
-                android:paddingHorizontal="@dimen/list_item_padding"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/tv_tips_title"
-                tools:ignore="RtlSymmetry"
-                tools:listitem="@layout/item_tips_home" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
         android:id="@+id/progress_bar"

@@ -1,5 +1,6 @@
 package com.capstone.interviewku.ui.fragments.interviewinstruction
 
+import android.app.ActionBar
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -11,7 +12,11 @@ import com.capstone.interviewku.databinding.CustomAlertInstructionBinding
 
 class InterviewInstructionFragment(
     private val dialogType: String,
-    private val onButtonClick: () -> Unit,
+    private val onViewCreated: () -> Unit,
+    private val onContinueClick: () -> Unit,
+    private val onTTSReinitClick: () -> Unit,
+    private val onTTSCheckClick: () -> Unit,
+    private val onMicCheckClick: () -> Unit,
 ) : DialogFragment() {
     private var _binding: CustomAlertInstructionBinding? = null
     private val binding
@@ -68,8 +73,20 @@ class InterviewInstructionFragment(
             }
         )
 
+        binding.btnTtsReinit.setOnClickListener {
+            onTTSReinitClick()
+        }
+
+        binding.btnTtsCheck.setOnClickListener {
+            onTTSCheckClick()
+        }
+
+        binding.btnMicRecord.setOnClickListener {
+            onMicCheckClick()
+        }
+
         binding.btnContinue.setOnClickListener {
-            onButtonClick()
+            onContinueClick()
             dismiss()
         }
 
@@ -84,11 +101,33 @@ class InterviewInstructionFragment(
 
             false
         }
+
+        onViewCreated()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        dialog?.window?.setLayout(
+            ActionBar.LayoutParams.MATCH_PARENT,
+            ActionBar.LayoutParams.WRAP_CONTENT
+        )
     }
 
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+    }
+
+    fun setIsRecording(isRecording: Boolean) {
+        if (isRecording) {
+            binding.btnMicRecord.text = getString(R.string.check_mic_stop)
+        } else {
+            binding.btnMicRecord.text = getString(R.string.check_mic_start)
+        }
+    }
+
+    fun setTTSStatus(status: String) {
+        binding.tvTtsStatus.text = getString(R.string.tts_status_template, status)
     }
 
     companion object {

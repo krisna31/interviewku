@@ -14,6 +14,7 @@ object Constants {
 
     // paging constants
     const val ARTICLE_PAGE_SIZE = 10
+    const val CHAT_PAGE_SIZE = 10
     const val INTERVIEW_HISTORY_PAGE_SIZE = 10
 
     // text to speech constants

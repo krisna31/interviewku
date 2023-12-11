@@ -3,6 +3,8 @@ package com.capstone.interviewku.ui.activities.interviewtest
 import android.Manifest
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
@@ -34,12 +36,15 @@ import java.util.Locale
 @AndroidEntryPoint
 class InterviewTestActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInterviewTestBinding
+    private lateinit var interviewInstructionFragment: InterviewInstructionFragment
     private lateinit var jobPickerFragment: JobPickerFragment
+    private lateinit var mediaPlayer: MediaPlayer
 
     private var audioFile: File? = null
-    private var audioFilename: String? = null
+    private var isTestRecording = false
     private var mediaRecorder: MediaRecorder? = null
     private var textToSpeech: TextToSpeech? = null
+
     private val viewModel by viewModels<InterviewTestViewModel>()
 
     private val checkTTSDataLauncher =
@@ -55,7 +60,9 @@ class InterviewTestActivity : AppCompatActivity() {
                         { initCode ->
                             if (initCode == TextToSpeech.SUCCESS) {
                                 textToSpeech?.apply {
-                                    language = Locale.forLanguageTag("id-ID")
+                                    language = Locale.forLanguageTag(
+                                        Constants.INDONESIA_LANGUAGE_TAG
+                                    )
                                     setOnUtteranceProgressListener(object :
                                         UtteranceProgressListener() {
                                         override fun onStart(utteranceId: String?) {
@@ -88,32 +95,29 @@ class InterviewTestActivity : AppCompatActivity() {
                                         }
                                     })
                                 }
+                                interviewInstructionFragment.setTTSStatus(
+                                    getString(R.string.ready)
+                                )
                             } else {
-                                Toast.makeText(
-                                    this@InterviewTestActivity,
-                                    getString(R.string.tts_init_failed),
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                interviewInstructionFragment.setTTSStatus(
+                                    getString(R.string.tts_init_failed)
+                                )
                             }
                         },
                         Constants.GOOGLE_TTS_PACKAGE_NAME
                     )
                 } else {
                     // no indonesia data
-                    Toast.makeText(
-                        this@InterviewTestActivity,
-                        getString(R.string.no_indonesian_tts_data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    interviewInstructionFragment.setTTSStatus(
+                        getString(R.string.no_indonesian_tts_data)
+                    )
                     installTTSData()
                 }
             } else {
                 // no data at all
-                Toast.makeText(
-                    this@InterviewTestActivity,
-                    getString(R.string.no_tts_data),
-                    Toast.LENGTH_SHORT
-                ).show()
+                interviewInstructionFragment.setTTSStatus(
+                    getString(R.string.no_tts_data)
+                )
                 installTTSData()
             }
         }
@@ -148,6 +152,40 @@ class InterviewTestActivity : AppCompatActivity() {
             onExitDialog()
         }
 
+        interviewInstructionFragment = InterviewInstructionFragment(
+            dialogType = InterviewInstructionFragment.TYPE_TEST,
+            onViewCreated = {
+                initializeTTS()
+            },
+            onContinueClick = {
+                viewModel.startInterviewSession()
+            },
+            onTTSReinitClick = {
+                initializeTTS()
+            },
+            onTTSCheckClick = {
+                textToSpeech?.speak(
+                    getString(R.string.tts_sample_sound),
+                    TextToSpeech.QUEUE_FLUSH,
+                    null,
+                    ""
+                )
+            },
+            onMicCheckClick = {
+                if (isTestRecording) {
+                    stopRecording(true)
+                } else {
+                    startRecording(true)
+                }
+            },
+        )
+        jobPickerFragment = JobPickerFragment(
+            onJobSelected = { jobFieldId ->
+                viewModel.setJobFieldId(jobFieldId)
+                interviewInstructionFragment.show(supportFragmentManager, null)
+            },
+        )
+
         if (!isPermissionGranted(Manifest.permission.RECORD_AUDIO)) {
             microphonePermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
         } else {
@@ -166,8 +204,7 @@ class InterviewTestActivity : AppCompatActivity() {
     }
 
     private fun initializeAll() {
-        initializeJobFieldPicker()
-        initializeTTS()
+        initializeMediaPlayer()
         observeViewmodelData()
 
         binding.ivNext.setOnClickListener {
@@ -183,17 +220,23 @@ class InterviewTestActivity : AppCompatActivity() {
             }
         }
 
+        jobPickerFragment.show(supportFragmentManager, null)
         viewModel.prepareInterview()
     }
 
-    private fun initializeJobFieldPicker() {
-        jobPickerFragment = JobPickerFragment(onJobSelected = { jobFieldId ->
-            InterviewInstructionFragment(InterviewInstructionFragment.TYPE_TEST) {
-                viewModel.setJobFieldId(jobFieldId)
-                viewModel.startInterviewSession()
-            }.show(supportFragmentManager, null)
-        })
-        jobPickerFragment.show(supportFragmentManager, null)
+    private fun initializeMediaPlayer() {
+        mediaPlayer = if (Build.VERSION.SDK_INT >= 34) {
+            MediaPlayer(this)
+        } else {
+            MediaPlayer()
+        }
+
+        mediaPlayer.setAudioAttributes(
+            AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build()
+        )
     }
 
     private fun initializeTTS() {
@@ -344,7 +387,10 @@ class InterviewTestActivity : AppCompatActivity() {
                     it.data.data?.let { data ->
                         startActivity(
                             Intent(this, InterviewResultActivity::class.java).apply {
-                                putExtra(InterviewResultActivity.EXTRA_INTERVIEW_ID_KEY, data.interviewId)
+                                putExtra(
+                                    InterviewResultActivity.EXTRA_INTERVIEW_ID_KEY,
+                                    data.interviewId
+                                )
                             }
                         )
                     }
@@ -377,8 +423,10 @@ class InterviewTestActivity : AppCompatActivity() {
 
         viewModel.currentQuestion.observe(this) {
             lifecycleScope.launch {
-                delay(1000)
-                speakTTS(it)
+                if (it.isNotEmpty()) {
+                    delay(1000)
+                    speakTTS(it)
+                }
             }
         }
 
@@ -431,18 +479,10 @@ class InterviewTestActivity : AppCompatActivity() {
             TextToSpeech.QUEUE_FLUSH,
             null,
             ""
-        ) ?: run {
-            Toast.makeText(
-                this@InterviewTestActivity,
-                getString(R.string.tts_not_initialized),
-                Toast.LENGTH_SHORT
-            ).show()
-
-            initializeTTS()
-        }
+        )
     }
 
-    private fun startRecording() {
+    private fun startRecording(isTesting: Boolean = false) {
         try {
             mediaRecorder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 MediaRecorder(this)
@@ -455,24 +495,28 @@ class InterviewTestActivity : AppCompatActivity() {
                 setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB)
                 setAudioSamplingRate(Constants.AUDIO_SAMPLE_RATE)
 
-                audioFilename = System.currentTimeMillis().toString().also { filename ->
-                    audioFile =
-                        File.createTempFile(filename, Constants.AUDIO_FORMAT_SUFFIX, cacheDir)
-                            .also {
-                                setOutputFile(
-                                    it.outputStream().fd
-                                )
-                            }
+                audioFile = File.createTempFile(
+                    System.currentTimeMillis().toString(),
+                    Constants.AUDIO_FORMAT_SUFFIX,
+                    cacheDir
+                ).also {
+                    setOutputFile(
+                        it.outputStream().fd
+                    )
                 }
 
                 prepare()
                 start()
             }
 
-            viewModel.startRecording()
+            if (!isTesting) {
+                viewModel.startRecording()
+            } else {
+                isTestRecording = true
+            }
         } catch (e: Exception) {
             audioFile = null
-            audioFilename = null
+            isTestRecording = false
 
             Toast.makeText(
                 this,
@@ -480,10 +524,12 @@ class InterviewTestActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
             e.printStackTrace()
+        } finally {
+            interviewInstructionFragment.setIsRecording(isTestRecording)
         }
     }
 
-    private fun stopRecording() {
+    private fun stopRecording(isTesting: Boolean = false) {
         try {
             mediaRecorder?.apply {
                 stop()
@@ -491,13 +537,26 @@ class InterviewTestActivity : AppCompatActivity() {
             }
 
             audioFile?.let {
-                viewModel.setAnswer(it)
+                if (isTesting) {
+                    mediaPlayer.reset()
+                    mediaPlayer.setDataSource(it.inputStream().fd)
+                    mediaPlayer.prepare()
+                    mediaPlayer.start()
+                } else {
+                    viewModel.setAnswer(it)
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
             mediaRecorder = null
-            viewModel.stopRecording()
+
+            if (isTesting) {
+                isTestRecording = false
+                interviewInstructionFragment.setIsRecording(false)
+            } else {
+                viewModel.stopRecording()
+            }
         }
     }
 }

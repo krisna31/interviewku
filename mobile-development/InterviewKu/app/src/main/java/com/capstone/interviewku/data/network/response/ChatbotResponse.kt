@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ArticlesResponse(
+data class ChatbotResponse(
     @field:SerializedName("success")
     val success: Boolean,
 
@@ -13,14 +13,14 @@ data class ArticlesResponse(
     val message: String,
 
     @field:SerializedName("meta")
-    val meta: ArticlesMeta?,
+    val meta: ChatsMeta,
 
     @field:SerializedName("data")
-    val data: List<Article>?,
+    val data: List<Chat>?,
 ) : Parcelable
 
 @Parcelize
-data class ArticlesMeta(
+data class ChatsMeta(
     @field:SerializedName("count")
     val count: Int,
 
@@ -46,29 +46,16 @@ data class ArticlesMeta(
     val limit: Int,
 ) : Parcelable
 
-
 @Parcelize
-data class Article(
+data class Chat(
     @field:SerializedName("id")
-    val id: Int,
+    val id: String,
 
-    @field:SerializedName("title")
-    val title: String,
+    @field:SerializedName("question")
+    val question: String,
 
-    @field:SerializedName("subtitle")
-    val subtitle: String,
-
-    @field:SerializedName("author")
-    val author: String,
-
-    @field:SerializedName("source")
-    val source: String,
-
-    @field:SerializedName("content")
-    val content: String,
-
-    @field:SerializedName("coverImgUrl")
-    val coverImgUrl: String,
+    @field:SerializedName("answer")
+    val answer: String,
 
     @field:SerializedName("createdAt")
     val createdAt: String,
