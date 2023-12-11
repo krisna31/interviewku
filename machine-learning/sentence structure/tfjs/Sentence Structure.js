@@ -1,9 +1,9 @@
 const fs = require('fs');
 const tf = require('@tensorflow/tfjs-node');
-const tokenizerJson = fs.readFileSync('tokenizer_dict_struktur.json', 'utf8');
-const tokenizer = JSON.parse(tokenizerJson)
-const handler = tf.io.fileSystem('./tfjs_model/model.json');
+const handler = tf.io.fileSystem('./model/model.json');
 const model = tf.loadLayersModel(handler)
+const tokenizerJson = fs.readFileSync('../tokenizer_dict_structure.json', 'utf8');
+const tokenizer = JSON.parse(tokenizerJson)
 
 function tokenize(text, max_length) {
   text = text.toLowerCase();

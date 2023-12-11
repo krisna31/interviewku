@@ -1,6 +1,6 @@
 const tf = require('@tensorflow/tfjs-node');
 const fs = require('fs');
-const handler = tf.io.fileSystem('./tfjs_model/model.json');
+const handler = tf.io.fileSystem('./model/model.json');
 const model = tf.loadLayersModel(handler);
 const commonWordsJson = fs.readFileSync('../common_words.json', 'utf8');
 const commonWords = JSON.parse(commonWordsJson);

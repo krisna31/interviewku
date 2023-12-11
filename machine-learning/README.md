@@ -1,7 +1,15 @@
 # interviewku-machine-learning
 
-## About the model
-### Sentence Structure
+## About the model & installation
+
+- [Sentence Structure Model](#sentence-structure)
+- [Scoring Model](#scoring)
+- [Chatbot Model](#chatbot)<br><br>
+- [Windows Installation](#installation-for-windows)
+- [linux Installation](#installation-for-linux)
+
+
+## Sentence Structure
 This model detects introductory sentence structures using Natural Language Processing (NLP). The input to this model is the user's response, and its output is a binary value of 0 or 1, indicating whether the response is considered "Good" or "Not Good".
 <br>Example:
 - "Saya biasanya membuat daftar prioritas untuk menentukan tindakan yang paling mendesak."<br>
@@ -9,7 +17,7 @@ This model detects introductory sentence structures using Natural Language Proce
 - "Ketika saya dihadapkan pada masalah, saya biasanya membuat daftar prioritas untuk menentukan tindakan yang paling mendesak."<br>
 -> Will give an output "Good"
 
-### Scoring
+## Scoring
 The scoring result have a composition: 50% from softmax field clasification and 50% similarity by the dataset
 - Softmax field classification by using the model created before
 - Sentences similarity calculated by Cosine Similarity algorithm
@@ -54,6 +62,12 @@ The angle between the vectors is calculated as:<br>
 
 [Source](https://www.learndatasci.com/glossary/cosine-similarity/)
 
+## Chatbot
+The model is a chatbot specifically designed to address interview-related inquiries. It's constructed using a Recurrent Neural Network (RNN) with Long Short-Term Memory (LSTM) and Embedding techniques.
+
+<img src="https://i.imgur.com/Rmx67pA.png" width='650px' />
+
+[source](https://www.researchgate.net/figure/Convolutional-layers-with-Keras_fig1_342039054)
 
 ## Tensorflow.js guide for Scoring and Sentence Structure model
 ### Installation for Windows
