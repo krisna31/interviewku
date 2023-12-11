@@ -184,8 +184,6 @@
                     android:id="@+id/tv_current_city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:focusable="false"
                     android:hint="@string/current_city"
                     android:importantForAutofill="no"
                     android:inputType="text"
