@@ -6,6 +6,8 @@ const tokenizerJson = fs.readFileSync('../tokenizer_dict_chatbot.json', 'utf8');
 const tokenizer = JSON.parse(tokenizerJson);
 const tagsClassJson = fs.readFileSync('../chatbot_result_decoder.json', 'utf8');
 const tagsClass = JSON.parse(tagsClassJson);
+const responsesJson = fs.readFileSync('../responses_chatbot.json', 'utf8');
+const responses = JSON.parse(responsesJson);
 
 
 const replace_words = [
@@ -74,7 +76,7 @@ function tokenize(text, max_length) {
     tokenized_text_segments.push(new_slice);
     i = i + 50;
   }
-  console.log(tokenized_text_segments);
+  // console.log(tokenized_text_segments);
 
   return tokenized_text_segments;
 }
@@ -87,11 +89,15 @@ async function predictText(answer) {
       const tokenizedText = tokenize(processedText, 13);
 
       // predict text
-      const result = res.predict(tf.tensor2d(tokenizedText));
-      const tagResult = result.argMax(-1).arraySync()[0];
-      // console.log(tagResult);
+      const predictResult = res.predict(tf.tensor2d(tokenizedText));
+      const tagResultSequence = predictResult.argMax(-1).arraySync()[0];
+      const tagResult = getKeyByValue(tagsClass, tagResultSequence);
 
-      resolve(getKeyByValue(tagsClass, tagResult));
+      const resultList = responses[tagResult];
+      const randomIndex = Math.floor(Math.random() * resultList.length);
+      const result = resultList[randomIndex];
+
+      resolve(result);
     }).catch(function (err) {
       reject(err);
     });
