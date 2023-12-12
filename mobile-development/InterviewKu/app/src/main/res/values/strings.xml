@@ -60,6 +60,15 @@
     <string name="tts_setting">Pengaturan Text To Speech</string>
     <string name="welcome">Selamat datang di InterviewKu</string>
     <string name="yes">Ya</string>
+    <string name="login_text">Lupa Kata Sandi ?</string>
+    <string name="Send_otp_succes">Kode OTP Berhasil Dikirim</string>
+    <string name="password_change_succes">Kata Sandi Berhasil Diubah</string>
+    <string name="newpassword_change_succes">Kata Sandi Baru Berhasil Disimpan </string>
+    <string name="correct_otp_code">Kode OTP Benar</string>
+    <string name="OTP">Kode OTP</string>
+    <string name="New_password">Kata Sandi Baru</string>
+    <string name="store">Simpan</string>
+    <string name="Recovery_password">Pemulihan Kata Sandi</string>
 
     <!--  MESSAGE / INSTRUCTION  -->
     <string name="birthdate_required">Silakan pilih tanggal lahir</string>

@@ -1,9 +1,16 @@
 package com.capstone.interviewku.ui.activities.forgetpass
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import com.capstone.interviewku.R
+import com.capstone.interviewku.util.Result
 import com.capstone.interviewku.databinding.ActivityForgetPasswordBinding
+import com.capstone.interviewku.ui.activities.recoverpass.RecoverPasswordActivity
+import com.capstone.interviewku.util.Extensions.handleHttpException
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,5 +24,40 @@ class ForgetPasswordActivity : AppCompatActivity() {
 
         binding = ActivityForgetPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnSend.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            viewModel.requestPasswordReset(email)
+        }
+
+        observePasswordResetState()
+    }
+    private fun observePasswordResetState() {
+        viewModel.passwordResetState.observe(this) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+                is Result.Success -> {
+                    binding.progressBar.isVisible = false
+                    showToast(getString(R.string.Send_otp_succes))
+                    navigateToRecoverPasswordActivity()
+                }
+                is Result.Error -> {
+                    binding.progressBar.isVisible = false
+                    result.exception.getData()?.handleHttpException(this)
+
+                }
+            }
+        }
+    }
+
+    private fun navigateToRecoverPasswordActivity() {
+        val intent = Intent(this, RecoverPasswordActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

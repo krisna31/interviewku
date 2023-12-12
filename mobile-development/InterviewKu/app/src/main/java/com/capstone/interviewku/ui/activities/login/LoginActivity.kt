@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityLoginBinding
+import com.capstone.interviewku.ui.activities.forgetpass.ForgetPasswordActivity
 import com.capstone.interviewku.ui.activities.main.MainActivity
 import com.capstone.interviewku.util.Extensions.handleHttpException
 import com.capstone.interviewku.util.Extensions.hideKeyboard
@@ -30,6 +31,11 @@ class LoginActivity : AppCompatActivity() {
 
         setupObservers()
         setupTextWatchers()
+
+        binding.tvRecovery.setOnClickListener {
+            val intent = Intent(this, ForgetPasswordActivity::class.java)
+            startActivity(intent)
+        }
     }
     private fun setupObservers() {
         viewModel.loginState.observe(this) {
@@ -60,6 +66,7 @@ class LoginActivity : AppCompatActivity() {
             viewModel.login(email, password)
 
             hideKeyboard(it)
+
         }
     }
 

@@ -19,6 +19,7 @@ class ForgetPasswordViewModel @Inject constructor(
     val passwordResetState: LiveData<Result<Unit>>
         get() = _passwordResetState
 
+
     fun requestPasswordReset(email: String) = viewModelScope.launch {
         _passwordResetState.value = Result.Loading
 
