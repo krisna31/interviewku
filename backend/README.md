@@ -44,9 +44,13 @@ This is the backend for interviewku.com
 
 ## How to run Swagger
 
-1. Run `npm run dev`  to start the server
+1. Run `npm run dev` to start the server
 2. Open `http://localhost:5000/documentation` in your browser
 
 ```bash
   npm run dev
 ```
+
+## Cloud Architecture
+
+![cloud architecture](CloudArchitecture.png)
