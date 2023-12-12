@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.FragmentHomeBinding
 import com.capstone.interviewku.ui.activities.interviewresult.InterviewResultActivity
@@ -19,6 +20,7 @@ import com.capstone.interviewku.ui.activities.tipsdetail.TipsDetailActivity
 import com.capstone.interviewku.ui.adapters.ItemInterviewPerformanceAdapter
 import com.capstone.interviewku.ui.adapters.ItemTipsHomeAdapter
 import com.capstone.interviewku.ui.customview.JobFieldChip
+import com.capstone.interviewku.util.Constants
 import com.capstone.interviewku.util.Extensions.handleHttpException
 import com.capstone.interviewku.util.Helpers
 import com.capstone.interviewku.util.Result
@@ -45,10 +47,6 @@ class HomeFragment : Fragment() {
 
         val context = requireContext()
 
-        binding.toolbar.apply {
-            setLogo(R.mipmap.ic_launcher_round)
-        }
-
         val itemInterviewPerformanceAdapter = ItemInterviewPerformanceAdapter {
             startActivity(
                 Intent(context, InterviewResultActivity::class.java).apply {
@@ -69,12 +67,12 @@ class HomeFragment : Fragment() {
         }
 
         binding.rvInterviewPerformance.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = itemInterviewPerformanceAdapter
         }
 
         binding.rvInterviewTips.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = itemTipsHomeAdapter
         }
 
@@ -89,7 +87,8 @@ class HomeFragment : Fragment() {
                 Intent(context, InterviewTestActivity::class.java)
             )
         }
-        
+
+        binding.swlMain.setDistanceToTriggerSync(Constants.SWIPE_REFRESH_LAYOUT_TRIGGER_DISTANCE)
         binding.swlMain.setOnRefreshListener {
             binding.swlMain.isRefreshing = false
             viewModel.loadAllData()

@@ -64,10 +64,6 @@ class AccountFragment : Fragment() {
             showLogoutConfirmationDialog(requireActivity())
         }
 
-        binding.toolbar.apply {
-            setLogo(R.mipmap.ic_launcher_round)
-        }
-
         viewModel.logoutState.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {

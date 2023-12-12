@@ -39,10 +39,6 @@ class TipsFragment : Fragment() {
 
         val context = requireContext()
 
-        binding.toolbar.apply {
-            setLogo(R.mipmap.ic_launcher_round)
-        }
-
         val tipsScreenAdapter = ItemTipsScreenAdapter {
             startActivity(Intent(context, TipsDetailActivity::class.java).apply {
                 putExtra(TipsDetailActivity.EXTRA_ARTICLE_ENTITY_KEY, it)

@@ -3,9 +3,12 @@
 
     <!--  STATIC TEXT / TITLE / PLACEHOLDER  -->
     <string name="additional_information">Informasi Tambahan</string>
+    <string name="answer">Jawaban</string>
     <string name="birthdate">Tanggal Lahir</string>
     <string name="change_password">Ganti Kata Sandi</string>
     <string name="chatbot">Chatbot</string>
+    <string name="chatbot_history">Riwayat Chat</string>
+    <string name="chatbot_result">Hasil Chatbot</string>
     <string name="check_mic_start">Rekam suara anda</string>
     <string name="check_mic_stop">Berhenti merekam</string>
     <string name="check_tts_feature">Cek Fitur TTS</string>
@@ -45,12 +48,14 @@
     <string name="password">Kata Sandi</string>
     <string name="permission_title">Perizinan Aplikasi</string>
     <string name="profile">Profil</string>
+    <string name="question">Pertanyaan</string>
     <string name="ready">Siap</string>
     <string name="register">Daftar</string>
     <string name="reinit_tts">Inisialisasi Ulang TTS</string>
     <string name="save">Simpan</string>
     <string name="scoring_detail">Detail Penilaian</string>
     <string name="select_job_field_title">Pilih Bidang Pekerjaan</string>
+    <string name="send_question">Kirim Pertanyaan</string>
     <string name="send_recovery_email">Kirim Email Pemulihan</string>
     <string name="start_test">Mulai Uji Kemampuan</string>
     <string name="start_train">Mulai Latihan</string>
@@ -88,9 +93,10 @@
     <string name="logout_success">Berhasil keluar dari akun anda</string>
     <string name="mic_permission_granted">Anda dapat merekam suara anda</string>
     <string name="mic_permission_prompt">Izin merekam suara harus diberikan agar fitur perekaman dapat digunakan</string>
+    <string name="no_chat_history">Anda belum pernah bertanya kepada Chatbot</string>
     <string name="no_google_tts">Silahkan mengunduh Google TTS di Play Store</string>
-    <string name="no_history">Anda belum pernah melakukan Interview</string>
     <string name="no_indonesian_tts_data">Anda belum memasang data suara Bahasa Indonesia. Silahkan memasang data suara Bahasa Indonesia</string>
+    <string name="no_interview_history">Anda belum pernah melakukan Interview</string>
     <string name="no_tts_data">Anda tidak memiliki data suara. Silahkan memasang data suara Bahasa Indonesia</string>
     <string name="password_requires_digit">Kata Sandi membutuhkan angka</string>
     <string name="password_requires_min_length">Kata Sandi membutuhkan 8 karakter</string>
@@ -98,6 +104,7 @@
     <string name="password_requires_uppercase">Kata Sandi membutuhkan huruf kapital</string>
     <string name="please_choose">Silahkan pilih</string>
     <string name="prepare_interview_failed">Gagal untuk mempersiapkan sesi. Silahkan coba lagi</string>
+    <string name="question_instruction">Silahkan tuliskan pertanyaan anda</string>
     <string name="question_not_answered">Pertanyaan tidak dijawab. Silahkan mencoba lagi pada sesi baru.</string>
     <string name="record_failed">Gagal memulai perekaman suara. Pastikan tidak ada aplikasi lain yang menggunakan mikrofon</string>
     <string name="register_detail_instruction">Silahkan masukkan informasi tambahan terkait diri anda</string>
@@ -125,4 +132,5 @@
     <string name="source_template">Sumber: %s</string>
     <string name="started_at_template">Waktu: %s</string>
     <string name="tts_status_template">Status TTS: %s</string>
+
 </resources>

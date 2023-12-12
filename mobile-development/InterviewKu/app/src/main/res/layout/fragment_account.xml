@@ -11,6 +11,11 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@mipmap/ic_launcher" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <View
@@ -27,7 +32,7 @@
         android:layout_height="72dp"
         android:layout_marginStart="@dimen/root_padding"
         android:layout_marginTop="@dimen/root_padding"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/baseline_person_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 

@@ -30,22 +30,9 @@ class InterviewFragment : Fragment() {
 
         val context = requireContext()
 
-        binding.clTrainSession.setOnClickListener {
-            context.apply {
-                startActivity(Intent(this, InterviewTrainActivity::class.java))
-            }
-        }
-
-        binding.clTestSession.setOnClickListener {
-            context.apply {
-                startActivity(Intent(this, InterviewTestActivity::class.java))
-            }
-        }
-
         binding.toolbar.apply {
-            setLogo(R.mipmap.ic_launcher_round)
             inflateMenu(R.menu.menu_fragment_interview)
-            binding.toolbar.setOnMenuItemClickListener {
+            setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.menu_fragment_interview_history -> {
                         startActivity(Intent(context, InterviewHistoryActivity::class.java))
@@ -56,6 +43,18 @@ class InterviewFragment : Fragment() {
                         false
                     }
                 }
+            }
+        }
+
+        binding.clTrainSession.setOnClickListener {
+            context.apply {
+                startActivity(Intent(this, InterviewTrainActivity::class.java))
+            }
+        }
+
+        binding.clTestSession.setOnClickListener {
+            context.apply {
+                startActivity(Intent(this, InterviewTestActivity::class.java))
             }
         }
     }

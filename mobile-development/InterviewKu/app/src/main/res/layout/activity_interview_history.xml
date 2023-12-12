@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/root_padding"
-        android:text="@string/no_history"
+        android:text="@string/no_interview_history"
         android:textAlignment="center"
         android:textSize="28sp"
         android:visibility="gone"

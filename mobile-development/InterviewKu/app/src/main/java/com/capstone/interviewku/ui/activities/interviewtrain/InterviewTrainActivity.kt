@@ -127,6 +127,10 @@ class InterviewTrainActivity : AppCompatActivity() {
                 initializeTTS()
             },
             onContinueClick = {
+                if (isTestRecording) {
+                    stopRecording(true)
+                }
+                textToSpeech?.stop()
                 viewModel.startInterviewSession()
             },
             onTTSReinitClick = {
@@ -143,6 +147,7 @@ class InterviewTrainActivity : AppCompatActivity() {
             onMicCheckClick = {
                 if (isTestRecording) {
                     stopRecording(true)
+                    playRecording()
                 } else {
                     startRecording(true)
                 }
@@ -208,6 +213,7 @@ class InterviewTrainActivity : AppCompatActivity() {
 
     private fun initializeTTS() {
         try {
+            interviewInstructionFragment.setTTSStatus(getString(R.string.tts_not_initialized))
             checkTTSDataLauncher.launch(
                 Intent(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA).apply {
                     setPackage(Constants.GOOGLE_TTS_PACKAGE_NAME)
@@ -470,6 +476,15 @@ class InterviewTrainActivity : AppCompatActivity() {
         }
     }
 
+    private fun playRecording() {
+        audioFile?.let {
+            mediaPlayer.reset()
+            mediaPlayer.setDataSource(it.inputStream().fd)
+            mediaPlayer.prepare()
+            mediaPlayer.start()
+        }
+    }
+
     private fun showMicrophonePermissionDialog() {
         val alertDialog = AlertDialog.Builder(this)
             .setCancelable(false)
@@ -540,7 +555,9 @@ class InterviewTrainActivity : AppCompatActivity() {
             ).show()
             e.printStackTrace()
         } finally {
-            interviewInstructionFragment.setIsRecording(isTestRecording)
+            if (isTesting) {
+                interviewInstructionFragment.setIsRecording(isTestRecording)
+            }
         }
     }
 
@@ -552,12 +569,7 @@ class InterviewTrainActivity : AppCompatActivity() {
             }
 
             audioFile?.let {
-                if (isTesting) {
-                    mediaPlayer.reset()
-                    mediaPlayer.setDataSource(it.inputStream().fd)
-                    mediaPlayer.prepare()
-                    mediaPlayer.start()
-                } else {
+                if (!isTesting) {
                     viewModel.setAnswer(it)
                 }
             }

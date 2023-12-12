@@ -3,6 +3,7 @@ package com.capstone.interviewku.ui.activities.chathistory
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityChatbotHistoryBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,5 +18,12 @@ class ChatbotHistoryActivity : AppCompatActivity() {
 
         binding = ActivityChatbotHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setDisplayShowHomeEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+            title = getString(R.string.chatbot_history)
+        }
     }
 }

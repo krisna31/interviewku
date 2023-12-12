@@ -25,5 +25,6 @@ object Constants {
     const val DATE_FORMAT = "dd MMMM yyyy HH:mm"
     const val INDONESIA_LANGUAGE_TAG = "id-ID"
     const val INTERVIEW_PERFORMANCE_COUNT = 7
+    const val SWIPE_REFRESH_LAYOUT_TRIGGER_DISTANCE = 400
     const val TIPS_HOME_COUNT = 10
 }

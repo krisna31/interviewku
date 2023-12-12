@@ -98,17 +98,13 @@ class InterviewTestViewModel @Inject constructor(
             val userDetailResponse = userRepository.getUserIdentity()
             val jobFieldsResponse = jobRepository.getJobFields()
 
-            userDetailResponse.data?.let { userIdentity ->
-                jobFieldsResponse.data?.let { jobFieldsResponseData ->
-                    _prepareInterviewState.value = Result.Success(
-                        JobFieldModel(
-                            userIdentity.jobFieldId ?: -1,
-                            jobFieldsResponseData.jobFields.sortedBy { it.name }
-                        )
+            jobFieldsResponse.data?.let { jobFieldsResponseData ->
+                _prepareInterviewState.value = Result.Success(
+                    JobFieldModel(
+                        userDetailResponse.data?.jobFieldId ?: -1,
+                        jobFieldsResponseData.jobFields.sortedBy { it.name }
                     )
-                } ?: run {
-                    throw Exception()
-                }
+                )
             } ?: run {
                 throw Exception()
             }
