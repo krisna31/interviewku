@@ -372,6 +372,7 @@ class InterviewsService {
           ON th.id = qah.test_history_id
         WHERE th.user_id = $1
         GROUP BY th.id
+        ORDER BY th.created_at DESC
         LIMIT $2 OFFSET $3
       `,
       values: [userId, limit, offset],

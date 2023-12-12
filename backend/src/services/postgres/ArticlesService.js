@@ -8,7 +8,7 @@ class ArticlesService {
 
   async getAllArticles({ limit = 10, offset = 0 }) {
     const query = {
-      text: 'SELECT * FROM articles LIMIT $1 OFFSET $2',
+      text: 'SELECT * FROM articles ORDER BY id DESC LIMIT $1 OFFSET $2',
       values: [limit, offset],
     };
 
