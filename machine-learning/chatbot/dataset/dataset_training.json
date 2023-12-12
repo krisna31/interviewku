@@ -1,0 +1,415 @@
+[
+  {
+    "tag": "unknown",
+    "patterns": [
+      "awd",
+      "tes",
+      "x",
+      "pacar",
+      "umur",
+      "makan",
+      "tidur"
+    ],
+    "responses": [
+      "Mohon maaf, saya tidak mengerti apa yang kamu maksud. Mohon diperjelas ^-^"
+    ]
+  },
+  {
+    "tag": "common_hello",
+    "patterns": [
+      "Hai"
+    ],
+    "responses": [
+      "Haii, ada yang bisa saya bantu?",
+      "Halo! Ada yang bisa saya bantu?",
+      "Ya, ada yang bisa saya bantu?",
+      "Hai! Apa yang dapat saya bantu?",
+      "Hai, saya siap membantu. Ada yang perlu ditanyakan?"
+    ]
+  },
+  {
+    "tag": "common_about",
+    "patterns": [
+      "Siapa kamu?",
+      "apa yang bisa kamu lakukan?",
+      "kamu bisa apa?",
+      "perkenalkan dirimu",
+      "kamu tinggal dimana",
+      "apa pekerjaan kamu?"
+    ],
+    "responses": [
+      "Perkenalkan, saya xx, chat-bot dari InterviewKu yang siap menjawab segala pertanyaan terkait masalah interview yang sedang kamu hadapi!",
+      "Halo! Saya xx, asisten virtual dari InterviewKu. Ada pertanyaan seputar wawancara yang bisa saya bantu jawab?",
+      "Selamat datang! Saya xx, chat-bot yang siap membantu kamu dalam menghadapi tantangan wawancara. Ada yang bisa saya bantu?",
+      "Hai! Nama saya xx, bot dari InterviewKu yang siap memberikan solusi untuk pertanyaan seputar wawancara. Ada yang ingin kamu tanyakan?",
+      "Hello! Saya xx, chat-bot siap membantu dengan segala pertanyaan terkait wawancara. Apakah ada yang perlu saya bantu?"
+    ]
+  },
+  {
+    "tag": "cv_tips",
+    "patterns": [
+      "Bagaimana cara membuat CV yang bagus?",
+      "Apa yang perlu diperhatikan saat membuat CV?",
+      "Tips bikin CV yang menarik?",
+      "Apakah ada saran membuat cv yang bagus?"
+    ],
+    "responses": [
+      "Untuk membuat CV yang bagus, Anda bisa memperhatikan beberapa poin seperti penulisan ringkas, penggunaan bahasa yang jelas, penekanan pada pengalaman relevan, dan tata letak yang bersih dan mudah dibaca.",
+      "Untuk meningkatkan kualitas CV Anda, pastikan untuk menulis secara ringkas dan jelas. Fokuskan pada pengalaman kerja yang relevan dengan pekerjaan yang Anda lamar, sertakan pencapaian yang menonjol, dan gunakan bahasa yang mudah dipahami. Tata letak yang bersih dan terstruktur juga memudahkan pembaca untuk menilai kemampuan dan kualifikasi Anda. Ingatlah bahwa CV adalah representasi pertama dari diri Anda, jadi pastikan untuk mencerminkan profesionalisme dan dedikasi Anda dalam setiap bagian.",
+      "Ketika menyusun CV, penting untuk memberikan penekanan pada keterampilan dan pengalaman yang sesuai dengan posisi yang Anda inginkan. Jelaskan secara singkat bagaimana setiap pengalaman kerja Anda dapat memberikan nilai tambah kepada perusahaan. Gunakan bahasa yang positif dan aktif, dan hindari penggunaan frasa yang terlalu umum. Selain itu, pastikan untuk mencantumkan pendidikan, sertifikasi, dan keterampilan teknis yang relevan. CV yang efektif adalah yang memberikan gambaran komprehensif tentang kualifikasi dan potensi Anda sebagai kandidat yang cocok untuk pekerjaan."
+    ]
+  },
+  {
+    "tag": "interview_tips",
+    "patterns": [
+      "Apa tips yang bisa membantu sebelum wawancara?",
+      "Bagaimana cara mempersiapkan diri sebelum wawancara?",
+      "Saya butuh tips untuk wawancara kerja.",
+      "apa tips interview terbaik yang bisa anda bisa berikan",
+      "Tips wawancara agar diterima oleh perusahaan"
+    ],
+    "responses": [
+      "Beberapa tips sebelum wawancara yang bisa membantu adalah melakukan riset tentang perusahaan, latihan menjawab pertanyaan umum, mempersiapkan pertanyaan untuk pewawancara, dan memastikan penampilan dan sikap yang profesional.",
+      "Persiapkan diri Anda dengan baik sebelum wawancara dengan melakukan riset tentang perusahaan dan posisi yang Anda lamar. Ketahui nilai-nilai perusahaan, proyek-proyek terkini, dan tantangan yang dihadapi. Ini memungkinkan Anda memberikan jawaban yang lebih terfokus dan menunjukkan minat Anda pada perusahaan. Selain itu, latihan menjawab pertanyaan umum wawancara dengan teman atau mentor dapat membantu meningkatkan keterampilan komunikasi dan kepercayaan diri Anda.",
+      "Ciptakan kesan positif selama wawancara dengan memperhatikan penampilan dan sikap. Pakaian yang rapi, kontak mata yang mantap, dan senyuman ramah dapat menciptakan hubungan yang baik dengan pewawancara. Selalu hadir dengan pertanyaan yang menunjukkan minat Anda terhadap perusahaan dan posisi. Berikan jawaban yang jelas dan konkret, tunjukkan kemampuan Anda dengan contoh pengalaman, dan jangan lupa untuk menunjukkan sikap yang ramah dan sopan."
+    ]
+  },
+  {
+    "tag": "interview_personal_weakness",
+    "patterns": [
+      "Bagaimana cara menjawab pertanyaan 'kelemahan Anda' saat wawancara?",
+      "Apa yang sebaiknya dikatakan saat diminta untuk menyebutkan kelemahan dalam wawancara?",
+      "Bagaimana cara menjawab jika ditanya 'apa kelemahanmu' saat wawancara?"
+    ],
+    "responses": [
+      "Saat menjawab pertanyaan tentang kelemahanmu, penting untuk mengakui kelemahan namun juga menunjukkan bagaimana Anda berusaha untuk mengatasinya. Contohnya, Anda bisa menyebutkan kelemahan tetapi menyertakan bagaimana Anda terus belajar dan berkembang untuk mengatasinya.",
+      "Saat ditanya tentang kelemahan, jadilah jujur tetapi tetap positif. Identifikasi kelemahan yang tidak langsung berkaitan dengan pekerjaan yang Anda lamar, dan kemudian jelaskan langkah-langkah yang telah Anda ambil untuk mengatasi atau memperbaikinya. Ini menunjukkan kepada pewawancara bahwa Anda memiliki keterbukaan untuk belajar dan berkomitmen untuk terus berkembang.",
+      "Untuk menjawab pertanyaan tentang kelemahan, hindari memberikan jawaban yang terlalu umum atau klise seperti 'saya terlalu perfeksionis.' Fokuskan pada kelemahan yang dapat diatasi dan tunjukkan bagaimana Anda telah berhasil mengatasi hambatan tersebut. Ini menciptakan kesan bahwa Anda reflektif dan memiliki kemampuan untuk mengubah kelemahan menjadi kekuatan."
+    ]
+  },
+  {
+    "tag": "interview_appearance",
+    "patterns": [
+      "Apa yang sebaiknya diperhatikan terkait penampilan saat wawancara?",
+      "Apa baju atau setelan yang cocok untuk wawancara?",
+      "Pakaian seperti apa yang harus sebaiknya dipakai saat interview?",
+      "Bagaimana berpenampilan yang baik untuk wawancara"
+    ],
+    "responses": [
+      "Penampilan sangatlah penting saat wawancara. Pastikan untuk berpakaian rapi dan sesuai dengan budaya perusahaan yang Anda lamar. Selain itu, jaga sikap dan perilaku agar terlihat profesional dan percaya diri.",
+      "Penampilan fisik Anda memiliki dampak besar selama wawancara. Pastikan untuk berpakaian rapi dan sesuai dengan budaya perusahaan yang Anda lamar. Perhatikan postur tubuh yang tegap, dan tunjukkan sikap yang percaya diri. Penampilan yang profesional memberikan kesan positif kepada pewawancara dan menciptakan lingkungan wawancara yang positif.",
+      "Selama wawancara, pastikan untuk memberikan penampilan yang konsisten dengan budaya perusahaan. Pakaian yang bersih dan rapi, serta rambut dan grooming yang terawat, menciptakan kesan profesional. Selain itu, berikan senyuman yang ramah dan pertahankan kontak mata yang tepat. Penampilan yang baik memberikan kesan bahwa Anda menghargai kesempatan wawancara dan serius dalam mencari pekerjaan."
+    ]
+  },
+  {
+    "tag": "interview_answering_question",
+    "patterns": [
+      "Bagaimana cara memberikan jawaban yang baik saat wawancara?",
+      "Bagaimana cara menjawab pertanyaan wawancara dengan baik."
+    ],
+    "responses": [
+      "Untuk memberikan jawaban yang baik, dengarkan pertanyaan dengan seksama, berikan jawaban yang jelas dan konkret, dan tunjukkan contoh dari pengalaman atau keahlian yang relevan dengan pertanyaan tersebut.",
+      "Untuk memberikan jawaban yang baik, dengarkan pertanyaan dengan seksama sebelum memberikan tanggapan. Berikan jawaban yang jelas dan konkret dengan contoh pengalaman atau keahlian yang relevan dengan pertanyaan tersebut. Hindari jawaban yang terlalu umum dan tetap fokus pada inti dari pertanyaan yang diajukan.",
+      "Ketika menjawab pertanyaan wawancara, pastikan untuk mencerminkan keahlian dan kualifikasi Anda yang paling relevan dengan pekerjaan yang Anda lamar. Sertakan rincian yang memperkuat jawaban Anda dan tunjukkan bagaimana pengalaman Anda sesuai dengan kebutuhan perusahaan. Kesinambungan antara pertanyaan dan jawaban Anda menciptakan narasi yang konsisten dan meyakinkan."
+    ]
+  },
+  {
+    "tag": "interview_followup",
+    "patterns": [
+      "Apakah follow-up setelah wawancara penting?",
+      "Bagaimana cara melakukan follow-up setelah wawancara?"
+    ],
+    "responses": [
+      "Follow-up setelah wawancara bisa memberikan kesan positif tambahan kepada pewawancara. Anda dapat mengirimkan email ucapan terima kasih, menanyakan status proses seleksi, dan menegaskan minat Anda terhadap posisi yang dilamar.",
+      "Setelah wawancara, kirimkan follow-up yang menunjukkan kesan positif dan terima kasih atas kesempatan tersebut. Sampaikan apresiasi Anda terhadap waktu pewawancara dan tambahkan catatan singkat yang menegaskan minat Anda terhadap posisi tersebut. Ini menciptakan kesan profesional dan menunjukkan ketertarikan Anda yang berkelanjutan.",
+      "Pertahankan kesan positif dengan mengirimkan email follow-up setelah wawancara. Ekspresikan rasa terima kasih Anda atas kesempatan tersebut, sampaikan bahwa Anda masih sangat berminat dengan posisi tersebut, dan tanyakan tentang status proses seleksi. Follow-up yang baik dapat memberikan keuntungan tambahan dan menunjukkan dedikasi Anda terhadap posisi tersebut."
+    ]
+  },
+  {
+    "tag": "interview_preparation",
+    "patterns": [
+      "Bagaimana cara mempersiapkan diri sebelum wawancara?",
+      "Saya butuh tips untuk persiapa wawancara kerja.",
+      "saya sulit dalam mempersiapkan diri.",
+      "saya tidak mengetahui apa yang perlu disiapkan.",
+      "apa persiapan yang perlu dilakukan?",
+      "Apa yang biasa dicari oleh HRD?",
+      "Apa yang biasanya ditanyakan oleh HRD?"
+    ],
+    "responses": [
+      "Sebelum wawancara, lakukan riset tentang perusahaan untuk memahami visi, misi, dan budaya perusahaan. Hal ini akan membantu Anda memberikan jawaban yang lebih relevan.",
+      "Persiapkan diri Anda dengan baik sebelum wawancara. Lakukan riset tentang perusahaan, ketahui struktur organisasi, nilai-nilai perusahaan, dan proyek-proyek terkini. Hal ini memungkinkan Anda memberikan jawaban yang lebih terfokus dan menunjukkan minat Anda pada perusahaan. Selain itu, latihan menjawab pertanyaan umum wawancara dengan teman atau mentor dapat membantu meningkatkan keterampilan komunikasi dan kepercayaan diri Anda.",
+      "Sebelum wawancara, pastikan untuk mempersiapkan diri dengan baik. Pelajari sebanyak mungkin tentang perusahaan, pewawancara, dan peran yang Anda lamar. Rancang jawaban untuk pertanyaan umum dan berlatihlah dengan teman atau mentor. Persiapan yang baik membantu Anda merasa lebih percaya diri dan memberikan kesan bahwa Anda serius mengambil kesempatan ini."
+    ]
+  },
+  {
+    "tag": "interview_handling_stress",
+    "patterns": [
+      "Bagaimana cara mengatasi stres setelah wawancara?",
+      "Apa tips untuk menghadapi wawancara yang menegangkan?",
+      "Bagaimana agar diskusi santai dengan HRD",
+      "Bagaimana cara mencairkan suasana dalam diri sendiri.",
+      "Kecemasan dalam diri saat interview, seperti terfikirkan keterima/tidaknya.",
+      "Kurangnya rasa percaya diri.",
+      "Kurangnya pengalaman atau keterampilan yang diminta.",
+      "Cara meningkatkan kelancaran berbicara dalam proses interview."
+    ],
+    "responses": [
+      "Untuk mengatasi stres saat wawancara, penting untuk melakukan latihan pernapasan, fokus pada pertanyaan yang diajukan, dan ingatkan diri bahwa wawancara adalah kesempatan untuk menunjukkan kemampuan Anda.",
+      "Untuk mengatasi stres saat wawancara, lakukan latihan pernapasan sebelumnya untuk menenangkan diri. Fokus pada pertanyaan yang diajukan dan ingatkan diri bahwa wawancara adalah kesempatan untuk menunjukkan kemampuan Anda. Sikap positif dapat membantu mengurangi stres, jadi lihat wawancara sebagai kesempatan positif.",
+      "Atasi stres saat wawancara dengan fokus pada pernapasan yang tenang dan teknik relaksasi. Ingatkan diri bahwa wawancara adalah peluang untuk menunjukkan kemampuan Anda, dan lihat stres sebagai reaksi alami yang dapat diatasi. Persiapkan diri Anda sebaik mungkin dan percayalah pada kemampuan Anda."
+    ]
+  },
+  {
+    "tag": "interview_handling_nervous",
+    "patterns": [
+      "Bagaimana cara mengatasi gugup saat wawancara?",
+      "Apa tips jika gagap atau tidak lancar berbicara saat berbicara?",
+      "Saya gugup saat melakukan sesi interview.",
+      "cara mengatasi rasa cemas saat diwawancarai.",
+      "saya belum pernah merasakan situasi seperti interview dan membuat saya gugup.",
+      "Saya merasa gugup dan tidak fokus saat interview",
+      "saya kurang fokus dalam memahami pertanyaan yang akan diajukan",
+      "saya minim latihan interview yang membuat merasa gugup dan tidak dapat menjawab pertanyaan",
+      "Cara agar tidak ngeblank saat ditanya oleh HRD saat wawancara.",
+      "Tips mengatasi kegugupan saat wawancara.",
+      "bagaimana Cara agar tidak grogi saat interview"
+    ],
+    "responses": [
+      "Untuk mengatasi gugup atau cemas saat wawancara, penting untuk melakukan latihan pernapasan, fokus pada pertanyaan yang diajukan, dan ingatkan diri bahwa wawancara adalah kesempatan untuk menunjukkan kemampuan Anda.",
+      "Jika Anda merasa gugup, berikan diri Anda sedikit waktu untuk bernapas dan mengatasi kecemasan. Ingatkan diri bahwa gugup adalah reaksi alami dan dapat diatasi. Fokus pada pertanyaan yang diajukan dan berikan jawaban dengan tenang dan jelas.",
+      "Atasi rasa gugup dengan melakukan latihan pernapasan dan memusatkan perhatian pada pertanyaan yang diajukan. Ingatlah bahwa gugup adalah sesuatu yang dialami banyak orang dan dapat diatasi dengan pengalaman. Tunjukkan sikap profesional dan percaya diri selama wawancara."
+    ]
+  },
+  {
+    "tag": "interview_closing",
+    "patterns": [
+      "Apakah penting memiliki closing statement dalam wawancara?",
+      "Bagaimana cara membuat closing statement yang efektif?",
+      "Bagaimana melakukan closing statement yang sopan?"
+    ],
+    "responses": [
+      "Terkait closing statement, gunakan kesempatan akhir ini untuk meninggalkan kesan yang baik. Sampaikan kesan terima kasih, tanyakan tentang langkah selanjutnya, dan pastikan pewawancara memiliki pemahaman yang kuat tentang mengapa Anda cocok untuk posisi tersebut.",
+      "Sampaikan closing statement yang kuat untuk meninggalkan kesan yang positif. Sampaikan rasa terima kasih atas kesempatan wawancara, tanyakan tentang langkah selanjutnya, dan reiterasikan minat Anda terhadap posisi tersebut. Ini menciptakan kesan profesional dan menunjukkan keseriusan Anda terhadap peran yang Anda lamar.",
+      "Akhiri wawancara dengan closing statement yang mencerminkan apresiasi Anda atas kesempatan tersebut. Sampaikan kesan terima kasih, tanyakan tentang proses seleksi berikutnya, dan sampaikan keyakinan Anda bahwa Anda akan menjadi aset berharga bagi perusahaan. Tutup dengan senyuman dan sikap yang percaya diri."
+    ]
+  },
+  {
+    "tag": "Random_Question_1",
+    "patterns": [
+      "Bagaimana cara menjawab pertanyaan 'ceritakan tentang diri Anda'?",
+      "cara menjawab pertanyaan 'ceritakan tentang diri Anda' dalam wawancara.",
+      "Bagaimana cara memperkenalkan diri yang baik dan benar",
+      "Bagaimana perkenalan diri yang baik dan sopan"
+    ],
+    "responses": [
+      "Untuk memperkenalkan diri dengan baik, fokuslah pada pengalaman dan keterampilan yang relevan dengan pekerjaan yang dilamar. Ceritakan secara singkat tentang latar belakang, pendidikan, pengalaman kerja, dan bagaimana itu terkait dengan pekerjaan yang diinginkan.",
+      "Pertahankan fokus pada pertanyaan ini dengan memberikan contoh konkret yang menunjukkan kemampuan dan kualifikasi Anda. Hindari memberikan informasi yang tidak relevan dan berikan jawaban yang singkat dan informatif. Tunjukkan keterkaitan langsung antara pengalaman Anda dan kebutuhan perusahaan."
+    ]
+  },
+  {
+    "tag": "interview_reschedule",
+    "patterns": [
+      "Bagaimana cara meyakinkan perekrut untuk mereschedule wawancara?",
+      "Apa yang sebaiknya dilakukan jika tidak bisa hadir dalam jadwal wawancara yang sudah ditetapkan?"
+    ],
+    "responses": [
+      "Jika perlu mereschedule, berikan pemberitahuan secepatnya. Sampaikan alasan yang jelas dan minta maaf atas ketidaknyamanan yang ditimbulkan. Ajukan opsi lain untuk jadwal yang dapat diterima oleh kedua belah pihak.",
+      "Jika perlu mereschedule wawancara, berikan pemberitahuan secepatnya. Sampaikan alasan yang jelas, seperti keadaan darurat atau konflik jadwal yang tidak terduga. Mintalah maaf atas ketidaknyamanan yang mungkin ditimbulkan dan ajukan opsi lain untuk jadwal yang dapat diterima oleh kedua belah pihak.",
+      "Jika Anda perlu mereschedule wawancara, berikan pemberitahuan sesegera mungkin. Sampaikan alasan yang jelas dan minta maaf atas ketidaknyamanan yang mungkin ditimbulkan. Ajukan opsi jadwal alternatif yang dapat diterima oleh pewawancara untuk memudahkan proses reschedule."
+    ]
+  },
+  {
+    "tag": "post_interview_thankyou",
+    "patterns": [
+      "Apakah penting mengirimkan ucapan terima kasih setelah wawancara?",
+      "Bagaimana cara yang tepat untuk mengirimkan ucapan terima kasih setelah wawancara?"
+    ],
+    "responses": [
+      "Mengirimkan ucapan terima kasih setelah wawancara dapat meninggalkan kesan positif tambahan. Kirimkan email atau surat ucapan terima kasih, sampaikan apresiasi atas kesempatan wawancara, dan reiterasikan minat Anda terhadap posisi tersebut. Ini menunjukkan kesopanan dan profesionalisme Anda.",
+      "Sampaikan rasa terima kasih Anda setelah wawancara melalui email atau surat. Ekspresikan apresiasi Anda atas waktu dan kesempatan tersebut, dan sampaikan keyakinan Anda bahwa Anda akan menjadi aset berharga bagi perusahaan. Ini menciptakan kesan positif tambahan."
+    ]
+  },
+  {
+    "tag": "interview_tricky_question",
+    "patterns": [
+      "Bagaimana cara menangani pertanyaan wawancara yang sulit?",
+      "Apa yang sebaiknya dilakukan jika mendapatkan pertanyaan yang sulit saat wawancara?"
+    ],
+    "responses": [
+      "Saat mendapat pertanyaan sulit, jangan panik. Berikan diri Anda sedikit waktu untuk berpikir, jelaskan proses berpikir Anda, dan fokuskan jawaban pada pembelajaran atau cara Anda menghadapi situasi sulit sebelumnya.",
+      "Saat dihadapkan pada pertanyaan sulit, jangan panik. Berikan diri Anda sedikit waktu untuk berpikir, jelaskan proses berpikir Anda, dan fokuskan jawaban pada pembelajaran atau cara Anda menghadapi situasi sulit sebelumnya.",
+      "Atasi pertanyaan sulit dengan sikap tenang dan pertimbangkan jawaban Anda dengan hati-hati. Fokus pada pengalaman atau keterampilan yang relevan dengan pertanyaan tersebut. Jangan ragu untuk meminta klarifikasi jika diperlukan."
+    ]
+  },
+  {
+    "tag": "company_research",
+    "patterns": [
+      "Mengapa penting melakukan riset tentang perusahaan sebelum wawancara?",
+      "Apa yang perlu diketahui tentang perusahaan sebelum wawancara?",
+      "Cara mencari tahu visi misi perusahaan?",
+      "Cara mengetahui Perusahaan tersebut bergerak dibidang apa?",
+      "Bagaimana Mencari tahu Latar belakang perusahaan?",
+      "Cara mengetahui Profile perusahaan, perkembangan, dan kabar terkini bidang industrinya?",
+      "Cara melihat informasi terkait perusahaan yang ingin dilamar"
+    ],
+    "responses": [
+      "Riset tentang perusahaan membantu Anda memahami budaya, nilai, dan visi perusahaan. Hal ini memungkinkan Anda untuk menyesuaikan jawaban Anda dengan nilai perusahaan, dan menunjukkan minat serta keseriusan Anda terhadap posisi yang dilamar.",
+      "Sebelum wawancara, lakukan riset tentang perusahaan untuk memahami budaya, nilai, dan visi perusahaan. Tinjau situs web perusahaan, baca berita terbaru, dan cari informasi tentang proyek-proyek atau inisiatif terkini. Pahami struktur organisasi dan identifikasi nilai-nilai perusahaan yang sejalan dengan nilai pribadi Anda. Riset yang mendalam memungkinkan Anda memberikan jawaban yang lebih terfokus dan menunjukkan minat serta keseriusan Anda terhadap posisi yang dilamar.",
+      "Untuk meningkatkan pemahaman Anda tentang perusahaan, lakukan riset yang mendalam sebelum wawancara. Pelajari sejarah perusahaan, tujuan, dan nilai-nilai inti. Baca publikasi atau berita terbaru yang melibatkan perusahaan tersebut. Riset yang baik memungkinkan Anda untuk menyesuaikan jawaban Anda dengan nilai perusahaan dan menunjukkan minat Anda pada perusahaan tersebut."
+    ]
+  },
+  {
+    "tag": "interview_body_language",
+    "patterns": [
+      "Bagaimana cara menunjukkan bahasa tubuh yang baik saat wawancara?",
+      "Apakah penting menunjukkan bahasa tubuh yang positif saat wawancara?",
+      "cara menunjukan gestur tubuh yang baik saat wawancara"
+    ],
+    "responses": [
+      "Bahasa tubuh dapat memberikan kesan yang kuat. Pastikan untuk menjaga kontak mata, postur tubuh yang tegap, dan tunjukkan ekspresi wajah yang ramah dan percaya diri selama wawancara.",
+      "Selama wawancara, berikan perhatian khusus pada bahasa tubuh Anda. Pastikan untuk menjaga kontak mata secara konsisten untuk menunjukkan ketertarikan dan kepercayaan diri. Pertahankan postur tubuh yang tegap untuk menciptakan kesan profesional dan percaya diri. Gunakan ekspresi wajah yang ramah dan senyuman untuk menciptakan suasana yang positif selama wawancara.",
+      "Bahasa tubuh Anda memiliki dampak besar selama wawancara. Pastikan untuk menjaga kontak mata, postur tubuh yang tegap, dan ekspresi wajah yang ramah. Hindari gerakan yang terlalu berlebihan atau terlalu minimal. Bahasa tubuh yang positif menciptakan kesan profesional dan dapat meningkatkan kesan yang Anda tinggalkan pada pewawancara."
+    ]
+  },
+  {
+    "tag": "interview_preparation_online",
+    "patterns": [
+      "Cara mempersiapkan diri untuk wawancara online?",
+      "Apa yang perlu diperhatikan saat wawancara online?",
+      "Apa yang perlu dipersiapkan sebelum wawancara online?"
+    ],
+    "responses": [
+      "Untuk wawancara remote, pastikan koneksi internet yang stabil, lingkungan yang tenang, dan pencahayaan yang baik. Gunakan platform yang diberikan dengan baik, dan pastikan untuk memperhatikan penampilan dan sikap yang profesional.",
+      "Persiapkan wawancara remote dengan memastikan koneksi internet yang stabil dan perangkat yang berfungsi baik. Pilih lokasi yang tenang dan hindari latar belakang yang mengganggu. Pastikan Anda terlihat dan terdengar dengan baik, dan uji semua perangkat sebelum wawancara. Penampilan dan sikap yang profesional tetap penting, meskipun Anda berada di lingkungan remote."
+    ]
+  },
+  {
+    "tag": "interview_asking_HRD",
+    "patterns": [
+      "Apakah saya boleh bertanya pada pewawancara atau HRD?",
+      "Apakah bertanya diperbolehkan dalam wawancara?"
+    ],
+    "responses": [
+      "Pertanyaan yang Anda ajukan kepada pewawancara mencerminkan minat dan pengetahuan Anda tentang perusahaan. Pilih pertanyaan yang menunjukkan bahwa Anda telah melakukan riset, seperti pertanyaan tentang budaya perusahaan, peluang pengembangan, atau proyek-proyek terkini. Hindari pertanyaan yang informasinya sudah dapat ditemukan secara umum dan tunjukkan bahwa Anda serius tentang peran tersebut.",
+      "Saat memilih pertanyaan untuk pewawancara, pertimbangkan untuk menanyakan tentang aspek-aspek spesifik dari perusahaan yang menarik bagi Anda. Pertanyaan tentang budaya perusahaan, peluang pengembangan, atau proyek-proyek terkini dapat menunjukkan minat Anda pada posisi tersebut dan dedikasi Anda untuk berkontribusi. Hindari pertanyaan yang informasinya sudah tersedia secara umum."
+    ]
+  },
+  {
+    "tag": "salary_question",
+    "patterns": [
+      "Bagaimana cara menjawab saat ditanyakan gaji yang diminta?",
+      "Bagaimana cara menjawab pertanyaan tentang gaji yang diharapkan atau diinginkan?",
+      "Beritahu saya cara melakukan negosisasi Gaji yang benar",
+      "Saya ingin mengetahui tentang gaji yang akan didapat"
+    ],
+    "responses": [
+      "Saat ditanya tentang gaji, lakukan riset tentang kisaran gaji yang umum untuk posisi tersebut. Jelaskan bahwa Anda menghargai nilai diri Anda dan mencari kompensasi yang sebanding dengan keterampilan dan pengalaman Anda. Berikan ruang untuk bernegosiasi dan pastikan untuk menyampaikan keinginan Anda secara jelas dan tegas.",
+      "Sebelum menjawab pertanyaan tentang gaji, lakukan riset untuk mengetahui kisaran gaji yang wajar untuk posisi tersebut. Sampaikan bahwa Anda menghargai nilai diri Anda dan ingin mendapatkan kompensasi yang sejalan dengan keterampilan dan pengalaman Anda. Bersiaplah untuk bernegosiasi dan berikan kesan bahwa Anda tahu nilai Anda sebagai seorang profesional."
+    ]
+  },
+  {
+    "tag": "salary_additional_question",
+    "patterns": [
+      "bagaimana mengetahui apakah dapat Tunjangan atau tidak",
+      "cara bertanya yang baik untuk mengetahui apakah akan ada tunjangan gaji",
+      "cara tau apakah perusahaan memberikan tunjangan gaji"
+    ],
+    "responses": [
+      "Aturan terkait tunjangan gaji dapat bervariasi di setiap perusahaan. Saya sarankan Anda untuk bertanya kepada HR atau atasan langsung Anda untuk mendapatkan informasi terperinci mengenai tunjangan gaji yang mungkin Anda dapatkan.",
+      "Ada baiknya menanyakan kepada pihak HR perusahaan terkait kebijakan tunjangan gaji. Biasanya, informasi tersebut dapat diperoleh melalui diskusi langsung dengan tim HR atau melalui dokumen kebijakan internal perusahaan.",
+      "Aturan terkait tunjangan gaji dapat bervariasi di setiap perusahaan. Saya sarankan Anda untuk bertanya kepada HR atau atasan langsung Anda untuk mendapatkan informasi terperinci mengenai tunjangan gaji yang mungkin Anda dapatkan."
+    ]
+  },
+  {
+    "tag": "salary_negotiation",
+    "patterns": [
+      "Bagaimana cara bernegosiasi gaji setelah wawancara?",
+      "Bagaimana cara melakukan negosiasi gaji yang baik",
+      "Cara untuk melakukan negosisasi gaji dengan sopan",
+      "Bagaimana cara negosisasi gaji dengan baik dan benar",
+      "Bagaimana cara menanyakan tentang gaji yang akan diterima."
+    ],
+    "responses": [
+      "Bernegosiasi gaji adalah hal yang umum. Lakukan riset tentang kisaran gaji yang sesuai dengan posisi dan pengalaman Anda. Sampaikan secara jelas keinginan Anda, tetapi berikan ruang untuk bernegosiasi.",
+      "Saat bernegosiasi gaji, tetaplah fleksibel namun jelas tentang nilai Anda. Gunakan data riset Anda untuk mendukung permintaan Anda dan pertimbangkan manfaat tambahan yang dapat disepakati. Jangan ragu untuk bertanya tentang peluang kenaikan gaji di masa mendatang dan pastikan kesepakatan akhir mencerminkan nilai dan kontribusi Anda.",
+      "Negosiasi gaji adalah proses saling memberikan dan menerima. Tetaplah fleksibel dan buka untuk diskusi, namun tetap jelas tentang nilai Anda. Gunakan data riset sebagai dasar untuk permintaan Anda dan pertimbangkan opsi manfaat tambahan. Pastikan kesepakatan akhir mencerminkan nilai dan kontribusi Anda sebagai seorang profesional."
+    ]
+  },
+  {
+    "tag": "job_vacancy",
+    "patterns": [
+      "Apakah ada saran tempat mencari lowongan kerja?",
+      "Apakah ada saran web atau platform untuk mencari lowongan kerja?",
+      "Saya kesulitan dalam mencari tempat kerja"
+    ],
+    "responses": [
+      "Terkait lowongan kerja, coba eksplorasi situs web seperti LinkedIn, Indeed, dan Glassdoor. Sesuaikan pencarian dengan keahlian dan minat Anda.",
+      "Temukan lowongan pekerjaan yang sesuai dengan keahlian dan minat Anda dengan menjelajahi situs web pencarian pekerjaan populer seperti LinkedIn, Indeed, dan Glassdoor. Sesuaikan pencarian Anda dengan filter yang relevan, seperti lokasi, jenis pekerjaan, dan tingkat pengalaman. Berlangganan notifikasi lowongan pekerjaan untuk mendapatkan pembaruan terbaru secara langsung.",
+      "Explorasi lowongan kerja dengan menggunakan situs web pencarian pekerjaan seperti LinkedIn, Indeed, dan Glassdoor. Sesuaikan pencarian Anda dengan keahlian dan minat Anda, dan aktifkan notifikasi untuk mendapatkan pembaruan langsung tentang lowongan terbaru. Jangan ragu untuk menjelajahi situs web perusahaan secara langsung dan memanfaatkan jaringan profesional Anda untuk informasi tambahan."
+    ]
+  },
+  {
+    "tag": "portofolio",
+    "patterns": [
+      "Apa yang sebaiknya dimasukkan dalam portfolio untuk wawancara?",
+      "Portofolio seperti apa yang menarik?",
+      "Bagaimana cara membuat portofolio yang menarik?"
+    ],
+    "responses": [
+      "Portfolio adalah alat yang baik untuk menunjukkan karya atau proyek Anda. Sertakan proyek yang relevan, dokumentasi yang jelas, dan ceritakan bagaimana Anda berkontribusi dalam setiap proyek tersebut.",
+      "Susun portfolio Anda dengan hati-hati, sertakan proyek-proyek atau karya yang menonjol. Berikan deskripsi singkat tentang setiap proyek, termasuk peran Anda, teknologi yang digunakan, dan hasil yang dicapai. Pastikan portfolio Anda mudah diakses dan dapat dibagikan secara elektronik. Gunakan kesempatan ini untuk menunjukkan keterampilan dan kreativitas Anda kepada pewawancara.",
+      "Menyusun portfolio yang efektif melibatkan penyeleksian proyek-proyek atau karya yang menonjol. Berikan konteks singkat untuk setiap proyek, sertakan peran Anda, teknologi yang digunakan, dan hasil yang dicapai. Pastikan portfolio dapat diakses dengan mudah, baik secara elektronik maupun fisik. Ini adalah peluang untuk menonjolkan keterampilan dan prestasi Anda."
+    ]
+  },
+  {
+    "tag": "personal_presentation_skill",
+    "patterns": [
+      "Apa yang sebaiknya dilakukan untuk meningkatkan keterampilan presentasi sebelum wawancara?",
+      "Bagaimana cara meningkatkan kemampuan presentasi untuk wawancara?"
+    ],
+    "responses": [
+      "Untuk meningkatkan keterampilan presentasi, latihan adalah kunci. Latihan presentasi tentang diri Anda, keterampilan Anda, dan pengalaman Anda sehingga dapat menyampaikannya dengan percaya diri dan jelas.",
+      "Untuk meningkatkan keterampilan presentasi, lakukan latihan secara teratur. Berlatihlah menyampaikan presentasi tentang diri Anda, keterampilan Anda, dan pengalaman Anda. Rekam diri Anda atau minta umpan balik dari teman atau mentor untuk perbaikan lebih lanjut. Fokus pada artikulasi, postur tubuh, dan interaksi dengan audiens.",
+      "Meningkatkan keterampilan presentasi memerlukan latihan terus-menerus. Berlatihlah menyampaikan presentasi tentang diri Anda, keterampilan Anda, dan pengalaman Anda. Rekam presentasi Anda atau minta umpan balik dari orang lain untuk mendapatkan perspektif eksternal. Fokus pada artikulasi, postur tubuh, dan kemampuan berkomunikasi dengan jelas."
+    ]
+  },
+  {
+    "tag": "personal_handling_common_mistakes",
+    "patterns": [
+      "Apa kesalahan umum yang sebaiknya dihindari dalam wawancara?",
+      "Bagaimana cara menghindari kesalahan umum yang sering terjadi saat wawancara?",
+      "cara agar tidak melakukan kesalahan umum saat wawancara"
+    ],
+    "responses": [
+      "Terkait kesalahan umum yang biasanya terjadi yaitu terlambat datang, kurangnya pengetahuan tentang perusahaan, jawaban yang terlalu umum, dan sikap yang tidak profesional. Persiapkan diri sebaik mungkin dan berikan kesan yang baik kepada pewawancara.",
+      "Hindari kesalahan umum selama wawancara, seperti terlambat datang, kurangnya pengetahuan tentang perusahaan, jawaban yang terlalu umum, dan sikap yang tidak profesional. Persiapkan diri sebaik mungkin dengan latihan menjawab pertanyaan umum, riset perusahaan, dan penampilan yang baik. Kesalahan kecil dapat memiliki dampak besar, jadi pastikan untuk memberikan kesan yang baik kepada pewawancara.",
+      "Persiapkan diri Anda dengan baik untuk menghindari kesalahan umum selama wawancara. Jangan terlambat datang, lakukan riset tentang perusahaan, hindari jawaban yang terlalu umum, dan pertahankan sikap yang profesional. Kesalahan kecil dapat memberikan kesan yang buruk, jadi pastikan Anda memberikan kesan yang positif dan terpercaya."
+    ]
+  },
+  {
+    "tag": "personal_prework_problem",
+    "patterns": [
+      "saya kesulitan mencari Pekerjaan yang sesuai dengan jurusan kuliah.",
+      "saya kurang dalam pengalaman bekerja.",
+      "lowongan yang saya lamar, memiliki Jumlah pelamar yang terlalu banyak."
+    ],
+    "responses": [
+      "Untuk mengatasi kesulitan seperti mencari pekerjaan berdasarkan jurusan kuliah, kurangnya pengalaman, kurangnya skill, jumlah saingan pelamar yang banyak, kamu dapat melakukan pengembangan diri seperti mengikuti organisasi, bootcamp, magang, dan lain-lain agar skill yang kamu miliki lebih menonjol dari yang lain sehingga peluang bekerja lebih tinggi.",
+      "Untuk mengatasi kesulitan dalam mencari pekerjaan berdasarkan jurusan kuliah, kurangnya pengalaman, dan persaingan yang ketat, Anda bisa mengembangkan diri melalui bergabung dalam organisasi, mengikuti bootcamp, atau magang. Dengan meningkatkan keterampilan, Anda bisa menonjol di antara pelamar lain dan meningkatkan peluang mendapatkan pekerjaan."
+    ]
+  },
+  {
+    "tag": "personal_rejected",
+    "patterns": [
+      "CV saya sudah bagus, namun seringkali ditolak",
+      "cara agar tidak ditolak perusahaan",
+      "bagaimana cara agar meningkatkan kemungkinan tidak ditolak oleh perusahaan"
+    ],
+    "responses": [
+      "Selain penilaian CV, ada faktor lain yang memengaruhi keputusan perusahaan. Pertimbangkan untuk meningkatkan keterampilan yang relevan dengan posisi yang Anda lamar atau mencari pengalaman tambahan melalui magang atau proyek sukarela.",
+      "Terlepas dari CV atau portofolio yang bagus, penting untuk mempersiapkan diri dengan baik untuk wawancara. Latihan wawancara, pengetahuan yang kuat tentang perusahaan yang Anda lamar, dan kemampuan untuk menunjukkan nilai-nilai Anda secara jelas dapat sangat meningkatkan kesempatan Anda.",
+      "Pertimbangkan untuk mendapatkan umpan balik dari orang-orang yang berpengalaman atau profesional di industri yang sama. Mereka mungkin dapat memberikan saran yang berharga untuk meningkatkan CV atau mempersiapkan diri lebih baik untuk proses seleksi."
+    ]
+  }
+]

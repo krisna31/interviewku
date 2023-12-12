@@ -4,25 +4,33 @@ const handler = tf.io.fileSystem('./model/model.json');
 const model = tf.loadLayersModel(handler);
 const tokenizerJson = fs.readFileSync('../tokenizer_dict_chatbot.json', 'utf8');
 const tokenizer = JSON.parse(tokenizerJson);
-const tagsClassJson = fs.readFileSync('../chatbot_result_decoder.json', 'utf8');
+const tagsClassJson = fs.readFileSync('../result_decoder.json', 'utf8');
 const tagsClass = JSON.parse(tagsClassJson);
-const responsesJson = fs.readFileSync('../responses_chatbot.json', 'utf8');
-const responses = JSON.parse(responsesJson);
+const datasetJson = fs.readFileSync('../dataset/dataset_training.json', 'utf8');
+const dataset = JSON.parse(datasetJson);
 
 
+const blacklist_word = ['saya']
 const replace_words = [
-  ['online', ['daring', 'remote']],
-  ['meeting', ['gmeet', 'zoom']],
-  ['persiapan', ['persiapkan', 'disiapkan', 'dipersiapkan']],
-  ['cv', ['curiculum vitae', 'resume']],
-  ['penutup', ['closing statement']],
-  ['mereschedule', ['jadwal ulang', 'menjadwalkan ulang', 'mengubah jadwal', 'merubah jadwal', 'pindah jadwal']],
-  ['pewawancara', ['hrd']],
-  ['bagus', ['menarik', 'keren', 'tepat']],
-  ['kesalahan umum', ['kesalahan kecil']],
-  ['saran', ['tips']],
-  ['pakaian', ['baju', 'setelan', 'kostum']]
-];
+    ['wawancara', ['interview']],
+    ['online', ['daring', 'remote']],
+    ['meeting', ['gmeet', 'zoom']],
+    ['persiapan',['persiapkan', 'disiapkan','dipersiapkan']],
+    ['cv', ['curiculum vitae', 'resume']],
+    ['penutup', ['closing statement']],
+    ['mereschedule', ['jadwal ulang', 'menjadwalkan ulang', 'mengubah jadwal', 'merubah jadwal', 'pindah jadwal']],
+    ['pewawancara', ['hrd', 'recruiter', 'interviewer', 'hr']],
+    ['bagus', ['menarik', 'keren', 'tepat']],
+    ['kesalahan umum', ['kesalahan kecil']],
+    ['pakaian', ['baju', 'setelan', 'kostum', 'berpenampilan']],
+    ['stres', ['stress']],
+    ['bahasa tubuh', ['gestur', 'gerak tubuh', 'postur']],
+    ['kurang', ['minim']],
+    ['gugup', ['terbatabata', 'gagap', 'grogi']],
+    ['saat', ['dalam proses']],
+    ['pekerjaan', ['job']],
+    ['hai', ['hello', 'hy', 'helo', 'halo', 'hay', 'p']]
+]
 
 function preprocessingText(sentence) {
   const filteredWords = sentence.toLowerCase().replace(/[^\w\d\s]/g, '');
@@ -30,6 +38,7 @@ function preprocessingText(sentence) {
 
   const cleanedWords = [];
   for (let word of words) {
+    if (blacklist_word.includes(word)) continue;
     let replaced = false;
     for (let [replacement, target] of replace_words) {
       if (target.includes(word)) {
@@ -86,18 +95,17 @@ async function predictText(answer) {
     model.then(function (res) {
       // preprocessing text
       const processedText = preprocessingText(answer);
-      const tokenizedText = tokenize(processedText, 13);
+      const tokenizedText = tokenize(processedText, 10);
 
       // predict text
       const predictResult = res.predict(tf.tensor2d(tokenizedText));
       const tagResultSequence = predictResult.argMax(-1).arraySync()[0];
       const tagResult = getKeyByValue(tagsClass, tagResultSequence);
 
-      const resultList = responses[tagResult];
-      const randomIndex = Math.floor(Math.random() * resultList.length);
-      const result = resultList[randomIndex];
+      const repsonses = dataset.filter(d => d.tag === tagResult)[0].responses;
+      const response = repsonses[Math.floor(Math.random() * repsonses.length)];
 
-      resolve(result);
+      resolve(response);
     }).catch(function (err) {
       reject(err);
     });
@@ -105,7 +113,7 @@ async function predictText(answer) {
 }
 
 const main = async () => {
-  const result = await predictText('apa yang harus disiapkan sebelum melakukan wawancara');
+  const result = await predictText('hai');
   console.log(result);
 }
 

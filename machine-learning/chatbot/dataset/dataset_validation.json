@@ -1,0 +1,193 @@
+[
+  {
+    "tag": "unknown",
+    "patterns": [
+      "gugu gaga"
+    ]
+  },
+  {
+    "tag": "common_hello",
+    "patterns": [
+      "hai",
+      "p"
+    ]
+  },
+  {
+    "tag": "common_about",
+    "patterns": [
+      "siapa kamu?"
+    ]
+  },
+  {
+    "tag": "cv_tips",
+    "patterns": [
+      "Bagaimana cara membuat cv yang menarik",
+      "bagaimana cara untuk memperbaiki CV agar terlihat bagus"
+    ]
+  },
+  {
+    "tag": "interview_tips",
+    "patterns": [
+      "apakah ada tips sebelum melakukan wawancara",
+      "apa tips interview terbaik yang anda bisa berikan ke saya"
+    ]
+  },
+  {
+    "tag": "interview_personal_weakness",
+    "patterns": [
+      "bagaimana cara menjawab saat ditanyakan 'apa kelemahanmu?'"
+    ]
+  },
+  {
+    "tag": "interview_appearance",
+    "patterns": [
+      "saran baju yang cocok untuk wawancara",
+      "pakaian apa yang harus saya pakai saat interview",
+      "bagaimana berpenampilan yang baik untuk wawancara"
+    ]
+  },
+  {
+    "tag": "interview_answering_question",
+    "patterns": [
+      "bagaimana cara menjawab pertanyaan dengan baik saat wawancara"
+    ]
+  },
+  {
+    "tag": "interview_followup",
+    "patterns": [
+      "cara melakukan follow-up setelah wawancara"
+    ]
+  },
+  {
+    "tag": "interview_preparation",
+    "patterns": [
+      "apa saja yang perlu disiapkan sebelum wawancara"
+    ]
+  },
+  {
+    "tag": "interview_handling_stress",
+    "patterns": [
+      "bagaimana cara mengatasi stress sebelum wawancara"
+    ]
+  },
+  {
+    "tag": "interview_handling_nervous",
+    "patterns": [
+      "bagaimana cara mengatasi gugup saat wawancara"
+    ]
+  },
+  {
+    "tag": "interview_closing",
+    "patterns": [
+      "bagaimana cara menutup sesi wawancara yang bagus"
+    ]
+  },
+  {
+    "tag": "Random_Question_1",
+    "patterns": [
+      "bagaimana cara menjawab jika ditanya 'ceritakan tentang diri Anda'",
+      "bagaimana cara memperkenalkan diri yang baik dan benar"
+    ]
+  },
+  {
+    "tag": "interview_reschedule",
+    "patterns": [
+      "bagaimana cara bertanya yang baik jika ingin mengubah jadwal wawancara"
+    ]
+  },
+  {
+    "tag": "post_interview_thankyou",
+    "patterns": [
+      "bagaimana cara berterima kasih setelah wawancara"
+    ]
+  },
+  {
+    "tag": "interview_tricky_question",
+    "patterns": [
+      "bagaimana cara menjawab pertanyaan yang sulit dengan baik"
+    ]
+  },
+  {
+    "tag": "company_research",
+    "patterns": [
+      "apa yang perlu diketahui tentang perusahaan sebelum wawancara",
+      "cara melihat informasi tentang perusahaan yang ingin dilamar"
+    ]
+  },
+  {
+    "tag": "interview_body_language",
+    "patterns": [
+      "bagaimana bahasa tubuh yang baik saat wawancara"
+    ]
+  },
+  {
+    "tag": "interview_preparation_online",
+    "patterns": [
+      "apa yang perlu dipersiapkan sebelum wawancara online"
+    ]
+  },
+  {
+    "tag": "interview_asking_HRD",
+    "patterns": [
+      "apakah boleh bertanya kepada HRD"
+    ]
+  },
+  {
+    "tag": "salary_question",
+    "patterns": [
+      "bagaimana cara menjawab yang baik saat ditanyakan gaji yang diinginkan",
+      "cara menjawab saat ditanya ingin gaji berapa",
+      "cara menjawab saat ditanyakan gaji yang diminta"
+    ]
+  },
+  {
+    "tag": "salary_additional_question",
+    "patterns": [
+      "bagaimana cara bernegosiasi gaji yang baik",
+      "cara untuk negosisasi gaji dengan baik dan benar"
+    ]
+  },
+  {
+    "tag": "salary_negotiation",
+    "patterns": [
+      "cara tau apakah perusahaan memberikan tunjangan gaji"
+    ]
+  },
+  {
+    "tag": "job_vacancy",
+    "patterns": [
+      "saran tempat mencari lowongan kerja"
+    ]
+  },
+  {
+    "tag": "portofolio",
+    "patterns": [
+      "bagaimana cara membuat portofolio yang menarik",
+      "cara agar portofolio terlihat menarik"
+    ]
+  },
+  {
+    "tag": "personal_presentation_skill",
+    "patterns": [
+      "bagaimana cara meningkatkan keterampilan presentasi saat wawancara"
+    ]
+  },
+  {
+    "tag": "personal_handling_common_mistakes",
+    "patterns": [
+      "bagaimana cara menghindari kesalahan umum dalam wawancara"
+    ]
+  },
+  {
+    "tag": "personal_prework_problem",
+    "patterns": [
+      "kesulitan dalam mencari pekerjaan yang sesuai dengan jurusan kuliah"
+    ]
+  },
+  {
+    "tag": "personal_rejected",
+    "patterns": [
+      "Cara agar tidak ditolak perusahaan"
+    ]
+  }
+]

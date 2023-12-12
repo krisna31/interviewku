@@ -63,11 +63,10 @@ The angle between the vectors is calculated as:<br>
 [Source](https://www.learndatasci.com/glossary/cosine-similarity/)
 
 ## Chatbot
-The model is a chatbot specifically designed to address interview-related inquiries. It's constructed using a Recurrent Neural Network (RNN) with Long Short-Term Memory (LSTM) and Embedding techniques.
+The model is a chatbot specifically designed to address interview-related inquiries. It's constructed using a Natural Language Processing (NLP) with Recurrent Neural Network (RNN) using Gated Recurrent Unit (GRU) and Embedding techniques.
+The embedding techniques using [GloVe algorithm](https://nlp.stanford.edu/projects/glove/) with indonesian dictionary word that scraped from Kaskus and Kompas, dictionary source: [here](https://github.com/ardwort/freq-dist-id).
 
-<img src="https://i.imgur.com/Rmx67pA.png" width='650px' />
-
-[source](https://www.researchgate.net/figure/Convolutional-layers-with-Keras_fig1_342039054)
+<img src="https://imgur.com/Dneivz6.png" width='400px' />
 
 ## Tensorflow.js guide for Scoring and Sentence Structure model
 ### Installation for Windows
