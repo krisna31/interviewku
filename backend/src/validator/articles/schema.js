@@ -16,7 +16,7 @@ const GetArticlesResponseSchema = Joi.object({
     .label('Meta')
     .required(),
   data: Joi.array().items(Joi.object().keys({
-    id: Joi.number().max(2147483647).default(1).required(),
+    id: Joi.string().default('article-xxx').required(),
     title: Joi.string().default('Tips and Tricks for Interviews').required(),
     subtitle: Joi.string().default('Mastering the Interview Process').required(),
     author: Joi.string().default('interviewku team').required(),
@@ -47,7 +47,7 @@ const GetArticleResponseSchema = Joi.object({
   success: Joi.boolean().default(true).required(),
   message: Joi.string().default('Article berhasil ditemukan').required(),
   data: Joi.object().keys({
-    id: Joi.number().max(2147483647).default(1).required(),
+    id: Joi.string().default('article-xxx').required(),
     title: Joi.string().default('Tips and Tricks for Interviews').required(),
     author: Joi.string().default('interviewku team').required(),
     source: Joi.string().default('https://interviewku.tech').required(),

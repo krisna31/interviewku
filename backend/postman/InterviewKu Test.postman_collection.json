@@ -3071,6 +3071,8 @@
 									"pm.test('response body have correct property and value', () => {\r",
 									"    const responseJson = pm.response.json();\r",
 									"\r",
+									"    pm.environment.set('articleId', responseJson.data[0].id)\r",
+									"\r",
 									"    pm.expect(responseJson.success).to.equal(true);\r",
 									"    pm.expect(responseJson.message).to.equal('Articles berhasil ditemukan');\r",
 									"    pm.expect(responseJson.data).to.be.an('array');\r",
@@ -3165,7 +3167,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/articles/33",
+							"raw": "{{protocol}}://{{host}}:{{port}}/articles/{{articleId}}",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
@@ -3173,7 +3175,7 @@
 							"port": "{{port}}",
 							"path": [
 								"articles",
-								"33"
+								"{{articleId}}"
 							]
 						}
 					},
@@ -3317,7 +3319,7 @@
 							"urlencoded": [
 								{
 									"key": "question",
-									"value": "cara membuat cv yang bagus",
+									"value": "test",
 									"type": "text"
 								}
 							]
