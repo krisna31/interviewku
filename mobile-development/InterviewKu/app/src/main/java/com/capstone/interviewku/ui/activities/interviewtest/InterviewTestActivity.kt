@@ -98,10 +98,26 @@ class InterviewTestActivity : AppCompatActivity() {
                                 interviewInstructionFragment.setTTSStatus(
                                     getString(R.string.ready)
                                 )
+                                interviewInstructionFragment.setIsTTSReady(true)
                             } else {
                                 interviewInstructionFragment.setTTSStatus(
                                     getString(R.string.tts_init_failed)
                                 )
+                                val alertDialog = AlertDialog.Builder(this)
+                                    .setCancelable(false)
+                                    .setTitle(getString(R.string.error_title))
+                                    .setMessage(getString(R.string.tts_init_failed))
+                                    .setPositiveButton(getString(R.string.try_again)) { _, _ ->
+                                        initializeTTS()
+                                    }
+                                    .setNegativeButton(getString(R.string.exit)) { _, _ ->
+                                        finish()
+                                    }
+                                    .create()
+
+                                if (!isFinishing) {
+                                    alertDialog.show()
+                                }
                             }
                         },
                         Constants.GOOGLE_TTS_PACKAGE_NAME
@@ -111,14 +127,14 @@ class InterviewTestActivity : AppCompatActivity() {
                     interviewInstructionFragment.setTTSStatus(
                         getString(R.string.no_indonesian_tts_data)
                     )
-                    installTTSData()
+                    showInstallTTSDataDialog()
                 }
             } else {
                 // no data at all
                 interviewInstructionFragment.setTTSStatus(
                     getString(R.string.no_tts_data)
                 )
-                installTTSData()
+                showInstallTTSDataDialog()
             }
         }
     private val microphonePermissionLauncher =
@@ -248,6 +264,7 @@ class InterviewTestActivity : AppCompatActivity() {
     private fun initializeTTS() {
         try {
             interviewInstructionFragment.setTTSStatus(getString(R.string.tts_not_initialized))
+            interviewInstructionFragment.setIsTTSReady(false)
             checkTTSDataLauncher.launch(
                 Intent(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA).apply {
                     setPackage(Constants.GOOGLE_TTS_PACKAGE_NAME)
@@ -255,27 +272,7 @@ class InterviewTestActivity : AppCompatActivity() {
             )
         } catch (e: Exception) {
             if (e is ActivityNotFoundException) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.no_google_tts),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-    }
-
-    private fun installTTSData() {
-        try {
-            startActivity(Intent(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA).apply {
-                setPackage(Constants.GOOGLE_TTS_PACKAGE_NAME)
-            })
-        } catch (e: Exception) {
-            if (e is ActivityNotFoundException) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.no_google_tts),
-                    Toast.LENGTH_SHORT
-                ).show()
+                showTTSDownloadDialog()
             }
         }
     }
@@ -290,18 +287,21 @@ class InterviewTestActivity : AppCompatActivity() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-                    it.exception.getData()?.handleHttpException(this)
-
                     val alertDialog = AlertDialog.Builder(this)
                         .setCancelable(false)
+                        .setTitle(getString(R.string.error_title))
+                        .setMessage(
+                            getString(
+                                R.string.prepare_interview_failed,
+                                it.exception.peekData().handleHttpException(this)
+                            )
+                        )
                         .setPositiveButton(getString(R.string.try_again)) { _, _ ->
                             viewModel.prepareInterview()
                         }
                         .setNegativeButton(getString(R.string.exit)) { _, _ ->
                             finish()
                         }
-                        .setTitle(getString(R.string.error_title))
-                        .setMessage(getString(R.string.prepare_interview_failed))
                         .create()
 
                     if (!isFinishing) {
@@ -323,18 +323,21 @@ class InterviewTestActivity : AppCompatActivity() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-                    it.exception.getData()?.handleHttpException(this)
-
                     val alertDialog = AlertDialog.Builder(this)
                         .setCancelable(false)
+                        .setTitle(getString(R.string.error_title))
+                        .setMessage(
+                            getString(
+                                R.string.start_interview_failed,
+                                it.exception.peekData().handleHttpException(this)
+                            )
+                        )
                         .setPositiveButton(getString(R.string.try_again)) { _, _ ->
                             viewModel.startInterviewSession()
                         }
                         .setNegativeButton(getString(R.string.exit)) { _, _ ->
                             finish()
                         }
-                        .setTitle(getString(R.string.error_title))
-                        .setMessage(getString(R.string.start_interview_failed))
                         .create()
 
                     if (!isFinishing) {
@@ -363,18 +366,21 @@ class InterviewTestActivity : AppCompatActivity() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-                    it.exception.getData()?.handleHttpException(this)
-
                     val alertDialog = AlertDialog.Builder(this)
                         .setCancelable(false)
+                        .setTitle(getString(R.string.error_title))
+                        .setMessage(
+                            getString(
+                                R.string.submit_answer_failed,
+                                it.exception.peekData().handleHttpException(this)
+                            )
+                        )
                         .setPositiveButton(getString(R.string.try_again)) { _, _ ->
                             viewModel.sendAnswer()
                         }
                         .setNegativeButton(getString(R.string.exit)) { _, _ ->
                             finish()
                         }
-                        .setTitle(getString(R.string.error_title))
-                        .setMessage(getString(R.string.submit_answer_failed))
                         .create()
 
                     if (!isFinishing) {
@@ -407,18 +413,21 @@ class InterviewTestActivity : AppCompatActivity() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-                    it.exception.getData()?.handleHttpException(this)
-
                     val alertDialog = AlertDialog.Builder(this)
                         .setCancelable(false)
+                        .setTitle(getString(R.string.error_title))
+                        .setMessage(
+                            getString(
+                                R.string.end_interview_failed,
+                                it.exception.peekData().handleHttpException(this)
+                            )
+                        )
                         .setPositiveButton(getString(R.string.try_again)) { _, _ ->
                             viewModel.endInterviewSession()
                         }
                         .setNegativeButton(getString(R.string.exit)) { _, _ ->
                             finish()
                         }
-                        .setTitle(getString(R.string.error_title))
-                        .setMessage(getString(R.string.end_interview_failed))
                         .create()
 
                     if (!isFinishing) {
@@ -447,14 +456,14 @@ class InterviewTestActivity : AppCompatActivity() {
     private fun onExitDialog() {
         val alertDialog = AlertDialog.Builder(this)
             .setCancelable(false)
+            .setTitle(getString(R.string.exit_from_session))
+            .setMessage(getString(R.string.interview_exit_confirm))
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 finish()
             }
             .setNegativeButton(getString(R.string.no)) { dialog, _ ->
                 dialog.dismiss()
             }
-            .setTitle(getString(R.string.exit_from_session))
-            .setMessage(getString(R.string.interview_exit_confirm))
             .create()
 
         if (!isFinishing) {
@@ -471,17 +480,61 @@ class InterviewTestActivity : AppCompatActivity() {
         }
     }
 
+    private fun showInstallTTSDataDialog() {
+        val alertDialog = AlertDialog.Builder(this)
+            .setCancelable(false)
+            .setTitle(getString(R.string.download_tts_data_title))
+            .setMessage(getString(R.string.download_tts_data_explanation))
+            .setPositiveButton(getString(R.string.download)) { _, _ ->
+                try {
+                    startActivity(Intent(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA).apply {
+                        setPackage(Constants.GOOGLE_TTS_PACKAGE_NAME)
+                    })
+                } catch (e: Exception) {
+                    if (e is ActivityNotFoundException) {
+                        showTTSDownloadDialog()
+                    }
+                }
+            }
+            .setNegativeButton(getString(R.string.exit)) { _, _ ->
+                finish()
+            }
+            .create()
+
+        if (!isFinishing) {
+            alertDialog.show()
+        }
+    }
+
     private fun showMicrophonePermissionDialog() {
         val alertDialog = AlertDialog.Builder(this)
             .setCancelable(false)
+            .setTitle(getString(R.string.permission_title))
+            .setMessage(getString(R.string.mic_permission_prompt))
             .setPositiveButton(getString(R.string.try_again)) { _, _ ->
                 microphonePermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
             }
             .setNegativeButton(getString(R.string.exit)) { _, _ ->
                 finish()
             }
-            .setTitle(getString(R.string.permission_title))
-            .setMessage(getString(R.string.mic_permission_prompt))
+            .create()
+
+        if (!isFinishing) {
+            alertDialog.show()
+        }
+    }
+
+    private fun showTTSDownloadDialog() {
+        val alertDialog = AlertDialog.Builder(this)
+            .setCancelable(false)
+            .setTitle(getString(R.string.error_title))
+            .setMessage(getString(R.string.no_google_tts))
+            .setNegativeButton(getString(R.string.exit)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setOnDismissListener {
+                finish()
+            }
             .create()
 
         if (!isFinishing) {

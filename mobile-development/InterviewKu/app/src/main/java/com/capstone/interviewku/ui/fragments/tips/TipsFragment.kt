@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.FragmentTipsBinding
 import com.capstone.interviewku.ui.activities.tipsdetail.TipsDetailActivity
 import com.capstone.interviewku.ui.adapters.ItemTipsScreenAdapter

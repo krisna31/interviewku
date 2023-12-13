@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.capstone.interviewku.databinding.ActivitySplashBinding
 import com.capstone.interviewku.ui.activities.landing.LandingActivity
 import com.capstone.interviewku.ui.activities.main.MainActivity
+import com.capstone.interviewku.ui.activities.registerdetail.RegisterDetailActivity
 import com.capstone.interviewku.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -32,7 +33,11 @@ class SplashActivity : AppCompatActivity() {
 
             startActivity(
                 if (viewModel.isLoggedIn()) {
-                    Intent(this@SplashActivity, MainActivity::class.java)
+                    if (viewModel.isHasUserIdentity()) {
+                        Intent(this@SplashActivity, MainActivity::class.java)
+                    } else {
+                        Intent(this@SplashActivity, RegisterDetailActivity::class.java)
+                    }
                 } else {
                     Intent(this@SplashActivity, LandingActivity::class.java)
                 }

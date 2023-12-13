@@ -17,5 +17,4 @@ open class SingleEvent<out T>(
     }
 
     fun peekData(): T = data
-
 }

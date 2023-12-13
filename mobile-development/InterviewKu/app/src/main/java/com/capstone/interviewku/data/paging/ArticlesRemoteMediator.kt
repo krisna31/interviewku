@@ -32,8 +32,10 @@ class ArticlesRemoteMediator(
             val page = when (loadType) {
                 LoadType.PREPEND -> {
                     val firstItemRemoteKey = getFirstItemRemoteKey(state)
-                    firstItemRemoteKey?.prevKey
+                    val prevKey = firstItemRemoteKey?.prevKey
                         ?: return MediatorResult.Success(endOfPaginationReached = firstItemRemoteKey != null)
+
+                    prevKey
                 }
 
                 LoadType.REFRESH -> {
@@ -42,8 +44,10 @@ class ArticlesRemoteMediator(
 
                 LoadType.APPEND -> {
                     val lastItemRemoteKey = getLastItemRemoteKey(state)
-                    lastItemRemoteKey?.nextKey
+                    val nextKey = lastItemRemoteKey?.nextKey
                         ?: return MediatorResult.Success(endOfPaginationReached = lastItemRemoteKey != null)
+
+                    nextKey
                 }
             }
 
@@ -98,21 +102,21 @@ class ArticlesRemoteMediator(
     private suspend fun getFirstItemRemoteKey(state: PagingState<Int, ArticleEntity>) =
         state.pages.firstOrNull {
             it.data.isNotEmpty()
-        }?.firstOrNull()?.let { firstItem ->
+        }?.data?.firstOrNull()?.let { firstItem ->
             database.getArticleRemoteKeysDao().getArticleRemoteKeyById(firstItem.id)
         }
 
     private suspend fun getClosestItemRemoteKey(state: PagingState<Int, ArticleEntity>) =
         state.anchorPosition?.let { anchorPosition ->
             state.closestItemToPosition(anchorPosition)
-        }?.let { closestItem ->
-            database.getArticleRemoteKeysDao().getArticleRemoteKeyById(closestItem.id)
+        }?.id?.let { closestItemId ->
+            database.getArticleRemoteKeysDao().getArticleRemoteKeyById(closestItemId)
         }
 
     private suspend fun getLastItemRemoteKey(state: PagingState<Int, ArticleEntity>) =
         state.pages.lastOrNull {
             it.data.isNotEmpty()
-        }?.lastOrNull()?.let { lastItem ->
+        }?.data?.lastOrNull()?.let { lastItem ->
             database.getArticleRemoteKeysDao().getArticleRemoteKeyById(lastItem.id)
         }
 }

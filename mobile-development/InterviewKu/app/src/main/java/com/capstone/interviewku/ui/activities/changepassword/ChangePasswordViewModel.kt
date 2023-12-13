@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.interviewku.data.AuthRepository
-import com.capstone.interviewku.util.SingleEvent
 import com.capstone.interviewku.util.Result
+import com.capstone.interviewku.util.SingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,6 +27,6 @@ class ChangePasswordViewModel @Inject constructor(
             _changePasswordState.value = Result.Success(Unit)
         } catch (e: Exception) {
             _changePasswordState.value = Result.Error(SingleEvent(e))
-            }
         }
+    }
 }

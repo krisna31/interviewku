@@ -9,7 +9,7 @@ import com.capstone.interviewku.data.room.entity.ArticleRemoteKey
 @Dao
 interface ArticleRemoteKeysDao {
     @Query("SELECT * FROM article_remote_keys WHERE id = :id")
-    suspend fun getArticleRemoteKeyById(id: Int): ArticleRemoteKey?
+    suspend fun getArticleRemoteKeyById(id: String): ArticleRemoteKey?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticleRemoteKeys(remoteKeys: List<ArticleRemoteKey>)

@@ -17,24 +17,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_confirm_logout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="@dimen/root_padding"
-        android:text="@string/yes"
-        app:layout_constraintEnd_toStartOf="@id/btn_cancel_logout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_logout_confirmation" />
-
-    <Button
         android:id="@+id/btn_cancel_logout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:text="@string/no"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_confirm_logout"
+        app:layout_constraintEnd_toStartOf="@id/btn_confirm_logout"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/btn_confirm_logout" />
+
+    <Button
+        android:id="@+id/btn_confirm_logout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="@dimen/root_padding"
+        android:backgroundTint="@color/red"
+        android:text="@string/yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_cancel_logout"
+        app:layout_constraintTop_toBottomOf="@id/tv_logout_confirmation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

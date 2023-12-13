@@ -50,6 +50,7 @@ object Helpers {
         labelArray.forEachIndexed { index, s ->
             result.add(SpinnerModel(valueArray[index], s))
         }
+        result.add(0, SpinnerModel("", context.getString(R.string.please_choose)))
 
         return result
     }
@@ -61,6 +62,8 @@ object Helpers {
                 && password.contains(Regex("[a-z]"))
                 && password.contains(Regex("[A-Z]"))
                 && password.contains(Regex("[0-9]"))
+
+    fun stringEscapeRemover(string: String) = string.replace("\\n", "\n")
 
     fun secondsToString(seconds: Int): String {
         return DateUtils.formatElapsedTime(seconds.toLong())

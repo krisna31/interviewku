@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -162,7 +163,18 @@ class HomeFragment : Fragment() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-                    homeScreenModel.exception.getData()?.handleHttpException(context)
+                    context.apply {
+                        homeScreenModel.exception
+                            .getData()
+                            ?.handleHttpException(this)
+                            ?.let { message ->
+                                Toast.makeText(
+                                    this,
+                                    getString(R.string.home_load_failed, message),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                    }
                 }
             }
         }

@@ -27,6 +27,9 @@ data class UserIdentity(
     @SerializedName("lastName")
     val lastname: String?,
 
+    @SerializedName("email")
+    val email: String,
+
     @field:SerializedName("jobFieldId")
     val jobFieldId: Int?,
 

@@ -38,14 +38,15 @@ class RegisterDetailViewModel @Inject constructor(
         _addUserIdentityState.value = Result.Loading
 
         try {
-            _addUserIdentityState.value = Result.Success(
-                userRepository.addUserIdentity(
-                    jobPositionId,
-                    gender,
-                    dateBirth,
-                    currentCity
-                )
+            val response = userRepository.addUserIdentity(
+                jobPositionId,
+                gender,
+                dateBirth,
+                currentCity
             )
+
+            userRepository.setHasUserIdentity(true)
+            _addUserIdentityState.value = Result.Success(response)
         } catch (e: Exception) {
             _addUserIdentityState.value = Result.Error(SingleEvent(e))
         }

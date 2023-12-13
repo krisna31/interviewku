@@ -2,6 +2,7 @@
     <string name="app_name">InterviewKu</string>
 
     <!--  STATIC TEXT / TITLE / PLACEHOLDER  -->
+    <string name="abort">Batal</string>
     <string name="additional_information">Informasi Tambahan</string>
     <string name="answer">Jawaban</string>
     <string name="birthdate">Tanggal Lahir</string>
@@ -14,12 +15,15 @@
     <string name="check_tts_feature">Cek Fitur TTS</string>
     <string name="choose_your_interest">Pilih Minat Anda</string>
     <string name="current_city">Kota Domisili</string>
+    <string name="download">Unduh</string>
+    <string name="download_tts_data_title">Unduh Data TTS</string>
     <string name="email">Alamat Email</string>
     <string name="error_title">Terjadi Kesalahan</string>
     <string name="exit">Keluar</string>
     <string name="exit_from_session">Keluar dari sesi</string>
     <string name="feedback">Umpan Balik</string>
     <string name="firstname">Nama Depan</string>
+    <string name="forgot_password_text">Lupa Kata Sandi ?</string>
     <string name="fullname">Nama Lengkap</string>
     <string name="gender">Jenis Kelamin</string>
     <string name="interview_history">Riwayat Interview</string>
@@ -45,7 +49,13 @@
     <string name="next">Lanjut</string>
     <string name="no">Tidak</string>
     <string name="old_password">Kata Sandi Lama</string>
+    <string name="otp_code">Kode OTP</string>
+    <string name="otp_code_correct">Kode OTP Benar</string>
+    <string name="otp_sending_success">Kode OTP Berhasil Dikirim</string>
     <string name="password">Kata Sandi</string>
+    <string name="password_change_success">Kata Sandi berhasil diubah</string>
+    <string name="password_recovery">Pemulihan Kata Sandi</string>
+    <string name="password_recovery_success">Kata Sandi berhasil dipulihkan</string>
     <string name="permission_title">Perizinan Aplikasi</string>
     <string name="profile">Profil</string>
     <string name="question">Pertanyaan</string>
@@ -65,23 +75,17 @@
     <string name="tts_setting">Pengaturan Text To Speech</string>
     <string name="welcome">Selamat datang di InterviewKu</string>
     <string name="yes">Ya</string>
-    <string name="login_text">Lupa Kata Sandi ?</string>
-    <string name="Send_otp_succes">Kode OTP Berhasil Dikirim</string>
-    <string name="password_change_succes">Kata Sandi Berhasil Diubah</string>
-    <string name="newpassword_change_succes">Kata Sandi Baru Berhasil Disimpan </string>
-    <string name="correct_otp_code">Kode OTP Benar</string>
-    <string name="OTP">Kode OTP</string>
-    <string name="New_password">Kata Sandi Baru</string>
-    <string name="store">Simpan</string>
-    <string name="Recovery_password">Pemulihan Kata Sandi</string>
 
     <!--  MESSAGE / INSTRUCTION  -->
     <string name="birthdate_required">Silakan pilih tanggal lahir</string>
     <string name="check_mic_instruction">Suara akan langsung diputar setelah perekaman berhenti</string>
     <string name="current_city_required">Silakan masukkan kota domisili</string>
+    <string name="download_tts_data_explanation">Untuk melanjutkan, Anda harus mengunduh data bahasa Indonesia pada Google TTS</string>
     <string name="email_invalid">Email Tidak Valid</string>
-    <string name="end_interview_failed">Gagal untuk mengakhiri sesi. Silahkan coba lagi</string>
+    <string name="end_interview_failed">Gagal untuk mengakhiri sesi (%s). Silahkan coba lagi</string>
+    <string name="firstname_empty">Nama depan tidak boleh kosong</string>
     <string name="gender_required">Silakan pilih jenis kelamin</string>
+    <string name="home_load_failed">Gagal memuat data halaman beranda (%s). Silahkan coba kembali</string>
     <string name="interview_exit_confirm">Apakah anda yakin ingin keluar dari sesi? Anda akan dianggap tidak menyelesaikan sesi ini</string>
     <string name="interview_finished">Sesi Interview telah selesai!</string>
     <string name="interview_not_finished">Sesi tidak selesai</string>
@@ -94,30 +98,27 @@
     <string name="mic_permission_granted">Anda dapat merekam suara anda</string>
     <string name="mic_permission_prompt">Izin merekam suara harus diberikan agar fitur perekaman dapat digunakan</string>
     <string name="no_chat_history">Anda belum pernah bertanya kepada Chatbot</string>
-    <string name="no_google_tts">Silahkan mengunduh Google TTS di Play Store</string>
+    <string name="no_google_tts">Silahkan mengunduh Google TTS di Play Store untuk menggunakan fitur interview</string>
     <string name="no_indonesian_tts_data">Anda belum memasang data suara Bahasa Indonesia. Silahkan memasang data suara Bahasa Indonesia</string>
     <string name="no_interview_history">Anda belum pernah melakukan Interview</string>
     <string name="no_tts_data">Anda tidak memiliki data suara. Silahkan memasang data suara Bahasa Indonesia</string>
-    <string name="password_requires_digit">Kata Sandi membutuhkan angka</string>
-    <string name="password_requires_min_length">Kata Sandi membutuhkan 8 karakter</string>
-    <string name="password_requires_special_char">Kata Sandi membutuhkan karakter khusus</string>
-    <string name="password_requires_uppercase">Kata Sandi membutuhkan huruf kapital</string>
+    <string name="password_invalid">Password harus minimal 8 karakter, terdapat 1 huruf kapital, dan 1 karakter simbol</string>
     <string name="please_choose">Silahkan pilih</string>
-    <string name="prepare_interview_failed">Gagal untuk mempersiapkan sesi. Silahkan coba lagi</string>
+    <string name="prepare_interview_failed">Gagal untuk mempersiapkan sesi (%s). Silahkan coba lagi</string>
     <string name="question_instruction">Silahkan tuliskan pertanyaan anda</string>
     <string name="question_not_answered">Pertanyaan tidak dijawab. Silahkan mencoba lagi pada sesi baru.</string>
     <string name="record_failed">Gagal memulai perekaman suara. Pastikan tidak ada aplikasi lain yang menggunakan mikrofon</string>
     <string name="register_detail_instruction">Silahkan masukkan informasi tambahan terkait diri anda</string>
     <string name="register_instruction">Silahkan masukkan informasi berikut untuk mendaftarkan diri</string>
-    <string name="start_interview_failed">Gagal untuk memulai sesi. Silahkan coba lagi</string>
-    <string name="submit_answer_failed">Gagal untuk mengirim jawaban. SIlahkan coba lagi</string>
+    <string name="start_interview_failed">Gagal untuk memulai sesi (%s). Silahkan coba lagi</string>
+    <string name="submit_answer_failed">Gagal untuk mengirim jawaban (%s). SIlahkan coba lagi</string>
     <string name="test_instruction">Mode ini ditujukan untuk menguji kemampuan anda dalam wawancara secara keseluruhan</string>
     <string name="train_instruction">Mode ini ditujukan untuk melatih kemampuan anda terhadap aplikasi ini</string>
-    <string name="tts_init_failed">Silahkan mengecek fitur Google TTS di perangkat anda</string>
+    <string name="tts_init_failed">Silahkan mengecek kembali fitur Google TTS di perangkat anda dan coba untuk menginisialisasi ulang</string>
     <string name="tts_not_initialized">TTS belum diinisialisasi</string>
     <string name="unexpected_error">Terjadi kesalahan. Silahkan coba lagi</string>
+    <string name="user_profile_saved">Perubahan info pengguna telah disimpan</string>
     <string name="wrong_password">Kata Sandi Salah</string>
-
 
     <!--  TEMPLATE  -->
     <string name="author_template">Dibuat oleh: %s</string>

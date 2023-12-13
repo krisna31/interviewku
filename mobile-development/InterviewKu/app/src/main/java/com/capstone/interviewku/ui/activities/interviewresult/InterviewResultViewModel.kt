@@ -20,14 +20,18 @@ class InterviewResultViewModel @Inject constructor(
     val interviewResultState: LiveData<Result<InterviewResultData>>
         get() = _interviewResultState
 
-    fun getInterviewResultById(interviewId: String) = viewModelScope.launch {
+    private var interviewId: String? = null
+
+    fun getInterviewResultById() = viewModelScope.launch {
         _interviewResultState.value = Result.Loading
 
         try {
-            interviewRepository.getInterviewResultById(interviewId).data?.let {
-                _interviewResultState.value = Result.Success(it)
-            } ?: run {
-                throw Exception()
+            interviewId?.let { id ->
+                interviewRepository.getInterviewResultById(id).data?.let {
+                    _interviewResultState.value = Result.Success(it)
+                } ?: run {
+                    throw Exception()
+                }
             }
         } catch (e: Exception) {
             _interviewResultState.value = Result.Error(SingleEvent(e))
@@ -36,5 +40,9 @@ class InterviewResultViewModel @Inject constructor(
 
     fun setInterviewResult(interviewResultData: InterviewResultData) {
         _interviewResultState.value = Result.Success(interviewResultData)
+    }
+
+    fun setInterviewResultId(interviewId: String) {
+        this.interviewId = interviewId
     }
 }

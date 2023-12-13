@@ -8,12 +8,6 @@ import com.capstone.interviewku.R
 import com.capstone.interviewku.data.room.entity.ArticleEntity
 import com.capstone.interviewku.databinding.ActivityTipsDetailBinding
 import com.capstone.interviewku.util.Helpers
-import io.noties.markwon.Markwon
-import io.noties.markwon.ext.strikethrough.StrikethroughPlugin
-import io.noties.markwon.ext.tables.TablePlugin
-import io.noties.markwon.ext.tasklist.TaskListPlugin
-import io.noties.markwon.html.HtmlPlugin
-import io.noties.markwon.image.glide.GlideImagesPlugin
 
 class TipsDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTipsDetailBinding
@@ -38,14 +32,6 @@ class TipsDetailActivity : AppCompatActivity() {
             intent.getParcelableExtra(EXTRA_ARTICLE_ENTITY_KEY)
         }
 
-        val markwon = Markwon.builder(this)
-            .usePlugin(StrikethroughPlugin.create())
-            .usePlugin(TablePlugin.create(this))
-            .usePlugin(TaskListPlugin.create(this))
-            .usePlugin(HtmlPlugin.create())
-            .usePlugin(GlideImagesPlugin.create(this))
-            .build()
-
         article?.let {
             Glide.with(this)
                 .load(article.coverImgUrl)
@@ -62,7 +48,7 @@ class TipsDetailActivity : AppCompatActivity() {
                     "-"
                 }
             )
-            markwon.setMarkdown(binding.tvContent, article.content)
+            binding.tvContent.text = Helpers.stringEscapeRemover(article.content)
             binding.tvSource.text = getString(R.string.source_template, article.source)
         } ?: run {
             finish()

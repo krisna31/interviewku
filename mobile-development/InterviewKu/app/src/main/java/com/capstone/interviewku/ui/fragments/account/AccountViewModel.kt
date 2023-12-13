@@ -1,6 +1,5 @@
 package com.capstone.interviewku.ui.fragments.account
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -44,7 +43,6 @@ class AccountViewModel @Inject constructor(
 
             _logoutState.value = Result.Success(Unit)
         } catch (e: Exception) {
-            Log.e("AccountViewModel", "Error during logout", e)
             _logoutState.value = Result.Error(SingleEvent(e))
         }
 
@@ -58,11 +56,10 @@ class AccountViewModel @Inject constructor(
             userResult.data?.let { userData ->
                 _getUserState.value = Result.Success(userData)
             } ?: run {
-                throw Exception("User data is null")
+                throw Exception("")
             }
         } catch (e: Exception) {
-            Log.e("AccountViewModel", "Error getting user", e)
             _getUserState.value = Result.Error(SingleEvent(e))
-            }
+        }
     }
 }

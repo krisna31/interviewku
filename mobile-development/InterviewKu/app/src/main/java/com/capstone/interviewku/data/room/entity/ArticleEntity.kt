@@ -9,9 +9,9 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "articles")
 @Parcelize
 data class ArticleEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
-    val id: Int,
+    val id: String,
 
     @ColumnInfo(name = "title")
     val title: String,
@@ -28,12 +28,12 @@ data class ArticleEntity(
     @ColumnInfo(name = "content")
     val content: String,
 
-    @ColumnInfo(name = "coverImgUrl")
+    @ColumnInfo(name = "cover_img_url")
     val coverImgUrl: String,
 
-    @ColumnInfo(name = "createdAt")
+    @ColumnInfo(name = "created_at")
     val createdAt: String,
 
-    @ColumnInfo(name = "updatedAt")
+    @ColumnInfo(name = "updated_at")
     val updatedAt: String?,
 ) : Parcelable

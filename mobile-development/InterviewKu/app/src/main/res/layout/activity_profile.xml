@@ -145,29 +145,37 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/spinner_gender_profile" />
 
-            <TextView
-                android:id="@+id/tv_birthdate"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_birthdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:gravity="center_vertical"
-                android:text="@string/please_choose"
-                android:textSize="16sp"
-                android:theme="@style/Base.Theme.InterviewKu"
-                app:layout_constraintEnd_toStartOf="@id/iv_birthdate_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_birthdate_title" />
+                app:layout_constraintTop_toBottomOf="@id/tv_birthdate_title">
 
-            <ImageView
-                android:id="@+id/iv_birthdate_icon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:contentDescription="@string/birthdate"
-                android:src="@drawable/baseline_calendar_month_24"
-                app:layout_constraintBottom_toBottomOf="@id/tv_birthdate"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv_birthdate"
-                app:layout_constraintTop_toTopOf="@id/tv_birthdate" />
+                <TextView
+                    android:id="@+id/tv_birthdate"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/please_choose"
+                    android:textSize="16sp"
+                    android:theme="@style/Base.Theme.InterviewKu"
+                    app:layout_constraintEnd_toStartOf="@id/iv_birthdate_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_birthdate_icon"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:contentDescription="@string/birthdate"
+                    android:src="@drawable/baseline_calendar_month_24"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_birthdate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_birthdate"
+                    app:layout_constraintTop_toTopOf="@id/tv_birthdate" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tv_current_city_title"
@@ -178,7 +186,7 @@
                 android:textStyle="bold"
                 android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_birthdate" />
+                app:layout_constraintTop_toBottomOf="@id/cl_birthdate" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_current_city"
@@ -188,13 +196,14 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_current_city_title">
 
                 <EditText
-                    android:id="@+id/tv_current_city"
+                    android:id="@+id/et_current_city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/current_city"
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:maxLines="1" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

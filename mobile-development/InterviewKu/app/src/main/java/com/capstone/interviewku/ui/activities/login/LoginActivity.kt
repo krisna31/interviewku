@@ -2,20 +2,23 @@ package com.capstone.interviewku.ui.activities.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.lifecycleScope
 import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityLoginBinding
 import com.capstone.interviewku.ui.activities.forgetpass.ForgetPasswordActivity
 import com.capstone.interviewku.ui.activities.main.MainActivity
+import com.capstone.interviewku.ui.activities.registerdetail.RegisterDetailActivity
 import com.capstone.interviewku.util.Extensions.handleHttpException
 import com.capstone.interviewku.util.Extensions.hideKeyboard
 import com.capstone.interviewku.util.Helpers
 import com.capstone.interviewku.util.Result
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -29,36 +32,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupObservers()
+        setButtonEnabled()
         setupTextWatchers()
-
-        binding.tvRecovery.setOnClickListener {
-            val intent = Intent(this, ForgetPasswordActivity::class.java)
-            startActivity(intent)
-        }
-    }
-    private fun setupObservers() {
-        viewModel.loginState.observe(this) {
-            when (it) {
-                is Result.Success -> {
-                    binding.progressBar.isVisible = false
-
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                    finishAffinity()
-                }
-
-                is Result.Loading -> {
-                    binding.progressBar.isVisible = true
-                }
-
-                is Result.Error -> {
-                    binding.progressBar.isVisible = false
-                    it.exception.getData()?.handleHttpException(this)
-                }
-            }
-        }
-
-
+        setupObservers()
 
         binding.btnLogin.setOnClickListener {
             val email = binding.etLoginEmail.text.toString()
@@ -66,51 +42,80 @@ class LoginActivity : AppCompatActivity() {
             viewModel.login(email, password)
 
             hideKeyboard(it)
+            setInputEnabled(false)
+            it.isEnabled = false
+        }
 
+        binding.tvRecovery.setOnClickListener {
+            val intent = Intent(this, ForgetPasswordActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun setButtonEnabled() {
+        binding.btnLogin.isEnabled =
+            Helpers.isEmailValid(binding.etLoginEmail.text.toString())
+                    && binding.etLoginPassword.text.isNotEmpty()
+    }
+
+    private fun setInputEnabled(isEnabled: Boolean) {
+        binding.etLoginEmail.isEnabled = isEnabled
+        binding.etLoginPassword.isEnabled = isEnabled
+    }
+
+    private fun setupObservers() {
+        viewModel.loginState.observe(this) {
+            binding.progressBar.isVisible = it is Result.Loading
+
+            when (it) {
+                is Result.Success -> {
+                    lifecycleScope.launch {
+                        if (viewModel.isHasUserIdentity()) {
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    MainActivity::class.java
+                                )
+                            )
+                        } else {
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    RegisterDetailActivity::class.java
+                                )
+                            )
+                        }
+                        finishAffinity()
+                    }
+                }
+
+                is Result.Loading -> {}
+
+                is Result.Error -> {
+                    setInputEnabled(true)
+                    setButtonEnabled()
+
+                    it.exception.getData()?.handleHttpException(this)?.let { message ->
+                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 
     private fun setupTextWatchers() {
-        val emailWatcher = object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                validateInputs()
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        binding.etLoginEmail.apply {
+            addTextChangedListener(afterTextChanged = {
+                error = if (!Helpers.isEmailValid(it.toString()) && it.toString().isNotEmpty()) {
+                    getString(R.string.email_invalid)
+                } else {
+                    null
+                }
+                setButtonEnabled()
+            })
         }
-
-        val passwordWatcher = object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                validateInputs()
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        }
-
-        binding.etLoginEmail.addTextChangedListener(emailWatcher)
-        binding.etLoginPassword.addTextChangedListener(passwordWatcher)
-
-        binding.btnLogin.setOnClickListener {
-            val email = binding.etLoginEmail.text.toString()
-            val password = binding.etLoginPassword.text.toString()
-            viewModel.login(email, password)
-        }
+        binding.etLoginPassword.addTextChangedListener(afterTextChanged = {
+            setButtonEnabled()
+        })
     }
-
-    private fun validateInputs() {
-        val email = binding.etLoginEmail.text.toString()
-        val password = binding.etLoginPassword.text.toString()
-
-        if (!Helpers.isEmailValid(email)) {
-            binding.etLoginEmail.error = getString(R.string.email_invalid)
-            binding.btnLogin.isEnabled = false
-        } else if (!Helpers.isPasswordValid(password)) {
-            binding.etLoginPassword.error = getString(R.string.wrong_password)
-            binding.btnLogin.isEnabled = false
-        } else {
-            binding.etLoginEmail.error = null
-            binding.etLoginPassword.error = null
-            binding.btnLogin.isEnabled = true
-            }
-        }
 }

@@ -126,6 +126,10 @@ class InterviewInstructionFragment(
         }
     }
 
+    fun setIsTTSReady(isReady: Boolean) {
+        binding.btnContinue.isEnabled = isReady
+    }
+
     fun setTTSStatus(status: String) {
         binding.tvTtsStatus.text = getString(R.string.tts_status_template, status)
     }

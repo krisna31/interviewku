@@ -11,7 +11,7 @@ import com.capstone.interviewku.databinding.ItemChatbotHistoryBinding
 import com.capstone.interviewku.util.Helpers
 
 
-class ItemChatbotHistoryAdapter (
+class ItemChatbotHistoryAdapter(
     private val onItemClick: (Chat) -> Unit
 ) : PagingDataAdapter<Chat, ItemChatbotHistoryAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<Chat>() {

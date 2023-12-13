@@ -9,7 +9,7 @@ import com.capstone.interviewku.data.room.entity.ArticleEntity
 
 @Dao
 interface ArticlesDao {
-    @Query("SELECT * FROM articles")
+    @Query("SELECT * FROM articles ORDER BY created_at DESC")
     fun getAllArticles(): PagingSource<Int, ArticleEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

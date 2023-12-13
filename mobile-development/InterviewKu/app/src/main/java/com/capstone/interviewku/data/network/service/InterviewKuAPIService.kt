@@ -180,7 +180,6 @@ interface InterviewKuAPIService {
     ): UserRegisterResponse
 
     @GET("/users")
-    @FormUrlEncoded
     suspend fun getUser(
         @Header("Authorization") bearerToken: String,
     ): UserDetailResponse

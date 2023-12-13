@@ -22,7 +22,7 @@ class RegisterBasicViewModel @Inject constructor(
     val registerState: LiveData<Result<UserRegisterResponse>>
         get() = _registerState
 
-    fun register(email: String, password: String, firstName: String, lastName: String) =
+    fun register(email: String, password: String, firstName: String, lastName: String?) =
         viewModelScope.launch {
             _registerState.value = Result.Loading
 

@@ -61,6 +61,12 @@ class UserRepository @Inject constructor(
         )
     }
 
+    suspend fun isHasUserIdentity() = appPreferences.isHasUserIdentity().first()
+
+    suspend fun setHasUserIdentity(isHasUserIdentity: Boolean) {
+        appPreferences.setHasUserIdentity(isHasUserIdentity)
+    }
+
     companion object {
         @Volatile
         private var instance: UserRepository? = null

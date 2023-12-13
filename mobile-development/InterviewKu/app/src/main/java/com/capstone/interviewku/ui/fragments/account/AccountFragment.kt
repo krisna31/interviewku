@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.FragmentAccountBinding
 import com.capstone.interviewku.ui.activities.changepassword.ChangePasswordActivity
-import com.capstone.interviewku.ui.activities.interviewhistory.InterviewHistoryActivity
 import com.capstone.interviewku.ui.activities.landing.LandingActivity
 import com.capstone.interviewku.ui.activities.profile.ProfileActivity
 import com.capstone.interviewku.util.Extensions.handleHttpException
@@ -41,17 +40,10 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupObservers()
-
         val activity = requireActivity()
 
         binding.clProfile.setOnClickListener {
             val intent = Intent(activity, ProfileActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.clTextToSpeach.setOnClickListener {
-            val intent = Intent(activity, InterviewHistoryActivity::class.java)
             startActivity(intent)
         }
 
@@ -61,7 +53,36 @@ class AccountFragment : Fragment() {
         }
 
         binding.clLogout.setOnClickListener {
-            showLogoutConfirmationDialog(requireActivity())
+            showLogoutConfirmationDialog()
+        }
+
+        viewModel.getUserState.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+
+                is Result.Success -> {
+                    val user = result.data
+                    binding.progressBar.isVisible = false
+                    binding.tvFullname.text = if (user.lastname == null) {
+                        user.firstname
+                    } else {
+                        getString(
+                            R.string.first_last_name_template,
+                            user.firstname,
+                            user.lastname
+                        )
+                    }
+                }
+
+                is Result.Error -> {
+                    binding.progressBar.isVisible = false
+                    result.exception.getData()?.handleHttpException(activity)?.let { message ->
+                        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
 
         viewModel.logoutState.observe(viewLifecycleOwner) { result ->
@@ -79,34 +100,17 @@ class AccountFragment : Fragment() {
 
                 is Result.Error -> {
                     binding.progressBar.isVisible = false
-                    result.exception.getData()?.handleHttpException(activity)
+                    result.exception.getData()?.handleHttpException(activity)?.let { message ->
+                        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
-    }
 
-    private fun setupObservers() {
         viewModel.getUser()
-        viewModel.getUserState.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> {
-                    binding.progressBar.isVisible = true
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.isVisible = false
-                    binding.tvFullname.text = "${result.data?.firstname} ${result.data?.lastname}"
-                }
-
-                is Result.Error -> {
-                    binding.progressBar.isVisible = false
-                    Toast.makeText(context, "Error: ${result.exception}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
     }
 
-    private fun showLogoutConfirmationDialog(activity: Activity) {
+    private fun showLogoutConfirmationDialog() {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.custom_alert_logout, null)
         val dialog = AlertDialog.Builder(context)
             .setView(dialogView)

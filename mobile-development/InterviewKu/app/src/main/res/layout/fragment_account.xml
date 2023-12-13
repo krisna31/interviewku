@@ -94,47 +94,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_text_to_speach"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        app:layout_constraintTop_toBottomOf="@id/cl_profile">
-
-        <ImageView
-            android:id="@+id/iv_tts_settings"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:importantForAccessibility="no"
-            android:src="@drawable/baseline_spatial_audio_off_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_tts_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/tts_setting"
-            android:textSize="16sp"
-            android:theme="@style/Base.Theme.InterviewKu"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_tts_settings"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:colorAccent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_reset_password"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        app:layout_constraintTop_toBottomOf="@id/cl_text_to_speach">
+        app:layout_constraintTop_toBottomOf="@id/cl_profile">
 
         <ImageView
             android:id="@+id/imageView3"

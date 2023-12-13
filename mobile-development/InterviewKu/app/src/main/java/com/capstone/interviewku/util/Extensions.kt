@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.datastore.preferences.preferencesDataStore
 import com.capstone.interviewku.BuildConfig
 import com.capstone.interviewku.R
@@ -28,12 +27,12 @@ object Extensions {
             checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED
         }
 
-    fun Exception.handleHttpException(context: Context) {
+    fun Exception.handleHttpException(context: Context): String {
         if (BuildConfig.DEBUG) {
             printStackTrace()
         }
 
-        if (this is HttpException) {
+        return if (this is HttpException) {
             val message = this.response()?.errorBody()?.string()?.let { errorBody ->
                 try {
                     Gson().fromJson(errorBody, BaseResponse::class.java).message
@@ -44,13 +43,9 @@ object Extensions {
                 context.getString(R.string.unexpected_error)
             }
 
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            message
         } else {
-            Toast.makeText(
-                context,
-                context.getString(R.string.unexpected_error),
-                Toast.LENGTH_SHORT
-            ).show()
+            context.getString(R.string.unexpected_error)
         }
     }
 }

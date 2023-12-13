@@ -3,6 +3,7 @@ package com.capstone.interviewku.ui.activities.interviewresult
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,7 +55,8 @@ class InterviewResultActivity : AppCompatActivity() {
             }
         } else if (intent.hasExtra(EXTRA_INTERVIEW_ID_KEY)) {
             intent.getStringExtra(EXTRA_INTERVIEW_ID_KEY)?.let { interviewId ->
-                viewModel.getInterviewResultById(interviewId)
+                viewModel.setInterviewResultId(interviewId)
+                viewModel.getInterviewResultById()
             } ?: run {
                 finish()
             }
@@ -81,7 +83,9 @@ class InterviewResultActivity : AppCompatActivity() {
                 is Result.Success -> {
                     val data = it.data
 
-                    interviewResultAnswerAdapter.submitList(data.answers)
+                    interviewResultAnswerAdapter.submitList(data.answers.sortedBy { item ->
+                        item.questionOrder
+                    })
 
                     binding.tvMode.text = getString(
                         R.string.mode_template,
@@ -155,7 +159,21 @@ class InterviewResultActivity : AppCompatActivity() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-                    it.exception.getData()?.handleHttpException(this)
+                    val alertDialog = AlertDialog.Builder(this)
+                        .setCancelable(false)
+                        .setTitle(getString(R.string.error_title))
+                        .setMessage(it.exception.peekData().handleHttpException(this))
+                        .setPositiveButton(getString(R.string.try_again)) { _, _ ->
+                            viewModel.getInterviewResultById()
+                        }
+                        .setNegativeButton(getString(R.string.exit)) { _, _ ->
+                            finish()
+                        }
+                        .create()
+
+                    if (!isFinishing) {
+                        alertDialog.show()
+                    }
                 }
             }
         }
