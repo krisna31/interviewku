@@ -18,7 +18,7 @@ const passwordValidation = joiPassword
 
 const UserPayloadSchema = Joi.object({
   firstName: Joi.string().required().default('first name'),
-  lastName: Joi.string(),
+  lastName: Joi.string().allow(null).allow(''),
   email: Joi.string().email({ tlds: true }).default('interviewku@gmail.com').required(),
   password: passwordValidation,
 }).label('Users Payload');
@@ -37,7 +37,7 @@ const UserGetResponseSchema = Joi.object({
   data: Joi.object({
     id: Joi.string().default('user-xxx'),
     firstName: Joi.string().default('first name'),
-    lastName: Joi.any().default(null),
+    lastName: Joi.string().default(null).allow(null).allow(''),
     email: Joi.string().default('interviewku@gmail.com'),
     createdAt: Joi.date().default('2023-11-09T09:18:07.659Z'),
     updatedAt: Joi.any().default(null),
@@ -79,7 +79,8 @@ const UserIdentityResponseSchema = Joi.object({
   data: Joi.object({
     userId: Joi.string().default('user-xxx').required(),
     firstName: Joi.string().default('first name').required(),
-    lastName: Joi.string().default('last name').allow(null).required(),
+    lastName: Joi.string().default('last name').allow(null).required()
+      .allow(''),
     email: Joi.string().default('interviewku@gmail.com'),
     jobFieldId: Joi.number().max(2147483647).default(1).integer(),
     jobFieldName: Joi.string().default('IT'),
@@ -103,7 +104,7 @@ const DeleteUserIdentityResponseSchema = Joi.object({
 
 const PutChangeUserIdentityPayloadSchema = Joi.object({
   firstName: Joi.string(),
-  lastName: Joi.string(),
+  lastName: Joi.string().allow(null).allow(''),
   jobPositionId: Joi.number().max(2147483647).integer(),
   gender: Joi.string().length(1).valid('p', 'l', 'P', 'L'),
   dateBirth: Joi.date().max('now'),
