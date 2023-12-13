@@ -24,9 +24,9 @@ const struktur =
 
 const repeat =
   [
-    'tingkat fokus kamu dan memahami pertanyaan dalam melakukan sesi interview sudah baik',
-    'tingkat fokus kamu dalam melakukan sesi interview cukup baik',
-    'sebaiknya kamu lebih fokus lagi dalam melakukan sesi interview agar bisa memahami pertanyaan yang diberikan',
+    'tingkat fokus kamu dalam memahami pertanyaan saat melakukan simulasi sudah baik',
+    'tingkat fokus kamu dalam melakukan simulasi cukup baik',
+    'sebaiknya kamu lebih fokus lagi dalam melakukan simulasi agar bisa memahami pertanyaan yang diberikan',
   ]
 
 /*
