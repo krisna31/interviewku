@@ -19,6 +19,8 @@ class ArticlesHandler {
       offset: startIndex,
     });
 
+    const baseUrl = request.server.info.uri;
+
     return {
       success: true,
       message: 'Articles berhasil ditemukan',
@@ -26,10 +28,10 @@ class ArticlesHandler {
         count: articles.length || 0,
         currentPage: +page,
         totalData: +totalData || 0,
-        nextUrl: endIndex < totalData ? `${process.env.BASE_URL}/articles?page=${+page + 1}&limit=${limit}` : null,
-        previousUrl: startIndex > 0 ? `${process.env.BASE_URL}/articles?page=${+page - 1}&limit=${limit}` : null,
-        firstPageUrl: `${process.env.BASE_URL}/articles?page=1&limit=${limit}`,
-        lastPageUrl: `${process.env.BASE_URL}/articles?page=${Math.ceil(totalData / limit)}&limit=${limit}`,
+        nextUrl: endIndex < totalData ? `${baseUrl}/articles?page=${+page + 1}&limit=${limit}` : null,
+        previousUrl: startIndex > 0 ? `${baseUrl}/articles?page=${+page - 1}&limit=${limit}` : null,
+        firstPageUrl: `${baseUrl}/articles?page=1&limit=${limit}`,
+        lastPageUrl: `${baseUrl}/articles?page=${Math.ceil(totalData / limit)}&limit=${limit}`,
         limit: +limit,
       },
       data: articles,

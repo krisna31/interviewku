@@ -208,6 +208,8 @@ class InterviewsHandler {
       offset: startIndex,
     });
 
+    const baseUrl = request.server.info.uri;
+
     return {
       success: true,
       message: 'Sesi Interview ditemukan',
@@ -215,10 +217,10 @@ class InterviewsHandler {
         count: interviewData.length || 0,
         currentPage: +page,
         totalData: +totalData || 0,
-        nextUrl: endIndex < totalData ? `${process.env.BASE_URL}/interviews?page=${+page + 1}&limit=${limit}` : null,
-        previousUrl: startIndex > 0 ? `${process.env.BASE_URL}/interviews?page=${+page - 1}&limit=${limit}` : null,
-        firstPageUrl: `${process.env.BASE_URL}/interviews?page=1&limit=${limit}`,
-        lastPageUrl: `${process.env.BASE_URL}/interviews?page=${Math.ceil(totalData / limit)}&limit=${limit}`,
+        nextUrl: endIndex < totalData ? `${baseUrl}/interviews?page=${+page + 1}&limit=${limit}` : null,
+        previousUrl: startIndex > 0 ? `${baseUrl}/interviews?page=${+page - 1}&limit=${limit}` : null,
+        firstPageUrl: `${baseUrl}/interviews?page=1&limit=${limit}`,
+        lastPageUrl: `${baseUrl}/interviews?page=${Math.ceil(totalData / limit)}&limit=${limit}`,
         limit: +limit,
       },
       data: interviewData,

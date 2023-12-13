@@ -41,6 +41,8 @@ class ChatsHandler {
       offset: startIndex,
     });
 
+    const baseUrl = request.server.info.uri;
+
     return {
       success: true,
       message: 'Chats berhasil ditemukan',
@@ -48,10 +50,10 @@ class ChatsHandler {
         count: chats.length || 0,
         currentPage: +page,
         totalData: +totalData || 0,
-        nextUrl: endIndex < totalData ? `${process.env.BASE_URL}/chats?page=${+page + 1}&limit=${limit}` : null,
-        previousUrl: startIndex > 0 ? `${process.env.BASE_URL}/chats?page=${+page - 1}&limit=${limit}` : null,
-        firstPageUrl: `${process.env.BASE_URL}/chats?page=1&limit=${limit}`,
-        lastPageUrl: `${process.env.BASE_URL}/chats?page=${Math.ceil(totalData / limit)}&limit=${limit}`,
+        nextUrl: endIndex < totalData ? `${baseUrl}/chats?page=${+page + 1}&limit=${limit}` : null,
+        previousUrl: startIndex > 0 ? `${baseUrl}/chats?page=${+page - 1}&limit=${limit}` : null,
+        firstPageUrl: `${baseUrl}/chats?page=1&limit=${limit}`,
+        lastPageUrl: `${baseUrl}/chats?page=${Math.ceil(totalData / limit)}&limit=${limit}`,
         limit: +limit,
       },
       data: chats.map((chat) => ({
