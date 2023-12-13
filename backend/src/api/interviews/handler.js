@@ -208,7 +208,7 @@ class InterviewsHandler {
       offset: startIndex,
     });
 
-    const baseUrl = request.server.info.uri;
+    const baseUrl = process.env.APP_BASE_URL;
 
     return {
       success: true,
