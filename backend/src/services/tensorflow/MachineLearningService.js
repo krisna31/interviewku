@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-restricted-syntax */
 const fs = require('fs');
@@ -18,8 +19,8 @@ class MachineLearningService {
     // chat bot model, tokenizer, and tags class
     this._chatbotModel = tf.loadLayersModel(tf.io.fileSystem(`${__dirname}/tfjs_model/chatbot_model/model.json`));
     this._chatbotModelTokenizer = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/chatbot_model/tokenizer_dict_chatbot.json`, 'utf8'));
-    this._chatbotModelTagsClassJson = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/chatbot_model/chatbot_result_decoder.json`, 'utf8'));
-    this._chatbotModelResponseJson = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/chatbot_model/responses_chatbot.json`, 'utf8'));
+    this._chatbotModelTagsClassJson = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/chatbot_model/result_decoder.json`, 'utf8'));
+    this._chatbotModelDatasetJson = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/chatbot_model/dataset_training.json`, 'utf8'));
 
     this._questionClass = {
       'General - Tentang Perusahaan': 0,
@@ -40,18 +41,27 @@ class MachineLearningService {
       Perhotelan: 15,
     };
 
+    this._blacklistWord = ['saya'];
+
     this._replaceWords = [
+      ['wawancara', ['interview']],
       ['online', ['daring', 'remote']],
       ['meeting', ['gmeet', 'zoom']],
       ['persiapan', ['persiapkan', 'disiapkan', 'dipersiapkan']],
       ['cv', ['curiculum vitae', 'resume']],
       ['penutup', ['closing statement']],
       ['mereschedule', ['jadwal ulang', 'menjadwalkan ulang', 'mengubah jadwal', 'merubah jadwal', 'pindah jadwal']],
-      ['pewawancara', ['hrd']],
+      ['pewawancara', ['hrd', 'recruiter', 'interviewer', 'hr']],
       ['bagus', ['menarik', 'keren', 'tepat']],
       ['kesalahan umum', ['kesalahan kecil']],
-      ['saran', ['tips']],
-      ['pakaian', ['baju', 'setelan', 'kostum']],
+      ['pakaian', ['baju', 'setelan', 'kostum', 'berpenampilan']],
+      ['stres', ['stress']],
+      ['bahasa tubuh', ['gestur', 'gerak tubuh', 'postur']],
+      ['kurang', ['minim']],
+      ['gugup', ['terbatabata', 'gagap', 'grogi']],
+      ['saat', ['dalam proses']],
+      ['pekerjaan', ['job']],
+      ['hai', ['hello', 'hy', 'helo', 'halo', 'hay', 'p']],
     ];
   }
 
@@ -60,19 +70,18 @@ class MachineLearningService {
       this._chatbotModel.then((res) => {
         // preprocessing text
         const processedText = this.chatbotPreprocessingText(question);
-        const tokenizedText = this.tokenize(processedText, this._chatbotModelTokenizer, 13);
+        const tokenizedText = this.tokenize(processedText, this._chatbotModelTokenizer, 10);
 
         // predict text
-        // const result = res.predict(tf.tensor2d(tokenizedText));
-        // const tagResult = result.argMax(-1).arraySync()[0];
         const predictResult = res.predict(tf.tensor2d(tokenizedText));
         const tagResultSequence = predictResult.argMax(-1).arraySync()[0];
         const tagResult = this.getKeyByValue(this._chatbotModelTagsClassJson, tagResultSequence);
 
-        const resultList = this._chatbotModelResponseJson[tagResult];
-        const randomIndex = Math.floor(Math.random() * resultList.length);
-        const result = resultList[randomIndex];
-        resolve(result);
+        const repsonses = this._chatbotModelDatasetJson
+          .filter((d) => d.tag === tagResult)[0].responses;
+        const response = repsonses[Math.floor(Math.random() * repsonses.length)];
+
+        resolve(response);
       }).catch((err) => {
         console.error('🚀 ~ file: MachineLearningService.js:94 ~ MachineLearningService ~ this._chatbotModel.then ~ err:', err);
         reject(err);
@@ -86,6 +95,7 @@ class MachineLearningService {
 
     const cleanedWords = [];
     for (const word of words) {
+      if (this._blacklistWord.includes(word)) continue;
       let replaced = false;
       for (const [replacement, target] of this._replaceWords) {
         if (target.includes(word)) {
