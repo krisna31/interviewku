@@ -118,6 +118,7 @@
     <string name="unexpected_error">Terjadi kesalahan. Silahkan coba lagi</string>
     <string name="wrong_password">Kata Sandi Salah</string>
 
+
     <!--  TEMPLATE  -->
     <string name="author_template">Dibuat oleh: %s</string>
     <string name="created_at_template">Dibuat pada: %s</string>
