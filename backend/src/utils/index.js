@@ -98,8 +98,16 @@ function changeToOneUntilFiveRange(number) {
 }
 
 function utcToLocalTimeZone(date) {
-  return date === null ? null : date.toLocaleString('id-ID', {
-    day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit',
+  if (date === null) return null;
+
+  date.setHours(date.getHours() + 7);
+
+  return date.toLocaleString('id-ID', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   });
 }
 
