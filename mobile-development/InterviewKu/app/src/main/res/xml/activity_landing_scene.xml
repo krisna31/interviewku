@@ -2,73 +2,136 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
+    <ConstraintSet android:id="@+id/blank">
+        <Constraint
+            android:id="@+id/iv_first"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="48dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/iv_second"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="48dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/iv_right"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="48dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
     <ConstraintSet android:id="@+id/first">
-        <Constraint android:id="@id/left">
-            <Transform android:translationX="0dp" />
-        </Constraint>
-
-        <Constraint android:id="@id/center">
-            <Transform
-                android:rotationY="-25"
-                android:translationX="200dp" />
-        </Constraint>
-
-        <Constraint android:id="@id/right">
-            <Transform
-                android:rotationY="-25"
-                android:translationX="500dp" />
-        </Constraint>
+        <Constraint
+            android:id="@+id/iv_first"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/iv_second"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="48dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/iv_right"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="48dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
-
     <ConstraintSet android:id="@+id/second">
-        <Constraint android:id="@id/left">
-            <Transform
-                android:rotationY="25"
-                android:translationX="-200dp" />
-        </Constraint>
-
-        <Constraint android:id="@id/center">
-            <Transform
-                android:rotationY="0"
-                android:translationX="0dp" />
-        </Constraint>
-
-        <Constraint android:id="@id/right">
-            <Transform
-                android:rotationY="-15"
-                android:translationX="200dp" />
-        </Constraint>
+        <Constraint
+            android:id="@+id/iv_first"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="48dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/iv_second"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/iv_right"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="48dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
-
     <ConstraintSet android:id="@+id/third">
-        <Constraint android:id="@id/left">
-            <Transform
-                android:rotationY="25"
-                android:translationX="-500dp" />
-        </Constraint>
-
-        <Constraint android:id="@id/center">
-            <Transform
-                android:rotationY="25"
-                android:translationX="-200dp" />
-        </Constraint>
-
-        <Constraint android:id="@id/right">
-            <Transform
-                android:rotationY="0"
-                android:translationX="0dp" />
-        </Constraint>
+        <Constraint
+            android:id="@+id/iv_first"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="48dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/iv_second"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="48dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/iv_right"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
-
-    <Transition
-        motion:constraintSetEnd="@id/second"
-        motion:constraintSetStart="@id/first" />
-
-    <Transition
-        motion:constraintSetEnd="@id/third"
-        motion:constraintSetStart="@id/second" />
     <Transition
         motion:constraintSetEnd="@+id/first"
-        motion:constraintSetStart="@+id/third" />
+        motion:constraintSetStart="@+id/blank" />
+    <Transition
+        motion:constraintSetEnd="@+id/second"
+        motion:constraintSetStart="@+id/blank" />
+    <Transition
+        motion:constraintSetEnd="@+id/third"
+        motion:constraintSetStart="@+id/blank" />
 
 </MotionScene>

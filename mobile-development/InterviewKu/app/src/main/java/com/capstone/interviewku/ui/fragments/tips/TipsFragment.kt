@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.FragmentTipsBinding
 import com.capstone.interviewku.ui.activities.tipsdetail.TipsDetailActivity
 import com.capstone.interviewku.ui.adapters.ItemTipsScreenAdapter
@@ -36,10 +38,10 @@ class TipsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val context = requireContext()
+        val activity = requireActivity()
 
         val tipsScreenAdapter = ItemTipsScreenAdapter {
-            startActivity(Intent(context, TipsDetailActivity::class.java).apply {
+            startActivity(Intent(activity, TipsDetailActivity::class.java).apply {
                 putExtra(TipsDetailActivity.EXTRA_ARTICLE_ENTITY_KEY, it)
             })
         }.also { adapter ->
@@ -47,11 +49,33 @@ class TipsFragment : Fragment() {
                 binding.progressBar.isVisible =
                     combinedLoadStates.refresh == LoadState.Loading
                             || combinedLoadStates.append == LoadState.Loading
+
+                if (combinedLoadStates.refresh is LoadState.Error) {
+                    Toast.makeText(
+                        activity,
+                        getString(
+                            R.string.fetch_new_data_failed,
+                            (combinedLoadStates.refresh as LoadState.Error).error.message ?: ""
+                        ),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                if (combinedLoadStates.append is LoadState.Error) {
+                    Toast.makeText(
+                        activity,
+                        getString(
+                            R.string.fetch_new_data_failed,
+                            (combinedLoadStates.append as LoadState.Error).error.message ?: ""
+                        ),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
 
         binding.rvInterviewTips.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(activity)
             adapter = tipsScreenAdapter
         }
 

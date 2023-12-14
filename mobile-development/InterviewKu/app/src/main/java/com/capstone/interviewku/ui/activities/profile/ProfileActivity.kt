@@ -105,6 +105,11 @@ class ProfileActivity : AppCompatActivity() {
         viewModel.getJobPositions()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
+    }
+
     private fun setButtonEnabled() {
         val firstName = binding.etFirstname.text.toString()
         val gender = (binding.spinnerGenderProfile.selectedItem as SpinnerModel?)?.value
@@ -150,7 +155,6 @@ class ProfileActivity : AppCompatActivity() {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
-
         binding.etCurrentCity.addTextChangedListener(afterTextChanged = {
             setButtonEnabled()
         })
@@ -178,14 +182,22 @@ class ProfileActivity : AppCompatActivity() {
                 is Result.Success -> {
                     jobPositionsResponseResult.data.data?.let { jobPositionsResponseData ->
                         jobFieldSpinnerData = mutableListOf<SpinnerModel>().apply {
+                            add(SpinnerModel("-1", getString(R.string.please_choose)))
+                            add(jobPositionsResponseData.jobPositions[0].let {
+                                // General
+                                SpinnerModel(it.id.toString(), it.name)
+                            })
                             addAll(
-                                jobPositionsResponseData.jobPositions.sortedBy {
+                                jobPositionsResponseData.jobPositions.subList(
+                                    1,
+                                    jobPositionsResponseData.jobPositions.size
+                                ).sortedBy {
                                     it.name
                                 }.map { jobPosition ->
                                     SpinnerModel(jobPosition.id.toString(), jobPosition.name)
                                 }
                             )
-                            add(0, SpinnerModel("-1", getString(R.string.please_choose)))
+
                             binding.spinnerJobPosition.adapter = ArrayAdapter(
                                 this@ProfileActivity,
                                 R.layout.spinner_item,

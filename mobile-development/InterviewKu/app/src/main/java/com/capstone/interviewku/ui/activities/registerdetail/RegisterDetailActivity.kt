@@ -140,15 +140,23 @@ class RegisterDetailActivity : AppCompatActivity() {
             when (jobPositionsResponseResult) {
                 is Result.Success -> {
                     jobPositionsResponseResult.data.data?.let { jobPositionsResponseData ->
-                        val spinnerData = mutableListOf<SpinnerModel>()
-                        spinnerData.addAll(
-                            jobPositionsResponseData.jobPositions.sortedBy {
-                                it.name
-                            }.map { jobPosition ->
-                                SpinnerModel(jobPosition.id.toString(), jobPosition.name)
-                            }
-                        )
-                        spinnerData.add(0, SpinnerModel("-1", getString(R.string.please_choose)))
+                        val spinnerData = mutableListOf<SpinnerModel>().apply {
+                            add(SpinnerModel("-1", getString(R.string.please_choose)))
+                            add(jobPositionsResponseData.jobPositions[0].let {
+                                // General
+                                SpinnerModel(it.id.toString(), it.name)
+                            })
+                            addAll(
+                                jobPositionsResponseData.jobPositions.subList(
+                                    1,
+                                    jobPositionsResponseData.jobPositions.size
+                                ).sortedBy {
+                                    it.name
+                                }.map { jobPosition ->
+                                    SpinnerModel(jobPosition.id.toString(), jobPosition.name)
+                                }
+                            )
+                        }
 
                         binding.spinnerJobPosition.adapter = ArrayAdapter(
                             this,

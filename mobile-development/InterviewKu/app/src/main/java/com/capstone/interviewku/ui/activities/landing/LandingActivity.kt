@@ -51,7 +51,12 @@ class LandingActivity : AppCompatActivity() {
                         R.id.first -> {
                             lifecycleScope.launch {
                                 delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
-                                setTransition(R.id.first, R.id.second)
+                                setTransition(R.id.first, R.id.blank)
+                                setTransitionDuration(TRANSITION_DURATION)
+                                transitionToEnd()
+
+                                delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
+                                setTransition(R.id.blank, R.id.second)
                                 setTransitionDuration(TRANSITION_DURATION)
                                 transitionToEnd()
                             }
@@ -60,7 +65,12 @@ class LandingActivity : AppCompatActivity() {
                         R.id.second -> {
                             lifecycleScope.launch {
                                 delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
-                                setTransition(R.id.second, R.id.third)
+                                setTransition(R.id.second, R.id.blank)
+                                setTransitionDuration(TRANSITION_DURATION)
+                                transitionToEnd()
+
+                                delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
+                                setTransition(R.id.blank, R.id.third)
                                 setTransitionDuration(TRANSITION_DURATION)
                                 transitionToEnd()
                             }
@@ -69,8 +79,13 @@ class LandingActivity : AppCompatActivity() {
                         R.id.third -> {
                             lifecycleScope.launch {
                                 delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
-                                setTransition(R.id.third, R.id.first)
-                                setTransitionDuration(RESET_TRANSITION_DURATION)
+                                setTransition(R.id.third, R.id.blank)
+                                setTransitionDuration(TRANSITION_DURATION)
+                                transitionToEnd()
+
+                                delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
+                                setTransition(R.id.blank, R.id.first)
+                                setTransitionDuration(TRANSITION_DURATION)
                                 transitionToEnd()
                             }
                         }
@@ -88,7 +103,7 @@ class LandingActivity : AppCompatActivity() {
 
             lifecycleScope.launch {
                 delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
-                setTransition(R.id.first, R.id.second)
+                setTransition(R.id.blank, R.id.first)
                 setTransitionDuration(TRANSITION_DURATION)
                 transitionToEnd()
             }
@@ -96,8 +111,7 @@ class LandingActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TRANSITION_DURATION = 1500
-        private const val TRANSITION_DELAY = 1000
-        private const val RESET_TRANSITION_DURATION = 500
+        private const val TRANSITION_DURATION = 750
+        private const val TRANSITION_DELAY = 500
     }
 }

@@ -86,6 +86,7 @@
     <string name="download_tts_data_explanation">Untuk melanjutkan, Anda harus mengunduh data bahasa Indonesia pada Google TTS</string>
     <string name="email_invalid">Email Tidak Valid</string>
     <string name="end_interview_failed">Gagal untuk mengakhiri sesi (%s). Silahkan coba lagi</string>
+    <string name="fetch_new_data_failed">Terjadi kesalahan saat mengambil data terbaru (%s)</string>
     <string name="firstname_empty">Nama depan tidak boleh kosong</string>
     <string name="gender_required">Silakan pilih jenis kelamin</string>
     <string name="home_load_failed">Gagal memuat data halaman beranda (%s). Silahkan coba kembali</string>
@@ -114,6 +115,7 @@
     <string name="record_failed">Gagal memulai perekaman suara. Pastikan tidak ada aplikasi lain yang menggunakan mikrofon</string>
     <string name="register_detail_instruction">Silahkan masukkan informasi tambahan terkait diri anda</string>
     <string name="register_instruction">Silahkan masukkan informasi berikut untuk mendaftarkan diri</string>
+    <string name="reload_instruction">Silahkan muat ulang untuk memperoleh data</string>
     <string name="start_interview_failed">Gagal untuk memulai sesi (%s). Silahkan coba lagi</string>
     <string name="start_other_session">Mulai sesi Uji Kemampuan lainnya</string>
     <string name="submit_answer_failed">Gagal untuk mengirim jawaban (%s). SIlahkan coba lagi</string>
