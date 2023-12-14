@@ -112,14 +112,16 @@ class InterviewsHandler {
           questionOrder,
         });
 
+      const strukturScore = await this._machineLearningService.getStrukturScore({
+        userAnswer,
+      });
+
       const score = await this._machineLearningService.getScore({
         userAnswer,
         field: jobFieldName,
         allAnswer,
-      });
-
-      const strukturScore = await this._machineLearningService.getStrukturScore({
-        userAnswer,
+        retryAttempt,
+        strukturScore,
       });
 
       testHistoryId = await this._interviewsService.updateAnswerByInterviewId({

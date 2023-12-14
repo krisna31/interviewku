@@ -8,15 +8,15 @@ class MachineLearningService {
   constructor() {
     // common_words
     this._commonWords = JSON.parse(fs.readFileSync(`${__dirname}/common_words.json`, 'utf8'));
-    // struktur model and tokenizer
+    // Sentences Structure's model and tokenizer
     this._strukturModel = tf.loadLayersModel(tf.io.fileSystem(`${__dirname}/tfjs_model/struktur_model/model.json`));
     this._strukturModelTokenizer = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/struktur_model/tokenizer_dict.json`, 'utf8'));
 
-    // similarity model and tokenizer
+    // Field Classification's model and tokenizer
     this._similarityModel = tf.loadLayersModel(tf.io.fileSystem(`${__dirname}/tfjs_model/similarity_model/model.json`));
     this._similarityModelTokenizer = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/similarity_model/tokenizer_dict.json`, 'utf8'));
 
-    // chat bot model, tokenizer, and tags class
+    // Chatbot's model, tokenizer, and tags class
     this._chatbotModel = tf.loadLayersModel(tf.io.fileSystem(`${__dirname}/tfjs_model/chatbot_model/model.json`));
     this._chatbotModelTokenizer = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/chatbot_model/tokenizer_dict_chatbot.json`, 'utf8'));
     this._chatbotModelTagsClassJson = JSON.parse(fs.readFileSync(`${__dirname}/tfjs_model/chatbot_model/result_decoder.json`, 'utf8'));
@@ -55,13 +55,14 @@ class MachineLearningService {
       ['bagus', ['menarik', 'keren', 'tepat']],
       ['kesalahan umum', ['kesalahan kecil']],
       ['pakaian', ['baju', 'setelan', 'kostum', 'berpenampilan']],
-      ['stres', ['stress']],
+      ['stres', ['stress', 'pusing', 'pening', 'bingung']],
       ['bahasa tubuh', ['gestur', 'gerak tubuh', 'postur']],
       ['kurang', ['minim']],
       ['gugup', ['terbatabata', 'gagap', 'grogi']],
       ['saat', ['dalam proses']],
-      ['pekerjaan', ['job']],
+      ['pekerjaan', ['job', 'kerjaan']],
       ['hai', ['hello', 'hy', 'helo', 'halo', 'hay', 'p']],
+      ['lowongan kerja', ['loker', 'lowker']],
     ];
   }
 
@@ -112,13 +113,13 @@ class MachineLearningService {
   }
 
   async getScore({
-    userAnswer, field, allAnswer,
+    userAnswer, field, allAnswer, retryAttempt, strukturScore,
   }) {
     if (userAnswer == null) {
       return null;
     }
 
-    // melakukan predict field
+    // field classification from user's answer
     const predictField = await this.predictText({ userAnswer });
     let resultField = false;
 
@@ -126,16 +127,31 @@ class MachineLearningService {
       resultField = true;
     }
 
-    // menghitung similarity jawaban dari membandingkan jawaban user ke jawaban dataset
+    // calculating similarity between user's answer and dataset
     const listScore = [];
     for (let i = 0; i < allAnswer.length; i += 1) {
       listScore.push(this.cosineSimilarity(userAnswer, allAnswer[i].answer));
     }
     const resultSimilarity = Math.max(...listScore);
 
-    // Komposisi score akhir yaitu 70% field dan 30% similarity
-    const finalScore = (resultField * 0.7) + (resultSimilarity * 0.3);
+    // Final Score composition is:
+    // 10% sentences structure, 20% retryAttempt, 50% field classification, dan 20% similarity
+    let retryScore;
 
+    if (retryAttempt === 0) {
+      retryScore = 1;
+    } else if (retryAttempt < 3) {
+      retryScore = 0.75;
+    } else if (retryAttempt < 5) {
+      retryScore = 0.5;
+    } else if (retryAttempt < 7) {
+      retryScore = 0.25;
+    } else {
+      retryScore = 0;
+    }
+
+    // eslint-disable-next-line max-len
+    const finalScore = (strukturScore * 0.1) + (retryScore * 0.2) + (resultField * 0.5) + (resultSimilarity * 0.2);
     return finalScore;
   }
 
@@ -173,6 +189,10 @@ class MachineLearningService {
       );
       tokenizeUserAnswer = tf.mean(tokenizeUserAnswer);
       tokenizeUserAnswer = tokenizeUserAnswer.arraySync();
+
+      if (tokenizeUserAnswer > 1) {
+        tokenizeUserAnswer = 1;
+      }
 
       return tokenizeUserAnswer;
     } catch (err) {
