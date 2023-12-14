@@ -27,6 +27,9 @@ class ChatsHandler {
   }
 
   async getAllChatsHandler(request, h) {
+    // get userId from auth
+    const { id: userId } = request.auth.credentials;
+
     // get page and limit
     const { page = 1, limit = 10 } = request.query;
     const startIndex = (page - 1) * limit;
@@ -39,6 +42,7 @@ class ChatsHandler {
     const chats = await this._chatsService.getAllChats({
       limit,
       offset: startIndex,
+      userId,
     });
 
     const baseUrl = process.env.APP_BASE_URL;
@@ -69,7 +73,8 @@ class ChatsHandler {
 
   async getChatById(request, h) {
     const { chatId } = request.params;
-    const chat = await this._chatsService.getChatById(chatId);
+    const { id: userId } = request.auth.credentials;
+    const chat = await this._chatsService.getChatById(chatId, userId);
 
     return {
       success: true,

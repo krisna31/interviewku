@@ -23,10 +23,10 @@ class ChatsService {
     return result.rows[0];
   }
 
-  async getAllChats({ limit, offset }) {
+  async getAllChats({ limit, offset, userId }) {
     const query = {
-      text: 'SELECT chat.id, users.id AS userId, chat.question, chat.answer, chat.created_at, chat.updated_at FROM chat LEFT JOIN users ON users.id = chat.user_id ORDER BY chat.created_at DESC LIMIT $1 OFFSET $2',
-      values: [limit, offset],
+      text: 'SELECT chat.id, users.id AS userId, chat.question, chat.answer, chat.created_at, chat.updated_at FROM chat LEFT JOIN users ON users.id = chat.user_id WHERE users.id = $1 ORDER BY chat.created_at DESC LIMIT $2 OFFSET $3',
+      values: [userId, limit, offset],
     };
 
     const result = await this._pool.query(query);
@@ -44,10 +44,10 @@ class ChatsService {
     return result.rows[0].count;
   }
 
-  async getChatById(chatId) {
+  async getChatById(chatId, userId) {
     const query = {
-      text: 'SELECT chat.id, users.id AS userId, chat.question, chat.answer, chat.created_at, chat.updated_at FROM chat LEFT JOIN users ON users.id = chat.user_id WHERE chat.id = $1',
-      values: [chatId],
+      text: 'SELECT chat.id, users.id AS userId, chat.question, chat.answer, chat.created_at, chat.updated_at FROM chat LEFT JOIN users ON users.id = chat.user_id WHERE chat.id = $1 AND users.id = $2',
+      values: [chatId, userId],
     };
 
     const result = await this._pool.query(query);
