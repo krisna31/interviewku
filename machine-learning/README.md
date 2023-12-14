@@ -4,7 +4,8 @@
 
 - [Sentence Structure Model](#sentence-structure)
 - [Scoring Model](#scoring)
-- [Chatbot Model](#chatbot)<br><br>
+- [Chatbot Model](#chatbot)
+- [Dataset](https://docs.google.com/spreadsheets/d/1WbzJXW3zsgJh7GDSrEA7GAng60mC53gq/edit?usp=sharing&ouid=112356162045159196126&rtpof=true&sd=true)<br><br>
 - [Windows Installation](#installation-for-windows)
 - [linux Installation](#installation-for-linux)
 
@@ -18,7 +19,7 @@ This model detects introductory sentence structures using Natural Language Proce
 -> Will give an output "Good"
 
 ## Scoring
-The scoring result have a composition: 50% from softmax field clasification and 50% similarity by the dataset
+The scoring result have a composition: 15% sentences structure, 5% retry attempt, 40% softmax classification, dan 40% similarity
 - Softmax field classification by using the model created before
 - Sentences similarity calculated by Cosine Similarity algorithm
 
