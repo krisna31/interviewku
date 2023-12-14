@@ -1,3 +1,5 @@
+@file:Suppress("SameParameterValue")
+
 package com.capstone.interviewku.ui.activities.interviewtrain
 
 import android.Manifest

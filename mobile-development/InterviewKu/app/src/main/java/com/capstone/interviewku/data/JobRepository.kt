@@ -21,16 +21,4 @@ class JobRepository @Inject constructor(
         APIUtil.unauthorizedErrorHandler(apiService, appPreferences) {
             apiService.getJobPositions(appPreferences.getBearerToken().first())
         }
-
-    companion object {
-        @Volatile
-        private var instance: JobRepository? = null
-
-        fun getInstance(apiService: InterviewKuAPIService, appPreferences: AppPreferences) =
-            instance ?: synchronized(this) {
-                JobRepository(apiService, appPreferences).also {
-                    instance = it
-                }
-            }
-    }
 }

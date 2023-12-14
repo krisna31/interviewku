@@ -66,16 +66,4 @@ class UserRepository @Inject constructor(
     suspend fun setHasUserIdentity(isHasUserIdentity: Boolean) {
         appPreferences.setHasUserIdentity(isHasUserIdentity)
     }
-
-    companion object {
-        @Volatile
-        private var instance: UserRepository? = null
-
-        fun getInstance(apiService: InterviewKuAPIService, appPreferences: AppPreferences) =
-            instance ?: synchronized(this) {
-                UserRepository(apiService, appPreferences).also {
-                    instance = it
-                }
-            }
-    }
 }

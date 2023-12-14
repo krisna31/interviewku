@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TipsViewModel @Inject constructor(
-    private val tipsRepository: TipsRepository
+    tipsRepository: TipsRepository
 ) : ViewModel() {
     val articles = tipsRepository.getPagedArticles().cachedIn(viewModelScope)
 }

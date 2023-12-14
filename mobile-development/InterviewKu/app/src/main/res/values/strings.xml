@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">InterviewKu</string>
 
     <!--  STATIC TEXT / TITLE / PLACEHOLDER  -->
@@ -39,7 +39,6 @@
     <string name="lastname">Nama Belakang</string>
     <string name="login">Masuk</string>
     <string name="logout">Keluar</string>
-    <string name="mic_setting">Pengaturan Mikrofon</string>
     <string name="microphone">Mikrofon</string>
     <string name="navigation_account">Akun</string>
     <string name="navigation_home">Beranda</string>
@@ -72,30 +71,25 @@
     <string name="try_again">Coba Lagi</string>
     <string name="tts_feature">Fitur Text to Speech (TTS)</string>
     <string name="tts_sample_sound">Ini adalah sampel suara dari TTS</string>
-    <string name="tts_setting">Pengaturan Text To Speech</string>
     <string name="welcome">Selamat datang di InterviewKu</string>
     <string name="yes">Ya</string>
 
     <!--  MESSAGE / INSTRUCTION  -->
     <string name="abort_recovery_confirmation">Apakah yakin ingin membatalkan pemulihan kata sandi?</string>
     <string name="abort_recovery_title">Batalkan Pemulihan</string>
-    <string name="birthdate_required">Silakan pilih tanggal lahir</string>
     <string name="check_mic_instruction">Suara akan langsung diputar setelah perekaman berhenti</string>
     <string name="continue_to_test">Lanjutkan ke Uji Kemampuan</string>
-    <string name="current_city_required">Silakan masukkan kota domisili</string>
     <string name="download_tts_data_explanation">Untuk melanjutkan, Anda harus mengunduh data bahasa Indonesia pada Google TTS</string>
     <string name="email_invalid">Email Tidak Valid</string>
     <string name="end_interview_failed">Gagal untuk mengakhiri sesi (%s). Silahkan coba lagi</string>
     <string name="fetch_new_data_failed">Terjadi kesalahan saat mengambil data terbaru (%s)</string>
     <string name="firstname_empty">Nama depan tidak boleh kosong</string>
-    <string name="gender_required">Silakan pilih jenis kelamin</string>
     <string name="home_load_failed">Gagal memuat data halaman beranda (%s). Silahkan coba kembali</string>
     <string name="interview_exit_confirm">Apakah anda yakin ingin keluar dari sesi? Anda akan dianggap tidak menyelesaikan sesi ini</string>
     <string name="interview_finished">Sesi Interview telah selesai!</string>
     <string name="interview_not_finished">Sesi tidak selesai</string>
     <string name="interview_not_finished_description">Silahkan mencoba sesi baru untuk memperoleh nilai keseluruhan</string>
     <string name="interview_test_screen_instruction">Silahkan berfokus pada pertanyaan yang diberikan</string>
-    <string name="job_position_required">Silakan pilih posisi pekerjaan yang diinginkan</string>
     <string name="login_instruction">Silahkan masuk ke akun anda</string>
     <string name="logout_confirmation">Apakah anda yakin ingin keluar?</string>
     <string name="logout_success">Berhasil keluar dari akun anda</string>
@@ -125,19 +119,18 @@
     <string name="tts_not_initialized">TTS belum diinisialisasi</string>
     <string name="unexpected_error">Terjadi kesalahan. Silahkan coba lagi</string>
     <string name="user_profile_saved">Perubahan info pengguna telah disimpan</string>
-    <string name="wrong_password">Kata Sandi Salah</string>
 
     <!--  TEMPLATE  -->
     <string name="author_template">Dibuat oleh: %s</string>
     <string name="created_at_template">Dibuat pada: %s</string>
     <string name="duration_label_template">Durasi: %s</string>
-    <string name="duration_template">%02d Menit %02d Detik</string>
+    <string name="duration_template" tools:ignore="PluralsCandidate">%02d Menit %02d Detik</string>
     <string name="first_last_name_template">%s %s</string>
     <string name="home_greeting_template">Halo, %s!</string>
     <string name="job_field_template">Bidang Pekerjaan: %s</string>
     <string name="mode_template">Mode %s</string>
     <string name="question_order_template">Pertanyaan %d / %d</string>
-    <string name="retry_count_template">%d kali</string>
+    <string name="retry_count_template" tools:ignore="PluralsCandidate">%d kali</string>
     <string name="source_template">Sumber: %s</string>
     <string name="started_at_template">Waktu: %s</string>
     <string name="tts_status_template">Status TTS: %s</string>

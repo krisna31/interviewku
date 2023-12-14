@@ -13,18 +13,6 @@ import java.util.Locale
 import java.util.TimeZone
 
 object Helpers {
-    fun articleEntityToArticleResponse(articleEntity: ArticleEntity) = Article(
-        id = articleEntity.id,
-        title = articleEntity.title,
-        subtitle = articleEntity.subtitle,
-        author = articleEntity.author,
-        source = articleEntity.source,
-        content = articleEntity.content,
-        coverImgUrl = articleEntity.coverImgUrl,
-        createdAt = articleEntity.createdAt,
-        updatedAt = articleEntity.updatedAt
-    )
-
     fun articleResponseToArticleEntity(article: Article) = ArticleEntity(
         id = article.id,
         title = article.title,

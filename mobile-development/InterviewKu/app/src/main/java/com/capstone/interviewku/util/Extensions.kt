@@ -22,11 +22,6 @@ object Extensions {
     fun Context.isPermissionGranted(permission: String) =
         checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
 
-    fun Context.isPermissionsGranted(vararg permissions: String) =
-        permissions.all {
-            checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED
-        }
-
     fun Exception.handleHttpException(context: Context): String {
         if (BuildConfig.DEBUG) {
             printStackTrace()

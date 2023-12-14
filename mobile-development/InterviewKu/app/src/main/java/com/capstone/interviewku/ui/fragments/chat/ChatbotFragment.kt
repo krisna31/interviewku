@@ -67,7 +67,7 @@ class ChatbotFragment : Fragment() {
 
             when (result) {
                 is Result.Success -> {
-                    binding.etQuestion.isEnabled = false
+                    binding.etQuestion.isEnabled = true
                     binding.btnSubmitQuestion.isEnabled = true
                     binding.etQuestion.setText("")
 
@@ -77,7 +77,7 @@ class ChatbotFragment : Fragment() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-                    binding.etQuestion.isEnabled = false
+                    binding.etQuestion.isEnabled = true
                     binding.btnSubmitQuestion.isEnabled = true
                     Toast.makeText(
                         context,

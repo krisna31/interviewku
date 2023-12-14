@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.capstone.interviewku.data
 
 import androidx.paging.Pager

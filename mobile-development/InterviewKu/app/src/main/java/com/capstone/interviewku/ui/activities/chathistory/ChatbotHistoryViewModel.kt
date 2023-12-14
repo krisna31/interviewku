@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChatbotHistoryViewModel @Inject constructor(
-    private val chatbotRepository: ChatbotRepository
+    chatbotRepository: ChatbotRepository
 ) : ViewModel() {
     val chatHistory = chatbotRepository.getPagedChatHistory().cachedIn(viewModelScope)
 }
