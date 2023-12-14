@@ -1,3 +1,5 @@
+const { utcToLocalTimeZone } = require('../../utils');
+
 /* eslint-disable no-unused-vars */
 class AuthenticationsHandler {
   constructor({
@@ -100,13 +102,13 @@ class AuthenticationsHandler {
       </div>
     `;
 
-    await this._usersService.addOtpToUser(email, otp);
+    const expiredAt = await this._usersService.addOtpToUser(email, otp);
 
     await this._mailService.sendEmail(email, content);
 
     return {
       success: true,
-      message: 'Email Sudah Dikirimkan',
+      message: `Kode OTP telah dikirimkan ke email ${email} dan berlaku hingga ${utcToLocalTimeZone(expiredAt)}`,
     };
   }
 

@@ -41,7 +41,7 @@ class AuthenticationsService {
 
   // eslint-disable-next-line class-methods-use-this
   generateSixDigitCode() {
-    return process.env.APP_ENV === 'dev' ? '888888' : `${Math.floor(100000 + Math.random() * 900000)}`;
+    return process.env.OTP_RESET_PASSWORD === '888888' ? '888888' : `${Math.floor(100000 + Math.random() * 900000)}`;
   }
 }
 

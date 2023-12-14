@@ -328,14 +328,18 @@ class UsersService {
   }
 
   async addOtpToUser(email, otp) {
+    const expiredAt = getDateAfterXMinutes(new Date(), 5);
+
     const query = {
       text: 'INSERT INTO otps(users_email, otp, expired_at) VALUES($1, $2, $3)',
-      values: [email, otp, getDateAfterXMinutes(new Date(), 5)],
+      values: [email, otp, expiredAt],
     };
 
     await this.verifyAvaliableEmail(email);
 
     await this._pool.query(query);
+
+    return expiredAt;
   }
 
   async deleteOtpFromUser(email) {

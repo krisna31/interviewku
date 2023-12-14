@@ -91,15 +91,21 @@ function getDateAfterXMinutes(date, minutes) {
 }
 
 function changeToOneUntilFiveRange(number) {
-  if (number === null) return null
-  const result = Math.round(number * 5)
+  if (number === null) return null;
+  const result = Math.round(number * 5);
 
   return result <= 1 ? 1 : result;
 }
 
+function utcToLocalTimeZone(date) {
+  return date === null ? null : date.toLocaleString('id-ID', {
+    day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit',
+  });
+}
+
 module.exports = {
   dateFromDBToRightFormatDate,
-  // utcToLocalTimeZone,
+  utcToLocalTimeZone,
   randomInRange,
   getFeedback,
   sendCustomResponseByStatusCode,
