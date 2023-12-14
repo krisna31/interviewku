@@ -10,10 +10,7 @@ import com.capstone.interviewku.data.network.response.Chat
 import com.capstone.interviewku.databinding.ItemChatbotHistoryBinding
 import com.capstone.interviewku.util.Helpers
 
-
-class ItemChatbotHistoryAdapter(
-    private val onItemClick: (Chat) -> Unit
-) : PagingDataAdapter<Chat, ItemChatbotHistoryAdapter.ViewHolder>(
+class ItemChatbotHistoryAdapter : PagingDataAdapter<Chat, ItemChatbotHistoryAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<Chat>() {
         override fun areItemsTheSame(
             oldItem: Chat,
@@ -38,7 +35,7 @@ class ItemChatbotHistoryAdapter(
         val binding = holder.binding
 
         getItem(position)?.let { data ->
-            with(binding) {
+            binding.apply {
                 tvItemQuestion.text = data.question
                 tvItemAnswer.text = data.answer
 
@@ -50,10 +47,6 @@ class ItemChatbotHistoryAdapter(
                         "-"
                     }
                 )
-
-                root.setOnClickListener {
-                    onItemClick(data)
-                }
             }
         }
     }

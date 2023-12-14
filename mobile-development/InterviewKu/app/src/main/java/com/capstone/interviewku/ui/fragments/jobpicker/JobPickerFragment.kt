@@ -17,7 +17,6 @@ import com.capstone.interviewku.util.SpinnerModel
 
 class JobPickerFragment(
     private val onJobSelected: (Int) -> Unit,
-    private val initialJobFieldId: Int = -1,
 ) : DialogFragment() {
     private var _binding: CustomAlertJobBinding? = null
     private val binding

@@ -1,6 +1,5 @@
 package com.capstone.interviewku.ui.activities.chathistory
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityChatbotHistoryBinding
 import com.capstone.interviewku.ui.adapters.ItemChatbotHistoryAdapter
-import com.capstone.interviewku.ui.fragments.chat.ChatbotFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,9 +30,7 @@ class ChatbotHistoryActivity : AppCompatActivity() {
             title = getString(R.string.chatbot_history)
         }
 
-        val chatHistoryAdapter = ItemChatbotHistoryAdapter { chat ->
-            startActivity(Intent(this, ChatbotFragment::class.java))
-        }.also { adapter ->
+        val chatHistoryAdapter = ItemChatbotHistoryAdapter().also { adapter ->
             adapter.addLoadStateListener { combinedLoadStates ->
                 binding.progressBar.isVisible =
                     combinedLoadStates.refresh == LoadState.Loading
@@ -54,6 +50,5 @@ class ChatbotHistoryActivity : AppCompatActivity() {
         viewModel.chatHistory.observe(this) {
             chatHistoryAdapter.submitData(lifecycle, it)
         }
-
     }
 }

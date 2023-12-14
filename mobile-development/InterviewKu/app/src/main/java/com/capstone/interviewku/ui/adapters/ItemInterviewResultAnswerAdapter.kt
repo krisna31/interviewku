@@ -83,6 +83,7 @@ class ItemInterviewResultAnswerAdapter :
                     binding.ivItemRetryQuestion.isVisible = false
                 }
 
+                binding.tvItemAnswer.text = data.userAnswer.ifEmpty { "-" }
                 binding.tvItemFeedback.text = data.feedback
             } ?: run {
                 binding.tvItemNotAnswered.isVisible = true
@@ -90,6 +91,7 @@ class ItemInterviewResultAnswerAdapter :
                 binding.ratingBarItemScore.isVisible = false
                 binding.ivItemDuration.isVisible = false
                 binding.ivItemRetryQuestion.isVisible = false
+                binding.tvItemAnswerTitle.isVisible = false
                 binding.tvItemFeedbackTitle.isVisible = false
                 binding.tvItemFeedback.isVisible = false
             }

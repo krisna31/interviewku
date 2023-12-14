@@ -6,10 +6,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityForgetPasswordBinding
 import com.capstone.interviewku.ui.activities.recoverpass.RecoverPasswordActivity
 import com.capstone.interviewku.util.Extensions.handleHttpException
+import com.capstone.interviewku.util.Helpers
 import com.capstone.interviewku.util.Result
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,44 +27,62 @@ class ForgetPasswordActivity : AppCompatActivity() {
         binding = ActivityForgetPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnSend.isEnabled = false
         binding.btnSend.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            viewModel.requestPasswordReset(email)
+            binding.etEmail.apply {
+                isEnabled = false
+                viewModel.requestPasswordReset(text.toString())
+            }
+            it.isEnabled = false
         }
 
-        observePasswordResetState()
-    }
+        binding.etEmail.apply {
+            addTextChangedListener(afterTextChanged = {
+                error = if (!Helpers.isEmailValid(it.toString()) && it.toString().isNotEmpty()) {
+                    getString(R.string.email_invalid)
+                } else {
+                    null
+                }
+                binding.btnSend.isEnabled = Helpers.isEmailValid(it.toString())
+            })
+        }
 
-    private fun observePasswordResetState() {
         viewModel.passwordResetState.observe(this) { result ->
+            binding.progressBar.isVisible = result is Result.Loading
+
             when (result) {
-                is Result.Loading -> {
-                    binding.progressBar.isVisible = true
+                is Result.Success -> {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.otp_sending_success),
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    startActivity(Intent(this, RecoverPasswordActivity::class.java).apply {
+                        putExtra(
+                            RecoverPasswordActivity.EXTRA_EMAIL_KEY,
+                            binding.etEmail.text.toString()
+                        )
+                        putExtra(
+                            RecoverPasswordActivity.EXTRA_MESSAGE_KEY,
+                            result.data.message
+                        )
+                    })
+                    finish()
                 }
 
-                is Result.Success -> {
-                    binding.progressBar.isVisible = false
-                    showToast(getString(R.string.otp_sending_success))
-                    navigateToRecoverPasswordActivity()
-                }
+                is Result.Loading -> {}
 
                 is Result.Error -> {
-                    binding.progressBar.isVisible = false
+                    binding.apply {
+                        etEmail.isEnabled = true
+                        btnSend.isEnabled = true
+                    }
                     result.exception.getData()?.handleHttpException(this)?.let { message ->
                         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
-    }
-
-    private fun navigateToRecoverPasswordActivity() {
-        val intent = Intent(this, RecoverPasswordActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

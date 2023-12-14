@@ -85,11 +85,21 @@
                 android:id="@+id/tv_not_finished"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="4dp"
                 android:text="@string/interview_not_finished_description"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/tv_rating_summary" />
+
+            <Button
+                android:id="@+id/btn_next_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_not_finished"
+                tools:text="Coba Lagi" />
 
             <TextView
                 android:id="@+id/tv_feedback_title"
@@ -102,7 +112,7 @@
                 android:textStyle="bold"
                 android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_not_finished" />
+                app:layout_constraintTop_toBottomOf="@id/btn_next_step" />
 
             <TextView
                 android:id="@+id/tv_feedback"

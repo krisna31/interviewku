@@ -110,7 +110,7 @@ class InterviewTrainViewModel @Inject constructor(
         }
     }
 
-    fun prepareInterview(interestJobFieldId: Int? = null) = viewModelScope.launch {
+    fun prepareInterview() = viewModelScope.launch {
         _prepareInterviewState.value = Result.Loading
 
         try {
@@ -120,7 +120,7 @@ class InterviewTrainViewModel @Inject constructor(
             jobFieldsResponse.data?.let { jobFieldsResponseData ->
                 _prepareInterviewState.value = Result.Success(
                     JobFieldModel(
-                        interestJobFieldId ?: userDetailResponse.data?.jobFieldId ?: -1,
+                        userDetailResponse.data?.jobFieldId ?: -1,
                         jobFieldsResponseData.jobFields.sortedBy { it.name }
                     )
                 )

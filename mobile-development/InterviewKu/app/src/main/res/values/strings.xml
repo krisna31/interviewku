@@ -35,7 +35,7 @@
     <string name="interview_tips_title">Tips Interview</string>
     <string name="interview_train">Latihan</string>
     <string name="interview_train_try">Coba Latihan</string>
-    <string name="job_position">Posisi Pekerjaan</string>
+    <string name="job_position">Posisi Pekerjaan yang diinginkan</string>
     <string name="lastname">Nama Belakang</string>
     <string name="login">Masuk</string>
     <string name="logout">Keluar</string>
@@ -77,8 +77,11 @@
     <string name="yes">Ya</string>
 
     <!--  MESSAGE / INSTRUCTION  -->
+    <string name="abort_recovery_confirmation">Apakah yakin ingin membatalkan pemulihan kata sandi?</string>
+    <string name="abort_recovery_title">Batalkan Pemulihan</string>
     <string name="birthdate_required">Silakan pilih tanggal lahir</string>
     <string name="check_mic_instruction">Suara akan langsung diputar setelah perekaman berhenti</string>
+    <string name="continue_to_test">Lanjutkan ke Uji Kemampuan</string>
     <string name="current_city_required">Silakan masukkan kota domisili</string>
     <string name="download_tts_data_explanation">Untuk melanjutkan, Anda harus mengunduh data bahasa Indonesia pada Google TTS</string>
     <string name="email_invalid">Email Tidak Valid</string>
@@ -91,7 +94,7 @@
     <string name="interview_not_finished">Sesi tidak selesai</string>
     <string name="interview_not_finished_description">Silahkan mencoba sesi baru untuk memperoleh nilai keseluruhan</string>
     <string name="interview_test_screen_instruction">Silahkan berfokus pada pertanyaan yang diberikan</string>
-    <string name="job_position_required">Silakan pilih posisi pekerjaan</string>
+    <string name="job_position_required">Silakan pilih posisi pekerjaan yang diinginkan</string>
     <string name="login_instruction">Silahkan masuk ke akun anda</string>
     <string name="logout_confirmation">Apakah anda yakin ingin keluar?</string>
     <string name="logout_success">Berhasil keluar dari akun anda</string>
@@ -102,6 +105,7 @@
     <string name="no_indonesian_tts_data">Anda belum memasang data suara Bahasa Indonesia. Silahkan memasang data suara Bahasa Indonesia</string>
     <string name="no_interview_history">Anda belum pernah melakukan Interview</string>
     <string name="no_tts_data">Anda tidak memiliki data suara. Silahkan memasang data suara Bahasa Indonesia</string>
+    <string name="otp_invalid">Kode OTP tidak valid</string>
     <string name="password_invalid">Password harus minimal 8 karakter, terdapat 1 huruf kapital, dan 1 karakter simbol</string>
     <string name="please_choose">Silahkan pilih</string>
     <string name="prepare_interview_failed">Gagal untuk mempersiapkan sesi (%s). Silahkan coba lagi</string>
@@ -111,6 +115,7 @@
     <string name="register_detail_instruction">Silahkan masukkan informasi tambahan terkait diri anda</string>
     <string name="register_instruction">Silahkan masukkan informasi berikut untuk mendaftarkan diri</string>
     <string name="start_interview_failed">Gagal untuk memulai sesi (%s). Silahkan coba lagi</string>
+    <string name="start_other_session">Mulai sesi Uji Kemampuan lainnya</string>
     <string name="submit_answer_failed">Gagal untuk mengirim jawaban (%s). SIlahkan coba lagi</string>
     <string name="test_instruction">Mode ini ditujukan untuk menguji kemampuan anda dalam wawancara secara keseluruhan</string>
     <string name="train_instruction">Mode ini ditujukan untuk melatih kemampuan anda terhadap aplikasi ini</string>

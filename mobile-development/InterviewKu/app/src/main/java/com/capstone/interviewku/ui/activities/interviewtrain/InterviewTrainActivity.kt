@@ -174,7 +174,6 @@ class InterviewTrainActivity : AppCompatActivity() {
                 viewModel.setJobFieldId(jobFieldId)
                 interviewInstructionFragment.show(supportFragmentManager, null)
             },
-            initialJobFieldId = intent.getIntExtra(EXTRA_JOB_FIELD_ID, -1)
         )
 
         if (!isPermissionGranted(Manifest.permission.RECORD_AUDIO)) {
@@ -208,8 +207,13 @@ class InterviewTrainActivity : AppCompatActivity() {
             viewModel.setAnswer(null)
         }
 
-        jobPickerFragment.show(supportFragmentManager, null)
-        viewModel.prepareInterview(intent.getIntExtra(EXTRA_JOB_FIELD_ID, -1))
+        if (intent.hasExtra(EXTRA_JOB_FIELD_ID)) {
+            viewModel.setJobFieldId(intent.getIntExtra(EXTRA_JOB_FIELD_ID, 1))
+            interviewInstructionFragment.show(supportFragmentManager, null)
+        } else {
+            jobPickerFragment.show(supportFragmentManager, null)
+            viewModel.prepareInterview()
+        }
     }
 
     private fun initializeMediaPlayer() {
@@ -263,7 +267,7 @@ class InterviewTrainActivity : AppCompatActivity() {
                             )
                         )
                         .setPositiveButton(getString(R.string.try_again)) { _, _ ->
-                            viewModel.prepareInterview(intent.getIntExtra(EXTRA_JOB_FIELD_ID, -1))
+                            viewModel.prepareInterview()
                         }
                         .setNegativeButton(getString(R.string.exit)) { _, _ ->
                             finish()

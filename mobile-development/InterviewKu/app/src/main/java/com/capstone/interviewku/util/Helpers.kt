@@ -3,6 +3,7 @@ package com.capstone.interviewku.util
 import android.content.Context
 import android.text.format.DateUtils
 import android.util.Patterns
+import androidx.core.text.isDigitsOnly
 import com.capstone.interviewku.R
 import com.capstone.interviewku.data.network.response.Article
 import com.capstone.interviewku.data.room.entity.ArticleEntity
@@ -56,6 +57,8 @@ object Helpers {
     }
 
     fun isEmailValid(email: String) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+
+    fun isOtpValid(otp: String) = otp.length == 6 && otp.isDigitsOnly()
 
     fun isPasswordValid(password: String) =
         password.length >= 8

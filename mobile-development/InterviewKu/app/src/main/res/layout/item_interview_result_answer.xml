@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_height="450dp"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/list_item_margin"
     app:cardCornerRadius="@dimen/corner_radius">
 
@@ -88,6 +88,27 @@
             tools:text="1 Kali" />
 
         <TextView
+            android:id="@+id/tv_item_answer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/answer"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_retry_question" />
+
+        <TextView
+            android:id="@+id/tv_item_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:maxLines="10"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_answer_title"
+            tools:text="Dari jawaban yang kamu berikan sudah sangat bagus, tingkat relatif jawaban dengan pertanyaan yang diberikan sudah tepat, namun penyampaian yang kamu berikan kurang tepat, dan tingkat fokus kamu dan memahami pertanyaan dalam melakukan sesi interview sudah baik" />
+
+        <TextView
             android:id="@+id/tv_item_feedback_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,7 +117,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_retry_question" />
+            app:layout_constraintTop_toBottomOf="@id/tv_item_answer" />
 
         <TextView
             android:id="@+id/tv_item_feedback"

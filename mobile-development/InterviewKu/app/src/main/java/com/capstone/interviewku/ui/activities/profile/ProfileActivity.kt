@@ -256,7 +256,6 @@ class ProfileActivity : AppCompatActivity() {
 
             if (result !is Result.Loading) {
                 setInputEnabled(true)
-                setButtonEnabled()
             }
 
             when (result) {
@@ -271,6 +270,7 @@ class ProfileActivity : AppCompatActivity() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
+                    setButtonEnabled()
                     result.exception.getData()?.handleHttpException(this)?.let { message ->
                         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                     }

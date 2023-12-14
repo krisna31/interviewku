@@ -10,9 +10,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.capstone.interviewku.R
-import com.capstone.interviewku.data.network.response.ChatbotDetailResponse
+import com.capstone.interviewku.data.network.response.Chat
 import com.capstone.interviewku.databinding.FragmentChatbotBinding
 import com.capstone.interviewku.ui.activities.chathistory.ChatbotHistoryActivity
+import com.capstone.interviewku.util.Extensions.handleHttpException
 import com.capstone.interviewku.util.Result
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,6 +36,8 @@ class ChatbotFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val context = requireContext()
+
         binding.toolbar.apply {
             inflateMenu(R.menu.menu_fragment_chatbot)
             setOnMenuItemClickListener {
@@ -52,43 +55,55 @@ class ChatbotFragment : Fragment() {
         }
 
         binding.btnSubmitQuestion.setOnClickListener {
-            binding.btnSubmitQuestion.isEnabled = false
             val userQuestion = binding.etQuestion.text.toString()
             viewModel.sendQuestion(userQuestion)
+
+            binding.etQuestion.isEnabled = false
+            it.isEnabled = false
         }
 
         viewModel.sendQuestionState.observe(viewLifecycleOwner) { result ->
+            binding.progressBar.isVisible = result is Result.Loading
+
             when (result) {
-                is Result.Loading -> {
-                    binding.progressBar.isVisible = true
-
-                }
-
                 is Result.Success -> {
-                    binding.progressBar.isVisible = false
+                    binding.etQuestion.isEnabled = false
                     binding.btnSubmitQuestion.isEnabled = true
-                    binding.etQuestion.text?.clear()
-                    updateUIWithResult(result.data)
+                    binding.etQuestion.setText("")
 
+                    setResultText(result.data.data)
                 }
+
+                is Result.Loading -> {}
 
                 is Result.Error -> {
-                    binding.progressBar.isVisible = false
-                    binding.btnSubmitQuestion.isEnabled = false
-                    Toast.makeText(context, "Error: ${result.exception}", Toast.LENGTH_SHORT).show()
+                    binding.etQuestion.isEnabled = false
+                    binding.btnSubmitQuestion.isEnabled = true
+                    Toast.makeText(
+                        context,
+                        result.exception.getData()?.handleHttpException(context),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
 
-    }
-
-    private fun updateUIWithResult(result: ChatbotDetailResponse?) {
-        binding.tvResultQuestion.text = result?.data?.question.toString()
-        binding.tvResultAnswer.text = result?.data?.answer.toString()
+        setResultText(null)
     }
 
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+    }
+
+    private fun setResultText(chat: Chat?) {
+        binding.tvResultTitle.isVisible = chat != null
+        binding.tvResultQuestionTitle.isVisible = chat != null
+        binding.tvResultAnswerTitle.isVisible = chat != null
+
+        chat?.let {
+            binding.tvResultQuestion.text = it.question
+            binding.tvResultAnswer.text = it.answer
+        }
     }
 }

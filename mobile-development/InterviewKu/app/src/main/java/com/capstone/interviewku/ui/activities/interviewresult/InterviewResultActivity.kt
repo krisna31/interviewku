@@ -1,5 +1,6 @@
 package com.capstone.interviewku.ui.activities.interviewresult
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -12,6 +13,8 @@ import com.capstone.interviewku.R
 import com.capstone.interviewku.data.network.response.InterviewResultData
 import com.capstone.interviewku.data.network.types.InterviewMode
 import com.capstone.interviewku.databinding.ActivityInterviewResultBinding
+import com.capstone.interviewku.ui.activities.interviewtest.InterviewTestActivity
+import com.capstone.interviewku.ui.activities.interviewtrain.InterviewTrainActivity
 import com.capstone.interviewku.ui.adapters.ItemInterviewResultAnswerAdapter
 import com.capstone.interviewku.util.Extensions.handleHttpException
 import com.capstone.interviewku.util.Helpers
@@ -153,6 +156,71 @@ class InterviewResultActivity : AppCompatActivity() {
 
                         binding.tvRatingSummary.text =
                             getString(R.string.interview_not_finished)
+                    }
+
+                    binding.btnNextStep.apply {
+                        text = data.score?.let { score ->
+                            if (score >= 3) {
+                                when (data.mode) {
+                                    InterviewMode.TRAIN.mode -> {
+                                        context.getString(R.string.continue_to_test)
+                                    }
+
+                                    InterviewMode.TEST.mode -> {
+                                        context.getString(R.string.start_other_session)
+                                    }
+
+                                    else -> {
+                                        getString(R.string.try_again)
+                                    }
+                                }
+                            } else {
+                                getString(R.string.try_again)
+                            }
+                        } ?: run {
+                            getString(R.string.try_again)
+                        }
+
+                        setOnClickListener {
+                            startActivity(
+                                data.score?.let { score ->
+                                    if (score >= 3) {
+                                        when (data.mode) {
+                                            InterviewMode.TRAIN.mode -> {
+                                                Intent(
+                                                    this@InterviewResultActivity,
+                                                    InterviewTestActivity::class.java
+                                                )
+                                            }
+
+                                            InterviewMode.TEST.mode -> {
+                                                Intent(
+                                                    this@InterviewResultActivity,
+                                                    InterviewTestActivity::class.java
+                                                )
+                                            }
+
+                                            else -> {
+                                                Intent(
+                                                    this@InterviewResultActivity,
+                                                    InterviewTrainActivity::class.java
+                                                )
+                                            }
+                                        }
+                                    } else {
+                                        Intent(
+                                            this@InterviewResultActivity,
+                                            InterviewTrainActivity::class.java
+                                        )
+                                    }
+                                } ?: run {
+                                    Intent(
+                                        this@InterviewResultActivity,
+                                        InterviewTrainActivity::class.java
+                                    )
+                                }
+                            )
+                        }
                     }
                 }
 
