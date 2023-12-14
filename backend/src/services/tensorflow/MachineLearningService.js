@@ -133,9 +133,21 @@ class MachineLearningService {
       listScore.push(this.cosineSimilarity(userAnswer, allAnswer[i].answer));
     }
     const resultSimilarity = Math.max(...listScore);
+    let buffedSimilarity;
+    if (resultSimilarity > 0.8) {
+      buffedSimilarity = 1;
+    } else if (resultSimilarity > 0.6) {
+      buffedSimilarity = 0.75;
+    } else if (resultSimilarity > 0.4) {
+      buffedSimilarity = 0.5;
+    } else if (resultSimilarity > 0.2) {
+      buffedSimilarity = 0.25;
+    } else {
+      buffedSimilarity = 0;
+    }
 
     // Final Score composition is:
-    // 10% sentences structure, 20% retryAttempt, 50% field classification, dan 20% similarity
+    // 15% sentences structure, 5% retry attempt, 40% field classification, dan 40% similarity
     let retryScore;
 
     if (retryAttempt === 0) {
@@ -151,7 +163,7 @@ class MachineLearningService {
     }
 
     // eslint-disable-next-line max-len
-    const finalScore = (strukturScore * 0.1) + (retryScore * 0.2) + (resultField * 0.5) + (resultSimilarity * 0.2);
+    const finalScore = (strukturScore * 0.15) + (retryScore * 0.05) + (resultField * 0.4) + (buffedSimilarity * 0.4);
     return finalScore;
   }
 
