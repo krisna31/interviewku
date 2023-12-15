@@ -25,6 +25,15 @@ class LandingActivity : AppCompatActivity() {
         Glide.with(this)
             .load(R.drawable.logo_alt_blue)
             .into(binding.ivLogo)
+        Glide.with(this@LandingActivity)
+            .load(R.drawable.img_landing_1)
+            .into(binding.ivFirst)
+        Glide.with(this@LandingActivity)
+            .load(R.drawable.img_landing_2)
+            .into(binding.ivSecond)
+        Glide.with(this@LandingActivity)
+            .load(R.drawable.img_landing_3)
+            .into(binding.ivThird)
 
         binding.btnLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
@@ -53,15 +62,28 @@ class LandingActivity : AppCompatActivity() {
 
                 override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                     when (motionLayout?.currentState) {
+                        R.id.blank1 -> {
+                            lifecycleScope.launch {
+                                delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
+                                setTransition(R.id.blank1, R.id.first)
+                                setTransitionDuration(TRANSITION_DURATION)
+                                transitionToEnd()
+                            }
+                        }
+
                         R.id.first -> {
                             lifecycleScope.launch {
                                 delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
-                                setTransition(R.id.first, R.id.blank)
+                                setTransition(R.id.first, R.id.blank2)
                                 setTransitionDuration(TRANSITION_DURATION)
                                 transitionToEnd()
+                            }
+                        }
 
+                        R.id.blank2 -> {
+                            lifecycleScope.launch {
                                 delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
-                                setTransition(R.id.blank, R.id.second)
+                                setTransition(R.id.blank2, R.id.second)
                                 setTransitionDuration(TRANSITION_DURATION)
                                 transitionToEnd()
                             }
@@ -70,12 +92,16 @@ class LandingActivity : AppCompatActivity() {
                         R.id.second -> {
                             lifecycleScope.launch {
                                 delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
-                                setTransition(R.id.second, R.id.blank)
+                                setTransition(R.id.second, R.id.blank3)
                                 setTransitionDuration(TRANSITION_DURATION)
                                 transitionToEnd()
+                            }
+                        }
 
+                        R.id.blank3 -> {
+                            lifecycleScope.launch {
                                 delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
-                                setTransition(R.id.blank, R.id.third)
+                                setTransition(R.id.blank3, R.id.third)
                                 setTransitionDuration(TRANSITION_DURATION)
                                 transitionToEnd()
                             }
@@ -84,12 +110,7 @@ class LandingActivity : AppCompatActivity() {
                         R.id.third -> {
                             lifecycleScope.launch {
                                 delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
-                                setTransition(R.id.third, R.id.blank)
-                                setTransitionDuration(TRANSITION_DURATION)
-                                transitionToEnd()
-
-                                delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
-                                setTransition(R.id.blank, R.id.first)
+                                setTransition(R.id.third, R.id.blank1)
                                 setTransitionDuration(TRANSITION_DURATION)
                                 transitionToEnd()
                             }
@@ -107,18 +128,8 @@ class LandingActivity : AppCompatActivity() {
             })
 
             lifecycleScope.launch {
-                Glide.with(this@LandingActivity)
-                    .load(R.drawable.img_landing_1)
-                    .into(binding.ivFirst)
-                Glide.with(this@LandingActivity)
-                    .load(R.drawable.img_landing_2)
-                    .into(binding.ivSecond)
-                Glide.with(this@LandingActivity)
-                    .load(R.drawable.img_landing_3)
-                    .into(binding.ivThird)
-
                 delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
-                setTransition(R.id.blank, R.id.first)
+                setTransition(R.id.blank1, R.id.first)
                 setTransitionDuration(TRANSITION_DURATION)
                 transitionToEnd()
             }
