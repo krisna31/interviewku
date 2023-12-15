@@ -53,4 +53,4 @@ This is the backend for interviewku.com
 
 ## Cloud Architecture
 
-![cloud architecture](CloudArchitecture.png)
+![cloud architecture](./CloudArchitecture/CloudArchitecture.png)
