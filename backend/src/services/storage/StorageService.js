@@ -12,6 +12,10 @@ class StorageService {
   }
 
   async saveToCloudStorage(audio, userId) {
+    if (process.env.APP_ENV === 'dev') {
+      return audio.path;
+    }
+
     if (!audio) {
       throw new InvariantError('No audio uploaded.');
     }

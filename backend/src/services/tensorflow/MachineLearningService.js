@@ -164,7 +164,8 @@ class MachineLearningService {
 
     // eslint-disable-next-line max-len
     const finalScore = (strukturScore * 0.15) + (retryScore * 0.05) + (resultField * 0.4) + (buffedSimilarity * 0.4);
-    return finalScore;
+
+    return finalScore >= 1 ? 1 : finalScore;
   }
 
   async predictText({ userAnswer }) {
@@ -202,11 +203,7 @@ class MachineLearningService {
       tokenizeUserAnswer = tf.mean(tokenizeUserAnswer);
       tokenizeUserAnswer = tokenizeUserAnswer.arraySync();
 
-      if (tokenizeUserAnswer > 1) {
-        tokenizeUserAnswer = 1;
-      }
-
-      return tokenizeUserAnswer;
+      return tokenizeUserAnswer >= 1 ? 1 : tokenizeUserAnswer;
     } catch (err) {
       console.error('🚀 ~ file: MachineLearningService.js:168 ~ MachineLearningService ~ getStrukturScore ~ err:', err);
       throw new Error(`Error loading model: ${err}`);

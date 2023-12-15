@@ -94,6 +94,8 @@ function changeToOneUntilFiveRange(number) {
   if (number === null) return null;
   const result = Math.round(number * 5);
 
+  if (result >= 5) return 5;
+
   return result <= 1 ? 1 : result;
 }
 
