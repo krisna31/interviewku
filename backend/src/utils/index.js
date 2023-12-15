@@ -21,11 +21,11 @@ function getFeedback(scoreParam, strukturs, repeat) {
   }
 
   const summary = [
-    'Dari jawaban yang kamu berikan kurang bagus',
-    'Dari jawaban yang kamu berikan lumayan bagus',
-    'Dari jawaban yang kamu berikan cukup bagus',
-    'Dari jawaban yang kamu berikan sudah bagus',
-    'Dari jawaban yang kamu berikan sudah sangat bagus',
+    'Performa kamu sedikit kurang bagus',
+    'Performa kamu cukup bagus',
+    'Performa kamu lumayan bagus',
+    'Performa kamu sudah bagus',
+    'Performa kamu sudah sangat bagus',
   ];
 
   const scoring = [
@@ -58,8 +58,8 @@ function getFeedback(scoreParam, strukturs, repeat) {
   const struktursScoreIndex = strukturs < 0.5 ? 0 : 1;
 
   let total = score
-  + (strukturs === 0 ? 1 : 5)
-  + (xrepeat === 0 ? 5 : xrepeat === 1 ? 3 : 1);
+    + (struktursScoreIndex === 0 ? 1 : 5)
+    + (xrepeat === 0 ? 5 : xrepeat === 1 ? 3 : 1);
 
   total = total < 4 ? 0
     : total < 7 ? 1
