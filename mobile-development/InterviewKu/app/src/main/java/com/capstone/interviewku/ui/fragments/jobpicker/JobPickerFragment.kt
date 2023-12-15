@@ -99,7 +99,7 @@ class JobPickerFragment(
                 SpinnerModel(jobField.id.toString(), jobField.name)
             }
         )
-        spinnerData.add(0, SpinnerModel("-1", "Silahkan Pilih"))
+        spinnerData.add(0, SpinnerModel("-1", getString(R.string.please_choose)))
 
         val selectedIndex = jobFieldModel.jobFields.indexOfFirst {
             it.id == jobFieldModel.selectedId

@@ -42,7 +42,6 @@
         android:layout_marginHorizontal="@dimen/root_padding"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:theme="@style/Base.Theme.InterviewKu"
         app:layout_constraintBottom_toBottomOf="@id/civ_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/civ_profile"
@@ -80,7 +79,6 @@
             android:layout_marginStart="16dp"
             android:text="@string/profile"
             android:textSize="16sp"
-            android:theme="@style/Base.Theme.InterviewKu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_profile_image"
             app:layout_constraintTop_toTopOf="parent" />
@@ -118,7 +116,6 @@
             android:layout_marginStart="16dp"
             android:text="@string/change_password"
             android:textSize="16sp"
-            android:theme="@style/Base.Theme.InterviewKu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/imageView3"
             app:layout_constraintTop_toTopOf="parent" />
@@ -156,7 +153,6 @@
             android:layout_marginStart="16dp"
             android:text="@string/logout"
             android:textSize="16sp"
-            android:theme="@style/Base.Theme.InterviewKu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_logout"
             app:layout_constraintTop_toTopOf="parent" />

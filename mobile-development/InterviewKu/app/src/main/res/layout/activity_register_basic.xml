@@ -24,11 +24,11 @@
                 android:layout_marginTop="24dp"
                 android:backgroundTint="@color/light_blue"
                 android:importantForAccessibility="no"
-                android:src="@drawable/logo_transparent"
                 app:civ_circle_background_color="@color/light_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/logo_transparent" />
 
             <TextView
                 android:id="@+id/tv_register_title"
@@ -39,7 +39,6 @@
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toBottomOf="@id/civ_logo" />
 
             <com.google.android.material.textfield.TextInputLayout

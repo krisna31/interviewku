@@ -16,6 +16,7 @@ import com.capstone.interviewku.databinding.ActivityRegisterDetailBinding
 import com.capstone.interviewku.ui.activities.main.MainActivity
 import com.capstone.interviewku.ui.fragments.datepicker.DatePickerFragment
 import com.capstone.interviewku.ui.fragments.datepicker.DatePickerListener
+import com.capstone.interviewku.util.Constants
 import com.capstone.interviewku.util.Extensions.handleHttpException
 import com.capstone.interviewku.util.Extensions.hideKeyboard
 import com.capstone.interviewku.util.Helpers
@@ -76,11 +77,12 @@ class RegisterDetailActivity : AppCompatActivity() {
             DatePickerFragment(
                 object : DatePickerListener {
                     override fun onDateSet(year: Int, month: Int, dayOfMonth: Int) {
-                        viewModel.birthDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                            .format(Calendar.getInstance().run {
-                                set(year, month, dayOfMonth)
-                                time
-                            })
+                        viewModel.birthDate =
+                            SimpleDateFormat(Constants.BIRTHDATE_FORMAT, Locale.getDefault())
+                                .format(Calendar.getInstance().run {
+                                    set(year, month, dayOfMonth)
+                                    time
+                                })
                         binding.tvBirthdate.text = viewModel.birthDate
                         setButtonEnabled()
                     }
@@ -115,6 +117,20 @@ class RegisterDetailActivity : AppCompatActivity() {
     }
 
     private fun setupInputWatchers() {
+        binding.spinnerGender.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    setButtonEnabled()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+
         binding.spinnerJobPosition.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(

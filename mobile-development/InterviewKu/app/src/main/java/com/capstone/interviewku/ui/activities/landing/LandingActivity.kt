@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityLandingBinding
 import com.capstone.interviewku.ui.activities.login.LoginActivity
@@ -20,6 +21,10 @@ class LandingActivity : AppCompatActivity() {
 
         binding = ActivityLandingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        Glide.with(this)
+            .load(R.drawable.logo_alt_blue)
+            .into(binding.ivLogo)
 
         binding.btnLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
@@ -102,6 +107,16 @@ class LandingActivity : AppCompatActivity() {
             })
 
             lifecycleScope.launch {
+                Glide.with(this@LandingActivity)
+                    .load(R.drawable.img_landing_1)
+                    .into(binding.ivFirst)
+                Glide.with(this@LandingActivity)
+                    .load(R.drawable.img_landing_2)
+                    .into(binding.ivSecond)
+                Glide.with(this@LandingActivity)
+                    .load(R.drawable.img_landing_3)
+                    .into(binding.ivThird)
+
                 delay((TRANSITION_DELAY + TRANSITION_DURATION).toLong())
                 setTransition(R.id.blank, R.id.first)
                 setTransitionDuration(TRANSITION_DURATION)

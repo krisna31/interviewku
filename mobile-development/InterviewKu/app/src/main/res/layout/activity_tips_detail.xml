@@ -51,8 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="8dp"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textSize="30sp"
+                android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/iv_cover"
                 tools:text="Lorem ipsum dolor sit amet" />

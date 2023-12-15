@@ -45,7 +45,6 @@
             android:text="@string/interview_train"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:theme="@style/Base.Theme.InterviewKu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,9 +53,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/train_instruction"
+            android:text="@string/train_overview"
             android:textSize="16sp"
-            android:theme="@style/Base.Theme.InterviewKu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_train_title" />
@@ -82,7 +80,6 @@
             android:text="@string/interview_test"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:theme="@style/Base.Theme.InterviewKu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,9 +88,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/test_instruction"
+            android:text="@string/test_overview"
             android:textSize="16sp"
-            android:theme="@style/Base.Theme.InterviewKu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_test_title" />

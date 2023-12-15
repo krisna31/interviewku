@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivitySplashBinding
 import com.capstone.interviewku.ui.activities.landing.LandingActivity
 import com.capstone.interviewku.ui.activities.main.MainActivity
@@ -29,6 +31,10 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         lifecycleScope.launch {
+            Glide.with(this@SplashActivity)
+                .load(R.drawable.logo_alt_2_blue)
+                .into(binding.civLogo)
+
             delay(Constants.SPLASH_SCREEN_DELAY)
 
             startActivity(

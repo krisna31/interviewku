@@ -11,10 +11,10 @@
         android:layout_width="280dp"
         android:layout_height="280dp"
         android:importantForAccessibility="no"
-        android:src="@drawable/logo_alt_2_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/logo_alt_2_blue" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

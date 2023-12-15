@@ -33,7 +33,6 @@
             android:maxLines="3"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:theme="@style/Base.Theme.InterviewKu"
             app:layout_constraintTop_toBottomOf="@id/iv_cover"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna eros, mattis eu eros ut, ultrices vulputate nisl." />
 

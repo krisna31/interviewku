@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.capstone.interviewku.R
 import com.capstone.interviewku.databinding.ActivityLoginBinding
 import com.capstone.interviewku.ui.activities.forgetpass.ForgetPasswordActivity
@@ -31,6 +32,10 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        Glide.with(this)
+            .load(R.drawable.logo_transparent)
+            .into(binding.civLogo)
 
         setButtonEnabled()
         setupTextWatchers()

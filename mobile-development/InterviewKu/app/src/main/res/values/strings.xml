@@ -17,7 +17,7 @@
     <string name="current_city">Kota Domisili</string>
     <string name="download">Unduh</string>
     <string name="download_tts_data_title">Unduh Data TTS</string>
-    <string name="email">Alamat Email</string>
+    <string name="email">Email</string>
     <string name="error_title">Terjadi Kesalahan</string>
     <string name="exit">Keluar</string>
     <string name="exit_from_session">Keluar dari sesi</string>
@@ -35,11 +35,11 @@
     <string name="interview_tips_title">Tips Interview</string>
     <string name="interview_train">Latihan</string>
     <string name="interview_train_try">Coba Latihan</string>
-    <string name="job_position">Posisi Pekerjaan yang diinginkan</string>
-    <string name="lastname">Nama Belakang</string>
+    <string name="job_position">Bidang Pekerjaan yang diinginkan</string>
+    <string name="lastname">Nama Belakang (opsional)</string>
     <string name="login">Masuk</string>
     <string name="logout">Keluar</string>
-    <string name="microphone">Mikrofon</string>
+    <string name="microphone_check">Cek Mikrofon</string>
     <string name="navigation_account">Akun</string>
     <string name="navigation_home">Beranda</string>
     <string name="navigation_interview">Interview</string>
@@ -81,21 +81,21 @@
     <string name="continue_to_test">Lanjutkan ke Uji Kemampuan</string>
     <string name="download_tts_data_explanation">Untuk melanjutkan, Anda harus mengunduh data bahasa Indonesia pada Google TTS</string>
     <string name="email_invalid">Email Tidak Valid</string>
-    <string name="end_interview_failed">Gagal untuk mengakhiri sesi (%s). Silahkan coba lagi</string>
+    <string name="end_interview_failed">Gagal mengakhiri sesi (%s). Silahkan coba lagi</string>
     <string name="fetch_new_data_failed">Terjadi kesalahan saat mengambil data terbaru (%s)</string>
-    <string name="firstname_empty">Nama depan tidak boleh kosong</string>
-    <string name="home_load_failed">Gagal memuat data halaman beranda (%s). Silahkan coba kembali</string>
-    <string name="interview_exit_confirm">Apakah anda yakin ingin keluar dari sesi? Anda akan dianggap tidak menyelesaikan sesi ini</string>
+    <string name="firstname_empty">Harap mengisi nama depan anda</string>
+    <string name="home_load_failed">Terdapat kesalahan dalam memuat data beranda (%s). Silahkan coba lagi nanti</string>
+    <string name="interview_exit_confirm">Apakah anda yakin ingin keluar? Sesi akan dianggap tidak selesai</string>
     <string name="interview_finished">Sesi Interview telah selesai!</string>
     <string name="interview_not_finished">Sesi tidak selesai</string>
     <string name="interview_not_finished_description">Silahkan mencoba sesi baru untuk memperoleh nilai keseluruhan</string>
-    <string name="interview_test_screen_instruction">Silahkan berfokus pada pertanyaan yang diberikan</string>
+    <string name="interview_test_screen_instruction">Mohon berfokus pada pertanyaan yang diberikan</string>
     <string name="login_instruction">Silahkan masuk ke akun anda</string>
-    <string name="logout_confirmation">Apakah anda yakin ingin keluar?</string>
+    <string name="logout_confirmation">Anda yakin ingin keluar?</string>
     <string name="logout_success">Berhasil keluar dari akun anda</string>
-    <string name="mic_permission_granted">Anda dapat merekam suara anda</string>
-    <string name="mic_permission_prompt">Izin merekam suara harus diberikan agar fitur perekaman dapat digunakan</string>
-    <string name="no_chat_history">Anda belum pernah bertanya kepada Chatbot</string>
+    <string name="mic_permission_granted">Anda dapat merekam suara anda sekarang</string>
+    <string name="mic_permission_prompt">Izin merekam suara wajib diberikan agar fitur perekaman dapat digunakan</string>
+    <string name="no_chat_history">Anda belum pernah bertanya kepada Chatbot sebelumnya</string>
     <string name="no_google_tts">Silahkan mengunduh Google TTS di Play Store untuk menggunakan fitur interview</string>
     <string name="no_indonesian_tts_data">Anda belum memasang data suara Bahasa Indonesia. Silahkan memasang data suara Bahasa Indonesia</string>
     <string name="no_interview_history">Anda belum pernah melakukan Interview</string>
@@ -103,22 +103,24 @@
     <string name="otp_invalid">Kode OTP tidak valid</string>
     <string name="password_invalid">Password harus minimal 8 karakter, terdapat 1 huruf kapital, dan 1 karakter simbol</string>
     <string name="please_choose">Silahkan pilih</string>
-    <string name="prepare_interview_failed">Gagal untuk mempersiapkan sesi (%s). Silahkan coba lagi</string>
-    <string name="question_instruction">Silahkan tuliskan pertanyaan anda</string>
+    <string name="prepare_interview_failed">Gagal mempersiapkan sesi (%s). Silahkan coba lagi</string>
+    <string name="question_instruction">Silahkan bertanya kepada Chatbot</string>
     <string name="question_not_answered">Pertanyaan tidak dijawab. Silahkan mencoba lagi pada sesi baru.</string>
     <string name="record_failed">Gagal memulai perekaman suara. Pastikan tidak ada aplikasi lain yang menggunakan mikrofon</string>
     <string name="register_detail_instruction">Silahkan masukkan informasi tambahan terkait diri anda</string>
     <string name="register_instruction">Silahkan masukkan informasi berikut untuk mendaftarkan diri</string>
-    <string name="reload_instruction">Silahkan muat ulang untuk memperoleh data</string>
-    <string name="start_interview_failed">Gagal untuk memulai sesi (%s). Silahkan coba lagi</string>
+    <string name="reload_instruction">Silahkan muat ulang untuk memperoleh data terbaru</string>
+    <string name="start_interview_failed">Gagal memulai sesi (%s). Silahkan coba lagi</string>
     <string name="start_other_session">Mulai sesi Uji Kemampuan lainnya</string>
-    <string name="submit_answer_failed">Gagal untuk mengirim jawaban (%s). SIlahkan coba lagi</string>
-    <string name="test_instruction">Mode ini ditujukan untuk menguji kemampuan anda dalam wawancara secara keseluruhan</string>
-    <string name="train_instruction">Mode ini ditujukan untuk melatih kemampuan anda terhadap aplikasi ini</string>
+    <string name="submit_answer_failed">Gagal mengirim jawaban (%s). Silahkan coba lagi</string>
+    <string name="test_instruction">Mode ini ditujukan untuk menguji kemampuan interview berdasarkan pengalaman nyata\nSoal hanya akan dibacakan melalui fitur Text To Speech (TTS). Sehingga anda harus fokus\nSetelah pembacaan soal, jawaban akan otomatis direkam saat indikator mikrofon menyala\nPerekaman akan dihentikan dan jawaban akan dikirim saat anda memilih lanjut ke pertanyaan selanjutnya\nAnda juga dapat memilih untuk mengulang pertanyaan dan mengulang kembali jawaban anda (dapat mempengaruhi skor anda)</string>
+    <string name="test_overview">Mode ini ditujukan untuk menguji kemampuan interview berdasarkan pengalaman nyata</string>
+    <string name="train_instruction">Mode ini ditujukan untuk melatih kemampuan interview dengan soal yang lebih sedikit\nSoal akan dibacakan melalui fitur Text To Speech (TTS) dan ditampilkan di layar\nTombol mikrofon dapat digunakan untuk memulai perekaman jawaban dan menghentikan perekaman\nSetelah itu, Anda bisa memilih untuk merekam ulang jawaban atau mengirim jawaban yang sudah direkam</string>
+    <string name="train_overview">Mode ini ditujukan untuk melatih kemampuan interview dengan soal yang lebih sedikit dan dapat dibaca</string>
     <string name="tts_init_failed">Silahkan mengecek kembali fitur Google TTS di perangkat anda dan coba untuk menginisialisasi ulang</string>
     <string name="tts_not_initialized">TTS belum diinisialisasi</string>
     <string name="unexpected_error">Terjadi kesalahan. Silahkan coba lagi</string>
-    <string name="user_profile_saved">Perubahan info pengguna telah disimpan</string>
+    <string name="user_profile_saved">Perubahan informasi pengguna telah disimpan</string>
 
     <!--  TEMPLATE  -->
     <string name="author_template">Dibuat oleh: %s</string>
@@ -133,6 +135,6 @@
     <string name="retry_count_template" tools:ignore="PluralsCandidate">%d kali</string>
     <string name="source_template">Sumber: %s</string>
     <string name="started_at_template">Waktu: %s</string>
-    <string name="tts_status_template">Status TTS: %s</string>
+    <string name="tts_status_template">Status: %s</string>
 
 </resources>

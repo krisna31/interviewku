@@ -22,8 +22,10 @@ object Constants {
     const val TTS_EXTRA_VOICE_INDONESIA = "ind-idn"
 
     // other constants
+    const val BIRTHDATE_FORMAT = "yyyy-MM-dd"
     const val DATE_FORMAT = "dd MMMM yyyy HH:mm"
     const val INDONESIA_LANGUAGE_TAG = "id-ID"
+    const val INITIAL_TIMER_STRING = "00:00"
     const val INTERVIEW_PERFORMANCE_COUNT = 7
     const val SWIPE_REFRESH_LAYOUT_TRIGGER_DISTANCE = 400
     const val TIPS_HOME_COUNT = 10

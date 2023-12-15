@@ -23,11 +23,11 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="24dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/logo_transparent"
                 app:civ_circle_background_color="@color/light_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/logo_transparent" />
 
             <TextView
                 android:id="@+id/tv_login_title"

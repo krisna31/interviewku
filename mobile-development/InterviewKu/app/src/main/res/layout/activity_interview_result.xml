@@ -42,7 +42,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/root_padding"
                 android:textStyle="bold"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Mode Latihan" />
@@ -53,7 +52,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="4dp"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toBottomOf="@id/tv_mode"
                 tools:text="Bidang: IT" />
 
@@ -77,7 +75,6 @@
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
                 android:textStyle="bold"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toBottomOf="@id/rating_bar_score"
                 tools:text="Sempurna!!!" />
 
@@ -110,7 +107,6 @@
                 android:text="@string/feedback"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_next_step" />
 
@@ -120,7 +116,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="4dp"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toBottomOf="@id/tv_feedback_title"
                 tools:text="Dari jawaban yang kamu berikan sudah bagus, tingkat relatif jawaban dengan pertanyaan yang diberikan sudah tepat, namun penyampaian yang kamu berikan kurang tepat, dan tingkat fokus kamu dalam melakukan sesi interview cukup baik." />
 
@@ -168,7 +163,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="4dp"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toBottomOf="@id/tv_additional_info_title"
                 tools:text="Waktu : 15 Oktober 2023, 10:23" />
 
@@ -178,7 +172,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="4dp"
-                android:theme="@style/Base.Theme.InterviewKu"
                 app:layout_constraintTop_toBottomOf="@id/tv_start_time"
                 tools:text="Durasi : 12 Menit 45 Detik" />
 

@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:importantForAccessibility="no"
-            android:src="@drawable/logo_alt_blue" />
+            tools:src="@drawable/logo_alt_blue" />
 
     </androidx.cardview.widget.CardView>
 
@@ -32,33 +32,33 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:importantForAccessibility="no"
-        android:src="@drawable/img_landing_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/img_landing_1" />
 
     <ImageView
         android:id="@+id/iv_second"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:importantForAccessibility="no"
-        android:src="@drawable/img_landing_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/img_landing_2" />
 
     <ImageView
-        android:id="@+id/iv_right"
+        android:id="@+id/iv_third"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:importantForAccessibility="no"
-        android:src="@drawable/img_landing_3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/img_landing_3" />
 
     <Button
         android:id="@+id/btn_register"

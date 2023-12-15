@@ -12,6 +12,7 @@ import com.capstone.interviewku.data.network.response.InterviewAnswerSubmitRespo
 import com.capstone.interviewku.data.network.response.InterviewQuestionsData
 import com.capstone.interviewku.data.network.response.InterviewQuestionsResponse
 import com.capstone.interviewku.data.network.response.InterviewResultResponse
+import com.capstone.interviewku.util.Constants
 import com.capstone.interviewku.util.Helpers
 import com.capstone.interviewku.util.JobFieldModel
 import com.capstone.interviewku.util.Result
@@ -29,7 +30,7 @@ class InterviewTrainViewModel @Inject constructor(
     private val jobRepository: JobRepository,
     private val userRepository: UserRepository,
 ) : ViewModel() {
-    private val _currentDuration = MutableLiveData("00:00")
+    private val _currentDuration = MutableLiveData(Constants.INITIAL_TIMER_STRING)
     val currentDuration: LiveData<String>
         get() = _currentDuration
 
@@ -94,7 +95,7 @@ class InterviewTrainViewModel @Inject constructor(
             _currentQuestionOrder.value?.let { prevOrder ->
                 val currentOrder = Pair(prevOrder.first + 1, interviewQuestionsData.questions.size)
 
-                _currentDuration.value = "00:00"
+                _currentDuration.value = Constants.INITIAL_TIMER_STRING
                 _currentQuestion.value =
                     interviewQuestionsData.questions[currentOrder.first - 1].question
                 _currentQuestionOrder.value = currentOrder
@@ -172,7 +173,7 @@ class InterviewTrainViewModel @Inject constructor(
         }
 
         if (audio == null) {
-            _currentDuration.value = "00:00"
+            _currentDuration.value = Constants.INITIAL_TIMER_STRING
         }
     }
 
