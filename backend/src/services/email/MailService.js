@@ -13,6 +13,10 @@ class MailService {
   }
 
   sendEmail(targetEmail, content) {
+    if (process.env.MAIL_SERVICE === 'false') {
+      console.info(`Email sent to: ${targetEmail} without mail service`);
+      return;
+    }
     const message = {
       from: 'interviewku-reset-password@interviewku.tech',
       // from: 'interviewku',
