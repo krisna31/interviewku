@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "922bee1f-9861-48cc-907d-8b465e07ca32",
-		"name": "InterviewKu Test",
+		"name": "InterviewKu Collection 0.0.1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23868327"
 	},
@@ -4130,7 +4130,7 @@
 								{
 									"key": "audio",
 									"type": "file",
-									"src": "/C:/Users/krisna/Downloads/kuliner.ogg"
+									"src": "/C:/Users/krisna/Downloads/WhatsApp Ptt 2023-12-08 at 15.28.59.ogg"
 								},
 								{
 									"key": "retryAttempt",
