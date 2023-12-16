@@ -11,6 +11,10 @@ Third party library used:
 
 Other resources:
 - Prototype (Figma) : https://www.figma.com/file/jaHvfqsnD1aJl26fPzPeE4/Capstone-Project
+- Assets by Freepik :
+    - https://www.freepik.com/free-vector/online-interview-employee-employer_9451562.htm
+    - https://www.freepik.com/free-vector/choice-worker-concept_9464331.htm
+    - https://www.freepik.com/free-vector/person-taking-online-interview_9589883.htm 
 
 How to build:   
 1. Install Android Studio (minimum version: code Giraffe)

@@ -50,7 +50,7 @@ class RecoverPasswordActivity : AppCompatActivity() {
             return
         }
 
-        binding.etNewPassword.isVisible = false
+        binding.tilNewPassword.isVisible = false
         binding.btnVerify.isEnabled = false
 
         binding.tvRecoveryInformation.text = intent.getStringExtra(EXTRA_MESSAGE_KEY)
@@ -76,17 +76,6 @@ class RecoverPasswordActivity : AppCompatActivity() {
             })
         }
 
-        binding.etNewPassword.apply {
-            addTextChangedListener(afterTextChanged = {
-                error = if (!Helpers.isPasswordValid(it.toString()) && it.toString().isNotEmpty()) {
-                    getString(R.string.password_invalid)
-                } else {
-                    null
-                }
-                binding.btnVerify.isEnabled = Helpers.isPasswordValid(it.toString())
-            })
-        }
-
         viewModel.verifyPasswordResetState.observe(this) { result ->
             binding.progressBar.isVisible = result is Result.Loading
 
@@ -101,12 +90,12 @@ class RecoverPasswordActivity : AppCompatActivity() {
 
                         viewModel.recoverPassword(email, newPassword)
 
-                        binding.etNewPassword.isEnabled = false
+                        binding.tilNewPassword.isEnabled = false
                         it.isEnabled = false
                     }
 
+                    binding.tilNewPassword.isVisible = true
                     binding.etNewPassword.apply {
-                        isVisible = true
                         addTextChangedListener(afterTextChanged = {
                             error = if (!Helpers.isPasswordValid(it.toString())
                                 && it.toString().isNotEmpty()
@@ -148,7 +137,7 @@ class RecoverPasswordActivity : AppCompatActivity() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-                    binding.etNewPassword.isEnabled = true
+                    binding.tilNewPassword.isEnabled = true
                     binding.btnVerify.isEnabled = true
                     result.exception.getData()?.handleHttpException(this)?.let { message ->
                         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

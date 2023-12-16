@@ -67,7 +67,7 @@
         android:layout_marginHorizontal="@dimen/root_padding"
         android:layout_marginBottom="48dp"
         android:text="@string/register"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_attribution"
         app:layout_constraintEnd_toStartOf="@id/btn_login"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -81,5 +81,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_register"
         app:layout_constraintTop_toTopOf="@id/btn_register" />
+
+    <TextView
+        android:id="@+id/tv_attribution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="24dp"
+        android:alpha="0.5"
+        android:text="@string/landing_asset_attribution"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

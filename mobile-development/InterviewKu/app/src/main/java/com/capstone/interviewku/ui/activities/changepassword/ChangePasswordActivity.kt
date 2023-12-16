@@ -63,8 +63,8 @@ class ChangePasswordActivity : AppCompatActivity() {
     }
 
     private fun setInputEnabled(isEnabled: Boolean) {
-        binding.etOldPassword.isEnabled = isEnabled
-        binding.etNewPassword.isEnabled = isEnabled
+        binding.tilOldPassword.isEnabled = isEnabled
+        binding.tilNewPassword.isEnabled = isEnabled
     }
 
     private fun setupInputWatchers() {

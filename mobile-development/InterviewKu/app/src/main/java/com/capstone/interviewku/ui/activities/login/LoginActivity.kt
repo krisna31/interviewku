@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setInputEnabled(isEnabled: Boolean) {
         binding.etLoginEmail.isEnabled = isEnabled
-        binding.etLoginPassword.isEnabled = isEnabled
+        binding.tilPassword.isEnabled = isEnabled
     }
 
     private fun setupObservers() {

@@ -60,7 +60,7 @@ class RegisterBasicActivity : AppCompatActivity() {
 
     private fun setInputEnabled(isEnabled: Boolean) {
         binding.etEmail.isEnabled = isEnabled
-        binding.etPassword.isEnabled = isEnabled
+        binding.tilPassword.isEnabled = isEnabled
         binding.etFirstname.isEnabled = isEnabled
         binding.etLastname.isEnabled = isEnabled
     }
