@@ -12,8 +12,9 @@ This is the API backend for [interviewku app](https://github.com/krisna31/interv
   - [Table of Contents 📋](#table-of-contents-)
   - [API Documentation 📖](#api-documentation-)
   - [How to run this project locally 💻](#how-to-run-this-project-locally-)
-    - [A. using docker image (recommended) 🐳](#a-using-docker-image-recommended-)
-    - [B. from source using npm and nodejs 📦](#b-from-source-using-npm-and-nodejs-)
+    - [A. using docker image official (recommended) 🐳](#a-using-docker-image-official-recommended-)
+    - [B. build manually from dockerfile 🐳](#b-build-manually-from-dockerfile-)
+    - [C. from source using npm and nodejs 📦](#c-from-source-using-npm-and-nodejs-)
   - [How to import Postman collection and environment 📥](#how-to-import-postman-collection-and-environment-)
   - [Cloud Architecture ☁️](#cloud-architecture-️)
   - [Tech Stack Used in This **Project** 🛠️](#tech-stack-used-in-this-project-️)
@@ -28,20 +29,31 @@ For more [detailed API documentation, please visit interviewku-backend or click 
 
 ## How to run this project locally 💻
 
-### A. using docker image (recommended) 🐳
+### A. using docker image official (recommended) 🐳
 
-1. Clone this repository by running `git clone https::/github.com/krisna31/interviewku-backend.git` in your terminal
-2. Run `cd backend` to enter the project directory
+1. Clone this repository by running `git clone https://github.com/krisna31/interviewku.git` in your terminal
+2. Run `cd interviewku/backend` to enter the project directory
 3. Run `cp .env.local .env` to copy the environment variables
 4. Edit `.env` file to match your environment (e.g. database name, username, password, etc.)
 5. Run `docker run -d -p 5000:5000 --env-file .env asia-southeast1-docker.pkg.dev/interviewku/interviewku-registry/interviewku-api:0.0.1` to start the server
 6. Open `http://localhost:5000` in your browser or API client (e.g. Postman) to explore the API
 7. Open `http://localhost:5000/documentation` in your browser to explore the API documentation (optional)
 
-### B. from source using npm and nodejs 📦
+### B. build manually from dockerfile 🐳
 
-1. Clone this repository by running `git clone https::/github.com/krisna31/interviewku-backend.git` in your terminal
-2. . Run `cd backend` to enter the project directory
+1. Clone this repository by running `git clone https://github.com/krisna31/interviewku.git` in your terminal
+2. Run `cd interviewku/backend` to enter the project directory
+3. Run `cp .env.local .env` to copy the environment variables
+4. Edit `.env` file to match your environment (e.g. database name, username, password, etc.)
+5. Run `docker build -t interviewku-api:0.0.1 .` to build the docker image
+6. Run `docker run -d -p 5000:5000 --env-file .env interviewku-api:0.0.1` to start the server
+7. Open `http://localhost:5000` in your browser or API client (e.g. Postman) to explore the API
+8. Open `http://localhost:5000/documentation` in your browser to explore the API documentation (optional)
+
+### C. from source using npm and nodejs 📦
+
+1. Clone this repository by running `git clone https://github.com/krisna31/interviewku.git` in your terminal
+2. Run `cd interviewku/backend` to enter the project directory
 3. Run `cp .env.local .env` to copy the environment variables
 4. Edit `.env` file to match your environment (e.g. database name, username, password, etc.)
 5. Run `npm install` to install all dependencies
@@ -53,11 +65,11 @@ For more [detailed API documentation, please visit interviewku-backend or click 
 ## How to import Postman collection and environment 📥
 
 1. Open Postman desktop app
-2. Click `Import` button
+2. Click `import` button
 3. Click `Choose Folder` button
 4. Select `interviewku/backend/Postman` folder
 5. Check all collections and environments
-6. Click `Import` button
+6. Click `import` button
 7. Click collection `InterviewKu Collection 0.0.1` to explore the API
 8. Choose environment `InterviewKu Env 0.0.1` to test the API locally
 9. Feel free to explore the API
