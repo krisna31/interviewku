@@ -109,7 +109,7 @@ class InterviewInstructionFragment(
         super.onResume()
         dialog?.window?.setLayout(
             ActionBar.LayoutParams.MATCH_PARENT,
-            ActionBar.LayoutParams.WRAP_CONTENT
+            ActionBar.LayoutParams.MATCH_PARENT
         )
     }
 

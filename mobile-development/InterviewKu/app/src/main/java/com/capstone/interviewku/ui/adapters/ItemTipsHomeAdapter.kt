@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.capstone.interviewku.R
 import com.capstone.interviewku.data.network.response.Article
 import com.capstone.interviewku.databinding.ItemTipsHomeBinding
@@ -37,6 +38,7 @@ class ItemTipsHomeAdapter(
             getItem(position).let { data ->
                 Glide.with(this)
                     .load(data.coverImgUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .error(R.drawable.bg_no_image)
                     .placeholder(R.drawable.bg_no_image)
                     .into(binding.ivCover)

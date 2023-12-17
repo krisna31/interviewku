@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.capstone.interviewku.R
 import com.capstone.interviewku.data.room.entity.ArticleEntity
 import com.capstone.interviewku.databinding.ActivityTipsDetailBinding
@@ -35,6 +36,7 @@ class TipsDetailActivity : AppCompatActivity() {
         article?.let {
             Glide.with(this)
                 .load(article.coverImgUrl)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(R.drawable.bg_no_image)
                 .placeholder(R.drawable.bg_no_image)
                 .into(binding.ivCover)

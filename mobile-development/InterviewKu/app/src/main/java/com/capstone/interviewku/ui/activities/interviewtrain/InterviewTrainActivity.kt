@@ -28,6 +28,7 @@ import com.capstone.interviewku.ui.fragments.jobpicker.JobPickerFragment
 import com.capstone.interviewku.util.Constants
 import com.capstone.interviewku.util.Extensions.handleHttpException
 import com.capstone.interviewku.util.Extensions.isPermissionGranted
+import com.capstone.interviewku.util.Helpers
 import com.capstone.interviewku.util.Result
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -419,7 +420,11 @@ class InterviewTrainActivity : AppCompatActivity() {
         }
 
         viewModel.currentDuration.observe(this) {
-            binding.tvTimer.text = it
+            binding.tvTimer.text = Helpers.secondsToString(it)
+
+            if (it >= Constants.INTERVIEW_MAX_DURATION_SECONDS) {
+                stopRecording()
+            }
         }
 
         viewModel.currentQuestion.observe(this) {

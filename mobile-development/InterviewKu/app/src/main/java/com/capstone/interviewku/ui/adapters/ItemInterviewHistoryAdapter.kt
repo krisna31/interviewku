@@ -60,17 +60,19 @@ class ItemInterviewHistoryAdapter(
                 )
                 binding.tvJobField.text = getString(R.string.job_field_template, data.jobFieldName)
 
-                data.score?.let {
-                    val score = if (it in 1..5) {
-                        it
-                    } else {
-                        1
-                    }
+                if (data.completed) {
+                    data.score?.let {
+                        val score = if (it in 1..5) {
+                            it
+                        } else {
+                            1
+                        }
 
-                    binding.ratingBarScore.rating = score.toFloat()
-                    binding.tvScoreDescription.text =
-                        resources.getStringArray(R.array.rating_summary)[score - 1]
-                } ?: run {
+                        binding.ratingBarScore.rating = score.toFloat()
+                        binding.tvScoreDescription.text =
+                            resources.getStringArray(R.array.rating_summary)[score - 1]
+                    }
+                } else {
                     binding.ratingBarScore.isVisible = false
                     binding.tvScoreDescription.text = getString(R.string.interview_not_finished)
                 }

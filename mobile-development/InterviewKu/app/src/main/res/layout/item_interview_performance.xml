@@ -2,14 +2,14 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/list_item_margin"
     app:cardCornerRadius="@dimen/corner_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="240dp"
         android:padding="@dimen/root_padding">
 
         <TextView
@@ -25,9 +25,11 @@
             android:id="@+id/tv_job_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_mode"
-            tools:text="Bidang: IT" />
+            tools:text="Bidang: Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier1"

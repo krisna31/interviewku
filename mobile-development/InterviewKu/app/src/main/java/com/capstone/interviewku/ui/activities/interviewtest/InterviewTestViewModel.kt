@@ -18,7 +18,9 @@ import com.capstone.interviewku.util.SingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.File
+import java.util.Timer
 import javax.inject.Inject
+import kotlin.concurrent.scheduleAtFixedRate
 
 @HiltViewModel
 class InterviewTestViewModel @Inject constructor(
@@ -26,6 +28,10 @@ class InterviewTestViewModel @Inject constructor(
     private val jobRepository: JobRepository,
     private val userRepository: UserRepository,
 ) : ViewModel() {
+    private val _currentDuration = MutableLiveData(0)
+    val currentDuration: LiveData<Int>
+        get() = _currentDuration
+
     private val _currentQuestion = MutableLiveData("")
     val currentQuestion: LiveData<String>
         get() = _currentQuestion
@@ -58,6 +64,8 @@ class InterviewTestViewModel @Inject constructor(
     private val interviewAnswers = mutableListOf<InterviewAnswer>()
     private var interviewData: InterviewQuestionsData? = null
 
+    private var timer: Timer? = null
+
     private var jobFieldId: Int? = null
 
     fun endInterviewSession() = viewModelScope.launch {
@@ -79,6 +87,7 @@ class InterviewTestViewModel @Inject constructor(
     fun moveToNextQuestion() {
         interviewData?.let { interviewQuestionsData ->
             currentQuestionOrder += 1
+            _currentDuration.value = 0
             _currentQuestion.value =
                 interviewQuestionsData.questions[currentQuestionOrder - 1].question
 
@@ -114,6 +123,7 @@ class InterviewTestViewModel @Inject constructor(
     }
 
     fun repeatQuestion() {
+        _currentDuration.value = 0
         interviewAnswers[currentQuestionOrder - 1].audio = null
         interviewAnswers[currentQuestionOrder - 1].retryAttempt += 1
     }
@@ -179,9 +189,16 @@ class InterviewTestViewModel @Inject constructor(
 
     fun startRecording() {
         _isRecording.value = true
+        timer = Timer().apply {
+            scheduleAtFixedRate(1000, 1000) {
+                _currentDuration.postValue(_currentDuration.value?.plus(1))
+            }
+        }
     }
 
     fun stopRecording() {
         _isRecording.value = false
+        timer?.cancel()
+        timer = null
     }
 }

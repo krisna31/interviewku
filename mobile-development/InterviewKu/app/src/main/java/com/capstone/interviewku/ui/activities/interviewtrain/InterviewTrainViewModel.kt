@@ -12,8 +12,6 @@ import com.capstone.interviewku.data.network.response.InterviewAnswerSubmitRespo
 import com.capstone.interviewku.data.network.response.InterviewQuestionsData
 import com.capstone.interviewku.data.network.response.InterviewQuestionsResponse
 import com.capstone.interviewku.data.network.response.InterviewResultResponse
-import com.capstone.interviewku.util.Constants
-import com.capstone.interviewku.util.Helpers
 import com.capstone.interviewku.util.JobFieldModel
 import com.capstone.interviewku.util.Result
 import com.capstone.interviewku.util.SingleEvent
@@ -30,8 +28,8 @@ class InterviewTrainViewModel @Inject constructor(
     private val jobRepository: JobRepository,
     private val userRepository: UserRepository,
 ) : ViewModel() {
-    private val _currentDuration = MutableLiveData(Constants.INITIAL_TIMER_STRING)
-    val currentDuration: LiveData<String>
+    private val _currentDuration = MutableLiveData(0)
+    val currentDuration: LiveData<Int>
         get() = _currentDuration
 
     private val _currentQuestion = MutableLiveData("")
@@ -70,7 +68,6 @@ class InterviewTrainViewModel @Inject constructor(
     private var interviewData: InterviewQuestionsData? = null
 
     private var timer: Timer? = null
-    private var seconds: Int = 0
 
     private var jobFieldId: Int? = null
 
@@ -95,7 +92,7 @@ class InterviewTrainViewModel @Inject constructor(
             _currentQuestionOrder.value?.let { prevOrder ->
                 val currentOrder = Pair(prevOrder.first + 1, interviewQuestionsData.questions.size)
 
-                _currentDuration.value = Constants.INITIAL_TIMER_STRING
+                _currentDuration.value = 0
                 _currentQuestion.value =
                     interviewQuestionsData.questions[currentOrder.first - 1].question
                 _currentQuestionOrder.value = currentOrder
@@ -173,7 +170,7 @@ class InterviewTrainViewModel @Inject constructor(
         }
 
         if (audio == null) {
-            _currentDuration.value = Constants.INITIAL_TIMER_STRING
+            _currentDuration.value = 0
         }
     }
 
@@ -205,11 +202,9 @@ class InterviewTrainViewModel @Inject constructor(
 
     fun startRecording() {
         _isRecording.value = true
-        seconds = 0
         timer = Timer().apply {
-            scheduleAtFixedRate(0, 1000) {
-                _currentDuration.postValue(Helpers.secondsToString(seconds))
-                seconds += 1
+            scheduleAtFixedRate(1000, 1000) {
+                _currentDuration.postValue(_currentDuration.value?.plus(1))
             }
         }
     }

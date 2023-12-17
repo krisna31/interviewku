@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:maxWidth="@dimen/max_dialog_width"
+    android:maxHeight="800dp"
     android:padding="@dimen/root_padding">
 
     <TextView
@@ -14,95 +15,113 @@
         android:text="@string/interview_instruction_title"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/sv_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_instructions"
+    <ScrollView
+        android:id="@+id/sv_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_instruction_title"
-        tools:text="@string/train_instruction" />
+        app:layout_constraintBottom_toTopOf="@id/btn_continue"
+        app:layout_constraintTop_toBottomOf="@id/tv_instruction_title">
 
-    <TextView
-        android:id="@+id/tv_tts_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/tts_feature"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_instructions" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never">
 
-    <TextView
-        android:id="@+id/tv_tts_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_tts_title"
-        tools:text="Status TTS: Siap" />
+            <TextView
+                android:id="@+id/tv_instructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/train_instruction" />
 
-    <Button
-        android:id="@+id/btn_tts_reinit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/reinit_tts"
-        app:layout_constraintEnd_toStartOf="@id/btn_tts_check"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_tts_status" />
+            <TextView
+                android:id="@+id/tv_tts_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/tts_feature"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_instructions" />
 
-    <Button
-        android:id="@+id/btn_tts_check"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/check_tts_feature"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_tts_reinit"
-        app:layout_constraintTop_toTopOf="@id/btn_tts_reinit" />
+            <TextView
+                android:id="@+id/tv_tts_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_tts_title"
+                tools:text="Status TTS: Siap" />
 
-    <TextView
-        android:id="@+id/tv_mic_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/microphone_check"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_tts_reinit" />
+            <Button
+                android:id="@+id/btn_tts_reinit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/reinit_tts"
+                app:layout_constraintEnd_toStartOf="@id/btn_tts_check"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_tts_status" />
 
-    <TextView
-        android:id="@+id/tv_mic_instruction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/check_mic_instruction"
-        app:layout_constraintTop_toBottomOf="@id/tv_mic_title" />
+            <Button
+                android:id="@+id/btn_tts_check"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/check_tts_feature"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_tts_reinit"
+                app:layout_constraintTop_toTopOf="@id/btn_tts_reinit" />
 
-    <Button
-        android:id="@+id/btn_mic_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/check_mic_start"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_mic_instruction" />
+            <TextView
+                android:id="@+id/tv_mic_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/microphone_check"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_tts_reinit" />
+
+            <TextView
+                android:id="@+id/tv_mic_instruction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/check_mic_instruction"
+                app:layout_constraintTop_toBottomOf="@id/tv_mic_title" />
+
+            <Button
+                android:id="@+id/btn_mic_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/check_mic_start"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_mic_instruction" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/btn_continue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_mic_record"
+        app:layout_constraintTop_toBottomOf="@id/sv_content"
         tools:text="Mulai Latihan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

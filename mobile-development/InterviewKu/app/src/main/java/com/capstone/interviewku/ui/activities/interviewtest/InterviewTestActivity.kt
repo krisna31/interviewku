@@ -439,6 +439,13 @@ class InterviewTestActivity : AppCompatActivity() {
             }
         }
 
+        viewModel.currentDuration.observe(this) {
+            if (it >= Constants.INTERVIEW_MAX_DURATION_SECONDS) {
+                stopRecording()
+                viewModel.sendAnswer()
+            }
+        }
+
         viewModel.currentQuestion.observe(this) {
             lifecycleScope.launch {
                 if (it.isNotEmpty()) {
