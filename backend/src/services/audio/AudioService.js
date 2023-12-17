@@ -20,7 +20,7 @@ class AudioService {
 
     const duration = await this._getDurationService(audio.path);
 
-    if (duration > 120) {
+    if (duration >= 125) {
       throw new InvariantError('Durasi audio tidak boleh lebih dari 2 menit');
     }
 
