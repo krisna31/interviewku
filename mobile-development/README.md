@@ -13,10 +13,8 @@ This folder contains code for InterviewKu Android Application
 1. Install Android Studio (minimum version: code Giraffe)
 2. Clone this repository
 3. Open folder `/mobile-development/InterviewKu` in Android Studio
-4. Add this line to `local.properties` file
-
+4. Add this line to `local.properties` file     
 `BASE_URL=\"http://backup.interviewku.tech/\"`
-
 5. Build the app
 
 ### 2. Install from release
@@ -37,6 +35,7 @@ This folder contains code for InterviewKu Android Application
 - [Circle Image View](https://github.com/hdodenhof/CircleImageView)
 - [Dagger Hilt](https://dagger.dev/hilt/)
 - [Glide](https://github.com/bumptech/glide)
+- [Google Text to Speech (through TextToSpeech API)](https://play.google.com/store/apps/details?id=com.google.android.tts)
 - [Lottie](https://github.com/airbnb/lottie-android)
 - [Retrofit](https://github.com/square/retrofit)
 
