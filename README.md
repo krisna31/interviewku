@@ -6,18 +6,23 @@
 [![GitHub stars](https://img.shields.io/github/stars/krisna31/interviewku.svg)](https://github.com/krisna31/interviewku)
 [![GitHub license](https://img.shields.io/github/license/krisna31/interviewku.svg)](https://github.com/krisna31/interviewku/blob/master/LICENSE)
 
+![InterviewKu](logo_alt_blue.png)
+
+## Download the application
+Navigate to [releases](https://github.com/krisna31/interviewku/releases) of this repository or see [build instructions](./mobile-development/README.md#1-build-from-source)
+
 ## Team List and Corresponding Members
 
 1. [Android](./mobile-development/README.md)
-   - [Rheza Rijaya](https://github.com/rza101)
-   - [Octa Adriawan](https://github.com/Octaadriawan)
+   - [Rheza Rijaya - A694BSY1991](https://github.com/rza101)
+   - [Octa Adriawan - A152BSY2732](https://github.com/Octaadriawan)
 2. [Backend](./backend/README.md)
-   - [Krisna](https://github.com/krisna31)
-   - [Gilang Wiko Wicaksono](https://github.com/Ame0thyst)
+   - [Jelvin Krisna Putra - C694BSY3105](https://github.com/krisna31)
+   - [Gilang Wiko Wicaksono - C265BSY4116](https://github.com/Ame0thyst)
 3. [Machine Learning](./machine-learning/README.md)
-   - [Fanes Pratama](https://github.com/fanesz)
-   - [Muhammad Firdaus](https://github.com/MFRDS)
-   - [M Fikri Aulian](https://github.com/Fikr17)
+   - [Fanes Pratama - M694BSY0084](https://github.com/fanesz)
+   - [Muhammad Firdaus - M156BSY0829](https://github.com/MFRDS)
+   - [M. Fikri Aulian - M315BSY1134](https://github.com/Fikr17)
 
 <!-- ## Background
 
