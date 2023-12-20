@@ -14,6 +14,10 @@ InterviewKu is an Android application that provides interview simulation feature
 
 This app is built as our Capstone Project from team *CH2-PS195* at Bangkit Academy 2023 Batch 2, with a theme centered around *Job, Talent, and Employment*.
 
+## Application Demo
+
+[InterviewKu Application Demo (CH2-PS195)](https://youtu.be/Wi0KT1S6sEA)
+
 ## Download the application
 
 Navigate to [releases](https://github.com/krisna31/interviewku/releases) of this repository or see [build instructions](./mobile-development/README.md#1-build-from-source)
