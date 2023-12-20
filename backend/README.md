@@ -12,8 +12,8 @@ This is the API backend for [interviewku app](https://github.com/krisna31/interv
   - [Table of Contents 📋](#table-of-contents-)
   - [API Documentation 📖](#api-documentation-)
   - [How to run this project locally 💻](#how-to-run-this-project-locally-)
-    - [A. using docker image official (recommended) 🐳](#a-using-docker-image-official-recommended-)
-    - [B. build manually from dockerfile 🐳](#b-build-manually-from-dockerfile-)
+    - [A. using docker image official (testing only without google service) 🐳](#a-using-docker-image-official-testing-only-without-google-service-)
+    - [B. build manually from dockerfile (can be testing or production) 🐳](#b-build-manually-from-dockerfile-can-be-testing-or-production-)
     - [C. from source using npm and nodejs 📦](#c-from-source-using-npm-and-nodejs-)
   - [How to import Postman collection and environment 📥](#how-to-import-postman-collection-and-environment-)
   - [Cloud Architecture ☁️](#cloud-architecture-️)
@@ -29,7 +29,7 @@ For more [detailed API documentation, please visit interviewku-backend or click 
 
 ## How to run this project locally 💻
 
-### A. using docker image official (recommended) 🐳
+### A. using docker image official (testing only without google service) 🐳
 
 1. Clone this repository by running `git clone https://github.com/krisna31/interviewku.git` in your terminal
 2. Run `cd interviewku/backend` to enter the project directory
@@ -39,16 +39,17 @@ For more [detailed API documentation, please visit interviewku-backend or click 
 6. Open `http://localhost:5000` in your browser or API client (e.g. Postman) to explore the API
 7. Open `http://localhost:5000/documentation` in your browser to explore the API documentation (optional)
 
-### B. build manually from dockerfile 🐳
+### B. build manually from dockerfile (can be testing or production) 🐳
 
 1. Clone this repository by running `git clone https://github.com/krisna31/interviewku.git` in your terminal
 2. Run `cd interviewku/backend` to enter the project directory
 3. Run `cp .env.local .env` to copy the environment variables
 4. Edit `.env` file to match your environment (e.g. database name, username, password, etc.)
-5. Run `docker build -t interviewku-api:0.0.1 .` to build the docker image
-6. Run `docker run -d -p 5000:5000 --env-file .env interviewku-api:0.0.1` to start the server
-7. Open `http://localhost:5000` in your browser or API client (e.g. Postman) to explore the API
-8. Open `http://localhost:5000/documentation` in your browser to explore the API documentation (optional)
+5. If you set `NODE_ENV=prod & AUDIO_SERVICE=true` in `.env` file then you must have `google-cloud-key.json` file in `interviewku/backend` directory
+6. Run `docker build -t interviewku-api:0.0.1 .` to build the docker image
+7. Run `docker run -d -p 5000:5000 --env-file .env interviewku-api:0.0.1` to start the server
+8. Open `http://localhost:5000` in your browser or API client (e.g. Postman) to explore the API
+9. Open `http://localhost:5000/documentation` in your browser to explore the API documentation (optional)
 
 ### C. from source using npm and nodejs 📦
 
