@@ -8,10 +8,17 @@
 
 ![InterviewKu](logo_alt_blue.png)
 
+## Overview
+
+InterviewKu is an Android application that provides interview simulation feature.
+
+This app is built as our Capstone Project from team *CH2-PS195* at Bangkit Academy 2023 Batch 2, with a theme centered around *Job, Talent, and Employment*.
+
 ## Download the application
+
 Navigate to [releases](https://github.com/krisna31/interviewku/releases) of this repository or see [build instructions](./mobile-development/README.md#1-build-from-source)
 
-## Team List and Corresponding Members
+## CH2-PS195 Team Members
 
 1. [Android](./mobile-development/README.md)
    - [Rheza Rijaya - A694BSY1991](https://github.com/rza101)
@@ -23,28 +30,6 @@ Navigate to [releases](https://github.com/krisna31/interviewku/releases) of this
    - [Fanes Pratama - M694BSY0084](https://github.com/fanesz)
    - [Muhammad Firdaus - M156BSY0829](https://github.com/MFRDS)
    - [M. Fikri Aulian - M315BSY1134](https://github.com/Fikr17)
-
-<!-- ## Background
-
-The background of the study encompasses:
-
-## Reason
-
-The reason of the study is: ...
-
-### Why this Theme and Problem Statement?
-
-## Existing Results
-
-## Implementation/Improvement & Reasoning
-
-## Result
-
-## Documentation
-
-## Local Deployment Plan
-
-## Business Pitch and Go-to-Market Proposal -->
 
 ## License 📄
 
